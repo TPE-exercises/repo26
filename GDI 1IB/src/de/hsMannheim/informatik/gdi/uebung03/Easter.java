@@ -1,4 +1,4 @@
-package de.hsMannheim.informatik.gdi.uebung01;
+package de.hsMannheim.informatik.gdi.uebung03;
 
 import static gdi.MakeItSimple.*;
 
