@@ -10,8 +10,8 @@ public class Easter {
 		
 		int y = readInt();
 
-		if (y < 1582){ 
-			println ("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen!");	
+		if (y < 1583){ 
+			println ("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen! Staten Sie das Programm neu.");	
 			
 		}
 		else {
