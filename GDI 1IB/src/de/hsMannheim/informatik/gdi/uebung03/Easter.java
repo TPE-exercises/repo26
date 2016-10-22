@@ -8,14 +8,16 @@ public class Easter {
 
 		println("Geben Sie die gewünschte Jahreszahl ein:");
 
-		int y = readInt();
+		int y;
+		y = readInt();
 
-		if (y < 1583) {
-			println("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen! Staten Sie das Programm neu.");
-			println(">>Programmende<<");
+		while (y < 1583) {
+			println("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen! Geben sie die Jahreszahl neu ein: ");
+			y = readInt();
+			readLine();
 		}
 		
-		else {
+	
 
 			int g = y % 19;
 			int c = y / 100;
@@ -28,7 +30,7 @@ public class Easter {
 
 			println("Der Ostersonntag im Jahr " + y + " fällt auf den " + day + "." + month + "." + y + ".");
 			println(">>Programmende<<");
-		}
+		
 
 	}
 
