@@ -6,10 +6,12 @@ public class VollkommeneZahl {
 
 	public static void main(String[] args) {
 
-		println("Geben sie eine Zahl ein: ");
+		print("Geben Sie eine Zahl ein: ");
 		int ganzeZahl;
 		ganzeZahl = readInt();
 		readLine();
+
+		// Vollkommene Zahlen zum Ausprobieren: 6, 28, 496, 8.128, 33.550.336
 
 		while (ganzeZahl < 1) {
 			println("Eingabe ungültig");
@@ -36,7 +38,7 @@ public class VollkommeneZahl {
 		}
 
 		else {
-			println("nein, die eingebenene Zahl ist nicht vollkommen");
+			println("nein, die eingegebene Zahl ist nicht vollkommen");
 		}
 
 	}

@@ -6,13 +6,13 @@ public class Easter {
 
 	public static void main(String[] args) {
 
-		println("Geben Sie die gewünschte Jahreszahl ein:");
+		print("Geben Sie die gewünschte Jahreszahl ein:");
 
 		int y;
 		y = readInt();
 
 		while (y < 1583) {
-			println("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen! Geben sie die Jahreszahl neu ein: ");
+			print("Fehler: Die eingegebene Jahreszahl muss nach 1582 liegen! Geben Sie die Jahreszahl neu ein: ");
 			y = readInt();
 			readLine();
 		}
