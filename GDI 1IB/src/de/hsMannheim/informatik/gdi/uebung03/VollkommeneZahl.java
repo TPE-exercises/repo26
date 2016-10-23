@@ -12,7 +12,7 @@ public class VollkommeneZahl {
 		readLine();
 
 		// Vollkommene Zahlen zum Ausprobieren: 6, 28, 496, 8.128, 33.550.336
-		//weitere vollkommene Zahlen liegen nicht mehr im Zahlenbereich von int
+		// weitere vollkommene Zahlen liegen nicht mehr im Zahlenbereich von int
 
 		while (ganzeZahl < 1) {
 			println("Eingabe ungültig");
