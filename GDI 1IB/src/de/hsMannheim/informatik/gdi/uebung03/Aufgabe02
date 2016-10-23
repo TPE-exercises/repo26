@@ -1,14 +1,23 @@
-Aufagabe 2:
+Aufagabe 2
+Beantworten Sie in jeweils 1-3 Sätzen folgende Fragen: OK.
 
-a)
-Was sind Namenskonventionen und warum sollte man sich daran halten?
+a) Was sind Namenskonventionen und warum sollte man sich daran halten?
 
-Antwort: 
+Namenskonventionen sind Regeln, wie Namen für z.B. Variablen oder Klassen geschrieben
+werden sollen. Wenn man sich daran hält, kann man z.B. am Anfangsbuchstaben sehen, ob
+es sich beim Namen um eine Variable (Kleinbuchstabe) oder eine Klasse (Großbuchstabe)
+handelt. Dies steigert die Übersichtlichkeit im Code.
+Quelle: Folie 11 und 12 von der Präsentation "14 Variablen.pdf" aus der GDI Vorlesung
 
 
+b) Was ist camel case?
 
-_________________________________________________________________________
-b)
-Was ist ein camel case?
+Um die Bedeutung eines Namens besser zuordnen zu können, versucht man diesen so genau
+wie möglich zu beschreiben. Wenn man dazu mehrere Wörter zu einem Namen zusammensetzt,
+schreibt man die Anfangsbuchstaben der Wörter innerhalb des Namens groß, um diese
+besser lesen zu können. Bsp: summeAllerUngeradenZahlen
+Quelle: Folie 12 von der Präsentation "14 Variablen.pdf" aus der GDI Vorlesung
 
-Antwort: 
+________________________________________________________________________
+Geben Sie zu Ihren Antworten unbedingt die jeweilige Quelle(n) an! OK.
+Geben Sie Ihre Lösung handschriftlich oder in einem Editor getippt ab. OK.
