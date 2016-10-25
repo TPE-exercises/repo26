@@ -8,16 +8,16 @@ public class Easter {
 
 		// Programmstart mit Jahreszahlabfrage
 		println(">>Programm zur Berechnung des Ostersonntags<<");
-		print("Geben Sie bitte eine vierstellige Jahreszahl ein, die nach 1582 liegt: ");
+		print("Geben Sie bitte eine vierstellige Jahreszahl ein, die nach 1581 liegt: ");
 
 		int y;
 		y = readInt();
 
 		// Gültigkeitsprüfung der eingegebenen Jahreszahl und
 		// eventuelle Fehlermeldung mit erneuter Abfrage
-		while (y < 1583 || y > 9999) {
+		while (y < 1582 || y > 9999) {
 			println("Fehler!");
-			println("Die eingegebene Jahreszahl muss nach 1582 liegen und muss eine vierstellige Zahl sein!");
+			println("Die eingegebene Jahreszahl muss nach 1581 liegen und muss eine vierstellige Zahl sein!");
 			print("Geben Sie eine gültige Jahreszahl ein: ");
 			y = readInt();
 			readLine();

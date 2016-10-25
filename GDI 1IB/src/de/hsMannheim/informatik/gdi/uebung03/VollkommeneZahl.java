@@ -15,7 +15,7 @@ public class VollkommeneZahl {
 		// weitere vollkommene Zahlen liegen nicht mehr im Zahlenbereich von int
 
 		while (ganzeZahl < 1) {
-			println("Eingabe ungültig");
+			println("Eingabe ungültig! Geben sie eine Zahl über 1 ein.");
 			ganzeZahl = readInt();
 			readLine();
 		}
