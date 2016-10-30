@@ -20,9 +20,9 @@ public class PerfectNumber {
 			ganzeZahl = readInt();
 			readLine();
 		}
-		
-		//Ausgabe vom Ergebnis
-		if (isPerfectNumber( ganzeZahl )) {
+
+		// Ausgabe vom Ergebnis
+		if (isPerfectNumber(ganzeZahl)) {
 			println("Herzlichen Glückwunsch!");
 			println("Die " + ganzeZahl + " ist eine vollkommene Zahl!");
 		}
@@ -42,12 +42,13 @@ public class PerfectNumber {
 
 		// Entspricht die Summe der Teiler, der Zahl die eingegeben wurde, gibt
 		// es eine positive Ausgabe.
-		if (summe == ganzeZahl) 
+		if (summe == ganzeZahl)
 			return true;
 		else
-			// >>> HIER die Kommentare ändern, um den JUnit-Test durchlaufen zu lassen! <<<
-			//return false;
-			throw new GDIException("Die " + ganzeZahl+ " ist leider keine vollkommene Zahl!");
+			// >>> HIER die Kommentare ändern, um den JUnit-Test durchlaufen zu
+			// lassen! <<<
+			// return false;
+			throw new GDIException("Die " + ganzeZahl + " ist leider keine vollkommene Zahl!");
 	}
 
 }

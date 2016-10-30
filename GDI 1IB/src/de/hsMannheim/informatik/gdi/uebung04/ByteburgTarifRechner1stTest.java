@@ -24,7 +24,7 @@ public class ByteburgTarifRechner1stTest {
 	public final void benutzeEndstation() {
 		assertEquals("Fahrt von 11 nach 16: ", 4, ByteburgTarifRechner.ermittleFahrtkosten(11, 16));
 		assertEquals("Fahrt von 15 nach 16: ", 1, ByteburgTarifRechner.ermittleFahrtkosten(15, 16));
-		assertEquals("Fahrt von 14 nach 16: ", 2, ByteburgTarifRechner.ermittleFahrtkosten(14, 16));
+		assertEquals("Fahrt von 14 nach 16: ", 3, ByteburgTarifRechner.ermittleFahrtkosten(14, 16));
 		assertEquals("Fahrt von 13 nach 16: ", 4, ByteburgTarifRechner.ermittleFahrtkosten(13, 16));
 	}
 
