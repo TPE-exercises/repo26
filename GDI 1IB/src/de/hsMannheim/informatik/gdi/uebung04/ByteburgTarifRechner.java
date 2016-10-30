@@ -29,55 +29,64 @@ public class ByteburgTarifRechner {
 		int[] endStation = {16, 26, 36, 46, 56, 66};
 
 
-		// Der Start ist das Ziel
+		// 1. Der Start ist das Ziel
 		if (startStation == zielStation) {
 			return 0;
 		}
-		// Start und Ziel liegen auf einer Linie nebeneinander
+		// 2. Start und Ziel liegen auf einer Linie nebeneinander
 		else if ( (((startStation - zielStation) == 1) || ((startStation - zielStation) == -1)) ) {
 			return 1;
 		}
-		// Start und Ziel liegen auf einer Linie nebeneinander und Station 00 ist dabei
+		// 3. Start und Ziel liegen auf einer Linie nebeneinander und Station 00 ist dabei
 		else if((((startStation - 1) % 10 == 0 ) && (zielStation == 0 )) || (((zielStation - 1) % 10 == 0 ) && (startStation == 0 ))){
 			return 1;
 		}
-		// Start und Ziel sind über Ringlinie verbunden
-		else if ( 	(((startStation - 3) % 10 == 0) && ((zielStation - 3) % 10 == 0)) && 
-					(startStation - 10 == zielStation || startStation + 10 == zielStation)) {
-			return 1;
+		
+		else if ( ((startStation - 3) % 10 == 0) && ((zielStation - 3) % 10 == 0) ) {
+			// 4. Start und Ziel sind über Ringlinie verbunden
+			if (startStation - 10 == zielStation || startStation + 10 == zielStation){
+				return 1;
+			}
+			// 5. Start und Ziel sind über Ringline 1-5 oder 1-6 verbunden
+			else if(((startStation == ringLinie[0]) && (zielStation == ringLinie[ringLinie.length - 1])) || ((startStation == ringLinie[ringLinie.length - 1]) && (zielStation == ringLinie[0]))){
+					return 1;
+			}		
 		} 
-		//Start und Ziel sind über Ringline 1-5 oder 1-6 verbunden
-		else if ( 	(((startStation - 3) % 10 == 0) && ((zielStation - 3) % 10 == 0)) && 
-					(((startStation == ringLinie[0]) && (zielStation == ringLinie[ringLinie.length - 1])) || ((startStation == ringLinie[ringLinie.length - 1]) && (zielStation == ringLinie[0]))) ) {
-			return 1;
-		}			
-		//Start und Ziel liegen in der Blauen Zone
+	
+		// 6. Start und Ziel liegen in der Blauen Zone
 		else if((istStationInLinie(startStation, blaueZone)) && (istStationInLinie(zielStation, blaueZone))){
 			nurBlaueZone = true;
 		}
-		//Beide Stationen liegen außerhalb der blauen Zone und nicht auf einer Linie -> muss 4 Kosten
-		else if (){
 		
+		// 7. Biede Stationen außerhalb der Blauen Zone
+		else if ((!(istStationInLinie(startStation, blaueZone)) && !(istStationInLinie(zielStation, blaueZone)))){
+			nurBlaueZone = true;
+		// 8. Beide Stationen auf einer Linie außerhalb der blauen Zone -> muss 2 Kosten -> 2 Einzelkarten
+			if(startStation +2 == zielStation){
+				println("Empfehlung: Kaufen sie sich 2 Tickets für \"eine Fahrt\" oder zahlen sie 3 Euro.");
+				return 2;		
+				}
+			else if (!(startStation-1==zielStation) && !(startStation-2==zielStation) && !(startStation+1==zielStation)&& !(startStation+2==zielStation)){
+				fahrtkosten+=2;
+			}
 		}
-		// Beide Stationen auf einer Linie außerhalb der blauen Zone -> muss 2 Kosten -> 2 Einzelkarten
-		else if(){
-			
-		}
-	
-		//Zonenüberquerung
+
+		
+
+		// 2.1 Zonenüberquerung
 		if( ((istStationInLinie(startStation, blaueZone)) && !(istStationInLinie(zielStation, blaueZone))) || ((istStationInLinie(zielStation, blaueZone)) && !(istStationInLinie(startStation, blaueZone))) ){
 			fahrtkosten+=1;
 			nurBlaueZone = true;
 		}
 
 		
-		//Endstation
+		// 3.1 Endstation
 		if((istStationInLinie(zielStation, endStation)) ){
 			fahrtkosten+=1;
 			nurBlaueZone = true;
 		}		
 
-		// Tarif 2: Langstecke
+		// 4.1 Tarif 2: Langstecke
 		if(nurBlaueZone){
 			fahrtkosten += 2;
 		}
@@ -89,7 +98,7 @@ public class ByteburgTarifRechner {
 	public static void main(String[] args) {
 		int[] stationen = {00, 11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 
 								31, 32, 33, 34, 35, 36, 41, 42, 43, 44, 45, 46, 
-								51, 52, 53, 54, 55, 56, 61/*, 62, 63, 64, 65, 66*/};
+								51, 52, 53, 54, 55, 56};
 		int startStation;
 		int zielStation;
 		int fahrtKosten;
@@ -105,7 +114,7 @@ public class ByteburgTarifRechner {
 		print("Geben sie ihre Zielstation ein: ");
 		zielStation = readInt();
 		while(!istStationInLinie(zielStation, stationen)){
-			println("Die von Ihnen eingegebene Zielstation ist nicht verfügbar. Bitte geben sie nun eine gültige ein: ");
+			print("Die von Ihnen eingegebene Zielstation ist nicht verfügbar. Bitte geben sie nun eine gültige ein: ");
 			zielStation = readInt();
 		}
 
@@ -132,13 +141,17 @@ public class ByteburgTarifRechner {
 		
 		if (fahrtKosten > 0)
 			println("Sie müssen für diese Fahrt " + fahrtKosten + " zahlen.");
+		
 	
 
 		println(">>>Programmende<<<");
+		
 
 		
 		
-		
+		//Wenn der Fahrplan um eine weitere Linie ausgebaut werden soll, muss man folgendes machen:
+		//1. in der main-Methode das array "stationen" um die neuen Stationen {61, 62, 63, 64, 65, 66} erweitern
+		//2. in der ermittleFahrtkosten-Methode das Array "ringLinie" um {63} erweitern
 	
 		
 		
@@ -181,18 +194,20 @@ public class ByteburgTarifRechner {
 		println("11 und 35 (erwartet 3): " + ermittleFahrtkosten(11, 35) + "\n___________________________");
 		println("35 und 11 (erwartet 3): " + ermittleFahrtkosten(35, 11) + "\n___________________________");
 		println("54 und 13 (erwartet 3): " + ermittleFahrtkosten(54, 13) + "\n___________________________");
-		println("13 und 54 (erwartet 3): " + ermittleFahrtkosten(13, 53) + "\n___________________________");
+		println("13 und 54 (erwartet 3): " + ermittleFahrtkosten(13, 54) + "\n___________________________");
 		
 		//Teste Endstation
 		println("55 und 56 (erwartet 1): " + ermittleFahrtkosten(55, 56) + "\n___________________________");
 		println("56 und 55 (erwartet 1): " + ermittleFahrtkosten(56, 55) + "\n___________________________");
-		println("54 und 56 (erwartet 3): " + ermittleFahrtkosten(54, 56) + "\n___________________________");
+		println("54 und 56 (erwartet 2 + Hinweis): " + ermittleFahrtkosten(54, 56) + "\n___________________________");
 		println("56 und 54 (erwartet 2): " + ermittleFahrtkosten(56, 54) + "\n___________________________");
 		println("00 und 16 (erwartet 4): " + ermittleFahrtkosten(0, 16) + "\n___________________________");
 		println("16 und 00 (erwartet 3): " + ermittleFahrtkosten(16, 0) + "\n___________________________");
 		println("43 und 56 (erwartet 4): " + ermittleFahrtkosten(43, 56) + "\n___________________________");
-		println("13 und 54 (erwartet 3): " + ermittleFahrtkosten(56, 43) + "\n___________________________");
-		
+		println("13 und 54 (erwartet 3): " + ermittleFahrtkosten(13, 54) + "\n___________________________");
+		println("55 und 46 (erwartet 5): " + ermittleFahrtkosten(55, 46) + "\n___________________________");
+		println("46 und 55 (erwartet 4): " + ermittleFahrtkosten(46, 55) + "\n___________________________");
+	
 */
 
 	}
