@@ -11,7 +11,7 @@ public class Fibonacci {
 		int n;
 		n = readInt();
 		readLine();
-		
+
 		// Ausgabe
 		int[] zahlenFolge;
 		zahlenFolge = calculateFibonacci(n);
@@ -26,19 +26,23 @@ public class Fibonacci {
 
 	// Verarbeitung
 	static int[] calculateFibonacci(int n) {
-		int[] zahlenFolge = new int[n];
-		int i = 0;
-		if (n >= 1)
-			zahlenFolge[i] = 0;
-		i++;
-		if (n >= 2)
-			zahlenFolge[i] = 1;
-		i++;
-		if (n >= 3)
-			while (i < n) {
-				zahlenFolge[i] = zahlenFolge[i - 2] + zahlenFolge[i - 1];
-				i++;
-			}
-		return zahlenFolge;
+		if (n < 1)
+			throw new GDIException("Ungültiger Parameter! Es wird eine natürliche Zahl erwartet!");
+		else {
+			int[] zahlenFolge = new int[n];
+			int i = 0;
+			if (n >= 1)
+				zahlenFolge[i] = 0;
+			i++;
+			if (n >= 2)
+				zahlenFolge[i] = 1;
+			i++;
+			if (n >= 3)
+				while (i < n) {
+					zahlenFolge[i] = zahlenFolge[i - 2] + zahlenFolge[i - 1];
+					i++;
+				}
+			return zahlenFolge;
+		}
 	}
 }
