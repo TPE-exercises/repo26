@@ -1,8 +1,8 @@
-package freierTest;
+package de.hsMannheim.informatik.gdi.uebung05;
 
 import static gdi.MakeItSimple.*;
 
-public class BenTest {
+public class Fibonacci {
 
 	public static void main(String[] args) {
 
@@ -11,9 +11,21 @@ public class BenTest {
 		int n;
 		n = readInt();
 		readLine();
-		// calculateFibonacci(n);
-		// println(" " + Arrays.toString(calculateFibonacci(n)));
+		
+		// Ausgabe
+		int[] zahlenFolge;
+		zahlenFolge = calculateFibonacci(n);
+		int i = 0;
+		print(zahlenFolge[i]);
+		i++;
+		if (n > 1)
+			while (i < n) {
+				print(", " + zahlenFolge[i++]);
+			}
+	}
 
+	// Verarbeitung
+	static int[] calculateFibonacci(int n) {
 		int[] zahlenFolge = new int[n];
 		int i = 0;
 		if (n >= 1)
@@ -27,25 +39,6 @@ public class BenTest {
 				zahlenFolge[i] = zahlenFolge[i - 2] + zahlenFolge[i - 1];
 				i++;
 			}
-		i = 0;
-		print(zahlenFolge[i]);
-		i++;
-		if (n > 1)
-			while (i < n) {
-				print(", " + zahlenFolge[i++]);
-			}
-		// Ausgabe
-		/*
-		 * int i=0; print(zahlenFolge); if (n > 1) while ( i < n ) print( ", " +
-		 * zahlenFolge[i++]);
-		 */
+		return zahlenFolge;
 	}
-
-	// Verarbeitung
-	/*
-	 * static int[] calculateFibonacci(int n) {
-	 * 
-	 * return zahlenFolge; }
-	 */
-
 }
