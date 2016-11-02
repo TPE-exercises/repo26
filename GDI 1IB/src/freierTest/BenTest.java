@@ -5,43 +5,47 @@ import static gdi.MakeItSimple.*;
 public class BenTest {
 
 	public static void main(String[] args) {
-		/*// ALLES FORMATIEREN: alles markieren und <STRG> + <SHIFT> + <F>
-		// BEISPIEL KONKATENATION
-		String nachname, vorname, name;
-		nachname = "Schmidt";
-		vorname = "Hans";
-		name = vorname + " " + nachname;
-		println(name);
 
-		// BEISPIEL FÜR EINE IF-BEDINGUNG
-		println("Geben Sie Ihr Geburtsdatum ein: ");
-		String geburtsdatum = readLine();
+		// Eingabe
+		print("Bitte geben Sie an, wie viele Zahlen aus der Fibonacci-Folge berechnet werden sollen: ");
+		int n;
+		n = readInt();
+		readLine();
+		// calculateFibonacci(n);
+		// println(" " + Arrays.toString(calculateFibonacci(n)));
 
-		if (geburtsdatum.equals("16.8."))
-			println("Wir haben am " + "gleichen Tag " + "Geburtstag!");
-
-		else
-			println("Wir haben nicht " + "am gleichen Tag " + "Geburtstag!");
-		*/
-		/*
-		println( "Ziehungsgerät in ordnungsgemäßem Zustand" );
-				int anzahlDerKugeln = 0;
-				while ( anzahlDerKugeln < 6 ) {
-					int zufallsZahl = (int) (Math.random()*49)+1;
-					println( zufallsZahl );
-					anzahlDerKugeln ++;
-				}
-				println( "Die Gewinner werden benachrichtigt" );
-				*/
-		int[] factorial = { 1, 1, 2, 6, 24, 120, 720, 5040 };
-		println( factorial.length );
-		boolean[ ] bc = { true, false, false, true, true, true };
+		int[] zahlenFolge = new int[n];
 		int i = 0;
-		while ( i < bc.length )
-		print( bc[++i] + ", " );
-		int[] empty = { };
-		println( empty.length );
-		String[] as;		
+		if (n >= 1)
+			zahlenFolge[i] = 0;
+		i++;
+		if (n >= 2)
+			zahlenFolge[i] = 1;
+		i++;
+		if (n >= 3)
+			while (i < n) {
+				zahlenFolge[i] = zahlenFolge[i - 2] + zahlenFolge[i - 1];
+				i++;
+			}
+		i = 0;
+		print(zahlenFolge[i]);
+		i++;
+		if (n > 1)
+			while (i < n) {
+				print(", " + zahlenFolge[i++]);
+			}
+		// Ausgabe
+		/*
+		 * int i=0; print(zahlenFolge); if (n > 1) while ( i < n ) print( ", " +
+		 * zahlenFolge[i++]);
+		 */
 	}
+
+	// Verarbeitung
+	/*
+	 * static int[] calculateFibonacci(int n) {
+	 * 
+	 * return zahlenFolge; }
+	 */
 
 }
