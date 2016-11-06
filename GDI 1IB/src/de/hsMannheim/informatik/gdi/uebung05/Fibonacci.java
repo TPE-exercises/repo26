@@ -28,6 +28,8 @@ public class Fibonacci {
 	static int[] calculateFibonacci(int n) {
 		if (n < 1)
 			throw new GDIException("Ungültiger Parameter! Es wird eine natürliche Zahl erwartet!");
+		if (n > 47)
+			throw new GDIException("Bitte geben Sie keine Zahl ein, die größer als 47 ist, da größere Zahlen nicht mehr fehlerfrei berechnet werden können.");
 		else {
 			int[] zahlenFolge = new int[n];
 			int i = 0;
