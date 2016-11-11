@@ -8,7 +8,11 @@ public class sort {
 	
 		println("Wie lang ist die zu sortierende Folge?");
 		int length = readInt();
-		int[] numberSequence = createNumberSequence(length);
+		int[] numberSequence = createRandomNumberSequence(length);
+		
+		/*for (int i = 0; i < length; i++) {
+			print(numberSequence[i] + " ");
+		}println();*/
 		
 		int[] newNumberSequence = new int[length];
 		int choise = 0;
@@ -30,12 +34,12 @@ public class sort {
 
 		int i = 0;
 		print(newNumberSequence[i]);
-		for (i = 1; i < length; i++) {
+		for (i = 1; i <= length; i++) {
 			print(", " + newNumberSequence[i]);
 		}
 	}
 	
-	
+	//Create own array
 	static int[] createNumberSequence (int length){
 		int i = 0;
 		int[] numberSequence = new int[length];
@@ -46,6 +50,18 @@ public class sort {
 			i++;
 		}
 		return numberSequence;
+	}
+	
+	//Create random array
+	static int[] createRandomNumberSequence (int length){
+		int[] numberSequence = new int[length];
+		
+		for(int i = 0; i < length; i++){
+			int random = (int) Math.floor(Math.random()*99);
+			numberSequence[i] = random;
+		}
+		return numberSequence;
+
 	}
 	
 	
