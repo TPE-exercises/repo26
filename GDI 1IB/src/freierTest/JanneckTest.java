@@ -11,9 +11,9 @@ public class JanneckTest {
 		int sum = 0;
 
 		if (n < 0){
-			throw new GDIException("Ungültiger Parameter! Es wird eine Zahl größer/gleich 0 erwartet!");
+			throw new GDIException("Ungültiger Parameter! "
+					+ "Es wird eine Zahl größer/gleich 0 erwartet!");
 		}
-		
 		if (n == 0 || n == 1) {
 			return 1;
 		} else {
@@ -28,10 +28,10 @@ public class JanneckTest {
 			i++;
 			if (n >= 3)
 				while (i < n) {
-					zahlenFolge[i] = zahlenFolge[i - 2] + zahlenFolge[i - 1];
+					zahlenFolge[i] = zahlenFolge[i - 2] + 
+							zahlenFolge[i - 1];
 					i++;
 				}
-
 			sum = zahlenFolge[n - 1] + zahlenFolge[n - 2];
 			return sum;
 		}
@@ -43,7 +43,8 @@ public class JanneckTest {
 		int zwischenSpeicher = 0;
 		
 		if (n < 0){
-			throw new GDIException("Ungültiger Parameter! Es wird eine Zahl größer/gleich 0 erwartet!");
+			throw new GDIException("Ungültiger Parameter! "
+					+ "Es wird eine Zahl größer/gleich 0 erwartet!");
 		}
 		
 		while (n!=0){
@@ -57,7 +58,8 @@ public class JanneckTest {
 
 	public static void main(String[] args) {
 
-		println("Welchen Stelle der Fibonacci-Folge wollen sie berechnen?");
+		println("Welchen Stelle der Fibonacci-Folge "
+				+ "wollen sie berechnen?");
 		int n = readInt();
 
 		println("Wollen sie nach A1 oder nach A2 verfahren?");
