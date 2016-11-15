@@ -25,6 +25,8 @@ public class searchFunction {
 			result3 = BinarySearchRecursive(numberSequence, searchNumber, 0, numberSequence.length-1);
 			result4 = BinarySearchIterative(numberSequence, searchNumber);
 			
+			;
+			
 			println("Array________________________");
 			for (int i = 0; i < length; i++) {
 				print(i + "  ");
