@@ -18,6 +18,9 @@ public class sort {
 		int choise = 0;
 		
 		println("Mit welcher Methode soll sortiert werden?");
+		println("1 für InsertionSort1");
+		println("2 für InsertionSort2");
+		println("3 für ShakerSort");
 		choise = readInt();
 				
 		if (choise == 1){
@@ -34,7 +37,7 @@ public class sort {
 
 		int i = 0;
 		print(newNumberSequence[i]);
-		for (i = 1; i <= length; i++) {
+		for (i = 1; i < length; i++) {
 			print(", " + newNumberSequence[i]);
 		}
 	}
