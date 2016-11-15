@@ -56,21 +56,7 @@ public class sort {
 	//Create random array
 	static int[] createRandomNumberSequence (int length){
 		int[] numberSequence = new int[length];
-<<<<<<< HEAD
-=======
-		
-		for(int i = 0; i < length; i++){
-			int random = (int) Math.floor(Math.random()*99);
-			numberSequence[i] = random;
-		}
-		return numberSequence;
 
-	}
-	
-	
-	static int[] InsertionSort  (int[] numberSequence){
-		int[] newNumberSequence = new int[numberSequence.length];
->>>>>>> branch 'master' of http://ovid.sr.hs-mannheim.de/git/g2-3/g2-3.git
 		
 		for(int i = 0; i < length; i++){
 			int random = (int) Math.floor(Math.random()*99);
