@@ -1,4 +1,3 @@
-
 package ads;
 
 import static gdi.MakeItSimple.*;
