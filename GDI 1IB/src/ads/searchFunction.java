@@ -52,16 +52,6 @@ public class searchFunction {
 		return numberSequence;
 	}
 	
-	static int[] createRandomNumberSequence (int length){
-		int[] numberSequence = new int[length];
-		
-		for(int i = 0; i < length; i++){
-			int random = (int) Math.floor(Math.random()*99);
-			numberSequence[i] = random;
-		}
-		return numberSequence;
-
-	}
 	static int[] createDNumberSequence (int length){
 		int[] numberSequence = {5,10,11,13,14,20,30,32,35,40};
 		return numberSequence;
