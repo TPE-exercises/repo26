@@ -14,20 +14,16 @@ public class searchFunction {
 		int searchNumber = 0;
 		int[] numberSequence;
 
-		/*
-		 * println("Wie lang ist die zu sortierende Folge?"); int length =
-		 * readInt();
-		 */ int length = 10;
-		numberSequence = createDNumberSequence(1);
+		
+		 println("Wie lang ist die zu sortierende Folge?"); 
+		 int length = readInt();
+		
+		numberSequence = createRandomNumberSequence(length);
 
 		println("Welche Zahl soll gesucht werden?");
 		searchNumber = readInt();
 
 		println("Array________________________");
-		for (int i = 0; i < length; i++) {
-			print(i + "  ");
-		}
-		println();
 		for (int i = 0; i < length; i++) {
 			print(numberSequence[i] + " ");
 		}
@@ -61,7 +57,7 @@ public class searchFunction {
 		int[] numberSequence = new int[length];
 
 		for (int i = 0; i < length; i++) {
-			int random = (int) Math.floor(Math.random() * 99);
+			int random = (int) Math.floor(Math.random() * 100);
 			numberSequence[i] = random;
 		}
 		return numberSequence;
