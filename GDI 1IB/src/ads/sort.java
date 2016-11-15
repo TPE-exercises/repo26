@@ -125,8 +125,8 @@ public class sort {
 	}
 
 	static int[] SelectionSort(int[] numberSequence) {
-		int markerMin = 0;
-		int markerMax = numberSequence.length - 1;
+		int bottom = 0;
+		int top = numberSequence.length - 1;
 
 		/*
 		int q = 0;
@@ -136,29 +136,29 @@ public class sort {
 		}
 		println();
 		*/
-		while (markerMax > numberSequence.length/2-1) {
+		while (top > bottom) {
 
 			int min = numberSequence.length-1;
-			for (int i = numberSequence.length-2; i >= markerMin; i--)
+			for (int i = numberSequence.length-2; i >= bottom; i--)
 				if (numberSequence[i] < numberSequence[min]){
 					min = i;
 				}
 			//if(markerMin >= 0 && markerMin < numberSequence.length){
-				swap(numberSequence, markerMin, min);
-				markerMin++;
+				swap(numberSequence, bottom, min);
+				bottom++;
 			//}
 			//else 
 			//	return numberSequence;
 
 			
 			int max = 0;
-			for (int i = 1; i <= markerMax; i++)
+			for (int i = 1; i <= top; i++)
 				if (numberSequence[i] > numberSequence[max])
 					max = i;
-			swap(numberSequence, markerMax, max);
-			markerMax--;	
+			swap(numberSequence, top, max);
+			top--;	
 			
-			println("Tausch nummer: " + markerMin);
+			println("Tausch nummer: " + bottom);
 			/*
 			int i = 0;
 			print(numberSequence[i]);
@@ -179,9 +179,67 @@ public class sort {
 	}
 
 	static int[] ShakerSort(int[] numberSequence) {
-		int[] newNumberSequence = new int[numberSequence.length];
+		//int[] newNumberSequence = new int[numberSequence.length];
+		
+		int q = 0;
+		boolean swapped;
+		do {
+			// print protocol
+			println("------------------------------");
+			println("Durchlauf: " + q++);
+			int d = 0;
+			print(numberSequence[d]);
+			for (d = 1; d < numberSequence.length; d++) {
+				print(", " + numberSequence[d]);
+			}
+			println();
+			// print protocol end
 
-		return newNumberSequence;
+			swapped = false;
+			// swap left to right
+			for (int i = 0; i < numberSequence.length - 1; i++) {
+				if (numberSequence[i] > numberSequence [i+1]) {
+					swap (numberSequence, i, i+1);
+					swapped = true;			
+				}
+
+			// print protocol		
+			}
+			d = 0;
+			println("links nach rechts");
+			print(numberSequence[d]);
+			for (d = 1; d < numberSequence.length; d++) {
+				print(", " + numberSequence[d]);
+			}
+			println();
+			// print protocol end
+
+			// swap right to left
+			for (int i = numberSequence.length -1 ; i > 0; i--) {
+				if (numberSequence[i] < numberSequence [i-1]) {
+					swap (numberSequence, i, i-1);
+					swapped = true;			
+				}
+			}
+			
+			// print protocol
+			d = 0;
+			println("rechts nach links");
+			print(numberSequence[d]);
+			for (d = 1; d < numberSequence.length; d++) {
+				print(", " + numberSequence[d]);
+			}
+			println();
+			// print protocol end
+			
+		} while (swapped);
+		
+		// print protocol
+		println("----------------------------------");
+		println("Fertige Folge:");
+		// print protocol end
+		
+		return numberSequence;
 	}
 
 }
