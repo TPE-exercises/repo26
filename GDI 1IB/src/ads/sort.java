@@ -6,7 +6,6 @@ public class sort {
 	
 	public static void main(String[] args) {
 	
-		println("test");
 		println("Wie lang ist die zu sortierende Folge?");
 		int length = readInt();
 		int[] numberSequence = createRandomNumberSequence(length);
