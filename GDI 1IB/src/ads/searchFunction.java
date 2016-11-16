@@ -6,18 +6,19 @@ public class searchFunction {
 
 	public static void main(String[] args) {
 
-		int result1 = 0;
-		int result2 = 0;
-		int result3 = 0;
-		int result4 = 0;
 		int searchNumber = 0;
 		int[] numberSequence;
 
-		
-		 println("Wie lang ist die zu sortierende Folge?"); 
-		 int length = readInt();
-		
-		numberSequence = createRandomNumberSequence(length);
+		// Chose one methode
+
+		// methode 1
+		//println("Wie lang ist die zu sortierende Folge?");
+		//int length = readInt();
+		//numberSequence = createOwnNumberSequence(length);
+
+		// methode 2
+		int length = 10;
+		numberSequence = createDefinedNumberSequence(length);
 
 		println("Welche Zahl soll gesucht werden?");
 		searchNumber = readInt();
@@ -28,43 +29,27 @@ public class searchFunction {
 		}
 		println();
 		println("_____________________________");
-		
-		result1 = linearSearchA(numberSequence, searchNumber);
-		result2 = linearSearchB(numberSequence, searchNumber);
-		result3 = BinarySearchRecursive(numberSequence, searchNumber, 0, numberSequence.length - 1);
-		result4 = BinarySearchIterative(numberSequence, searchNumber);
 
-		println("Index der Linearen Suche 1: " + result1);
-		println("Index der Linearen Suche 2: " + result2);
-		println("Index der Binären Suche rekusiv: " + result3);
-		println("Index der Binären Suche iterativ: " + result4);
+		println("Index der Linearen Suche 1: " + linearSearchA(numberSequence, searchNumber));
+		println("Index der Linearen Suche 2: " + linearSearchB(numberSequence, searchNumber));
+		println("Index der Binären Suche rekusiv: " + BinarySearchRecursive(numberSequence, searchNumber, 0, numberSequence.length - 1));
+		println("Index der Binären Suche iterativ: " + BinarySearchIterative(numberSequence, searchNumber));
 	}
 
-	static int[] createNumberSequence(int length) {
+	static int[] createOwnNumberSequence(int length) {
 		int i = 0;
 		int[] numberSequence = new int[length];
-		println("Geben sie die Zahlenfolge ein.");
+		println("Geben Sie eine sortierte Zahlenfolge ein.");
 		while (i < length) {
-			println("Gebe " + i + " Stelle ein");
+			println("Gebe " + (i+1) + ". Stelle ein");
 			numberSequence[i] = readInt();
 			i++;
 		}
 		return numberSequence;
 	}
 
-	static int[] createRandomNumberSequence(int length) {
-		int[] numberSequence = new int[length];
-
-		for (int i = 0; i < length; i++) {
-			int random = (int) Math.floor(Math.random() * 100);
-			numberSequence[i] = random;
-		}
-		return numberSequence;
-
-	}
-
-	static int[] createDNumberSequence(int length) {
-		int[] numberSequence = { 5, 10, 11, 13, 14, 20, 30, 32, 35, 40 };
+	static int[] createDefinedNumberSequence(int length) {
+		int[] numberSequence = { 5, 10, 11, 13, 14, 30, 32, 32, 32, 40 };
 		return numberSequence;
 	}
 
