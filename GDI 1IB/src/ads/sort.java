@@ -73,23 +73,39 @@ public class sort {
 	}
 
 	static int[] InsertionSort1(int[] numberSequence) {
-
-		// Kopie
+		int numberOfSwaps = 0;
+		int q = 1;
+		
 		for (int i = 1; i < numberSequence.length; i++) {
 			int j = i;
-			int m = numberSequence[i]; // Marker-Feld
-
+			int m = numberSequence[i]; // Marker-Field
+			
+			// print protocol
+			println("-----------------------------------");
+			println("Durchlauf: " + q++);
+			int d = 0;
+			print(numberSequence[d]);
+			for (d = 1; d < numberSequence.length; d++) {
+				print(", " + numberSequence[d]);
+			}
+			println();
+			// print protocol end
+			
 			while (j > 0 && numberSequence[j - 1] > m) {
-				// Verschiebe alle größeren Elemente nach hinten
+				// swap greater elements
 				numberSequence[j] = numberSequence[j - 1];
 				j--;
+				numberOfSwaps++;
 			}
-			// Setze m auf das freie Feld
+			// Set m to free field
 			numberSequence[j] = m;
 		}
-
-		// Kopie Ende
-
+		
+		// print protocol
+		println("-----------------------------------");
+		println("Anzahlvertauschungen: " + numberOfSwaps);
+		// print protocol end
+		
 		return numberSequence;
 	}
 
@@ -127,17 +143,22 @@ public class sort {
 	static int[] SelectionSort(int[] numberSequence) {
 		int bottom = 0;
 		int top = numberSequence.length - 1;
+		int numberOfSwaps = 0;
+		int q = 1;
 
-		/*
-		int q = 0;
-		print(numberSequence[q]);
-		for (q = 1; q < numberSequence.length; q++) {
-			print(", " + numberSequence[q]);
-		}
-		println();
-		*/
 		while (top > bottom) {
 
+			// print protocol
+			println("-----------------------------------");
+			println("Durchlauf: " + q++);
+			int d = 0;
+			print(numberSequence[d]);
+			for (d = 1; d < numberSequence.length; d++) {
+				print(", " + numberSequence[d]);
+			}
+			println();
+			// print protocol end
+			
 			int min = numberSequence.length-1;
 			for (int i = numberSequence.length-2; i >= bottom; i--)
 				if (numberSequence[i] < numberSequence[min]){
@@ -145,6 +166,7 @@ public class sort {
 				}
 			//if(markerMin >= 0 && markerMin < numberSequence.length){
 				swap(numberSequence, bottom, min);
+				numberOfSwaps++;
 				bottom++;
 			//}
 			//else 
@@ -156,19 +178,16 @@ public class sort {
 				if (numberSequence[i] > numberSequence[max])
 					max = i;
 			swap(numberSequence, top, max);
+			numberOfSwaps++;
 			top--;	
-			
-			println("Tausch nummer: " + bottom);
-			/*
-			int i = 0;
-			print(numberSequence[i]);
-			for (i = 1; i < numberSequence.length; i++) {
-				print(", " + numberSequence[i]);
-			}
-			println();
-			*/
 		}
+		
+		// print protocol
+		println("-----------------------------------");
+		println("Anzahlvertauschungen: " + numberOfSwaps);
 		return numberSequence;
+		// print protocol end
+		
 	}
 
 	static void swap(int[] numberSequence, int idx1, int idx2) {
@@ -179,13 +198,14 @@ public class sort {
 	}
 
 	static int[] ShakerSort(int[] numberSequence) {
-		//int[] newNumberSequence = new int[numberSequence.length];
-		
-		int q = 0;
 		boolean swapped;
+		int numberOfSwaps = 0;
+		int q = 1;
 		do {
+			swapped = false;
+			
 			// print protocol
-			println("------------------------------");
+			println("-----------------------------------");
 			println("Durchlauf: " + q++);
 			int d = 0;
 			print(numberSequence[d]);
@@ -194,13 +214,14 @@ public class sort {
 			}
 			println();
 			// print protocol end
-
-			swapped = false;
+			
 			// swap left to right
 			for (int i = 0; i < numberSequence.length - 1; i++) {
 				if (numberSequence[i] > numberSequence [i+1]) {
 					swap (numberSequence, i, i+1);
-					swapped = true;			
+					numberOfSwaps++;
+					swapped = true;
+					
 				}
 
 			// print protocol		
@@ -218,7 +239,8 @@ public class sort {
 			for (int i = numberSequence.length -1 ; i > 0; i--) {
 				if (numberSequence[i] < numberSequence [i-1]) {
 					swap (numberSequence, i, i-1);
-					swapped = true;			
+					numberOfSwaps++;
+					swapped = true;
 				}
 			}
 			
@@ -235,8 +257,8 @@ public class sort {
 		} while (swapped);
 		
 		// print protocol
-		println("----------------------------------");
-		println("Fertige Folge:");
+		println("-----------------------------------");
+		println("Anzahlvertauschungen: " + numberOfSwaps);	
 		// print protocol end
 		
 		return numberSequence;
