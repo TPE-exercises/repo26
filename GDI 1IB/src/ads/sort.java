@@ -4,16 +4,37 @@ import static gdi.MakeItSimple.*;
 
 public class sort {
 
+	public static int protokollRun (int[] numberSequence, int numberOfRuns){
+		// print protocol
+		println("-----------------------------------");
+		println("Durchlauf: " + numberOfRuns++);
+		int d = 0;
+		print(numberSequence[d]);
+		for (d = 1; d < numberSequence.length; d++) {
+			print(", " + numberSequence[d]);
+		}
+		println();
+		// print protocol end
+		
+		return numberOfRuns;
+	}
+	public static int protokollSwap (int[] numberSequence, int numberOfSwaps){
+		// print protocol
+		numberOfSwaps++;
+		println("-----------------------------------");
+		println("Anzahlvertauschungen: " + numberOfSwaps);
+		// print protocol end
+		
+		return numberOfSwaps;
+	}
+	
 	public static void main(String[] args) {
 
+		boolean debug = true;
+		
 		println("Wie lang ist die zu sortierende Folge?");
 		int length = readInt();
 		int[] numberSequence = createRandomNumberSequence(length);
-
-		/*
-		 * for (int i = 0; i < length; i++) { print(numberSequence[i] + " ");
-		 * }println();
-		 */
 
 		int[] newNumberSequence = new int[length];
 
@@ -25,22 +46,24 @@ public class sort {
 		int k = readInt();
 		switch (k) {
 		case 1:
-			newNumberSequence = InsertionSort1(numberSequence);
+			newNumberSequence = InsertionSort1(numberSequence, debug);
 			break;
 		case 2:
-			newNumberSequence = InsertionSort2(numberSequence);
+			newNumberSequence = InsertionSort2(numberSequence, debug);
 			break;
 		case 3:
-			newNumberSequence = SelectionSort(numberSequence);
+			newNumberSequence = SelectionSort(numberSequence, debug);
 			break;
 		case 4:
-			newNumberSequence = ShakerSort(numberSequence);
+			newNumberSequence = ShakerSort(numberSequence, debug);
 			break;
 		default:
 			println("Falsche eingabe");
 		}
 
+		//Return Array to Console
 		int i = 0;
+		println("______________________________________");
 		print(newNumberSequence[i]);
 		for (i = 1; i < length; i++) {
 			print(", " + newNumberSequence[i]);
@@ -65,63 +88,69 @@ public class sort {
 		int[] numberSequence = new int[length];
 
 		for (int i = 0; i < length; i++) {
-			int random = (int) Math.floor(Math.random() * 99);
+			int random = (int) Math.floor(Math.random() * 100);
 			numberSequence[i] = random;
 		}
 		return numberSequence;
 
 	}
 
-	static int[] InsertionSort1(int[] numberSequence) {
-		int numberOfComparisons = 0;
-		int numberOfSwaps = 0;
-		int q = 1;
+	static int[] InsertionSort1(int[] numberSequence, boolean debug) {
+
+		int numberOfRuns = 1;
+		int numberOfSwap = 0;
 
 		for (int i = 1; i < numberSequence.length; i++) {
 			int j = i;
 			int m = numberSequence[i]; // Marker-Field
 
-			// print protocol
-			println("-----------------------------------");
-			println("Durchlauf: " + q++);
-			int d = 0;
-			print(numberSequence[d]);
-			for (d = 1; d < numberSequence.length; d++) {
-				print(", " + numberSequence[d]);
-			}
-			println();
-			// print protocol end
-
 			while (j > 0 && numberSequence[j - 1] > m) {
-				// swap greater elements
 				numberSequence[j] = numberSequence[j - 1];
 				j--;
-				numberOfSwaps++;
+				if(debug){
+					numberOfSwap = protokollSwap(numberSequence, numberOfSwap);
+				}
+				if(debug){
+					numberOfRuns = protokollRun(numberSequence, numberOfRuns);
+				}
 			}
 			// Set m to free field
 			numberSequence[j] = m;
 		}
 
-		// print protocol
-		println("-----------------------------------");
-		println("Anzahlvertauschungen: " + numberOfSwaps);
-		// print protocol end
-
 		return numberSequence;
 	}
 
-	static int[] InsertionSort2(int[] numberSequence) {
+	static int[] InsertionSort2(int[] numberSequence, boolean debug) {
+
+		int numberOfRuns = 1;
+		int numberOfSwap = 0;
+		
 		for (int i = 1; i < numberSequence.length; i++) {
-
-			int m = numberSequence[i];
-			int j = BinarySearchRecursive(numberSequence, m, 0, i - 1);
-
-			for (int x = i; j != x; x--) {
-				numberSequence[x] = numberSequence[x - 1];
+			
+			int j = i;
+			int m = numberSequence[i]; // Marker-Field
+			
+			int daMusstDuHin = BinarySearchRecursive(numberSequence, m, 0, j-1);	
+			if(numberSequence[daMusstDuHin] < m){
+				daMusstDuHin ++;
 			}
-			numberSequence[i] = m;
+			
 
+			while (j > 0 && daMusstDuHin < j) {
+				// swap greater elements
+				numberSequence[j] = numberSequence[j - 1];
+				j--;
+				if(debug){
+					numberOfSwap = protokollSwap(numberSequence, numberOfSwap);
+				}
+			}
+			numberSequence[j] = m;
+			if(debug){
+				numberOfRuns = protokollRun(numberSequence, numberOfRuns);
+			}
 		}
+
 		return numberSequence;
 	}
 
@@ -130,7 +159,7 @@ public class sort {
 
 		int m = (u + o) / 2;
 
-		if (u == o)
+		if (u >= o)
 			return m;
 
 		else if (searchNumber < numberSequence[m])
@@ -141,63 +170,54 @@ public class sort {
 
 	}
 
-	static int[] SelectionSort(int[] numberSequence) {
+	static int[] SelectionSort(int[] numberSequence, boolean debug) {
+		int numberOfRuns = 1;
+		int numberOfSwap = 0;
+		
 		int bottom = 0;
 		int top = numberSequence.length - 1;
-		int numberOfComparisons = 0;
-		int numberOfSwaps = 0;
-		int q = 1;
 
 		while (top > bottom) {
 
-			// print protocol
-			println("-----------------------------------");
-			println("Durchlauf: " + q++);
-			int d = 0;
-			print(numberSequence[d]);
-			for (d = 1; d < numberSequence.length; d++) {
-				print(", " + numberSequence[d]);
-			}
-			println();
-			// print protocol end
-
 			int min = numberSequence.length - 1;
-			for (int i = numberSequence.length - 2; i >= bottom; i--)
+			for (int i = numberSequence.length - 2; i >= bottom; i--){
 				if (numberSequence[i] < numberSequence[min]) {
-					min = i;
+					min = i;		
 				}
-			// if(markerMin >= 0 && markerMin < numberSequence.length){
+			}
 			swap(numberSequence, bottom, min);
-			numberOfSwaps++;
 			bottom++;
-			// }
-			// else
-			// return numberSequence;
+			if(debug){
+				numberOfSwap = protokollSwap(numberSequence, numberOfSwap);
+			}
+
 
 			int max = 0;
-			for (int i = 1; i <= top; i++)
+			for (int i = 1; i <= top; i++){
 				if (numberSequence[i] > numberSequence[max])
 					max = i;
+			}
 			swap(numberSequence, top, max);
-			numberOfSwaps++;
 			top--;
+			if(debug){
+				numberOfSwap = protokollSwap(numberSequence, numberOfSwap);
+			}
+			if(debug){
+				numberOfRuns = protokollRun(numberSequence, numberOfRuns);
+			}	
 		}
-
-		// print protocol
-		println("-----------------------------------");
-		println("Anzahlvertauschungen: " + numberOfSwaps);
-		// print protocol end
-
+		
 		return numberSequence;
 	}
 
+	//swap for SelectionSort
 	static void swap(int[] numberSequence, int idx1, int idx2) {
 		int tmp = numberSequence[idx1];
 		numberSequence[idx1] = numberSequence[idx2];
 		numberSequence[idx2] = tmp;
 	}
 
-	static int[] ShakerSort(int[] numberSequence) {
+	static int[] ShakerSort(int[] numberSequence, boolean debug) {
 		boolean swapped;
 		int numberOfComparisons = 0;
 		int numberOfSwaps = 0;
