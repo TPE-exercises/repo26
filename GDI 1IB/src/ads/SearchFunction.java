@@ -2,7 +2,7 @@ package ads;
 
 import static gdi.MakeItSimple.*;
 
-public class searchFunction {
+public class SearchFunction {
 
 	public static void main(String[] args) {
 
@@ -12,9 +12,9 @@ public class searchFunction {
 		// Chose one methode
 
 		// methode 1
-		//println("Wie lang ist die zu sortierende Folge?");
-		//int length = readInt();
-		//numberSequence = createOwnNumberSequence(length);
+		// println("Wie lang ist die zu sortierende Folge?");
+		// int length = readInt();
+		// numberSequence = createOwnNumberSequence(length);
 
 		// methode 2
 		int length = 10;
@@ -32,7 +32,8 @@ public class searchFunction {
 
 		println("Index der Linearen Suche 1: " + linearSearchA(numberSequence, searchNumber));
 		println("Index der Linearen Suche 2: " + linearSearchB(numberSequence, searchNumber));
-		println("Index der Binären Suche rekusiv: " + BinarySearchRecursive(numberSequence, searchNumber, 0, numberSequence.length - 1));
+		println("Index der Binären Suche rekusiv: "
+				+ BinarySearchRecursive(numberSequence, searchNumber, 0, numberSequence.length - 1));
 		println("Index der Binären Suche iterativ: " + BinarySearchIterative(numberSequence, searchNumber));
 	}
 
@@ -41,7 +42,7 @@ public class searchFunction {
 		int[] numberSequence = new int[length];
 		println("Geben Sie eine sortierte Zahlenfolge ein.");
 		while (i < length) {
-			println("Gebe " + (i+1) + ". Stelle ein");
+			println("Gebe " + (i + 1) + ". Stelle ein");
 			numberSequence[i] = readInt();
 			i++;
 		}
