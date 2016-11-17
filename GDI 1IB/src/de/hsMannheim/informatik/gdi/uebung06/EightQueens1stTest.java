@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class EightQueens1stTest {
-	
+	boolean debug = false;
 	@After
 	public void tearDown() throws Exception {
 		new File("proto.txt").delete();
@@ -41,12 +41,12 @@ public class EightQueens1stTest {
 	
 	@Test
 	public void gültigeLösung() throws Exception {
-		assertTrue(EightQueens.isValidSolution(gültigeLösung));
+		assertTrue(EightQueens.isValidSolution(gültigeLösung, debug));
 	}
 
 	@Test
 	public void ungültigeLösung() throws Exception {
-		assertFalse(EightQueens.isValidSolution(linksOben));
+		assertFalse(EightQueens.isValidSolution(linksOben, debug));
 	}
 	
 	@Test

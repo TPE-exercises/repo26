@@ -18,7 +18,7 @@ public class EightQueens {
 			field = readFieldFromFile("Field-2.txt");
 			break;
 		case 2:
-			field = readFieldFromFile("Field-1.txt");
+			field = readFieldFromFile("Field-4.txt");
 			break;
 		default:
 			println("Ungültige Eingabe");
@@ -40,7 +40,7 @@ public class EightQueens {
 		println("Das Ergebniss ist: " + solution);
 		
 		if(!solution)
-			markThreatendQueens(field);
+			markThreatenedQueens(field);
 	}
 	
 	static int[][] readFieldFromFile(String filename){
@@ -73,13 +73,17 @@ public class EightQueens {
 					damenZähler++;
 			
 					if(debug){
+						println("------------------------------------------------");
 						println("Testzeile " + zeile);
 						println("Vertikal ist " + v);
 						println("Horizontal ist " + h);
 						println("Diagonal ist " + d);
-						println("------------------------------------------------");
 					}
 					if(!d || !v || !h){
+						if(debug){
+							println("------------------------------------------------");
+							println("Test beendet");
+						}
 						return false;
 					}
 				}
@@ -228,7 +232,7 @@ public class EightQueens {
 			return false;
 	}
 	
-	static void markThreatendQueens(int[][] field){
+	static void markThreatenedQueens(int[][] field){
 		
 		boolean debug = false;
 		boolean d,v,h,v2;

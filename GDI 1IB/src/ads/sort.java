@@ -297,6 +297,7 @@ public class sort {
 		boolean swapped;
 		int numberOfComparisons = 0;
 		int numberOfSwaps = 0;
+		
 		int q = 1;
 		do {
 			swapped = false;
