@@ -4,68 +4,73 @@ import static gdi.MakeItSimple.*;
 
 public class FindEightQueensSolution {
 
+	final static int Dame = 1;
+	final static int Leer = 0;
+	static int anzahlDerLösungen = 0;
+	static int sollAnzahlDamen = 8;
+	static int spielbrettGroesse = 8;
+
 	public static void main(String[] args) {
-		
-		int[][] field = new int [8][8];
-		boolean debug = false;
+
+		anzahlDerLösungen = 0;
+		int[][] schachbrett = new int[spielbrettGroesse][spielbrettGroesse];
 		int damenZähler = 0;
-		
-		for(int zeile=0; zeile<8; zeile++){
-			int zählerinZeile = 0;
-			int newspalte = 0;
-			
-			for(int spalte=0; spalte<8; spalte++){
-				//println(zeile + ", " + spalte);
-				
-				newspalte = spalte;
-				if(field[zeile][spalte] == 0)
-					field[zeile][spalte] = 1;
-				
-				zählerinZeile++;
-				
-				boolean d = EightQueens.isValidSolutionDiagonal(field, zeile, spalte, debug);
-				boolean du = EightQueens.isValidSolutionDiagonalUp(field, zeile, spalte, debug);
-				boolean v = EightQueens.isValidSolutionVertikal(field, spalte, debug);
-				boolean h = EightQueens.isValidSolutionHorizontal(field, zeile, debug);
-				
-				if(!d || !du || !v || !h){
-					field[zeile][spalte] = 0;
-					zählerinZeile--;
-				}
-							println("Zeile: " + zeile + " Spalte: " + spalte + " Zähler: " + zählerinZeile);
-					
-				damenZähler += zählerinZeile;
-				
-			}
-				println("__--__--__--__--__--__--__--__--__--__--__");
-				println(zählerinZeile);
-				if(zählerinZeile == 0){
-					for(int i=0; i<8; i++){
-						
-						//field[zeile][i] = 0;
-					}
-					for(int i=0; i<8; i++){
-						if(field[zeile-1][i] == 1)
-							field[zeile-1][i] = 4;
-					}
-					for(int n=0; n<8;n++){
-						println();
-						for(int i=0; i<8;i++){
-							print(field[n][i] + " ");		
-						}
-					}
-					zeile = zeile-2;
-				}	
-		}
-	
-		
-		for(int n=0; n<8;n++){
-			println();
-			for(int i=0; i<8;i++){
-				print(field[n][i] + " ");		
-			}
-		}
-	
+		int zeile = 0;
+		int spalte = 0;
+
+		findeLoesung(schachbrett, damenZähler, zeile, spalte);
+
+		println("Anzahl der Lösungen: " + anzahlDerLösungen);
 	}
 
+	static void findeLoesung(int[][] schachbrett, int damenZähler, int zeile, int spalte) {
+
+		if (zeile >= spielbrettGroesse || spalte >= spielbrettGroesse)
+			return;
+
+		schachbrett[zeile][spalte] = Dame;
+		damenZähler++;
+
+		if (isValidSolution(schachbrett)) {
+			if (damenZähler == sollAnzahlDamen)
+				printValidSolution(schachbrett);
+			else
+				findeLoesung(schachbrett, damenZähler, zeile + 1, 0);
+		}
+
+		schachbrett[zeile][spalte] = Leer;
+		damenZähler--;
+		findeLoesung(schachbrett, damenZähler, zeile, spalte + 1);
+	}
+
+	static void printValidSolution(int[][] field) {
+		anzahlDerLösungen++;
+		println("Mögliche Lösung: " + anzahlDerLösungen);
+
+		// Gebe Spielbrett aus
+		for (int j = 0; j < spielbrettGroesse; j++) {
+			println();
+			for (int i = 0; i < spielbrettGroesse; i++)
+				print(field[j][i] + " ");
+		}
+		println();
+		println("_______________________");
+	}
+
+	static boolean isValidSolution(int[][] field) {
+		boolean d = false, v = false;
+		boolean debug = false;
+
+		for (int zeile = 0; zeile < spielbrettGroesse; zeile++) {
+			for (int spalte = 0; spalte < spielbrettGroesse; spalte++) {
+				if (field[zeile][spalte] == 1) {
+					d = EightQueens.isValidSolutionDiagonalUp(field, zeile, spalte, debug);
+					v = EightQueens.isValidSolutionVertikal(field, spalte, debug);
+				}
+			}
+		}
+		if (d && v)
+			return true;
+		return false;
+	}
 }
