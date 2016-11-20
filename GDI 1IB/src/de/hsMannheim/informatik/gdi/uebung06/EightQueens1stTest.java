@@ -41,12 +41,12 @@ public class EightQueens1stTest {
 	
 	@Test
 	public void gültigeLösung() throws Exception {
-		assertTrue(EightQueens.isValidSolution(gültigeLösung, debug));
+		assertTrue(EightQueens.isValidSolution(gültigeLösung));
 	}
 
 	@Test
 	public void ungültigeLösung() throws Exception {
-		assertFalse(EightQueens.isValidSolution(linksOben, debug));
+		assertFalse(EightQueens.isValidSolution(linksOben));
 	}
 	
 	@Test

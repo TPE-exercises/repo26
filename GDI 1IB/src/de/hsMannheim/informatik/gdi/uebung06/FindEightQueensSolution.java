@@ -54,7 +54,7 @@ public class FindEightQueensSolution {
 				print(field[j][i] + " ");
 		}
 		println();
-		println("_______________________");
+		EightQueens.trenner();
 	}
 
 	static boolean isValidSolution(int[][] field) {
@@ -64,8 +64,8 @@ public class FindEightQueensSolution {
 		for (int zeile = 0; zeile < spielbrettGroesse; zeile++) {
 			for (int spalte = 0; spalte < spielbrettGroesse; spalte++) {
 				if (field[zeile][spalte] == 1) {
-					d = EightQueens.isValidSolutionDiagonalUp(field, zeile, spalte, debug);
-					v = EightQueens.isValidSolutionVertikal(field, spalte, debug);
+					d = EightQueens.isValidSolutionDiagonalUp(field, zeile, spalte);
+					v = EightQueens.isValidSolutionVertikal(field, spalte);
 				}
 			}
 		}
