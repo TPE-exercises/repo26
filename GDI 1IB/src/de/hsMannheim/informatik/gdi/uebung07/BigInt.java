@@ -18,6 +18,8 @@ public class BigInt {
 			int[] arrayAfterAdd = new int[MaxBigInt];
 			String bigIntAsString;
 
+			BigInt name = new BigInt("");
+			
 			durchgaenge++;
 			
 			// Frage Zahl ab
@@ -30,7 +32,7 @@ public class BigInt {
 			arrayMAX = getDigits(bigIntAsString, length);
 
 			
-			println("Eigegebenes Array: ");
+			println("Eigegebene Zahl: ");
 			gebeArrayAus(arrayMAX);
 			
 			// Addiere Array auf vorhandenes auf
@@ -76,7 +78,7 @@ public class BigInt {
 		return -1;
 	}
 
-	private static int[] kuerzeArray(int[] arrayMAX, int length) {
+	private int[] kuerzeArray(int[] arrayMAX, int length) {
 		int[] array = new int[length];
 
 		int position = MaxBigInt - 1;
@@ -105,11 +107,10 @@ public class BigInt {
 	static int[] add(int[] array2, int arrayLength) {
 		int[] newArray = new int[MaxBigInt];
 
-		for (int i = MaxBigInt - 1; i >= (MaxBigInt - arrayLength); i--) {
+		for (int i = MaxBigInt - 1; i > 0; i--) {
 			int zwischenergebniss = 0;
 			boolean uebertrag = false;
 
-			//	durchgang 			1				0			1		-> 1
 			zwischenergebniss = globalArray[i] + array2[i] + newArray[i];
 			if (zwischenergebniss >= 10) {
 				zwischenergebniss -= 10;
