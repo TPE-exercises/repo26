@@ -9,7 +9,7 @@ public class EightQueens {
 	final static int BEDROHTEDAME = 2;
 	final static int LEER = 0;
 	static int sollAnzahlDamen = 8;
-	static boolean debug = true;
+	static boolean debug = false;
 
 	public static void main(String[] args) {
 
