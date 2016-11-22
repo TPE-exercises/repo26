@@ -4,14 +4,8 @@ import static gdi.MakeItSimple.*;
 
 public class BigIntRechner {
 	
-	
-	
-
 	BigIntRechner(String BigInt){
-		
 	}
-	
-	
 	
 	static int[] add(int[] array2, int arrayLength) {
 		int[] newArray = new int[BigInt.MaxBigInt];
@@ -29,7 +23,6 @@ public class BigIntRechner {
 			if (uebertrag) {
 				newArray[i - 1] += 1;
 			}
-
 		}
 		return newArray;
 	}
@@ -75,12 +68,11 @@ public class BigIntRechner {
 				array1[position] = 9;
 				break;
 			default:
-				throw new GDIException("Es dürfen nur Zahlen von 0-9 verwendet werden");
+				throw new GDIException("Es dürfen nur positive Ziffern von 0-9 verwendet werden!");
 			}
 			position--;
 		}
 		return array1;
-
 	}
 	
 	static int[] kuerzeArray(int[] arrayMAX, int length) {
@@ -91,21 +83,20 @@ public class BigIntRechner {
 			array[i] = arrayMAX[position];
 			position--;
 		}
-
 		return array;
 	}
 	
 	public static String toString(int notUse) {
 		String bigIntAsString;
 
-		println("Gebe nun die BigInt ein");
+		println("Geben Sie eine sehr große natürliche Zahl ein: ");
 		if(BigInt.durchgaenge!=1)bigIntAsString = readLine();
 		bigIntAsString = readLine();
 
 		if (bigIntAsString.length() > 0)
 			return bigIntAsString;
 		else
-			throw new GDIException("Es wurde keine Zahl eingegeben");
+			throw new GDIException("Es wurde keine Zahl eingegeben!");
 	}
 	
 	public static int length(String bigIntAsString) {
@@ -115,7 +106,5 @@ public class BigIntRechner {
 		if (length > BigInt.MaxBigInt)
 			throw new GDIException("Die eingegebene Zahl ist zu groß, ändere MaxBigInt.");
 		return length;
-
 	}
-
 }
