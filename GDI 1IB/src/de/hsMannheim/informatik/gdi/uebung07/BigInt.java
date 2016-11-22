@@ -17,26 +17,24 @@ public class BigInt {
 			int[] arrayMAX = new int[MaxBigInt];
 			int[] arrayAfterAdd = new int[MaxBigInt];
 			String bigIntAsString;
-
-			BigInt name = new BigInt("");
-			
+		
 			durchgaenge++;
 			
 			// Frage Zahl ab
-			bigIntAsString = toString(0);
+			bigIntAsString = BigIntRechner.toString(0);
 
 			// Frage Stringlänge ab
-			length = length(bigIntAsString);
+			length = BigIntRechner.length(bigIntAsString);
 
 			// Wandle String in Array um
-			arrayMAX = getDigits(bigIntAsString, length);
+			arrayMAX = BigIntRechner.getDigits(bigIntAsString, length);
 
 			
 			println("Eigegebene Zahl: ");
 			gebeArrayAus(arrayMAX);
 			
 			// Addiere Array auf vorhandenes auf
-			arrayAfterAdd = add(arrayMAX, length);
+			arrayAfterAdd = BigIntRechner.add(arrayMAX, length);
 			
 			globalArray = arrayAfterAdd;
 			
@@ -44,7 +42,7 @@ public class BigInt {
 
 			// Entferne alle NULLen vor der ersten Zahl
 			int[] array = new int[newlength];
-			array = kuerzeArray(arrayAfterAdd, newlength);
+			array = BigIntRechner.kuerzeArray(arrayAfterAdd, newlength);
 
 			println("Ausgerechnetes Array: ");
 			gebeArrayAus(array);
@@ -75,21 +73,10 @@ public class BigInt {
 				return (MaxBigInt-i);
 			}
 		}
-		return -1;
+		return 1;
 	}
 
-	private int[] kuerzeArray(int[] arrayMAX, int length) {
-		int[] array = new int[length];
-
-		int position = MaxBigInt - 1;
-
-		for (int i = array.length - 1; i >= 0; i--) {
-			array[i] = arrayMAX[position];
-			position--;
-		}
-
-		return array;
-	}
+	
 
 	public static void trenner() {
 		println("---------------------------------");
@@ -104,97 +91,12 @@ public class BigInt {
 		trenner();
 	}
 
-	static int[] add(int[] array2, int arrayLength) {
-		int[] newArray = new int[MaxBigInt];
+	
 
-		for (int i = MaxBigInt - 1; i > 0; i--) {
-			int zwischenergebniss = 0;
-			boolean uebertrag = false;
+	
 
-			zwischenergebniss = globalArray[i] + array2[i] + newArray[i];
-			if (zwischenergebniss >= 10) {
-				zwischenergebniss -= 10;
-				uebertrag = true;
-			}
-			newArray[i] = zwischenergebniss;
-			if (uebertrag) {
-				newArray[i - 1] += 1;
-			}
+	
 
-		}
-		return newArray;
-	}
-
-	public static String toString(int notUse) {
-		String bigIntAsString;
-
-		println("Gebe nun die BigInt ein");
-		if(durchgaenge!=1)bigIntAsString = readLine();
-		bigIntAsString = readLine();
-
-		if (bigIntAsString.length() > 0)
-			return bigIntAsString;
-		else
-			throw new GDIException("Es wurde keine Zahl eingegeben");
-	}
-
-	public static int[] getDigits(String bigIntAsString, int arrayLength) {
-
-		int[] array1 = new int[MaxBigInt];
-		int position = MaxBigInt - 1;
-
-		for (int i = arrayLength - 1; i >= 0; i--) {
-
-			char k = bigIntAsString.charAt(i);
-
-			switch (k) {
-			case '0':
-				array1[position] = 0;
-				break;
-			case '1':
-				array1[position] = 1;
-				break;
-			case '2':
-				array1[position] = 2;
-				break;
-			case '3':
-				array1[position] = 3;
-				break;
-			case '4':
-				array1[position] = 4;
-				break;
-			case '5':
-				array1[position] = 5;
-				break;
-			case '6':
-				array1[position] = 6;
-				break;
-			case '7':
-				array1[position] = 7;
-				break;
-			case '8':
-				array1[position] = 8;
-				break;
-			case '9':
-				array1[position] = 9;
-				break;
-			default:
-				throw new GDIException("Es dürfen nur Zahlen von 0-9 verwendet werden");
-			}
-			position--;
-		}
-		return array1;
-
-	}
-
-	public static int length(String bigIntAsString) {
-
-		int length = 0;
-		length = bigIntAsString.length();
-		if (length > MaxBigInt)
-			throw new GDIException("Die eingegebene Zahl ist zu groß, ändere MaxBigInt.");
-		return length;
-
-	}
+	
 
 }

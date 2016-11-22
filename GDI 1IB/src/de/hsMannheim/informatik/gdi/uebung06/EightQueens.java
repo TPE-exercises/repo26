@@ -4,9 +4,9 @@ import static gdi.MakeItSimple.*;
 
 public class EightQueens {
 
-	static int spielbrettGroesse = 8;
+	static int spielbrettGroesse = 7;
 	final static int DAME = 1;
-	final static int BEDROHTEDAME = 2;
+	final static int BEDROHTE_DAME = 2;
 	final static int LEER = 0;
 	static int sollAnzahlDamen = 8;
 	static boolean debug = false;
@@ -34,6 +34,7 @@ public class EightQueens {
 			for (int i = 0; i < spielbrettGroesse; i++) {
 				print(field[n][i] + " ");
 			}
+			
 		}
 		println();
 		trenner();
@@ -113,7 +114,7 @@ public class EightQueens {
 
 			// Für die Methode "markThreatendQueens" wird auch nach der
 			// BEDROHTEDAME gesucht
-			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTEDAME) {
+			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTE_DAME) {
 				damenZähler++;
 				if (debug && damenZähler > 1)
 					diagonalDebug(damenZähler, zeile, spalte, zählerZeile, zählerSpalte);
@@ -126,7 +127,7 @@ public class EightQueens {
 		zählerZeile = zeile;
 		zählerSpalte = spalte;
 		while (zählerZeile < spielbrettGroesse && zählerSpalte >= 0) {
-			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTEDAME) {
+			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTE_DAME) {
 				damenZähler++;
 				if (debug && damenZähler > 2)
 					diagonalDebug(damenZähler, zeile, spalte, zählerZeile, zählerSpalte);
@@ -153,7 +154,7 @@ public class EightQueens {
 		while (zählerZeile >= 0 && zählerSpalte < spielbrettGroesse) {
 			// Für die Methode "markThreatendQueens" wird auch nach der 2
 			// gesucht
-			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTEDAME) {
+			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTE_DAME) {
 				damenZähler++;
 				if (debug && damenZähler > 1)
 					diagonalDebug(damenZähler, zeile, spalte, zählerZeile, zählerSpalte);
@@ -166,7 +167,7 @@ public class EightQueens {
 		zählerZeile = zeile;
 		zählerSpalte = spalte;
 		while (zählerZeile >= 0 && zählerSpalte >= 0) {
-			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTEDAME) {
+			if (field[zählerZeile][zählerSpalte] == DAME || field[zählerZeile][zählerSpalte] == BEDROHTE_DAME) {
 				damenZähler++;
 				if (debug && damenZähler > 2)
 					diagonalDebug(damenZähler, zeile, spalte, zählerZeile, zählerSpalte);
@@ -187,7 +188,7 @@ public class EightQueens {
 		int damenZähler = 0;
 
 		for (int i = 0; i < spielbrettGroesse; i++) {
-			if (field[i][spalte] == DAME || field[i][spalte] == BEDROHTEDAME) {
+			if (field[i][spalte] == DAME || field[i][spalte] == BEDROHTE_DAME) {
 				damenZähler++;
 			}
 			if (debug && damenZähler > 1) {
@@ -208,7 +209,7 @@ public class EightQueens {
 		int damenZähler = 0;
 
 		for (int i = 0; i < spielbrettGroesse; i++) {
-			if (field[zeile][i] == DAME || field[zeile][i] == BEDROHTEDAME) {
+			if (field[zeile][i] == DAME || field[zeile][i] == BEDROHTE_DAME) {
 				damenZähler++;
 			}
 			if (debug && damenZähler > 1) {
@@ -238,7 +239,7 @@ public class EightQueens {
 					du = isValidSolutionDiagonalUp(field, zeile, spalte);
 					// Wird eine Dame bedroht wird sie auf 2 geändert
 					if (!d || !v || !h || !du) {
-						field[zeile][spalte] = BEDROHTEDAME;
+						field[zeile][spalte] = BEDROHTE_DAME;
 					}
 				}
 			}

@@ -7,8 +7,8 @@ public class FindEightQueensSolution {
 	final static int Dame = 1;
 	final static int Leer = 0;
 	static int anzahlDerLösungen = 0;
-	static int sollAnzahlDamen = 8;
-	static int spielbrettGroesse = 8;
+	static int sollAnzahlDamen = 7;
+	static int spielbrettGroesse = 7;
 
 	public static void main(String[] args) {
 

@@ -4,7 +4,7 @@ import static gdi.MakeItSimple.*;
 
 public class Konto {
 	
-	private float betrag;
+	private float betrag ;
 	private String inhaber;
 	private int kontoNummer;
 	
