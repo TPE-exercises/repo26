@@ -2,12 +2,22 @@ package de.hsMannheim.informatik.gdi.uebung07.bibliothek;
 
 import static gdi.MakeItSimple.*;
 
+import gdi.MakeItSimple.GDIException;
+
 public class Bibliothek {
-	final static int BUCH_NICHT_VORHANDEN = 0;
 	final static int BUCH_VERFÜGBAR = 1;
 	final static int BUCH_VERLIEHEN = 2;
 	final static int BUCH_INFO_TITEL = 1;
-	final static int BUCH_INFO_AUTOR = 2;
+	final static int BUCH_INFO_NUMMER = 2;
+	static int kundenAnzahl = 0;
+	static KundenKonto[] kunden = new KundenKonto[100]; // [Kundennummer][0.
+														// Vorname / 1. Nachname
+														// / 2. Alter / 3.
+														// Passwort]
+	Buecher[] buecher = new Buecher[100]; // [Inventarnummer][0. Titel / 1.
+											// Autor / 2. Verfügbarkeit / 3.-5.
+											// Glihen bis ... / 6. Anzahl
+											// verlängerungen]
 
 	/**
 	 * Was kann die Bibliothek? (Aus der sicht des Kunden) 0. Konto anlegen
@@ -72,7 +82,7 @@ public class Bibliothek {
 										+ " kann nicht gelöscht werden. Bringen sie erst alle geliehenen Bücher zurück: ");
 							}
 							logout = true;
-							
+
 							break;
 						case (2): // Nein Konto nicht löschen
 							// Abbruch
@@ -81,7 +91,7 @@ public class Bibliothek {
 							break;
 
 						}
-						
+
 						break;
 					case (2):// Buch ausleihen
 						println("Sie befinden sich in \"Buch ausleihen\"");
@@ -95,7 +105,7 @@ public class Bibliothek {
 						// Gebe Liste der der ausgeliehenen Bücher mit Index+1
 						// aus
 						// Abfrage welches Buch zurück soll
-					trenner();
+						trenner();
 						break;
 					case (4):// Zeige geliehene Bücher
 						println("Sie befinden sich in \"Zeige geliehene Bücher\"");
@@ -105,7 +115,7 @@ public class Bibliothek {
 						break;
 					case (0):
 						logout = true;
-					trenner();
+						trenner();
 						break;
 					}
 				}
@@ -116,14 +126,15 @@ public class Bibliothek {
 
 				println("Sie befinden sich in \"Prüfe ob Buch verfügbar ist\"");
 				println("Wonach möchten sie suchen? ");
-				println("1 = Titel | 2 = Autor");
-				int menue_buchVerfügbar = readInt();readLine();
+				println("1 = Titel | 2 = Inventarnummer");
+				int menue_buchVerfügbar = readInt();
+				readLine();
 				trenner();
 
 				String buchInfo = null;
 				int buchInfoArt = 0;
 
-				switch (menue_buchVerfügbar) {//Switch 4 (in 1)
+				switch (menue_buchVerfügbar) {// Switch 4 (in 1)
 				case (1):
 					print("Geben sie den Titel ein: ");
 					buchInfo = readLine();
@@ -131,15 +142,23 @@ public class Bibliothek {
 					trenner();
 					break;
 				case (2):
-					print("Geben sie den Autor ein: ");
+					print("Geben sie die Inventarnummer ein: ");
 					buchInfo = readLine();
-					buchInfoArt = BUCH_INFO_AUTOR;
+					buchInfoArt = BUCH_INFO_NUMMER;
 					trenner();
 					break;
 				}
 
 				int status = istBuchVerfügbar(buchInfo, buchInfoArt);
-				
+
+				if (status == BUCH_VERFÜGBAR) {
+
+				} else if (status == BUCH_VERLIEHEN) {
+
+				} else {// BUCH_NICHT_VORHANDEN
+
+				}
+
 				println("Buchstatus: " + status);
 				trenner();
 
@@ -161,6 +180,7 @@ public class Bibliothek {
 
 				println("Sie heißen: " + vorname + " " + nachname + " und sind " + alter + " Jahre alt.");
 				int neuekontonummer = legeKontoAn(vorname, nachname, alter);
+
 				println("Ihre Kontonummer ist: " + neuekontonummer + ". Merken sie sich diese!");
 				trenner();
 				break;
@@ -175,29 +195,62 @@ public class Bibliothek {
 	}
 
 	static int legeKontoAn(String vorname, String nachname, int alter) {
-		int kontonummer = 0;
 
-		// Erstelle Kundennummer und lege Konto an
+		int kontonummer = (int) (Math.floor(Math.random() * 90000) + 10000);
 
-		// erstellePasswort
-		erstellePasswort(kontonummer);
+		String passwort = erstellePasswort(kontonummer);
+
+		kunden[kundenAnzahl] = new KundenKonto(vorname, nachname, alter, kontonummer, passwort);
+		kundenAnzahl++;
 
 		return kontonummer;
 
 	}
 
-	static void erstellePasswort(int kundennummer) {
+	static String erstellePasswort(int kundennummer) {
+		String passwortEingabe1 = "pass1";
+		String passwortEingabe2 = "pass2";
+		boolean passwortStimmeenUeberein = false;
 
-		// Gebe Passwort 2x ein und verbinde wenn gleich mit dem Konto
+		while (!passwortStimmeenUeberein) {
+
+			print("Geben sie ihr gewünschtes Passwort ein: ");
+			passwortEingabe1 = readLine();
+			println();
+			print("Wiederholen sie ihr Passwort:           ");
+			passwortEingabe2 = readLine();
+			println();
+
+			if (passwortEingabe1.equals(passwortEingabe2))
+				passwortStimmeenUeberein = true;
+			else
+				println("Die Passwörter stimme nicht überein, versuchen sie es erneut.");
+		}
+		return passwortEingabe1;
 
 	}
 
-	static boolean loescheKonto(int kontonummer) {
+	static boolean loescheKonto(int kundennummer) {
 
-		// Prüfe ob noch Bücher geliehen sind
-		kontoLöschenMöglich(kontonummer);
-		// Lösche alle Daten
+		int position = sucheKundenKontoPosition(kundennummer);
+
+		if (kontoLöschenMöglich(kundennummer)) {
+			for (int i = position; i < kundenAnzahl - 1; i++)
+				kunden[i] = kunden[i + 1];
+			kundenAnzahl--;
+			return true;
+		}
+
 		return false;
+	}
+
+	private static int sucheKundenKontoPosition(int kundennummer) {
+		int position = 0;
+		while (position < kundenAnzahl && kunden[position].kontonummer() != kundennummer)
+			position++;
+		if (position >= kundenAnzahl)
+			throw new GDIException("Kein Konto mit Nummer " + kundennummer);
+		return position;
 	}
 
 	static boolean kontoLöschenMöglich(int kontonummer) {
@@ -208,11 +261,20 @@ public class Bibliothek {
 	}
 
 	public static int istBuchVerfügbar(String buchInfo, int buchInfoArt) {
+		int buchStatus;
 
-		// Frage ab welche Info gesucht wird (Titel / Autor / Inv.Nummer)
-		// Suche Array ab und Liste alles auf
+		if (BUCH_INFO_NUMMER == buchInfoArt) {
+			
+			//Suche Inventarnummer für buchInfo
 
-		int buchStatus = BUCH_NICHT_VORHANDEN;
+		} else if (BUCH_INFO_TITEL == buchInfoArt) {
+			
+			//Suche Titel für buchInfo
+
+		}
+
+		buchStatus = BUCH_VERFÜGBAR;
+		buchStatus = BUCH_VERLIEHEN;
 
 		return buchStatus;
 	}
