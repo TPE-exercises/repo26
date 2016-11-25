@@ -17,9 +17,9 @@ public class BigInt {
 			int[] arrayMAX = new int[MaxBigInt];
 			int[] arrayAfterAdd = new int[MaxBigInt];
 			String bigIntAsString;
-		
+
 			durchgaenge++;
-			
+
 			// Frage Zahl ab
 			bigIntAsString = BigIntRechner.toString(0);
 
@@ -29,15 +29,14 @@ public class BigInt {
 			// Wandle String in Array um
 			arrayMAX = BigIntRechner.getDigits(bigIntAsString, length);
 
-			
-			println("Eigegebene Zahl: ");
+			println("Eingegebene Zahl: ");
 			gebeArrayAus(arrayMAX);
-			
+
 			// Addiere Array auf vorhandenes auf
 			arrayAfterAdd = BigIntRechner.add(arrayMAX, length);
-			
+
 			globalArray = arrayAfterAdd;
-			
+
 			int newlength = newlength(arrayAfterAdd);
 
 			// Entferne alle NULLen vor der ersten Zahl
@@ -48,7 +47,7 @@ public class BigInt {
 			gebeArrayAus(array);
 
 			// Möglichkeit weiteres Array ab zu fragen
-			println("Möchten sie eine Zahl auf die eingegebene addieren?");
+			println("Möchten Sie eine Zahl auf die eingegebene addieren?");
 			println(" JA = 1 | NEIN = 0");
 			int wahl = readInt();
 
@@ -64,19 +63,17 @@ public class BigInt {
 				throw new GDIException("Fehlerhafte Eingabe");
 			}
 		} while (erneutUeberpruefen);
-
 	}
-	private static int newlength (int[] arrayMax){
-		
-		for(int i = 0; i<arrayMax.length; i++){
-			if(arrayMax[i] != 0){
-				return (MaxBigInt-i);
+
+	private static int newlength(int[] arrayMax) {
+
+		for (int i = 0; i < arrayMax.length; i++) {
+			if (arrayMax[i] != 0) {
+				return (MaxBigInt - i);
 			}
 		}
 		return 1;
 	}
-
-	
 
 	public static void trenner() {
 		println("---------------------------------");
@@ -90,13 +87,4 @@ public class BigInt {
 		println();
 		trenner();
 	}
-
-	
-
-	
-
-	
-
-	
-
 }
