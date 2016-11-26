@@ -10,14 +10,8 @@ public class Bibliothek {
 	final static int BUCH_INFO_TITEL = 1;
 	final static int BUCH_INFO_NUMMER = 2;
 	static int kundenAnzahl = 0;
-	static KundenKonto[] kunden = new KundenKonto[100]; // [Kundennummer][0.
-														// Vorname / 1. Nachname
-														// / 2. Alter / 3.
-														// Passwort]
-	Buecher[] buecher = new Buecher[100]; // [Inventarnummer][0. Titel / 1.
-											// Autor / 2. Verfügbarkeit / 3.-5.
-											// Glihen bis ... / 6. Anzahl
-											// verlängerungen]
+	static KundenKonto[] kunden = new KundenKonto[100];
+	Buecher[] buecher = new Buecher[100];
 
 	/**
 	 * Was kann die Bibliothek? (Aus der sicht des Kunden) 0. Konto anlegen
@@ -74,10 +68,12 @@ public class Bibliothek {
 
 						switch (menue_kontoLoeschen) {// Switch 3 (in 2 (in 1))
 						case (1): // Ja Konto löschen
-							boolean kontoGelöscht = loescheKonto(kontonummer);
-							if (kontoGelöscht)
+
+							boolean kontoLöschenMöglich = kontoLöschenMöglich(kontonummer);
+							if (kontoLöschenMöglich) {
+								loescheKonto(kontonummer);
 								println("Ihr Konto " + kontonummer + " wurde gelöscht");
-							else {
+							} else {
 								println("Ihr Konto " + kontonummer
 										+ " kann nicht gelöscht werden. Bringen sie erst alle geliehenen Bücher zurück: ");
 							}
@@ -200,7 +196,6 @@ public class Bibliothek {
 
 		String passwort = erstellePasswort(kontonummer);
 
-		kunden[kundenAnzahl] = new KundenKonto(vorname, nachname, alter, kontonummer, passwort);
 		kundenAnzahl++;
 
 		return kontonummer;
@@ -230,26 +225,17 @@ public class Bibliothek {
 
 	}
 
-	static boolean loescheKonto(int kundennummer) {
+	static void loescheKonto(int kundennummer) {
 
 		int position = sucheKundenKontoPosition(kundennummer);
 
-		if (kontoLöschenMöglich(kundennummer)) {
-			for (int i = position; i < kundenAnzahl - 1; i++)
-				kunden[i] = kunden[i + 1];
-			kundenAnzahl--;
-			return true;
-		}
+		kundenAnzahl--;
 
-		return false;
 	}
 
 	private static int sucheKundenKontoPosition(int kundennummer) {
 		int position = 0;
-		while (position < kundenAnzahl && kunden[position].kontonummer() != kundennummer)
-			position++;
-		if (position >= kundenAnzahl)
-			throw new GDIException("Kein Konto mit Nummer " + kundennummer);
+
 		return position;
 	}
 
@@ -264,12 +250,12 @@ public class Bibliothek {
 		int buchStatus;
 
 		if (BUCH_INFO_NUMMER == buchInfoArt) {
-			
-			//Suche Inventarnummer für buchInfo
+
+			// Suche Inventarnummer für buchInfo
 
 		} else if (BUCH_INFO_TITEL == buchInfoArt) {
-			
-			//Suche Titel für buchInfo
+
+			// Suche Titel für buchInfo
 
 		}
 
@@ -297,11 +283,18 @@ public class Bibliothek {
 	}
 
 	static String zeigeGelieheneBücher(int kundennummer) {
-		String buecherliste;
+		String buecherliste= "kein Buch";
 
-		buecherliste = "kein Buch";
 
 		return buecherliste;
+	}
+	
+	static int zeigeAlzahlGelieheneBücher (int kundennummer){
+		int anzahl = 0;
+		
+		//Zähle Bücher
+		
+		return anzahl;
 	}
 
 }
