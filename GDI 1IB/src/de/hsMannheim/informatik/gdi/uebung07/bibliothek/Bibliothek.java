@@ -2,8 +2,6 @@ package de.hsMannheim.informatik.gdi.uebung07.bibliothek;
 
 import static gdi.MakeItSimple.*;
 
-import gdi.MakeItSimple.GDIException;
-
 public class Bibliothek {
 	final static int BUCH_VERFÜGBAR = 1;
 	final static int BUCH_VERLIEHEN = 2;
@@ -12,6 +10,13 @@ public class Bibliothek {
 	static int kundenAnzahl = 0;
 	static KundenKonto[] kunden = new KundenKonto[100];
 	Buecher[] buecher = new Buecher[100];
+	private String name;
+	private int anzahlBücher;
+	
+	Bibliothek(String name, int anzahlBücher) {
+		this.name = name;
+		this.anzahlBücher = anzahlBücher;
+	}
 
 	/**
 	 * Was kann die Bibliothek? (Aus der sicht des Kunden) 0. Konto anlegen
