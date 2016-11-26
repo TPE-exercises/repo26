@@ -12,7 +12,7 @@ public class Bibliothek {
 	Buecher[] buecher = new Buecher[100];
 	private String name;
 	private int anzahlBücher;
-	
+
 	Bibliothek(String name, int anzahlBücher) {
 		this.name = name;
 		this.anzahlBücher = anzahlBücher;
@@ -50,7 +50,11 @@ public class Bibliothek {
 				print("Passwort: ");
 				int pass = readInt();
 				readLine();
-				// Abfrage auf übereinstimmung Dann erst weiter
+				
+				/**
+				 * Abfrage auf übereinstimmung Dann erst weiter
+				 */
+
 				println("Erfolgreich Eingeloggt.");
 				trenner();
 
@@ -98,20 +102,35 @@ public class Bibliothek {
 						println("Sie befinden sich in \"Buch ausleihen\"");
 						println("Geben sie nun den Titel des Buches ein, welches sie ausleihen wollen.");
 						String zuSuchendesBuch = readLine();
+						
+						/**
+						 * Prüfe ob Buch verfügbar ist
+						 * Füge Buch dem Konto hinzu
+						 * Setze buch auf "Verliehen"
+						 * 
+						 */
+						
 						trenner();
 						break;
 					case (3):// Buch zurückgeben
 						println("Sie befinden sich in \"Buch zurückgeben\"");
 
-						// Gebe Liste der der ausgeliehenen Bücher mit Index+1
-						// aus
-						// Abfrage welches Buch zurück soll
+						/**
+						 * Gebe Liste der der ausgeliehenen Bücher mit Index+1 aus
+						 * 
+						 * Abfrage welches Buch zurück soll
+						 */
+						
 						trenner();
 						break;
 					case (4):// Zeige geliehene Bücher
 						println("Sie befinden sich in \"Zeige geliehene Bücher\"");
 						println("Sie haben folgende Bücher geliehen");
-						// Zeige Liste von Benutzer
+						
+						/**
+						 * 
+						 */
+						
 						trenner();
 						break;
 					case (0):
@@ -197,6 +216,11 @@ public class Bibliothek {
 
 	static int legeKontoAn(String vorname, String nachname, int alter) {
 
+		/**
+		 * Konto wird in der Klasse KundenKonto angelegt und als Objekt
+		 * gespeicehrt Zu jedem Konto existiert Vorname, Nachname, Alter,
+		 * Passwort, Kundennummer
+		 */
 		int kontonummer = (int) (Math.floor(Math.random() * 90000) + 10000);
 
 		String passwort = erstellePasswort(kontonummer);
@@ -208,6 +232,12 @@ public class Bibliothek {
 	}
 
 	static String erstellePasswort(int kundennummer) {
+
+		/**
+		 * Es wird ein Passwort vom Benutzer erstellt Diese müssen
+		 * übereinstimmen
+		 */
+
 		String passwortEingabe1 = "pass1";
 		String passwortEingabe2 = "pass2";
 		boolean passwortStimmeenUeberein = false;
@@ -232,6 +262,12 @@ public class Bibliothek {
 
 	static void loescheKonto(int kundennummer) {
 
+		/**
+		 * Vorher (main) wurde geprüft on Löschung möglich ist (keine Bücher
+		 * ausgeliehen) Dann wird Konto gelöscht und alle anderen nach vorne
+		 * verschoben
+		 */
+
 		int position = sucheKundenKontoPosition(kundennummer);
 
 		kundenAnzahl--;
@@ -239,6 +275,11 @@ public class Bibliothek {
 	}
 
 	private static int sucheKundenKontoPosition(int kundennummer) {
+
+		/**
+		 * Suche die Position im Array des Kunden anhand der Kundennummer
+		 */
+
 		int position = 0;
 
 		return position;
@@ -246,59 +287,83 @@ public class Bibliothek {
 
 	static boolean kontoLöschenMöglich(int kontonummer) {
 
-		// Prüfe ob noch Bücher geliehen sind
+		/**
+		 * Prüfe ob noch Bücher geliehen sind
+		 * alzahlGelieheneBücher == 0
+		 */
 
 		return false;
 	}
 
 	public static int istBuchVerfügbar(String buchInfo, int buchInfoArt) {
-		int buchStatus;
 
+		/**
+		 * Suche nach Buch über 2 Wege möglich
+		 */
+
+		int buchStatus;
 		if (BUCH_INFO_NUMMER == buchInfoArt) {
 
-			// Suche Inventarnummer für buchInfo
+			/**
+			 * Suche Inventarnummer für buchInfo
+			 */
 
 		} else if (BUCH_INFO_TITEL == buchInfoArt) {
 
-			// Suche Titel für buchInfo
+			/**
+			 * Suche Titel für buchInfo
+			 */
 
 		}
 
-		buchStatus = BUCH_VERFÜGBAR;
-		buchStatus = BUCH_VERLIEHEN;
+		// buchStatus = BUCH_VERFÜGBAR;
+		// buchStatus = BUCH_VERLIEHEN;
 
-		return buchStatus;
+		return BUCH_VERFÜGBAR;
 	}
 
 	static void leiheBuchAus(int kundennummer, String buchTitel) {
 
-		// Prüfe ob Buch verfügbar
-		// Wenn Verfügbar, setze auf nicht verfügbar
-		// Füge Buch dem Benutzerkonto hinzu
+		/**
+		 * Prüfe ob Buch verfügbar Wenn Verfügbar, setze auf nicht verfügbar
+		 * Füge Buch dem Benutzerkonto hinzu
+		 */
 	}
 
 	static int buchZurueckgeben(int kundennummer, String buchTitel) {
-		int kosten = 0;
-		// Prüfe ausleihfrist ggf. Zahlungsaufforderung
-		// Entferne Buch von Benutzerkonto
-		// Setzte Status auf Verfügbar
 
-		// Zeige geliehene Bücher
+		/**
+		 * Zeige geliehene Bücher
+		 * 
+		 * Prüfe ausleihfrist ggf. Zahlungsaufforderung 
+		 * Entferne Buch von Benutzerkonto 
+		 * Setzte Status auf Verfügbar
+		 */
+
+		int kosten = 0;
+
 		return kosten;
 	}
 
 	static String zeigeGelieheneBücher(int kundennummer) {
-		String buecherliste= "kein Buch";
-
+		
+		/**
+		 * Liste Geliehene Bücher auf
+		 */
+		
+		String buecherliste = "kein Buch";
 
 		return buecherliste;
 	}
-	
-	static int zeigeAlzahlGelieheneBücher (int kundennummer){
+
+	static int alzahlGelieheneBücher(int kundennummer) {
+
+		/**
+		 * Liste Anzahl der geliehenen Bücher auf
+		 */
+		
+		
 		int anzahl = 0;
-		
-		//Zähle Bücher
-		
 		return anzahl;
 	}
 
