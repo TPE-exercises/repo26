@@ -1,4 +1,4 @@
-package ads;
+package de.hsMannheim.informatik.ads.uebung03;
 
 import static gdi.MakeItSimple.*;
 
@@ -43,72 +43,6 @@ public class Sort {
 	 * 
 	 * return numberOfCompares; }
 	 */
-	public static void insertionSortComparison(boolean debug) {
-
-		int[] numberSequence1024 = Sort.createRandomNumberSequence(1024, 1000);
-		int[] numberSequence2048 = Sort.createRandomNumberSequence(2048, 1000);
-		int[] numberSequence4096 = Sort.createRandomNumberSequence(4096, 1000);
-
-		int[] InsertionSort11024 = Sort.insertionSort1(numberSequence1024, debug);
-		int[] InsertionSort21024 = Sort.insertionSort2(numberSequence1024, debug);
-		if (InsertionSort11024 == InsertionSort21024) {
-			println("Die 1024 sind gleich");
-			println("-----------------------------------");
-			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
-			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
-			println("-----------------------------------");
-			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
-			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
-			println("___________________________________");
-			numberOfComparesInInsertionSort1 = 0;
-			numberOfSwapsInInsertionSort1 = 0;
-
-			numberOfComparesInInsertionSort2 = 0;
-			numberOfSwapsInInsertionSort2 = 0;
-		} else
-			println("Die 1024 sind nicht gleich");
-
-		int[] InsertionSort12048 = Sort.insertionSort1(numberSequence2048, debug);
-		int[] InsertionSort22048 = Sort.insertionSort2(numberSequence2048, debug);
-		if (InsertionSort12048 == InsertionSort22048) {
-			println("Die 2048 sind gleich");
-			println("-----------------------------------");
-			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
-			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
-			println("-----------------------------------");
-			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
-			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
-			println("___________________________________");
-			numberOfComparesInInsertionSort1 = 0;
-			numberOfSwapsInInsertionSort1 = 0;
-
-			numberOfComparesInInsertionSort2 = 0;
-			numberOfSwapsInInsertionSort2 = 0;
-		} else
-			println("Die 2048 sind nicht gleich");
-
-		int[] InsertionSort14096 = Sort.insertionSort1(numberSequence4096, debug);
-		int[] InsertionSort24096 = Sort.insertionSort2(numberSequence4096, debug);
-		if (InsertionSort14096 == InsertionSort24096) {
-			println("Die 4096 sind gleich");
-			println("-----------------------------------");
-			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
-			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
-			println("-----------------------------------");
-			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
-			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
-			println("___________________________________");
-			numberOfComparesInInsertionSort1 = 0;
-			numberOfSwapsInInsertionSort1 = 0;
-
-			numberOfComparesInInsertionSort2 = 0;
-			numberOfSwapsInInsertionSort2 = 0;
-		} else
-			println("Die 4096 sind nicht gleich");
-		println("Unbekannter Fehler im Programm!!! Anzahl der Vertauschungen in InsertionSort2 ist in dieser Methode abhängig von \"N\" in createRandomNumberSequence.");
-		println("Testet 1024, 2048 und 4096 über die Methode \"insertionSort2\" sind die Anzahlen der Vertauschungen annährend gleich.");
-	}
-
 	public static void main(String[] args) {
 
 		boolean debug = false;
@@ -178,6 +112,77 @@ public class Sort {
 		for (i = 1; i < length; i++) {
 			print(", " + newNumberSequence[i]);
 		}
+	}
+
+	/**
+	 * Compare insertionSort1 with insertionSort2
+	 * 
+	 * @param debug
+	 */
+	public static void insertionSortComparison(boolean debug) {
+
+		int[] numberSequence1024 = Sort.createRandomNumberSequence(1024, 1000);
+		int[] numberSequence2048 = Sort.createRandomNumberSequence(2048, 1000);
+		int[] numberSequence4096 = Sort.createRandomNumberSequence(4096, 1000);
+
+		int[] InsertionSort11024 = Sort.insertionSort1(numberSequence1024, debug);
+		int[] InsertionSort21024 = Sort.insertionSort2(numberSequence1024, debug);
+		if (InsertionSort11024 == InsertionSort21024) {
+			println("Die 1024 sind gleich");
+			println("-----------------------------------");
+			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
+			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
+			println("-----------------------------------");
+			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
+			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
+			println("___________________________________");
+			numberOfComparesInInsertionSort1 = 0;
+			numberOfSwapsInInsertionSort1 = 0;
+
+			numberOfComparesInInsertionSort2 = 0;
+			numberOfSwapsInInsertionSort2 = 0;
+		} else
+			println("Die 1024 sind nicht gleich");
+
+		int[] InsertionSort12048 = Sort.insertionSort1(numberSequence2048, debug);
+		int[] InsertionSort22048 = Sort.insertionSort2(numberSequence2048, debug);
+		if (InsertionSort12048 == InsertionSort22048) {
+			println("Die 2048 sind gleich");
+			println("-----------------------------------");
+			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
+			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
+			println("-----------------------------------");
+			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
+			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
+			println("___________________________________");
+			numberOfComparesInInsertionSort1 = 0;
+			numberOfSwapsInInsertionSort1 = 0;
+
+			numberOfComparesInInsertionSort2 = 0;
+			numberOfSwapsInInsertionSort2 = 0;
+		} else
+			println("Die 2048 sind nicht gleich");
+
+		int[] InsertionSort14096 = Sort.insertionSort1(numberSequence4096, debug);
+		int[] InsertionSort24096 = Sort.insertionSort2(numberSequence4096, debug);
+		if (InsertionSort14096 == InsertionSort24096) {
+			println("Die 4096 sind gleich");
+			println("-----------------------------------");
+			println("Anzahl der Schlüsselvergleiche InsertionSort1: " + Sort.numberOfComparesInInsertionSort1);
+			println("Anzahl der Schlüsselvergleiche InsertionSort2: " + Sort.numberOfComparesInInsertionSort2);
+			println("-----------------------------------");
+			println("Anzahl der Vertauschungen InsertionSort1: " + Sort.numberOfSwapsInInsertionSort1);
+			println("Anzahl der Vertauschungen InsertionSort2: " + Sort.numberOfSwapsInInsertionSort2);
+			println("___________________________________");
+			numberOfComparesInInsertionSort1 = 0;
+			numberOfSwapsInInsertionSort1 = 0;
+
+			numberOfComparesInInsertionSort2 = 0;
+			numberOfSwapsInInsertionSort2 = 0;
+		} else
+			println("Die 4096 sind nicht gleich");
+		println("Unbekannter Fehler im Programm!!! Anzahl der Vertauschungen in InsertionSort2 ist in dieser Methode abhängig von \"N\" in createRandomNumberSequence.");
+		println("Testet 1024, 2048 und 4096 über die Methode \"insertionSort2\" sind die Anzahlen der Vertauschungen annährend gleich.");
 	}
 
 	// Create own array

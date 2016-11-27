@@ -1,4 +1,4 @@
-package bank;
+package de.hsMannheim.informatik.gdi.bank;
 
 import static gdi.MakeItSimple.*;
 

@@ -27,6 +27,11 @@ public class EightQueens {
 			markThreatenedQueens(field);
 	}
 
+	/**
+	 * Consolenausgabe
+	 * 
+	 * @param field
+	 */
 	public static void gebeSpielbrettAus(int[][] field) {
 
 		for (int n = 0; n < spielbrettGroesse; n++) {
@@ -34,12 +39,14 @@ public class EightQueens {
 			for (int i = 0; i < spielbrettGroesse; i++) {
 				print(field[n][i] + " ");
 			}
-			
 		}
 		println();
 		trenner();
 	}
 
+	/**
+	 * Formatierungshilfe
+	 */
 	public static void trenner() {
 		println("---------------------------------");
 	}

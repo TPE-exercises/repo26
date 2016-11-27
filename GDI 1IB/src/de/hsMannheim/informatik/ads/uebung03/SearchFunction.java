@@ -1,4 +1,4 @@
-package ads;
+package de.hsMannheim.informatik.ads.uebung03;
 
 import static gdi.MakeItSimple.*;
 
