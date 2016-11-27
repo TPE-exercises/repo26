@@ -47,9 +47,22 @@ public class _Main {
 			throw new GDIException("Bitte geben Sie [1], [2] oder [3] ein!");
 		readLine();
 
+		trenner();
+		println("Eingabearray: ");
+		print(eingabeArray[0]);
+		for (int d = 1; d < eingabeArray.length; d++) {
+			print(", " + eingabeArray[d]);
+		}
+		println();
+		
 		switch (welcheSortierung) {
 		case 1:
-			ausgabeArray = MergeSort.direkterMergeSort(eingabeArray);
+			Object file = openOutputFile("Hauptband.txt");
+			for (int i = 0; i < length; i++) {
+				println(file, eingabeArray[i]);
+			}
+			closeOutputFile(file);
+			ausgabeArray = MergeSort.direkterMergeSort(eingabeArray, length);
 			// println("Anzahl der Schlüsselvergleiche: " +
 			// numberOfComparesInInsertionSort1
 			// + " Anzahl der Vertauschungen: " +
@@ -70,17 +83,9 @@ public class _Main {
 			break;
 		}
 
-		trenner();
-		println("Eingabearray: ");
-
-		print(eingabeArray[0]);
-		for (int d = 1; d < eingabeArray.length; d++) {
-			print(", " + eingabeArray[d]);
-		}
-		println();
-
 		// Return Array to Console int i = 0;
 		trenner();
+		println("Ausgabearray: ");
 		print(ausgabeArray[0]);
 		for (int i = 1; i < length; i++) {
 			print(", " + ausgabeArray[i]);
