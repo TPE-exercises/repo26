@@ -5,7 +5,7 @@ import static gdi.MakeItSimple.*;
 import gdi.MakeItSimple.GDIException;
 
 public class JanneckTest {
-
+//Fibunacchi
 	
 	static int a1(int n){
 		int sum = 0;
