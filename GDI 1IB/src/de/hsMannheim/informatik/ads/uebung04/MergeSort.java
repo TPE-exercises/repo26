@@ -7,9 +7,11 @@ public class MergeSort {
 	static int[] zuSortierendesArray;
 	static int[] sortiertesArray = new int[_Main.length];
 
+	/*
 	public static void main(String[] args) {
 		_Main.main(args);
 	}
+	*/
 
 	static int[] direkterMergeSort(int[] numberSequence, int anzahlSplits) {
 		zuSortierendesArray = einlesenDesEingabeArrays();
@@ -78,12 +80,10 @@ public class MergeSort {
 							splitTo1 = readInt(Band1);
 					}
 					else{
-						
 					}
 					
 				} else {
 					print(einleseBand, splitTo2 + " ");
-				
 				}
 			}
 			println(einleseBand);

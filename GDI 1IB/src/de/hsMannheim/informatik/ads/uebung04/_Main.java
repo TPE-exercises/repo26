@@ -69,11 +69,10 @@ public class _Main {
 			// numberOfSwapsInInsertionSort1);
 			break;
 		case 2:
-			ausgabeArray = Quicksort.quicksort(eingabeArray);
-			// println("Anzahl der Schlüsselvergleiche: " +
-			// numberOfComparesInInsertionSort2
-			// + " Anzahl der Vertauschungen: " +
-			// numberOfSwapsInInsertionSort2);
+			ausgabeArray = Quicksort.quicksort(eingabeArray, 0, eingabeArray.length-1);
+			println("Anzahl Schlüsselvergleiche: " + Quicksort.anzahlSchlüsselvergleiche);
+			println("Anzahl Vertauschungen: " + Quicksort.anzahlVertauschungen);
+			println("Anzahl Rekursionsschritte: " + Quicksort.anzahlRekursionsschritte);
 			break;
 		case 3:
 			ausgabeArray = Shellsort.shellsort(eingabeArray);
