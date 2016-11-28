@@ -1,100 +1,88 @@
 package freierTest;
 
 import static gdi.MakeItSimple.*;
-import java.io.*;
 
 public class JanneckTest03 {
+	static int length = 8;
+	static int blocklänge = 1;
+	static int[] array = new int[length];
+	static int[] band1 = new int[length / 2];
+	static int[] band2 = new int[length / 2];
 
-	public static void main(String[] args) throws IOException {
-		
-		double pott = 0.0;
-		
-		// Abfrage der Personenanzahl und des Bankguthabens___________________________________________________
-		
-		System.out.print("Geben sie eine Spieleranzahl ein: ");
-		int personenZahl = readInt();
-		readLine();
-		while(personenZahl <= 0){
-			System.out.print("Ohne Spieler ist langeweilig, nochmal bitte: ");
-			personenZahl = readInt();
-			readLine();
-		}
-		System.out.print("\nGeben sie das Guthaben der Bank in Euro ein: ");
-		pott = readInt();
-		readLine();
-		System.out.println("***----------------------------------------------------------------------------***");
+	static void merge() {
+		int i1 = 0;
+		int i2 = 0;
+		for (int i = 0; i < length / 2; i++) {
 
-		// __________________________________________________________________________________________________________________
+			if (band1[i1] < band2[i2]) {
+				
+				array[i] = band1[i1];
+				i1++;
 
-		String[] namen = new String[personenZahl];
-		int[] wetten = new int[personenZahl];
-		double[] einsatz = new double[personenZahl];
+				for (i2 = i2; i2 < blocklänge; i2++) {
+					i++;
+					array[i] = band2[i2];
+				}
 
-		// Eingabe der Daten: Name, wette, Einsatz____________________________________________________________________________
-
-		for (int i = 0; i <= (personenZahl - 1); i++) {
-			System.out.println("\n" + "Geben Sie den Namen von Person " + (i + 1) + " ein.");
-			String person1 = readLine();
-			namen[i] = person1;
-
-			System.out.println("\n" + namen[i] + " gib nun ein, wie viele Tafeln du vermutest.");
-			int wette1 = readInt();
-			readLine();
-			wetten[i] = wette1;
-
-			System.out.println("\n" + namen[i] + " wie viel Euro möchtest du auf " + wetten[i] + " Tafelseiten setzen?");			
-			double einsatz1 = readInt();
-			readLine();
-			System.out.println("***----------------------------------------------------------------------------***");
-			einsatz[i] = einsatz1;
-			pott += einsatz1;
-		}
-
-		// Zusammenfassung_______________________________________________________________________________________
-
-		for (int i = 0; i <= (personenZahl - 1); i++) {
-			System.out.println(
-					namen[i] + " wettet " + einsatz[i] + "€ darauf, das " + wetten[i] + " Tafeln verwendet werden.");
-		}
-		System.out.println("Der Pott beträgt: " + pott);
-		System.out.println("***----------------------------------------------------------------------------***");
-
-		// Errechnung der Siegeranzahl und des siegerPotts____________________________________________________________________
-
-		System.out.println("Geben Sie nun das Wettergebnis ein.");
-		int wettErgebnis = readInt();
-		int siegerAnzahl = 0;
-		double siegerpott = 0.0;
-
-		for (int i = 0; i <= (personenZahl - 1); i++) {
-			if (wettErgebnis == wetten[i]) {
-				siegerAnzahl++;
-				siegerpott += einsatz[i];
-			}
-		}
-		// Errechnung der Gewinnes für Spieler und/oder Bank_________________________________________________________________________
-
-		System.out.println("Es gibt " + siegerAnzahl + " Sieger!");
-
-		boolean esGibtKeinenSieger = false;
-		if (siegerAnzahl == 0) {
-			esGibtKeinenSieger = true;
-			siegerAnzahl++;
-		}
-
-
-		double preisDif = pott % siegerAnzahl;
-
-		for (int i = 0; i <= (personenZahl - 1); i++) {
-			if (wettErgebnis == wetten[i]) {
-				System.out.println(namen[i] + " hat " + (einsatz[i] / siegerpott) * pott + "€ gewonnen!");
+			} else {
+				array[i] = band2[i2];
+				i2++;
+				for (i1 = i1; i1 < blocklänge; i1++) {
+					i++;
+					array[i] = band1[i1];
+				}
 			}
 		}
 
-		if (esGibtKeinenSieger == true) {
-			System.out.println("Somit geht der Pott von " + pott + "€ an die Bank.");
-		} else
-			System.out.println("Die Bank gewinnt " + preisDif + "€!");
+	}
+
+	static void split() {
+		int pos = 0;
+		for (int i = 0; i < length / 2; i++) {
+			band1[i] = array[pos];
+			pos++;
+			band2[i] = array[pos];
+			pos++;
+		}
+
+	}
+
+	public static void main(String[] args) {
+		int length = 8;
+
+		array = createRandomNumberSequence(length);
+		printArray(array);
+
+		split();
+
+		print("Band1: ");
+		printArray(band1);
+		print("Band2: ");
+		printArray(band2);
+
+		merge();
+
+		printArray(array);
+
+	}
+
+	private static void printArray(int[] arrayToPrint) {
+
+		for (int i = 0; i < arrayToPrint.length; i++) {
+			print(arrayToPrint[i] + " ");
+		}
+		println();
+
+	}
+
+	static int[] createRandomNumberSequence(int length) {
+		int[] numberSequence = new int[length];
+
+		for (int i = 0; i < length; i++) {
+			int random = (int) Math.floor(Math.random() * 100);
+			numberSequence[i] = random;
+		}
+		return numberSequence;
 	}
 
 }
