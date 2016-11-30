@@ -4,25 +4,24 @@ import static gdi.MakeItSimple.*;
 
 public class MergeSort {
 
-	//mergeSortFileToSort3.txt
-	
-	
-	public static int[] eingabeArray = { 10, 5, 15, 3, 6, 9, 12, 16, };
-	static int length; 						
-	static int tl = 1;// aktuelle Lauflänge | Blocklänge
-	static int runGeneral = 2; // Für berechnung der Schleife notwendig ist den
-								// "tl" eine runde vorraus
+	public static int[] inputArray;
+	// aktuelle Lauflänge | Blocklänge
+	static int tl = 1;
+	// necessary for a loop in merge()
+	static int tlForLoop = 2;
+	// length for the merge | is next power of two
+	static int length;
 	static int filelength = 0;
-	static int runs = 1;
-	static Object hauptband;// Dateivariable
-	static Object band1;// Dateivariable
-	static Object band2;// Dateivariable
-	static int ddrun = 1; // Debug
+	static int runs = 0;
+	// Dateivariableen
+	static Object mainTape;
+	static Object tape1;
+	static Object tape2;
 
 	/**
-	 * 
+	 * Optical separator
 	 */
-	static void trenner() {
+	static void separator() {
 		print("----------------------");
 		for (int i = 0; i < length; i++) {
 			print("---");
@@ -32,175 +31,180 @@ public class MergeSort {
 		println();
 	}
 
-
-	public static void erstelleHauptband(String filename) {
-		Object hauptband = openOutputFile("Hauptband.txt");
-		Object quellBand = openInputFile(filename);
+	/**
+	 * @param filename
+	 * @do numbersequens from file, and fills to the next power of two
+	 */
+	public static void createMainTape(String filename) {
+		mainTape = openOutputFile("Hauptband.txt");
+		Object sourceTape = openInputFile(filename);
 		boolean endOfFile = false;
 		int number;
-		/*
-		 * for (int i = 0; i < eingabeArray.length; i++) print(hauptband,
-		 * eingabeArray[i] + "\n");
-		 */
 
 		while (!endOfFile) {
-			number = readInt(quellBand);
-			print(hauptband, number + " ");
-			endOfFile = isEndOfInputFile(quellBand);
+			number = readInt(sourceTape);
+			print(mainTape, number + " ");
+			endOfFile = isEndOfInputFile(sourceTape);
 			filelength++;
-			//println("An Stelle: " + filelength + ", schreibe: " + number);
 		}
 
-		int zweierPotenz = 1;
+		int powerOfTwo = 1;
 		int howMuchToFill = 0;
 
-		while (zweierPotenz < filelength) {
-			zweierPotenz = zweierPotenz * 2;
+		while (powerOfTwo < filelength) {
+			powerOfTwo = powerOfTwo * 2;
 		}
-		length = zweierPotenz;
-		howMuchToFill = zweierPotenz - filelength;
+		length = powerOfTwo;
+		howMuchToFill = powerOfTwo - filelength;
 
 		for (int i = 0; i < howMuchToFill; i++)
-			print(hauptband, Integer.MAX_VALUE + " ");
-		println(howMuchToFill);
+			print(mainTape, Integer.MAX_VALUE + " ");
 
-		closeInputFile(quellBand);
-		closeOutputFile(hauptband);
+		closeInputFile(sourceTape);
+		closeOutputFile(mainTape);
 
 	}
 
+	/**
+	 * Splits the mainTape alternating on two other tapes
+	 */
 	public static void split() {
 
-		hauptband = openInputFile("Hauptband.txt");
-		band1 = openOutputFile("Band1.txt");
-		band2 = openOutputFile("Band2.txt");
+		mainTape = openInputFile("Hauptband.txt");
+		tape1 = openOutputFile("Band1.txt");
+		tape2 = openOutputFile("Band2.txt");
 		int blockPosition = 0;
 
 		for (int j = 0; j < length; j++) {
 
 			if (blockPosition < tl) {
-				int hauptNumber = readInt(hauptband);
-				print(band1, hauptNumber + "\n");
+				int mainNumber = readInt(mainTape);
+				print(tape1, mainNumber + "\n");
 				blockPosition++;
 			} else {
-				int hauptNumber = readInt(hauptband);
-				print(band2, hauptNumber + "\n");
+				int hauptNumber = readInt(mainTape);
+				print(tape2, hauptNumber + "\n");
 				blockPosition++;
 			}
 			if (blockPosition >= tl * 2)
 				blockPosition = 0;
 		}
 
-		closeInputFile(hauptband);
-		closeOutputFile(band1);
-		closeOutputFile(band2);
-
-		printTape("band1.txt", length / 2);
-		printTape("band2.txt", length / 2);
+		closeInputFile(mainTape);
+		closeOutputFile(tape1);
+		closeOutputFile(tape2);
 	}
 
 	/**
-	 * TODO Programm läuft nicht für längen außerhalb der 2er Potenz,
-	 * printOperationen in extra methode, split in extra methode
+	 * Sort the number sequence using the direct mergeSort
 	 * 
 	 */
 	public static void merge() {
 
-		// läuft bis sortiert
+		// Stop when whole number sequence is sorted
 		while (tl < length) {
-
-			println("______________________Split Start______________________");
+			runs++;
 			split();
-			println("______________________Split Ende______________________");
 
-			band1 = openInputFile("band1.txt");
-			band2 = openInputFile("band2.txt");
-			hauptband = openOutputFile("hauptband.txt");
+			tape1 = openInputFile("band1.txt");
+			tape2 = openInputFile("band2.txt");
+			mainTape = openOutputFile("hauptband.txt");
 
-			// läuft bis zum ende der datei (alle blöcke)
-			for (int i = 1; i <= (length / runGeneral); i++) {
+			// Stop when run is finished
+			for (int i = 1; i <= (length / tlForLoop); i++) {
 
 				int indexBand1 = -1;
 				int indexBand2 = -1;
 
-				// läuft bis zum ende von tl
+				// Stop when TL is finished
 				while (indexBand1 < tl && indexBand2 < tl) {
 
-					//println("Start Durchgang: " + ddrun);
-					//print("Lese von Band1: ");
-					int splitTo1 = readInt(band1);
+					int splitTo1 = readInt(tape1);
 					indexBand1++;
 
-					//println("done!");
-					//print("Lese von Band2: ");
-					int splitTo2 = readInt(band2);
+					int splitTo2 = readInt(tape2);
 					indexBand2++;
-
-					//println("done!");
 
 					while (indexBand1 < tl && indexBand2 < tl) {
 						if (splitTo1 < splitTo2) {
-							print(hauptband, splitTo1 + "\n");
+							print(mainTape, splitTo1 + "\n");
 							indexBand1++;
 							if (indexBand1 < tl)
-								splitTo1 = readInt(band1);
+								splitTo1 = readInt(tape1);
 
 						} else {
-							print(hauptband, splitTo2 + "\n");
+							print(mainTape, splitTo2 + "\n");
 							indexBand2++;
 							if (indexBand2 < tl)
-								splitTo2 = readInt(band2);
-
+								splitTo2 = readInt(tape2);
 						}
 					}
 
 					if (indexBand1 >= tl) {
 						while (indexBand2 < tl) {
-							print(hauptband, splitTo2 + "\n");
+							print(mainTape, splitTo2 + "\n");
 							indexBand2++;
 							if (indexBand2 < tl)
-								splitTo2 = readInt(band2);
-
+								splitTo2 = readInt(tape2);
 						}
+
 					} else if (indexBand2 >= tl) {
 						while (indexBand1 < tl) {
-							print(hauptband, splitTo1 + "\n");
+							print(mainTape, splitTo1 + "\n");
 							indexBand1++;
 							if (indexBand1 < tl) {
-								splitTo1 = readInt(band1);
+								splitTo1 = readInt(tape1);
 
 							}
 						}
 					}
-					ddrun++;
 				}
-
-				// printTape("hauptband.txt", (runs*2)-2);
 			}
 			tl = tl * 2;
-			runGeneral = runGeneral * 2;
-			closeInputFile(band1);
-			closeInputFile(band2);
-			closeOutputFile(hauptband);
-
-			// printTape("hauptband.txt", filelength);
-			trenner();
+			tlForLoop = tlForLoop * 2;
+			closeInputFile(tape1);
+			closeInputFile(tape2);
+			closeOutputFile(mainTape);
+			
+			separator();
+			printruns();
+			printTape("Hauptband.txt", filelength);
 		}
+	}
+
+	/**
+	 * cut the length of file to the inputFileLength
+	 */
+	private static void cutFill() {
+
+		mainTape = openInputFile("Hauptband.txt");
+		Object finalFile = openOutputFile("finalFile.txt");
+
+		for (int i = 0; i < filelength-1; i++) {
+			int number = readInt(mainTape);
+			print(finalFile, number + " ");
+		}
+		int number = readInt(mainTape);
+		print(finalFile, number);
+
+		closeOutputFile(finalFile);
+		closeInputFile(mainTape);
 	}
 
 	/**
 	 * 
 	 * @param file
 	 *            name of file to print
-	 * @param dateiLänge
+	 * @param fileLength
 	 *            legth of printability
 	 */
-	private static void printTape(String file, int dateiLänge) {
+	private static void printTape(String file, int fileLength) {
 
 		Object band = openInputFile(file);
+		
 		print(file + ": ");
-		for (int i = 0; i < dateiLänge; i++) {
-			print(readInt(band) + ", ");
+		for(int i = 0; i<fileLength;i++) {
+			print(readInt(band) + " ");
 		}
 		closeInputFile(band);
 		println();
@@ -210,9 +214,19 @@ public class MergeSort {
 	 * 
 	 */
 	private static void printruns() {
-
+		println("Durchgang Nummer: " + runs);
 	}
 
+	/**
+	 * direct external mergeSort
+	 * 
+	 * @Step1 createMainTape based on userDefined number sequence
+	 * @Step2 merge it
+	 * @Step3 cut last numbers added in createMainTape
+	 * @Step4 print sorted number sequence to "finalFile.txt"
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// eingabeArray = createRandomNumberSequence(length, 100);
 
@@ -221,33 +235,17 @@ public class MergeSort {
 		if (!isFilePresent(filename))
 			throw new GDIException("Datei \"" + filename + "\" konnte nicht gefunden werden.");
 
-		MergeSort.erstelleHauptband(filename);
+		MergeSort.createMainTape(filename);
 
-		println("Eingabe Zahlenfolge:");
-		MergeSort.printTape("Hauptband.txt", filelength);
-		trenner();
 		MergeSort.merge();
-		cutFill();
-	}
-
-/**
- * Programm Liest angegebene Datei
- * Benutzt Hauptband/Band1/Band2
- * Gibt in finalFile aus
- */
-	private static void cutFill() {
+		MergeSort.cutFill();
 		
-		hauptband = openInputFile("Hauptband.txt");
-		Object finalFile = openOutputFile("finalFile.txt");
+		separator();
+		printTape("finalFile.txt", filelength);
+		separator();
 		
-		for (int i = 0; i < filelength;i++){
-			int number = readInt(hauptband);
-			print(finalFile, number + " ");
-		}
-		
-		
-		closeOutputFile(finalFile);
-		closeInputFile(hauptband);
+		println("Sortierte Folge steht nun in \"finalFile.txt\"");
+		println("--> Programm beendet! <--");
 	}
 
 }
