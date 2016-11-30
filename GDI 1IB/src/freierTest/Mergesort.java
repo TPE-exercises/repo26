@@ -5,16 +5,23 @@ import static gdi.MakeItSimple.*;
 public class Mergesort {
 
 	public static int[] eingabeArray = { 10, 5, 15, 3, 6, 9, 12, 16, };
-	static final int length = 10; // 2, 4, 8, 16, 32, 64, 128, 256, 1024, 2048,
+	static final int length = 9; // 2, 4, 8, 16, 32, 64, 128, 256, 1024, 2048,
 									// 4096
 	static int tl = 1;// aktuelle Lauflänge | Blocklänge
-	static int lengthBand1;
-	static int lengthBand2;
-	static int runGeneral = 2;
+	static int runGeneral = 2; // Für berechnung der Schleife notwendig ist den
+								// "tl" eine runde vorraus
+	static int lengthBand1; // Berechnugn der länge des Bandes in den einzelnen
+							// durchgängen
+	static int lengthBand2;// Berechnugn der länge des Bandes in den einzelnen
+							// durchgängen
+	static int positionAufBand1 = 0;
+	static int positionAufBand2 = 0;
 	static int runs = 1;
-	static Object hauptband;
-	static Object band1;
-	static Object band2;
+	static Object hauptband;// Dateivariable
+	static Object band1;// Dateivariable
+	static Object band2;// Dateivariable
+	static int ddrun = 1; // Debug
+	static int anzahlBlöcke = -1;// -1 == es gibt kein vorher
 
 	/**
 	 * 
@@ -30,25 +37,46 @@ public class Mergesort {
 	}
 
 	/**
-	 * Errechne die Länge der Bänder, benötigt bei zahlen die nicht in der 2er potenz sind
+	 * Errechne die Länge der Bänder, benötigt bei zahlen die nicht in der 2er
+	 * potenz sind
 	 */
 	static void calcBandLegth() {
 
 		int i = 0;
-
+		lengthBand1 = 0;
+		lengthBand2 = 0;
 		while (i < length) {
-			for (int i1 = 0; i1 < runs + 1 && i < length; i1++) {
+
+			for (int i1 = 1; i1 < runs + 1 && i < length; i1++) {
 				lengthBand1++;
 				i++;
 			}
 
-			for (int i2 = 0; i2 < runs + 1 && i < length; i2++) {
+			for (int i2 = 1; i2 < runs + 1 && i < length; i2++) {
 				lengthBand2++;
 				i++;
 			}
 
 		}
 		runs++;
+
+	}
+
+	/**
+	 * @do Berechne Anzahl an Blöcken Pro durchgang
+	 */
+	static void calcTlCount() {
+		int vorherAnzahlBlöcke = anzahlBlöcke;
+
+		if (vorherAnzahlBlöcke == -1) {
+			anzahlBlöcke = length;
+		}
+		else if (vorherAnzahlBlöcke % 2 == 0) {
+			anzahlBlöcke = vorherAnzahlBlöcke / 2;
+		} else {
+			vorherAnzahlBlöcke++;
+			anzahlBlöcke = vorherAnzahlBlöcke / 2;
+		}
 	}
 
 	/**
@@ -79,9 +107,9 @@ public class Mergesort {
 		closeOutputFile(hauptband);
 
 	}
-	
-	public static void split(){
-		
+
+	public static void split() {
+
 		hauptband = openInputFile("Hauptband.txt");
 		band1 = openOutputFile("Band1.txt");
 		band2 = openOutputFile("Band2.txt");
@@ -106,8 +134,8 @@ public class Mergesort {
 		closeOutputFile(band1);
 		closeOutputFile(band2);
 
-		//printTape("band1.txt", lengthBand1);
-		//printTape("band2.txt", lengthBand2);
+		printTape("band1.txt", lengthBand1);
+		printTape("band2.txt", lengthBand2);
 	}
 
 	/**
@@ -117,18 +145,22 @@ public class Mergesort {
 	 */
 	public static void merge() {
 
-
 		// läuft bis sortiert
 		while (tl < length) {
 
+			Mergesort.calcBandLegth();
+			println("Länge Band1: " + lengthBand1 + " Länge Band2: " + lengthBand2);
+			trenner();
+			println("______________________Split Start______________________");
 			split();
+			println("______________________Split Ende______________________");
 
 			band1 = openInputFile("band1.txt");
 			band2 = openInputFile("band2.txt");
 			hauptband = openOutputFile("hauptband.txt");
-			
+
 			// läuft bis zum ende der datei (alle blöcke)
-			for (int i = 1; i <= (length / runGeneral); i++) {
+			for (int i = 1; /* BlöckeCount<AnzahlBlöcke */; i++) {
 
 				int indexBand1 = -1;
 				int indexBand2 = -1;
@@ -136,10 +168,17 @@ public class Mergesort {
 				// läuft bis zum ende von tl
 				while (indexBand1 < tl && indexBand2 < tl) {
 
+					println("Start Durchgang: " + ddrun);
+					print("Lese von Band1: ");
 					int splitTo1 = readInt(band1);
 					indexBand1++;
+					positionAufBand1++;
+					println("done!");
+					print("Lese von Band2: ");
 					int splitTo2 = readInt(band2);
 					indexBand2++;
+					positionAufBand2++;
+					println("done!");
 
 					while (indexBand1 < tl && indexBand2 < tl) {
 						if (splitTo1 < splitTo2) {
@@ -147,11 +186,13 @@ public class Mergesort {
 							indexBand1++;
 							if (indexBand1 < tl)
 								splitTo1 = readInt(band1);
+							positionAufBand1++;
 						} else {
 							print(hauptband, splitTo2 + "\n");
 							indexBand2++;
 							if (indexBand2 < tl)
 								splitTo2 = readInt(band2);
+							positionAufBand2++;
 						}
 					}
 
@@ -161,30 +202,31 @@ public class Mergesort {
 							indexBand2++;
 							if (indexBand2 < tl)
 								splitTo2 = readInt(band2);
+							positionAufBand2++;
 						}
 					} else if (indexBand2 >= tl) {
 						while (indexBand1 < tl) {
 							print(hauptband, splitTo1 + "\n");
 							indexBand1++;
-							if (indexBand1 < tl)
+							if (indexBand1 < tl) {
 								splitTo1 = readInt(band1);
+								positionAufBand1++;
+							}
 						}
 					}
-
+					ddrun++;
 				}
-				// Füge den verbleibenden nichtleeren Rest des aktuellen Laufs
-				// von F1 oder F2 an F an
 
-				// printBand("hauptband.txt", (runs*2)-2);
+				// printTape("hauptband.txt", (runs*2)-2);
 			}
 			tl = tl * 2;
 			runGeneral = runGeneral * 2;
 			closeInputFile(band1);
 			closeInputFile(band2);
 			closeOutputFile(hauptband);
-			trenner();
-			//printTape("hauptband.txt", length);
 
+			printTape("hauptband.txt", length);
+			trenner();
 		}
 	}
 
@@ -224,11 +266,12 @@ public class Mergesort {
 	}
 
 	public static void main(String[] args) {
-		eingabeArray = createRandomNumberSequence(length, 100); 
-		
+		eingabeArray = createRandomNumberSequence(length, 100);
+
 		Mergesort.erstelleHauptband();
+		println("Eingabe Zahlenfolge:");
 		Mergesort.printTape("Hauptband.txt", length);
-		Mergesort.calcBandLegth();
+		trenner();
 		Mergesort.merge();
 	}
 }
