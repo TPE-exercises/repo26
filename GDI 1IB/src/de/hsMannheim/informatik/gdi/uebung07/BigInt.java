@@ -4,7 +4,7 @@ import static gdi.MakeItSimple.*;
 
 public class BigInt {
 
-	static final int MaxBigInt = 20000000;
+	static final int MaxBigInt = 50;
 	static int[] arrayToAdd = new int[MaxBigInt];
 	private static String number;
 	static int bigIntCount = 0;

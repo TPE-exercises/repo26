@@ -32,7 +32,7 @@ public class JanneckTest04 {
 	print(BigInt.length());
 	
 	public String toString(){
-		String res=
+		String res= 
 		for(int i = 0; i<digits.length; i++)
 			res+=digits[i];
 		return res;

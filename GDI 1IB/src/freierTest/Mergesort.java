@@ -5,14 +5,59 @@ import static gdi.MakeItSimple.*;
 public class Mergesort {
 
 	public static int[] eingabeArray = { 10, 5, 15, 3, 6, 9, 12, 16, };
-	static final int length = 8;
+	static final int length = 10; // 2, 4, 8, 16, 32, 64, 128, 256, 1024, 2048,
+									// 4096
 	static int tl = 1;// aktuelle Lauflänge | Blocklänge
-	static int runs = 1;
+	static int lengthBand1;
+	static int lengthBand2;
 	static int runGeneral = 2;
+	static int runs = 1;
+	static Object hauptband;
+	static Object band1;
+	static Object band2;
 
+	/**
+	 * 
+	 */
 	static void trenner() {
-		print("-------------");
+		print("----------------------");
+		for (int i = 0; i < length; i++) {
+			print("---");
+			if (i % 2 == 0)
+				print("-");
+		}
+		println();
 	}
+
+	/**
+	 * Errechne die Länge der Bänder, benötigt bei zahlen die nicht in der 2er potenz sind
+	 */
+	static void calcBandLegth() {
+
+		int i = 0;
+
+		while (i < length) {
+			for (int i1 = 0; i1 < runs + 1 && i < length; i1++) {
+				lengthBand1++;
+				i++;
+			}
+
+			for (int i2 = 0; i2 < runs + 1 && i < length; i2++) {
+				lengthBand2++;
+				i++;
+			}
+
+		}
+		runs++;
+	}
+
+	/**
+	 * @param length
+	 *            length of the array
+	 * @param n
+	 *            upper border of random number
+	 * @return random array of int between 0 and n.
+	 */
 	static int[] createRandomNumberSequence(int length, int n) {
 		int[] numberSequence = new int[length];
 
@@ -24,6 +69,9 @@ public class Mergesort {
 
 	}
 
+	/**
+	 * print array to file
+	 */
 	public static void erstelleHauptband() {
 		Object hauptband = openOutputFile("Hauptband.txt");
 		for (int i = 0; i < eingabeArray.length; i++)
@@ -31,60 +79,54 @@ public class Mergesort {
 		closeOutputFile(hauptband);
 
 	}
-
-	public static void merge() {
-
+	
+	public static void split(){
+		
+		hauptband = openInputFile("Hauptband.txt");
+		band1 = openOutputFile("Band1.txt");
+		band2 = openOutputFile("Band2.txt");
 		int blockPosition = 0;
 
-		// läuft bis sortiert
-		while (tl <= length) {
-			/**
-			 * Split Start
-			 */
-			trenner();
-			print("Split Start");
-			trenner();
-			println();
-			Object hauptband = openInputFile("Hauptband.txt");
-			Object band1 = openOutputFile("Band1.txt");
-			Object band2 = openOutputFile("Band2.txt");
+		for (int j = 0; j < length; j++) {
 
-			for (int j = 0; j < length; j++) {
-
-				if (blockPosition < tl) {
-					int hauptNumber = readInt(hauptband);
-					print(band1, hauptNumber + "\n");
-					blockPosition++;
-				} else {
-					int hauptNumber = readInt(hauptband);
-					print(band2, hauptNumber + "\n");
-					blockPosition++;
-				}
-				if (blockPosition >= tl * 2)
-					blockPosition = 0;
+			if (blockPosition < tl) {
+				int hauptNumber = readInt(hauptband);
+				print(band1, hauptNumber + "\n");
+				blockPosition++;
+			} else {
+				int hauptNumber = readInt(hauptband);
+				print(band2, hauptNumber + "\n");
+				blockPosition++;
 			}
+			if (blockPosition >= tl * 2)
+				blockPosition = 0;
+		}
 
-			closeInputFile(hauptband);
-			closeOutputFile(band1);
-			closeOutputFile(band2);
+		closeInputFile(hauptband);
+		closeOutputFile(band1);
+		closeOutputFile(band2);
 
-			printBand("band1.txt", 4);
-			printBand("band2.txt", 4);
+		//printTape("band1.txt", lengthBand1);
+		//printTape("band2.txt", lengthBand2);
+	}
 
-			trenner();
-			print("Split Ende");
-			trenner();
-			println();
-			/**
-			 * Split Ende
-			 * 
-			 * Merge Start
-			 */
+	/**
+	 * TODO Programm läuft nicht für längen außerhalb der 2er Potenz,
+	 * printOperationen in extra methode, split in extra methode
+	 * 
+	 */
+	public static void merge() {
+
+
+		// läuft bis sortiert
+		while (tl < length) {
+
+			split();
 
 			band1 = openInputFile("band1.txt");
 			band2 = openInputFile("band2.txt");
 			hauptband = openOutputFile("hauptband.txt");
-			runs = 1;
+			
 			// läuft bis zum ende der datei (alle blöcke)
 			for (int i = 1; i <= (length / runGeneral); i++) {
 
@@ -93,10 +135,6 @@ public class Mergesort {
 
 				// läuft bis zum ende von tl
 				while (indexBand1 < tl && indexBand2 < tl) {
-					trenner();
-					print("Merge Runde " + runs++ + " Start");
-					trenner();
-					println();
 
 					int splitTo1 = readInt(band1);
 					indexBand1++;
@@ -137,19 +175,27 @@ public class Mergesort {
 				// Füge den verbleibenden nichtleeren Rest des aktuellen Laufs
 				// von F1 oder F2 an F an
 
-				printBand("hauptband.txt", (runs * 2) - 2);
+				// printBand("hauptband.txt", (runs*2)-2);
 			}
 			tl = tl * 2;
 			runGeneral = runGeneral * 2;
 			closeInputFile(band1);
 			closeInputFile(band2);
 			closeOutputFile(hauptband);
+			trenner();
+			//printTape("hauptband.txt", length);
 
 		}
 	}
 
-	private static void printBand(String file, int dateiLänge) {
-		boolean endOfFile = false;
+	/**
+	 * 
+	 * @param file
+	 *            name of file to print
+	 * @param dateiLänge
+	 *            legth of printability
+	 */
+	private static void printTape(String file, int dateiLänge) {
 
 		Object band = openInputFile(file);
 		print(file + ": ");
@@ -160,9 +206,29 @@ public class Mergesort {
 		println();
 	}
 
+	/**
+	 * 
+	 */
+	private static void printruns() {
+
+	}
+
+	/**
+	 * 
+	 * @param fileName
+	 * @return boolean true = file is presend, false = file not found
+	 */
+	public static boolean isFilePresent(String fileName) {
+		return false;
+
+	}
+
 	public static void main(String[] args) {
-		eingabeArray = createRandomNumberSequence(8, 50); // 2, 4, 8, 16, 32, 64, 128
-		erstelleHauptband();
+		eingabeArray = createRandomNumberSequence(length, 100); 
+		
+		Mergesort.erstelleHauptband();
+		Mergesort.printTape("Hauptband.txt", length);
+		Mergesort.calcBandLegth();
 		Mergesort.merge();
 	}
 }
