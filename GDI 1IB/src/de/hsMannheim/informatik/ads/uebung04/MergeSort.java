@@ -23,7 +23,7 @@ public class MergeSort {
 	 */
 	static void separator() {
 		print("----------------------");
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < filelength; i++) {
 			print("---");
 			if (i % 2 == 0)
 				print("-");
