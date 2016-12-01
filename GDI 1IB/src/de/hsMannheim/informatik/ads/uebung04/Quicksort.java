@@ -4,50 +4,72 @@ import static gdi.MakeItSimple.*;
 
 public class Quicksort {
 
-	public static int anzahlSchlüsselvergleiche = 0;
-	public static int anzahlVertauschungen = 0;
-	public static int anzahlRekursionsschritte = -1;
+	/**
+	 * declaration of global variables
+	 */
+	public static int numberOfComparisons = 0;
+	public static int numberOfSwaps = 0;
+	public static int numberOfRecursions = -1;
 
-	static int[] quicksort(int[] numberSequence, int unten, int oben) {
-		anzahlRekursionsschritte++;
+	/**
+	 * "main"-method to run the quicksort algorithm
+	 * @param numberSequence is the array of the unsorted numbers
+	 * @param bottom of comparison
+	 * @param top of comparison
+	 * @return the sorted numbers
+	 */
+	static int[] quicksort(int[] numberSequence, int bottom, int top) {
+		numberOfRecursions++;
 		int[] array = numberSequence;
 
-		if (oben > unten) {
-			int index = zerlege(array, unten, oben);
-			quicksort(array, unten, index - 1);
-			quicksort(array, index + 1, oben);
+		if (top > bottom) {
+			int index = zerlege(array, bottom, top);
+			quicksort(array, bottom, index - 1);
+			quicksort(array, index + 1, top);
 		}
 		return array;
 	}
 
-	static int zerlege(int[] numberSequence, int unten, int oben) {
+	/**
+	 * dividing numberSequence
+	 * @param numberSequence
+	 * @param bottom of comparison
+	 * @param top of comparison
+	 * @return
+	 */
+	static int zerlege(int[] numberSequence, int bottom, int top) {
 		int[] array = numberSequence;
-		int pivot = oben;
-		int index = unten;
+		int pivot = top;
+		int index = bottom;
 
-		for (int zeiger = unten; zeiger <= oben - 1; zeiger++) {
-			anzahlSchlüsselvergleiche++;
-			if (array[zeiger] <= array[pivot]) {
-				swap(array, index, zeiger);
+		for (int marker = bottom; marker <= top - 1; marker++) {
+			numberOfComparisons++;
+			if (array[marker] <= array[pivot]) {
+				if(index != marker)
+				swap(array, index, marker);
 				index = index + 1;
 			}
 		}
 
 		swap(array, index, pivot);
-		
 		print("Zwischenergebnis: ");
 		print(array[0]);
 		for (int d = 1; d < array.length; d++) {
 			print(", " + array[d]);
 		}
 		println();
-		println("----------------");
 
 		return index;
 	}
 
+	/**
+	 * method to swap numbers
+	 * @param numberSequence array of numbers
+	 * @param idx1
+	 * @param idx2
+	 */
 	static void swap(int[] numberSequence, int idx1, int idx2) {
-		anzahlVertauschungen++;
+		numberOfSwaps++;
 		int tmp = numberSequence[idx1];
 		numberSequence[idx1] = numberSequence[idx2];
 		numberSequence[idx2] = tmp;
