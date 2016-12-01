@@ -5,7 +5,7 @@ import static gdi.MakeItSimple.*;
 public class MergeSort {
 
 	public static int[] inputArray;
-	// aktuelle Lauflänge | Blocklänge
+	// current length of block
 	static int tl = 1;
 	// necessary for a loop in merge()
 	static int tlForLoop = 2;
@@ -13,10 +13,10 @@ public class MergeSort {
 	static int length;
 	static int filelength = 0;
 	static int runs = 0;
-	// Dateivariableen
 	static Object mainTape;
 	static Object tape1;
 	static Object tape2;
+	public static String filename;
 
 	/**
 	 * Optical separator
@@ -35,7 +35,7 @@ public class MergeSort {
 	 * @param filename
 	 * @do numbersequens from file, and fills to the next power of two
 	 */
-	public static void createMainTape(String filename) {
+	public static void createMainTape() {
 		mainTape = openOutputFile("Hauptband.txt");
 		Object sourceTape = openInputFile(filename);
 		boolean endOfFile = false;
@@ -173,7 +173,8 @@ public class MergeSort {
 	}
 
 	/**
-	 * cut the length of file to the inputFileLength
+	 * @param finalFile here could you change the outputfile
+	 * @do cut the length of file to the inputFileLength
 	 */
 	private static void cutFill() {
 
@@ -227,15 +228,15 @@ public class MergeSort {
 	 * 
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
-		// eingabeArray = createRandomNumberSequence(length, 100);
 
 		print("Geben Sie den Dateinamen ein: ");
-		String filename = readLine();
+		filename = readLine();
 		if (!isFilePresent(filename))
 			throw new GDIException("Datei \"" + filename + "\" konnte nicht gefunden werden.");
 
-		MergeSort.createMainTape(filename);
+		MergeSort.createMainTape();
 
 		MergeSort.merge();
 		MergeSort.cutFill();
@@ -245,7 +246,6 @@ public class MergeSort {
 		separator();
 		
 		println("Sortierte Folge steht nun in \"finalFile.txt\"");
-		println("--> Programm beendet! <--");
 	}
 
 }

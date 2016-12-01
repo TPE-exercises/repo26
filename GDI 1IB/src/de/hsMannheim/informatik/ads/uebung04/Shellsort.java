@@ -5,15 +5,14 @@ import static gdi.MakeItSimple.*;
 public class Shellsort {
 
 	static int[] gap = new int[] { 9, 7, 4, 1 };
-	static int[] arrayToSort = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-	static int comparerisenCounter = 0;
-	static int swaps = 0;
+	static int numberOfComparisons = 0;
+	static int numberOfSwaps = 0;
 
 	/**
 	 * 
 	 */
-	static void shellSort() {
-		
+	public static int[] shellSort(int[] arrayToSort) {
+
 		//the run-loop repeats the loop for every gap that is possible until the array is sorted
 		for (int run = 0; run < gap.length; run++) {
 
@@ -23,9 +22,9 @@ public class Shellsort {
 			for (int end = 0 + gap[run]; end < arrayToSort.length; end++) {
 				
 				//if the index1 is bigger swap it with index2 
-				comparerisenCounter++;
+				numberOfComparisons++;
 				if (arrayToSort[index1] > arrayToSort[index2]) { 
-					swaps++;
+					numberOfSwaps++;
 					int m = arrayToSort[index1];
 					arrayToSort[index1] = arrayToSort[index2];
 					arrayToSort[index2] = m;
@@ -39,9 +38,9 @@ public class Shellsort {
 					while (smaleerSwaped && afterSwapIndex1 >= 0) {
 						
 						//if the afterSwapIndex1 is bigger swap it with afterSwapIndex2 
-						comparerisenCounter++;
+						numberOfComparisons++;
 						if (arrayToSort[afterSwapIndex1] > arrayToSort[afterSwapIndex2]) {
-							swaps++;
+							numberOfSwaps++;
 							m = arrayToSort[afterSwapIndex1];
 							arrayToSort[afterSwapIndex1] = arrayToSort[afterSwapIndex2];
 							arrayToSort[afterSwapIndex2] = m;
@@ -64,8 +63,9 @@ public class Shellsort {
 			}
 			
 		}
+		return arrayToSort;
 	}
-	
+	/*
 	public static void main(String[] args) {
 		
 		shellSort();
@@ -74,5 +74,6 @@ public class Shellsort {
 			print(arrayToSort[i] + " ");
 		}
 	}
+	*/
 
 }
