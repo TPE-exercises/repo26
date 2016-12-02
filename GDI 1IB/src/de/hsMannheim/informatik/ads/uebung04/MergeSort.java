@@ -90,9 +90,13 @@ public class MergeSort {
 				blockPosition = 0;
 		}
 
+	
 		closeInputFile(mainTape);
 		closeOutputFile(tape1);
 		closeOutputFile(tape2);
+		
+		//printTape("Band1.txt", filelength/2);
+		//printTape("Band2.txt", filelength/2);
 	}
 
 	/**
@@ -205,6 +209,7 @@ public class MergeSort {
 		
 		print(file + ": ");
 		for(int i = 0; i<fileLength;i++) {
+			
 			print(readInt(band) + " ");
 		}
 		closeInputFile(band);

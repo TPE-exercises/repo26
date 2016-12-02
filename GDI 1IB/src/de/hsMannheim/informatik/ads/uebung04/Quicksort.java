@@ -1,4 +1,4 @@
-package de.hsMannheim.informatik.ads.uebung04;
+ package de.hsMannheim.informatik.ads.uebung04;
 
 import static gdi.MakeItSimple.*;
 
@@ -73,5 +73,25 @@ public class Quicksort {
 		int tmp = numberSequence[idx1];
 		numberSequence[idx1] = numberSequence[idx2];
 		numberSequence[idx2] = tmp;
+		printRun( numberSequence[idx1],  numberSequence[idx2], numberSequence, idx1, idx2);
+	}
+	static void printRun(int swapNumber1, int swapNumber2, int[] arrayToSort, int index1, int index2){
+		_Main.perfectSeperator();
+		println("Swap: " + swapNumber1 + " with: " + swapNumber2);
+		for(int i = 0; i<index1;i++){
+			print(arrayToSort[i] + " ");
+		}
+		print("*" + arrayToSort[index1] + "* ");
+		for(int i = index1+1; i<index2;i++){
+			print(arrayToSort[i] + " ");
+			
+		}
+		if(!(index1==index2))
+			print("*" + arrayToSort[index2] + "* ");
+		for(int i = index2+1; i<arrayToSort.length;i++){
+			print(arrayToSort[i] + " ");
+			
+		}
+		println();
 	}
 }
