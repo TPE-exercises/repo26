@@ -3,7 +3,22 @@ package de.hsMannheim.informatik.gdi.uebung06;
 import static gdi.MakeItSimple.*;
 
 public class EightQueens {
-
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * ACHTUNG !!! !!! !!! !!! !!! !!!
+	 * 
+	 * 
+	 * Dateien wurden in ein anderen Ordner verschoben: FilesForGDIUebung06
+	 * 
+	 * 
+	 * Quelltext muss dafür noch angepasst werden!
+	 * 
+	 * 
+	 * 
+	 */
 	static int spielbrettGroesse = 7;
 	final static int DAME = 1;
 	final static int BEDROHTE_DAME = 2;

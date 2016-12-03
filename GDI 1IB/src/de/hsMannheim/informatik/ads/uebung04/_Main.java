@@ -6,6 +6,22 @@ import gdi.MakeItSimple.GDIException;
 
 public class _Main {
 
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * ACHTUNG !!! !!! !!! !!! !!! !!!
+	 * 
+	 * 
+	 * Dateien für MergeSort wurden in ein Ordner verschoben: FilesForADSUebung04
+	 * 
+	 * 
+	 * Quelltext muss dafür noch angepasst werden!
+	 * 
+	 * 
+	 * 
+	 */
 	static int length;
 	public static int[] inputArray;
 	static int[] outputArray;
