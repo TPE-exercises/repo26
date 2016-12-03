@@ -3,25 +3,38 @@ package de.hsMannheim.informatik.ads.uebung05;
 public class ListNode {
 	private int value;
 	private ListNode next;
+	private MyObject element;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getValue() {
 		return value;
 	}
 
+	/**
+	 * 
+	 * @param value
+	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
-
+	
+	/**
+	 * @return the next element
+	 */
 	public ListNode getNext() {
 		return next;
 	}
-
+	
+	/**
+	 * @param next
+	 *            the new next element
+	 */
 	public void setNext(ListNode next) {
 		this.next = next;
 	}
-	
-	private MyObject element;
-	private ListNode next;
 
 	/**
 	 * @return the value of the current node
@@ -36,21 +49,5 @@ public class ListNode {
 	 */
 	public void setElement(MyObject value) {
 		this.element = value;
-	}
-
-	/**
-	 * @return the next element
-	 */
-	public ListNode getNext() {
-		return next;
-	}
-
-	/**
-	 * 
-	 * @param next
-	 *            the new next element
-	 */
-	public void setNext(ListNode next) {
-		this.next = next;
 	}
 }

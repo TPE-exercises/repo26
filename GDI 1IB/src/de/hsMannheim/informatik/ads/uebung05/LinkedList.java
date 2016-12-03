@@ -59,4 +59,6 @@ public class LinkedList {
 		
 		return otherList;
 	}
+	
+	public void addFirst(MyObject obj1){}  // it works for all kind of (My)Object
 }

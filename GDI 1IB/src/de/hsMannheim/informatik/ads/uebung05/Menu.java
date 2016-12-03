@@ -1,153 +1,132 @@
-package blatt5v2;
+package de.hsMannheim.informatik.ads.uebung05;
 
 import static gdi.MakeItSimple.*;
 
-public class Menu {
 
+public class Menu {
 	
+	static LinkedList la[] = new LinkedList[3];  // array with 3 linked lists
 
 	public static void main(String[] args) {
-	
-		Hashtable ht = new Hashtable();
 		
+		for (int i = 0; i < la.length; i++)
+			la[i] = new MyLinkedList();
+		
+
 		while (true) {
-	
-			printMenu(); // print all options
-	
-			switch (getAction()) {
-	
-			case 1: { // put
-				println("Key = ");
-				String key = readLine();
-				println("Value = ");
-				String value = readLine();
-	
-				println("put " +  ht.put(key, value));
-	
-				break;
-			}
-			
-			case 2: { // get 
-				println("Key = ");
-				String key = readLine();
-	
-				println("mapped to  =" + ht.get(key));
-	
-				break;
-			}
-			case 3: { // contains key
-				println("Key = ");
-				String key = readLine();
-	
-				println(" " + key + "  " + ht.containsKey(key));
-	
-				break;
-			}
-			case 4: { // contains value
-				println("Value = ");
-				String value = readLine();
-	
-				println(" " + value + "  " + ht.contains(value));
-	
-				break;
-			}
-			case 5: { // print
-				ht.print();
-	
-				break;
-			}
-			case 6:{ // size
-				println("size = "+ht.size());
-				
-				break;
-			}
-	
-			case 7: { // remove
-				println("Key = ");
-				String key = readLine();
-	
-				println("removed key " + key + "  "
-						+ ht.removeKey(key));
-				break;
-			}
-
-	
-			case 8: { // clear
-				ht.clear();
-				println("Hashtable cleared");
-				ht.print();
-	
-				break;
-			}
-	
-			case 9: {// load factor
-				println("actual load factor= " + ht.getActualLoadFactor());
-	
-				break;
-			}
-	
-			case 0: { // terminates loop
-				return;
-			}
-	
-			case 10: { // is Empty
-				println("Hashtable is empty = "+ht.isEmpty());
-				break;
-			}
-	
-			default: {
-				println("invalid input");
-				break;
-			}
-	
-			}
+			makeMenu();
 		}
+
 	}
 
-	public static int getAction() {
-		String s = readLine();
+	public static void makeMenu() {
+	
 
-		if (s.equals("1"))
-			return 1;// put
-		else if (s.equals("2"))
-			return 2;// get
-		else if (s.equals("3"))
-			return 3;// containsKey
-		else if (s.equals("4"))
-			return 4;// containsValue
-		else if (s.equals("5"))
-			return 5;// print
-		else if (s.equals("6"))
-			return 6; // size
-		else if (s.equals("7"))
-			return 7;// remove
-		else if (s.equals("8"))
-			return 8;// clear
-		else if (s.equals("9"))
-			return 9;// loadFactor
-		else if (s.equals("0"))
-			return 0;// exit
+		int wl = 0; // working list per default
 
-		else
-			return -1;
-	}
+		
+		
+		println("------------------- Menü -------------------");
+		println("1: Print List");  // calls method toString
+		println("2: Print size of the list");
+		println("3: add(index, element)");
+		println("4: addFirst(element)");
+		println("5: addLast(element)");
+		println("6: addAll(LinkedList)");
+		println("7: get(index)");
+		println("8: getFirst()");
+		println("9: getLast()");
+		println("10: removeFirst()");
+		println("11: removeLast()");
+		println("12: removeAll()");  // calls method clear
+		println("13: remove(element)");
+		println("14: toArray()");
+		println("15: isempty()");
+		println("16: contains(element)");
+		println("17: delete(index)");  // delete element at index
+		println("18: cloneDeep()");
+		println("20: empty()");  // returns a new (empty) list, has to be implemented as a static method
+		println("30: change working list");  // sets another list as working list
+		
+		
 
-	public static void printMenu() {
+		int selection = readInt();
 
-		println("Mögliche Aktionen: Wählen Sie eine Zahl");
-		println(" (1) put");
-		println(" (2) get");
-		println(" (3) contains key");
-		println(" (4) contains value");
-		println(" (5) print Hashtable");
-		println(" (6) size");
-		println(" (7) removeKey");
-		println(" (8) clear Hashtable");
-		println(" (9) actual load factor");
-		println(" (10) is empty");
+		switch (selection) {
+		case 1:
+			// your code here
+			break;
+		case 2:
+			// your code here
+			break;
+		case 3:
+			// your code here
+			break;
+		case 4:
+			// your code here
+			// for instance your code looks something like this
+			//
+			println("value to add= ");
+			int i = readInt();
+			MyInteger obj1 = new MyInteger(i);  // create a MyIntObject first before adding to list
+			
+			la[wl].addFirst(obj1);  // syntax error until defining addFirst
 
-		println(" (0) exit");
+			break;
+		case 5:
+			// your code here
+			break;
+		case 6:
+			// your code here
+			break;
+		case 7:
+			// your code here
+			break;
+		case 8:
+			// your code here
+			break;
+		case 9:
+			// your code here
+			break;
+		case 10:
+			// your code here
+			break;
+		case 11:
+			// your code here
+			break;
+		case 12:
+			// your code here
+			break;		
+		case 13:
+			// your code here
+			break;
+		case 14:
+			// your code here
+			break;
+		case 15:
+			// your code here
+			break;
+		case 16:
+			// your code here
+			break;
+		case 17:
+			// your code here
+			break;
+		case 18:
+			// your code here
+			break;
+		case 20:
+			// your code here
+			break;
+		case 30:
+			// your code here
+			break;
+		default:
+			break;
+		}
+		;
+
+		readLine();
 
 	}
 }
-
