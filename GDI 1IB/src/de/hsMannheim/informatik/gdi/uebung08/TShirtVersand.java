@@ -6,8 +6,12 @@ public class TShirtVersand {
 
 	private Kunden[] kunde = new Kunden[100];
 	private int kundenanzahl = 0;
-	/*
+	/* **************
+	 * Viel Erfolg!
+	 * **************
+	 * 
 	 * Konstruktor Kunde benötigt
+	 * name
 	 * Kundennummer
 	 * Warenkorb
 	 * 
