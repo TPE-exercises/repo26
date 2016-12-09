@@ -2,18 +2,31 @@ package de.hsMannheim.informatik.ads.uebung05;
 
 import static gdi.MakeItSimple.*;
 
+class LinkList{
+	public LinkList firstLink;
+	LinkList(){
+		firstLink = null;
+		
+	}
+	public boolean isEmpty(){
+		return(firstLink == null);
+	}
+	public void addFirst(int element){
+		LinkedList newLinkedList = new LinkedList(element);
+	}
+}
 public class LinkedList {
 
 
-	private int element;
-	private int next;
+	public int element;
+	public LinkedList next;
 
-	LinkedList(int element, int next){
+	public LinkedList(int element){
 		this.element = element;
-		this.next = next;		
+		
 	}
 	
-	LinkedList list = new LinkedList(element, next);
+	LinkedList list = new LinkedList(element);
 	
 	public static void main(String[] args) {
 
@@ -24,7 +37,7 @@ public class LinkedList {
 	 * @return LinkedList 
 	 */
 	LinkedList empty(){
-		LinkedList list = new LinkedList(0, 0);
+		LinkedList list = new LinkedList(0);
 		
 		return list;	
 	}
@@ -195,7 +208,7 @@ public class LinkedList {
 	 * @do konkateniert die aktuelle Liste mit otherList indem die Listen
 	 *     jeweils tief kopiert werden
 	 * @param otherList
-	 * @return Als Ergebnis wird die konkatenierte Liste zurückgegeben
+	 * @return Als Ergebnis wird die konkatenierte Liste zurÃ¼ckgegeben
 	 */
 	LinkedList concat(LinkedList otherList) {
 
