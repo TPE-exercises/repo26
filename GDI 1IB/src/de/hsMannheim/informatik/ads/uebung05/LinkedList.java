@@ -2,42 +2,35 @@ package de.hsMannheim.informatik.ads.uebung05;
 
 import static gdi.MakeItSimple.*;
 
-class LinkList{
-	public LinkList firstLink;
-	LinkList(){
-		firstLink = null;
-		
-	}
-	public boolean isEmpty(){
-		return(firstLink == null);
-	}
-	public void addFirst(int element){
-		LinkedList newLinkedList = new LinkedList(element);
-	}
-}
 public class LinkedList {
 
-
-	public int element;
+	public static int value;
 	public LinkedList next;
+	public static ListNode head = new ListNode (0, null);
+	
+	public LinkedList(ListNode head){
+		this.head = head;
 
-	public LinkedList(int element){
-		this.element = element;
-		
 	}
-	
-	LinkedList list = new LinkedList(element);
-	
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
+		LinkedList list = new LinkedList(head);
+		
+		list.addFirst(10, list);
+		list.addFirst(9, list);
+		list.addFirst(8, list);
+		list.addFirst(7, list);
+		
+		print("List: " + list);
+		
 	}
 	
 	/**
-	 * 
+	 * Fertig
 	 * @return LinkedList 
 	 */
 	LinkedList empty(){
-		LinkedList list = new LinkedList(0);
+		LinkedList list = new LinkedList();
 		
 		return list;	
 	}
@@ -139,19 +132,39 @@ public class LinkedList {
 	 * @return
 	 */
 	LinkedList addFirst(int element, LinkedList list){
+
+		ListNode node = new ListNode(element, null);
+		node.setNext(head);
+		head = node;
 		
 		
+		//next same as Head.next
+		//head pointer neu setzten
 		
 		return list;
 	}
-
 	/**
 	 * @return String
 	 */
 	public String toString() {
-		return null;
+		String string = "";
+		boolean goOn = true;
+		ListNode speicher = new ListNode(0, null);
+		speicher = head;
+		
+		while(goOn){
+			int lustigerName = speicher.getValue();
+			string += " " + lustigerName;
+			
+			if(speicher.getNext() != null)
+				speicher = speicher.getNext();
+			else 
+				goOn = false;
+		}
+		
+		
+		return string;
 	}
-
 	/**
 	 * 
 	 * @param index
@@ -160,6 +173,13 @@ public class LinkedList {
 	 * @return
 	 */
 	LinkedList add(int index, int element, LinkedList list) {
+		
+		
+		//neues Node erstellen
+		//mit wert belegen
+		//ListNode.getNext -> pointer setzen
+		//getPrevius -> pointer setzen
+
 		return list;
 
 	}
@@ -214,7 +234,4 @@ public class LinkedList {
 
 		return otherList;
 	}
-
-	public void addFirst(MyObject obj1) {
-	} // it works for all kind of (My)Object
 }
