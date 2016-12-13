@@ -4,24 +4,25 @@ import static gdi.MakeItSimple.*;
 
 public class LinkedList {
 
-	public static int value;
-	public LinkedList next;
-	public static ListNode head = new ListNode (0, null);
+//	public static int value;
+//	public LinkedList next;
+	public static ListNode head;
 	
-	public LinkedList(ListNode head){
-		this.head = head;
+	public LinkedList(){
+		this.head = null;
 
 	}
 
 	public static void main(String[] args) {
-		LinkedList list = new LinkedList(head);
+		LinkedList list = new LinkedList();
 		
 		list.addFirst(10, list);
 		list.addFirst(9, list);
 		list.addFirst(8, list);
 		list.addFirst(7, list);
 		
-		print("List: " + list);
+		println("List: " + list);
+		println("Anzahl Elemente: " + list.size(list));
 		
 	}
 	
@@ -30,7 +31,7 @@ public class LinkedList {
 	 * @return LinkedList 
 	 */
 	LinkedList empty(){
-		LinkedList list = new LinkedList();
+		LinkedList list = new LinkedList(head);
 		
 		return list;	
 	}
@@ -55,12 +56,25 @@ public class LinkedList {
 		
 	}
 	/**
-	 * 
+	 * Fertig
 	 * @param list
 	 * @return
 	 */
 	int size(LinkedList list){
-		return 0;
+		int zaehler = 0;
+		boolean goOn = true;
+		ListNode speicher = new ListNode(0, null);
+		speicher = head;
+		
+		while(goOn){
+			zaehler++;
+			
+			if(speicher.getNext() != null)
+				speicher = speicher.getNext();
+			else 
+				goOn = false;
+		}
+		return zaehler;
 		
 	}
 	/**
@@ -135,12 +149,7 @@ public class LinkedList {
 
 		ListNode node = new ListNode(element, null);
 		node.setNext(head);
-		head = node;
-		
-		
-		//next same as Head.next
-		//head pointer neu setzten
-		
+		head = node;		
 		return list;
 	}
 	/**
