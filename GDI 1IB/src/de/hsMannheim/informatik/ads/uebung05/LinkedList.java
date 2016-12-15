@@ -4,8 +4,7 @@ import static gdi.MakeItSimple.*;
 
 public class LinkedList {
 
-	// public static int value;
-	// public LinkedList next;
+	static final int notFound = Integer.MIN_VALUE;
 	public ListNode head;
 
 	public LinkedList() {
@@ -15,90 +14,203 @@ public class LinkedList {
 
 	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
+		int index;
+		int value;
+		boolean runMain = true;
 
-		trenner();
-		println("[addFirst] 10");
-		list.addFirst(10, list);
+		do {
+			println("------------------- Menue -------------------");
+			println("1: Print List");
+			println("2: Print size of the list");
+			println("3: add(index, element)");
+			println("4: addFirst(element)");
+			println("5: addLast(element)");
+			println("6: addAll(LinkedList)");
+			println("7: get(index)");
+			println("8: getFirst()");
+			println("9: getLast()");
+			println("10: removeFirst()");
+			println("11: removeLast()");
+			println("12: removeAll()");// clear
+			println("13: remove(element)");// delete
+			println("0: end program");
 
-		trenner();
-		println("[addFirst] 9");
-		list.addFirst(9, list);
+			int selection = readInt();
+			readLine();
+			
+			println("Mit welcher Liste wollen Sie arbeiten?");
+			String listName = readLine();
+			
+			trenner();
+			switch (selection) {
+			case 1:
+				println("[toString] List: " + list);
+				break;
+			case 2:
+				println("[size] Anzahl Elemente: " + list.size(list));
+				break;
+			case 3:
+				do {
+					println("Geben Sie den Index an, an den sie einfügen wollen.");
+					index = readInt();
+					readLine();
+				} while (index < 0);
 
-		trenner();
-		println("[addFirst] 8");
-		list.addFirst(8, list);
+				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				value = readInt();
+				readLine();
 
-		trenner();
-		println("[addFirst] 7");
-		list.addFirst(7, list);
-		trenner();
+				list.add(index, value, list);
+				println("[add] " + value + " to index " + index);
+				break;
+			case 4:
+				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				value = readInt();
+				readLine();
+				list.addFirst(value, list);
+				println("Wert " + value + " an erster Stelle eingefügt.");
+				break;
+			case 5:
+				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				value = readInt();
+				readLine();
+				list.addLast(value, list);
+				println("Wert " + value + " an letzter Stelle eingefügt.");
+				break;
+			case 6:
 
-		println("[toString] List: " + list);
+				// list.addAll(otherList, list);
+				break;
+			case 7:
+				do {
+					println("Geben Sie den Index an");
+					index = readInt();
+					readLine();
+				} while (index < 0);
+				int thisValue = list.get(index, list);
+				if (thisValue == notFound)
+					println("An ihrem angegebenen Index (" + index + ") befindet sich kein Element.");
+				else
+					println("Der Wert an IndexStelle " + index + " ist " + thisValue);
+				break;
+			case 8:
+				thisValue = list.getFirst(list);
+				if (thisValue == notFound)
+					println("An der ersten Stelle befindet sich kein Element.");
+				else
+					println("Der erste Wert in der Liste ist:" + thisValue);
+				break;
+			case 9:
+				thisValue = list.getLast(list);
+				if (thisValue == notFound)
+					println("In der Liste befinden sich keine Elemente.");
+				else
+					println("Der letzte Wert in der Liste ist: " + thisValue);
+				break;
+			case 10:
+				list.removeFirst(list);
+				println("[removeFirst]");
+				break;
+			case 11:
+				println("nicht vorhanden");
+				break;
+			case 12:
+				list.clear(list);
+				println("[clearList]");
+				break;
+			case 13:
+				println("Geben Sie den Wert ein, den Sie löschen möchten.");
+				value = readInt();
+				readLine();
+				list.delete(value, list);
+				println("Wert " + value + " gelöscht.");
+				break;
+			case 0:
+				runMain = false;
+				println("--> Programm beendet <--");
+			}
+			trenner();println();
+		} while (runMain);
 
-		int[] array = list.toArray(list);
-		print("[toArray] Array: ");
-		for (int i = 0; i < array.length; i++) {
-			print(array[i] + " ");
-		}
-		println();
-
-		println("[size] Anzahl Elemente: " + list.size(list));
-
-		println("[isEmpty]: " + list.isEmpty(list));
-
-		int index = 3;
-		println("[get] Wert an Stelle " + index + ": " + list.get(index, list));
-
-		println("[getFirst] Erster Wert: " + list.getFirst(list));
-		println("[getLast] Letzter Wert: " + list.getLast(list));
-		trenner();
-		println("[removeFirst]");
-		list.removeFirst(list);
-		trenner();
-
-		println("[getFirst] Erster Wert: " + list.getFirst(list));
-
-		int element = 9;
-		println("[contains] Wert " + element + " enthalten: " + list.contains(element, list));
-
-		trenner();
-		println("[delete] 9");
-		list.delete(9, list);
-		trenner();
-
-		println("[contains] Wert " + element + " enthalten: " + list.contains(element, list));
-
-		trenner();
-		println("[clear]");
-		list.clear(list);
-		trenner();
-
-		println("[isEmpty]: " + list.isEmpty(list));
-
-		trenner();
-		list.addLast(11, list);
-		println("[addLast] 11");
-		trenner();
-		list.addLast(1, list);
-		println("[addLast] 1");
-		trenner();
-
-		println("[toString] List: " + list);
-		
-		trenner();
-		list.add(0, 12, list);
-		println("[add] 12 to index 1");
-		trenner();
-		
-		println("[toString] List: " + list);
-
-	}
-
-	/**
-	 * Print seperator to console
-	 */
-	private static void trenner() {
-		println("-------------------------");
+		// ____________________________________________________________OldMainBeginn__________________
+		// trenner();
+		// println("[addFirst] 10");
+		// list.addFirst(10, list);
+		//
+		// trenner();
+		// println("[addFirst] 9");
+		// list.addFirst(9, list);
+		//
+		// trenner();
+		// println("[addFirst] 8");
+		// list.addFirst(8, list);
+		//
+		// trenner();
+		// println("[addFirst] 7");
+		// list.addFirst(7, list);
+		// trenner();
+		//
+		// println("[toString] List: " + list);
+		//
+		// int[] array = list.toArray(list);
+		// print("[toArray] Array: ");
+		// for (int i = 0; i < array.length; i++) {
+		// print(array[i] + " ");
+		// }
+		// println();
+		//
+		// println("[size] Anzahl Elemente: " + list.size(list));
+		//
+		// println("[isEmpty]: " + list.isEmpty(list));
+		//
+		// int index = 3;
+		// println("[get] Wert an Stelle " + index + ": " + list.get(index,
+		// list));
+		//
+		// println("[getFirst] Erster Wert: " + list.getFirst(list));
+		// println("[getLast] Letzter Wert: " + list.getLast(list));
+		// trenner();
+		// println("[removeFirst]");
+		// list.removeFirst(list);
+		// trenner();
+		//
+		// println("[getFirst] Erster Wert: " + list.getFirst(list));
+		//
+		// int element = 9;
+		// println("[contains] Wert " + element + " enthalten: " +
+		// list.contains(element, list));
+		//
+		// trenner();
+		// println("[delete] 9");
+		// list.delete(9, list);
+		// trenner();
+		//
+		// println("[contains] Wert " + element + " enthalten: " +
+		// list.contains(element, list));
+		//
+		// trenner();
+		// println("[clear]");
+		// list.clear(list);
+		// trenner();
+		//
+		// println("[isEmpty]: " + list.isEmpty(list));
+		//
+		// trenner();
+		// list.addLast(11, list);
+		// println("[addLast] 11");
+		// trenner();
+		// list.addLast(1, list);
+		// println("[addLast] 1");
+		// trenner();
+		//
+		// println("[toString] List: " + list);
+		//
+		// trenner();
+		// list.add(0, 12, list);
+		// println("[add] 12 to index 1");
+		// trenner();
+		//
+		// println("[toString] List: " + list);
 
 	}
 
@@ -111,6 +223,66 @@ public class LinkedList {
 		LinkedList list = new LinkedList();
 
 		return list;
+	}
+
+	/**
+	 * Fertig
+	 * 
+	 * @param list
+	 * @return cleared list
+	 */
+	LinkedList clear(LinkedList list) {
+		ListNode head = null;
+		this.head = head;
+
+		return list;
+
+	}
+
+	/**
+	 * Fertig, wenn element an erster Stelle, rufe removeFirst auf
+	 * 
+	 * @param value
+	 * @param list
+	 * @return list
+	 */
+	LinkedList delete(int element, LinkedList list) {
+
+		ListNode savedNode = new ListNode(0, null);
+		ListNode previousNode = new ListNode(0, null);
+		savedNode = head;
+		previousNode = head;
+
+		if (head == null)
+			return list;
+		if (head.getValue() == element) {
+			list.removeFirst(list);
+			return list;
+		}
+		for (int i = 0; i < list.size(list); i++) {
+			if (element == savedNode.getValue()) {
+				previousNode.setNext(savedNode.getNext());
+				return list;
+			}
+			previousNode = savedNode;
+			savedNode = savedNode.getNext();
+		}
+
+		return list;
+
+	}
+
+	/**
+	 * Fertig, check size, if size == 0, list is empty
+	 * 
+	 * @param LinkedList
+	 * @return
+	 */
+	boolean isEmpty(LinkedList list) {
+		if (list.size(list) == 0)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -130,20 +302,6 @@ public class LinkedList {
 			speicher = speicher.getNext();
 		}
 		return false;
-	}
-
-	/**
-	 * Fertig
-	 * 
-	 * @param list
-	 * @return cleared list
-	 */
-	LinkedList clear(LinkedList list) {
-		ListNode head = null;
-		this.head = head;
-
-		return list;
-
 	}
 
 	/**
@@ -186,47 +344,64 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig, wenn element an erster Stelle, rufe removeFirst auf
-	 * 
-	 * @param element
-	 * @param list
-	 * @return list
-	 */
-	LinkedList delete(int element, LinkedList list) {
-
-		ListNode savedNode = new ListNode(0, null);
-		ListNode previousNode = new ListNode(0, null);
-		savedNode = head;
-		previousNode = head;
-
-		if (head.getValue() == element) {
-			list.removeFirst(list);
-			return list;
-		}
-		for (int i = 0; i < list.size(list); i++) {
-			if (element == savedNode.getValue()) {
-				previousNode.setNext(savedNode.getNext());
-				return list;
-			}
-			previousNode = savedNode;
-			savedNode = savedNode.getNext();
-		}
-
-		return list;
-
-	}
-
-	/**
-	 * Fertig, check size, if size == 0, list is empty
 	 * 
 	 * @param LinkedList
 	 * @return
 	 */
-	boolean isEmpty(LinkedList list) {
-		if (list.size(list) == 0)
-			return true;
-		else
-			return false;
+	LinkedList cloneDeep(int LinkedList) {
+		return null;
+	}
+
+	/**
+	 * @do konkateniert die aktuelle Liste mit otherList indem die Listen
+	 *     jeweils tief kopiert werden
+	 * @param otherList
+	 * @return Als Ergebnis wird die konkatenierte Liste zurÃ¼ckgegeben
+	 */
+	LinkedList concat(LinkedList otherList) {
+
+		return otherList;
+	}
+
+	/**
+	 * Fertig
+	 * 
+	 * @param index
+	 * @param list
+	 * @return value (-1 if index not in List)
+	 * @exception index
+	 *                not in List
+	 */
+	int get(int index, LinkedList list) {
+		int value = 0;
+		ListNode speicher = new ListNode(0, null);
+		speicher = head;
+		int size = list.size(list);
+		if (index > size)
+			return notFound;
+
+		for (int i = 0; i < index; i++) {
+
+			value = speicher.getValue();
+			speicher = speicher.getNext();
+
+		}
+
+		return value;
+	}
+
+	/**
+	 * Fertig
+	 * 
+	 * @param LinkedList
+	 * @return value
+	 */
+	int getFirst(LinkedList list) {
+
+		if (head == null)
+			return notFound;
+
+		return head.getValue();
 	}
 
 	/**
@@ -251,23 +426,68 @@ public class LinkedList {
 	/**
 	 * Fertig
 	 * 
-	 * @param LinkedList
-	 * @return value
-	 */
-	int getFirst(LinkedList list) {
-
-		return head.getValue();
-	}
-
-	/**
-	 * Fertig
-	 * 
 	 * @param list
 	 * @return list
 	 */
 	LinkedList removeFirst(LinkedList list) {
 
+		if (head == null)
+			return list;
 		head = head.getNext();
+		return list;
+	}
+
+	/**
+	 * Fertig, if index == 0 -> addFirst
+	 * 
+	 * @param index
+	 * @param element
+	 * @param list
+	 * @return list
+	 * @exception negativer
+	 *                index
+	 */
+	LinkedList add(int index, int element, LinkedList list) {
+		ListNode node = new ListNode(element, null);
+		ListNode saveNode = new ListNode(0, null);
+		ListNode previusNode = new ListNode(0, null);
+		saveNode = head;
+		previusNode = head;
+
+		if (index > list.size(list)) {
+			list.addLast(element, list);
+			return list;
+		}
+
+		if (index == 0) {
+			list.addFirst(element, list);
+			return list;
+		}
+
+		for (int i = 0; i < index; i++) {
+
+			previusNode = saveNode;
+			saveNode = saveNode.getNext();
+		}
+		node.setNext(saveNode);
+		previusNode.setNext(node);
+
+		return list;
+
+	}
+
+	/**
+	 * Fertig
+	 * 
+	 * @param element
+	 * @param list
+	 * @return list
+	 */
+	LinkedList addFirst(int element, LinkedList list) {
+
+		ListNode node = new ListNode(element, null);
+		node.setNext(head);
+		head = node;
 		return list;
 	}
 
@@ -299,105 +519,26 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
+	 * Vieleicht Fertig nocht testen
 	 * 
-	 * @param element
+	 * @param otherList
 	 * @param list
 	 * @return list
 	 */
-	LinkedList addFirst(int element, LinkedList list) {
-
-		ListNode node = new ListNode(element, null);
-		node.setNext(head);
-		head = node;
-		return list;
-	}
-
-	/**
-	 * Fertig
-	 * 
-	 * @return String
-	 */
-	public String toString() {
-		String string = "";
-		boolean goOn = true;
+	LinkedList addAll(LinkedList otherList, LinkedList list) {
+		ListNode otherNode = new ListNode(0, null);
 		ListNode speicher = new ListNode(0, null);
-		speicher = head;
-
-		if (this.head == null)
-			return string;
-
-		while (goOn) {
-			int lustigerName = speicher.getValue();
-			string += " " + lustigerName;
-
-			if (speicher.getNext() != null)
-				speicher = speicher.getNext();
-			else
-				goOn = false;
-		}
-
-		return string;
-	}
-
-	/**
-	 * Fertig, if index == 0 -> addFirst
-	 * @param index
-	 * @param element
-	 * @param list
-	 * @return list
-	 * @exception
-	 */
-	LinkedList add(int index, int element, LinkedList list) {
-		ListNode node = new ListNode(element, null);
-		ListNode saveNode = new ListNode (0, null);
-		ListNode previusNode = new ListNode (0, null);
-		saveNode=head;
-		previusNode=head;
-		
-		if(index==0){
-			list.addFirst(element, list);
-			return list;
-		}
-			
-		
-		for(int i= 0;i<index; i++){
-
-			previusNode = saveNode;
-			saveNode = saveNode.getNext();
-		}
-		node.setNext(saveNode);
-		previusNode.setNext(node);
-
-
-		return list;
-
-	}
-	/**
-	 * Fertig
-	 * 
-	 * @param index
-	 * @param list
-	 * @return value (-1 if index not in List)
-	 * @exception index
-	 *                not in List
-	 */
-	int get(int index, LinkedList list) {
-		int value = 0;
-		ListNode speicher = new ListNode(0, null);
-		speicher = head;
+		speicher = list.head;
+		otherNode = otherList.head;
 		int size = list.size(list);
-		if (index > size)
-			return -1;
 
-		for (int i = 0; i < index; i++) {
-
-			value = speicher.getValue();
+		for (int i = 0; i < size; i++) {
 			speicher = speicher.getNext();
-
 		}
+		speicher.setNext(otherNode);
 
-		return value;
+		return list;
+
 	}
 
 	/**
@@ -424,46 +565,37 @@ public class LinkedList {
 	}
 
 	/**
+	 * Fertig
 	 * 
-	 * @param LinkedList
-	 * @return
+	 * @return String
 	 */
-	LinkedList cloneDeep(int LinkedList) {
-		return null;
-	}
-
-	/**
-	 * Vieleicht Fertig nocht testen
-	 * @param otherList
-	 * @param list
-	 * @return list
-	 */
-	LinkedList addAll(LinkedList otherList, LinkedList list) {
-		ListNode otherNode = new ListNode(0,null);
+	public String toString() {
+		String string = "";
+		boolean goOn = true;
 		ListNode speicher = new ListNode(0, null);
-		speicher = list.head;
-		otherNode = otherList.head;
-		int size = list.size(list);
+		speicher = head;
 
-		for (int i = 0; i < size; i++) {
-			speicher = speicher.getNext();
+		if (this.head == null)
+			return "Die Liste ist leer.";
+
+		while (goOn) {
+			int lustigerName = speicher.getValue();
+			string += " " + lustigerName;
+
+			if (speicher.getNext() != null)
+				speicher = speicher.getNext();
+			else
+				goOn = false;
 		}
-		speicher.setNext(otherNode);
-		
-		
-		
-		return list;
 
+		return string;
 	}
 
 	/**
-	 * @do konkateniert die aktuelle Liste mit otherList indem die Listen
-	 *     jeweils tief kopiert werden
-	 * @param otherList
-	 * @return Als Ergebnis wird die konkatenierte Liste zurÃ¼ckgegeben
+	 * Print seperator to console
 	 */
-	LinkedList concat(LinkedList otherList) {
+	private static void trenner() {
+		println("-------------------------------------");
 
-		return otherList;
 	}
 }

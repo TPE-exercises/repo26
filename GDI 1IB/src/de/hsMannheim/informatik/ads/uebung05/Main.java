@@ -1,4 +1,4 @@
-package blatt6;
+package de.hsMannheim.informatik.ads.uebung05;
 
 import static gdi.MakeItSimple.*;
 
@@ -64,11 +64,11 @@ müssen Sie sich einen sinnvollen überlegen.
 
 public class Main {
 
-	private static LinkedList list;
+	private static MyLinkedList list;
 
 	public static void main(String[] args) {
 
-		list = new MyLinkedList();
+		LinkedList list = new LinkedList();
 
 		while (true) {
 			makeMenu();
@@ -96,10 +96,10 @@ public class Main {
 
 		switch (selection) {
 		case 1:
-			// your code here
+			
 			break;
 		case 2:
-			// your code here
+			
 			break;
 		case 3:
 			// your code here
