@@ -5,8 +5,8 @@ import static gdi.MakeItSimple.*;
 import java.awt.List;
 
 public class LinkedList implements Queue {
-	
-	public static final int MAX_QUEUE_LENGTH = 100;
+
+	public static final int MAX_QUEUE_LENGTH = Integer.MAX_VALUE;
 	private static boolean existList1 = true; // standartList1
 	private static boolean existList2 = true; // standartList2
 	private static boolean existAddAllList = false;
@@ -21,7 +21,8 @@ public class LinkedList implements Queue {
 	private static LinkedList concatList = new LinkedList();
 	private static LinkedList clonedList = new LinkedList();
 	private static LinkedList clonedDeepList = new LinkedList();
-
+	public static boolean isEntered = false;
+	public static boolean isLeaved = false;
 	static final int notFound = Integer.MIN_VALUE;
 	public ListNode head;
 
@@ -36,7 +37,7 @@ public class LinkedList implements Queue {
 		boolean runMain = true;
 
 		do {
-			println("------------------- Listen -------------------");
+			println("------------------- Verfügbare Listen -------------------");
 			if (existList1)
 				println("1: list1");
 			if (existList2)
@@ -70,13 +71,14 @@ public class LinkedList implements Queue {
 			println("14: clone(list)");
 			println("15: concat(list)");
 			println("16: cloneDeep(list)");
+			println("17: toArray");
 			println("0: end program");
 
 			int selection = readInt();
 			readLine();
 
 			LinkedList l1 = new LinkedList();
-			println("Geben sie an, welche Liste sie bearbeiten wollen.");
+			println("Geben Sie an, welche Liste sie bearbeiten wollen.");
 			int listChoise = readInt();
 			readLine();
 			switch (listChoise) {
@@ -115,12 +117,12 @@ public class LinkedList implements Queue {
 				break;
 			case 3:
 				do {
-					println("Geben Sie den Index an, an den sie einfügen wollen.");
+					println("Geben Sie den Index an, an den Sie einfügen wollen.");
 					index = readInt();
 					readLine();
 				} while (index < 0);
 
-				println("Geben Sie den Wert ein, den sie einfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
 
@@ -131,7 +133,7 @@ public class LinkedList implements Queue {
 					println("Der Wert konnte nicht hinzugefügt werden, ggf. existiert der Index nicht.");
 				break;
 			case 4:
-				println("Geben Sie den Wert ein, den sie einfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
 				boolean successfulAddedFirst = l1.addFirst(value, l1);
@@ -141,7 +143,7 @@ public class LinkedList implements Queue {
 					println("Unbekannter Fehler");
 				break;
 			case 5:
-				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
 				boolean successfulAddedLast = l1.addLast(value, l1);
@@ -282,6 +284,10 @@ public class LinkedList implements Queue {
 				clonedDeepList = l1.cloneDeep(l1);
 				existClonedDeepList = true;
 				break;
+			case 17:
+				l1.toArray(l1);
+				existArray = true;
+				break;
 			case 0:
 				runMain = false;
 				println("--> Programm beendet <--");
@@ -300,7 +306,7 @@ public class LinkedList implements Queue {
 	 * 
 	 * @return LinkedList
 	 */
-	 static  LinkedList empty() {
+	static LinkedList empty() {
 		LinkedList list = new LinkedList();
 
 		return list;
@@ -338,7 +344,7 @@ public class LinkedList implements Queue {
 			return false;
 		if (head.getValue() == element) {
 			list.removeFirst(list);
-			return false;
+			return true;
 		}
 		for (int i = 0; i < list.size(list); i++) {
 			if (element == savedNode.getValue()) {
@@ -573,16 +579,18 @@ public class LinkedList implements Queue {
 		saveNode = head;
 		previusNode = head;
 
-		if (index > list.size(list) || index < 0) {
-			return false;
-		}
-
 		if (index == 0) {
 			list.addFirst(element, list);
 			return true;
 		}
-
-		for (int i = 0; i < index; i++) {
+		if (index == list.size(list)) {
+			list.addLast(element, list);
+			return true;
+		}
+		if (index > list.size(list) || index < 0) {
+			return false;
+		}
+		for (int i = 0; i <= index; i++) {
 
 			previusNode = saveNode;
 			saveNode = saveNode.getNext();
@@ -716,27 +724,38 @@ public class LinkedList implements Queue {
 		println("-------------------------------------");
 
 	}
-/**
- * 
- * @param element
- * @param list
- * @return
- */
+
+	/**
+	 * 
+	 * @param element
+	 * @param list
+	 * @return
+	 */
 	@Override
 	public LinkedList enter(int element, LinkedList list) {
-		if (list.size(list) >= MAX_QUEUE_LENGTH){
-			println("Die Warteschlange (Queue) ist voll und somit kann kein weiteres Element hinzugefügt werden."); 
+		if (list.size(list) >= MAX_QUEUE_LENGTH) {
+			println("Die Warteschlange (Queue) ist voll und somit kann kein weiteres Element hinzugefügt werden.");
+			isEntered = false;
 			return list;
-		}else{
+		} else {
 			list.addLast(element, list);
+			println("size: " + list.size(list));
+			isEntered = true;
 			return list;
 		}
 	}
 
 	@Override
 	public LinkedList leave(LinkedList list) {
+		if (list.size(list)== 0) {
+			println("Die Warteschlange (Queue) ist leer und somit kann kein Element entfernt werden.");
+			isLeaved = false;
+			return list;
+		} else {
 		list.removeFirst(list);
+		isLeaved = true;
 		return list;
+		}
 	}
 
 	@Override

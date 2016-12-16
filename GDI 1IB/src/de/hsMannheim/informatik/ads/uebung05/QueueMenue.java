@@ -14,6 +14,7 @@ public class QueueMenue {
 		LinkedList QueueOfLinkedlist = queue.emptyQueue();
 		boolean menue = true;
 		while (menue){
+
 		println("------------------- Menue -------------------");
 		println("1: Print Queue");
 		println("2: Enter a new Element to the Queue (enter)");
@@ -34,18 +35,14 @@ public class QueueMenue {
 			println("Geben Sie den Wert ein, den sie eimfügen wollen.");
 			int value = readInt();
 			readLine();
-			boolean successfulAddedLast = QueueOfLinkedlist.addLast(value, QueueOfLinkedlist);
-			if (successfulAddedLast)
+			QueueOfLinkedlist = QueueOfLinkedlist.enter(value, QueueOfLinkedlist);
+			if (LinkedList.isEntered)
 				println("Wert " + value + " an letzter Stelle eingefügt.");
-			else
-				println("Unbekannter Fehler");
 			break;
 		case 3:// removeFirst / leave
-			boolean successfulRemovedFirst = QueueOfLinkedlist.removeFirst(QueueOfLinkedlist);
-			if (successfulRemovedFirst)
+			QueueOfLinkedlist = QueueOfLinkedlist.leave(QueueOfLinkedlist);
+			if (LinkedList.isLeaved)
 				println("[removeFirst]");
-			else
-				println("Wert konnte nicht gelöscht werden, ggf. existiert er nicht.");
 			break;
 		case 4:// getFirst / front
 			int thisValue = QueueOfLinkedlist.getFirst(QueueOfLinkedlist);
@@ -57,6 +54,7 @@ public class QueueMenue {
 		case 5://isEmpty
 			boolean isEmpty = QueueOfLinkedlist.isEmpty(QueueOfLinkedlist);
 			println(" Die Queue ist Empty : " + isEmpty );
+			break;
 		case 6:
 			menue = false;
 			break;
