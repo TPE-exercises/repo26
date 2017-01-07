@@ -4,20 +4,25 @@ import static gdi.MakeItSimple.*;
 
 import java.awt.List;
 
-public class LinkedList {
+public class LinkedList implements Queue {
 
+	public static final int MAX_QUEUE_LENGTH = Integer.MAX_VALUE;
 	private static boolean existList1 = true; // standartList1
 	private static boolean existList2 = true; // standartList2
 	private static boolean existAddAllList = false;
 	private static boolean existConcatList = false;
 	private static boolean existClonedList = false;
+	private static boolean existClonedDeepList = false;
+
 	private static boolean existArray = false;
 	private static LinkedList list1 = new LinkedList();
 	private static LinkedList list2 = new LinkedList();
 	private static LinkedList addAllList = new LinkedList();
 	private static LinkedList concatList = new LinkedList();
 	private static LinkedList clonedList = new LinkedList();
-
+	private static LinkedList clonedDeepList = new LinkedList();
+	public static boolean isEntered = false;
+	public static boolean isLeaved = false;
 	static final int notFound = Integer.MIN_VALUE;
 	public ListNode head;
 
@@ -32,21 +37,23 @@ public class LinkedList {
 		boolean runMain = true;
 
 		do {
-			println("------------------- Listen -------------------");
+			println("------------------- Verfügbare Listen -------------------");
 			if (existList1)
-				println("list1");
-			if(existList2)
-				println("list2");
+				println("1: list1");
+			if (existList2)
+				println("2: list2");
 			if (existClonedList)
-				println("ClonedList ");
+				println("3: ClonedList ");
+			if (existClonedDeepList)
+				println("4: ClonedDeepList ");
 			if (existAddAllList)
-				println("AddAllList ");
+				println("5: AddAllList ");
 			if (existConcatList)
-				println("ConcatList");
+				println("6: ConcatList");
 			if (existArray)
-				println("Array");
+				println("7: Array");
 			println();
-			
+
 			println("------------------- Menue -------------------");
 			println("1: Print List");
 			println("2: Print size of the list");
@@ -64,29 +71,36 @@ public class LinkedList {
 			println("14: clone(list)");
 			println("15: concat(list)");
 			println("16: cloneDeep(list)");
+			println("17: toArray");
 			println("0: end program");
 
 			int selection = readInt();
 			readLine();
 
 			LinkedList l1 = new LinkedList();
-			println("Geben sie an, welche Liste sie bearbeiten wollen.");
-			String listChoise = readLine();
+			println("Geben Sie an, welche Liste sie bearbeiten wollen.");
+			int listChoise = readInt();
+			readLine();
 			switch (listChoise) {
-			case "list1":
+			case 1:
 				l1 = list1;
 				break;
-			case "list2":
+			case 2:
 				l1 = list2;
 				break;
-			case "addAllList":
+			case 3:
+				l1 = clonedList;
+
+				break;
+			case 4:
+				l1 = clonedDeepList;
+
+				break;
+			case 5:
 				l1 = addAllList;
 				break;
-			case "concatList":
+			case 6:
 				l1 = concatList;
-				break;
-			case "clonedList":
-				l1 = clonedList;
 				break;
 			default:
 				println("falsche eingabe");
@@ -103,12 +117,12 @@ public class LinkedList {
 				break;
 			case 3:
 				do {
-					println("Geben Sie den Index an, an den sie einfügen wollen.");
+					println("Geben Sie den Index an, an den Sie einfügen wollen.");
 					index = readInt();
 					readLine();
 				} while (index < 0);
 
-				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
 
@@ -119,96 +133,160 @@ public class LinkedList {
 					println("Der Wert konnte nicht hinzugefügt werden, ggf. existiert der Index nicht.");
 				break;
 			case 4:
-				println("Geben Sie den Wert ein, den sie einfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
-				boolean successfulAddedFirst = list1.addFirst(value, list1);
+				boolean successfulAddedFirst = l1.addFirst(value, l1);
 				if (successfulAddedFirst)
 					println("Wert " + value + " an erster Stelle eingefügt.");
 				else
 					println("Unbekannter Fehler");
 				break;
 			case 5:
-				println("Geben Sie den Wert ein, den sie eimfügen wollen.");
+				println("Geben Sie den Wert ein, den Sie einfügen wollen.");
 				value = readInt();
 				readLine();
-				boolean successfulAddedLast = list1.addLast(value, list1);
+				boolean successfulAddedLast = l1.addLast(value, l1);
 				if (successfulAddedLast)
 					println("Wert " + value + " an letzter Stelle eingefügt.");
 				else
 					println("Unbekannter Fehler");
 				break;
 			case 6:
+				println("Geben Sie an, welche Liste, ihrer hinzugefügt werden soll.");
+				LinkedList l2 = new LinkedList();
+				listChoise = readInt();
+				readLine();
+				switch (listChoise) {
+				case 1:
+					l2 = list1;
+					break;
+				case 2:
+					l2 = list2;
+					break;
+				case 3:
+					l2 = clonedList;
 
-				// list.addAll(otherList, list);
+					break;
+				case 4:
+					l2 = clonedDeepList;
+
+					break;
+				case 5:
+					l2 = addAllList;
+					break;
+				case 6:
+					l2 = concatList;
+					break;
+				default:
+					println("falsche eingabe");
+
+				}
+				addAllList = l1.addAll(l2, l1);
+				existAddAllList = true;
 				break;
-			case 7:
+			case 7:// get
 				do {
 					println("Geben Sie den Index an");
 					index = readInt();
 					readLine();
 				} while (index < 0);
-				int thisValue = list1.get(index, list1);
+
+				int thisValue = l1.get(index, l1);
 				if (thisValue == notFound)
 					println("An ihrem angegebenen Index (" + index + ") befindet sich kein Element.");
 				else
 					println("Der Wert an IndexStelle " + index + " ist " + thisValue);
 				break;
-			case 8:
-				thisValue = list1.getFirst(list1);
+			case 8:// getFirst
+				thisValue = l1.getFirst(l1);
 				if (thisValue == notFound)
 					println("An der ersten Stelle befindet sich kein Element.");
 				else
 					println("Der erste Wert in der Liste ist:" + thisValue);
 				break;
-			case 9:
-				thisValue = list1.getLast(list1);
+			case 9:// getLast
+				thisValue = l1.getLast(l1);
 				if (thisValue == notFound)
 					println("In der Liste befinden sich keine Elemente.");
 				else
 					println("Der letzte Wert in der Liste ist: " + thisValue);
 				break;
-			case 10:
-				boolean successfulRemovedFirst = list1.removeFirst(list1);
+			case 10:// removeFirst
+				boolean successfulRemovedFirst = l1.removeFirst(l1);
 				if (successfulRemovedFirst)
 					println("[removeFirst]");
 				else
 					println("Wert konnte nicht gelöscht werden, ggf. existiert er nicht.");
 				break;
-			case 11:
-				boolean successfulRemovedLast = list1.removeLast(list1);
+			case 11:// removeLast
+				boolean successfulRemovedLast = l1.removeLast(l1);
 				if (successfulRemovedLast)
 					println("[removeLast]");
 				else
 					println("Wert konnte nicht gelöscht werden, ggf. existiert er nicht.");
 
 				break;
-			case 12:
-				boolean successfulCleared = list1.clear(list1);
+			case 12:// clear
+				boolean successfulCleared = l1.clear(l1);
 				if (successfulCleared)
 					println("[clearList]");
 				else
 					println("Liste konnte nicht gecleared werden, ggf ist sie schon leer.");
 				break;
-			case 13:
+			case 13:// delete
 				println("Geben Sie den Wert ein, den Sie löschen möchten.");
 				value = readInt();
 				readLine();
-				boolean deleteSuccesful = list1.delete(value, list1);
+				boolean deleteSuccesful = l1.delete(value, l1);
 				if (deleteSuccesful)
 					println("Wert " + value + " gelöscht.");
 				else
 					println("Wert konnte nicht gelöscht werden. Ggf. ist er nicht vorhanden.");
 				break;
-			case 14:
-				clonedList=l1.clone(l1);
+			case 14:// clone
+				clonedList = l1.clone(l1);
 				existClonedList = true;
-				
-				
 				break;
-			case 15:
+			case 15:// concat
+				println("Geben Sie an, mit welcher Liste, ihre konkateniert werden soll.");
+				l2 = new LinkedList();
+				listChoise = readInt();
+				readLine();
+				switch (listChoise) {
+				case 1:
+					l2 = list1;
+					break;
+				case 2:
+					l2 = list2;
+					break;
+				case 3:
+					l2 = clonedList;
+
+					break;
+				case 4:
+					l2 = clonedDeepList;
+
+					break;
+				case 5:
+					l2 = addAllList;
+					break;
+				case 6:
+					l2 = concatList;
+					break;
+				default:
+					println("falsche eingabe");
+				}
+				concatList = l1.concat(l2, l1);
+				existConcatList = true;
 				break;
 			case 16:
+				clonedDeepList = l1.cloneDeep(l1);
+				existClonedDeepList = true;
+				break;
+			case 17:
+				l1.toArray(l1);
+				existArray = true;
 				break;
 			case 0:
 				runMain = false;
@@ -224,21 +302,21 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
+	 * creates a new empty list
 	 * 
 	 * @return LinkedList
 	 */
-	LinkedList empty() {
+	static LinkedList empty() {
 		LinkedList list = new LinkedList();
 
 		return list;
 	}
 
 	/**
-	 * Fertig
+	 * clears a list
 	 * 
 	 * @param list
-	 * @return boolean successful cleared list
+	 * @return boolean (successful cleared list)
 	 */
 	boolean clear(LinkedList list) {
 		ListNode head = null;
@@ -249,7 +327,7 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig, wenn element an erster Stelle, rufe removeFirst auf
+	 * deletes the first element with the value
 	 * 
 	 * @param value
 	 * @param list
@@ -266,7 +344,7 @@ public class LinkedList {
 			return false;
 		if (head.getValue() == element) {
 			list.removeFirst(list);
-			return false;
+			return true;
 		}
 		for (int i = 0; i < list.size(list); i++) {
 			if (element == savedNode.getValue()) {
@@ -282,12 +360,10 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig, check size, if size == 0, list is empty
-	 * 
 	 * @param LinkedList
-	 * @return
+	 * @return boolen (true if empty)
 	 */
-	boolean isEmpty(LinkedList list) {
+	public boolean isEmpty(LinkedList list) {
 		if (list.size(list) == 0)
 			return true;
 		else
@@ -295,7 +371,7 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
+	 * check if value is in list
 	 * 
 	 * @param element
 	 * @param list
@@ -314,10 +390,8 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param list
-	 * @return
+	 * @return int (size of list)
 	 */
 	int size(LinkedList list) {
 		int zaehler = 0;
@@ -341,7 +415,7 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
+	 * (not deep) clones a list
 	 * 
 	 * @param list
 	 * @return newlist
@@ -353,7 +427,7 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
+	 * clones a list deep
 	 * 
 	 * @param list
 	 * @return newList
@@ -376,10 +450,10 @@ public class LinkedList {
 	}
 
 	/**
-	 * @do konkateniert die aktuelle Liste mit otherList indem die Listen
-	 *     jeweils tief kopiert werden
+	 * clones two lists deep, than addAll
+	 * 
 	 * @param otherList
-	 * @return Als Ergebnis wird die konkatenierte Liste zurÃ¼ckgegeben
+	 * @return newList
 	 */
 	LinkedList concat(LinkedList otherList, LinkedList list) {
 		LinkedList list1 = list.cloneDeep(list);
@@ -391,13 +465,11 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param index
 	 * @param list
-	 * @return value (-1 if index not in List)
+	 * @return value
 	 * @exception index
-	 *                not in List
+	 *                not in List returns Integer.MIN_VALUE
 	 */
 	int get(int index, LinkedList list) {
 		int value = 0;
@@ -411,17 +483,15 @@ public class LinkedList {
 
 			value = speicher.getValue();
 			speicher = speicher.getNext();
-
 		}
-
 		return value;
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param LinkedList
 	 * @return value
+	 * @exception no
+	 *                first element returns Integer.MIN_VALUE
 	 */
 	int getFirst(LinkedList list) {
 
@@ -432,10 +502,10 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param LinkedList
 	 * @return Value
+	 * @exception no
+	 *                last element returns Integer.MIN_VALUE
 	 */
 	int getLast(LinkedList list) {
 		int value = notFound;
@@ -452,10 +522,8 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param list
-	 * @return boolean successful removed
+	 * @return boolean (successful removed)
 	 */
 	boolean removeFirst(LinkedList list) {
 
@@ -466,10 +534,8 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param list
-	 * @return boolean successful removed
+	 * @return boolean (successful removed)
 	 */
 	boolean removeLast(LinkedList list) {
 
@@ -499,14 +565,12 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param index
 	 * @param element
 	 * @param list
 	 * @return boolean successful added
-	 * @exception fehlerhafter
-	 *                indexwert returns false
+	 * @exception if
+	 *                index not reachable return false
 	 */
 	boolean add(int index, int element, LinkedList list) {
 		ListNode node = new ListNode(element, null);
@@ -515,16 +579,18 @@ public class LinkedList {
 		saveNode = head;
 		previusNode = head;
 
-		if (index > list.size(list) || index < 0) {
-			return false;
-		}
-
 		if (index == 0) {
 			list.addFirst(element, list);
 			return true;
 		}
-
-		for (int i = 0; i < index; i++) {
+		if (index == list.size(list)) {
+			list.addLast(element, list);
+			return true;
+		}
+		if (index > list.size(list) || index < 0) {
+			return false;
+		}
+		for (int i = 0; i <= index; i++) {
 
 			previusNode = saveNode;
 			saveNode = saveNode.getNext();
@@ -537,11 +603,10 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
 	 * 
 	 * @param element
 	 * @param list
-	 * @return boolean successful added
+	 * @return boolean (successful added)
 	 */
 	boolean addFirst(int element, LinkedList list) {
 
@@ -552,11 +617,9 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param element
 	 * @param list
-	 * @return boolean successful added
+	 * @return boolean (successful added)
 	 */
 	boolean addLast(int element, LinkedList list) {
 		ListNode node = new ListNode(element, null);
@@ -581,7 +644,6 @@ public class LinkedList {
 	}
 
 	/**
-	 * Vieleicht Fertig nocht testen
 	 * 
 	 * @param otherList
 	 * @param list
@@ -594,6 +656,11 @@ public class LinkedList {
 		otherNode = otherList.head;
 		int size = list.size(list);
 
+		if (size == 0) {
+			list.head = otherList.head;
+			return list;
+		}
+
 		for (int i = 0; i < size - 1; i++) {
 			speicher = speicher.getNext();
 
@@ -605,8 +672,6 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @param list
 	 * @return array int[]
 	 */
@@ -628,8 +693,6 @@ public class LinkedList {
 	}
 
 	/**
-	 * Fertig
-	 * 
 	 * @return String
 	 */
 	public String toString() {
@@ -657,8 +720,54 @@ public class LinkedList {
 	/**
 	 * Print seperator to console
 	 */
-	private static void trenner() {
+	public static void trenner() {
 		println("-------------------------------------");
 
+	}
+
+	/**
+	 * 
+	 * @param element
+	 * @param list
+	 * @return
+	 */
+	@Override
+	public LinkedList enter(int element, LinkedList list) {
+		if (list.size(list) >= MAX_QUEUE_LENGTH) {
+			println("Die Warteschlange (Queue) ist voll und somit kann kein weiteres Element hinzugefügt werden.");
+			isEntered = false;
+			return list;
+		} else {
+			list.addLast(element, list);
+			println("size: " + list.size(list));
+			isEntered = true;
+			return list;
+		}
+	}
+
+	@Override
+	public LinkedList leave(LinkedList list) {
+		if (list.size(list)== 0) {
+			println("Die Warteschlange (Queue) ist leer und somit kann kein Element entfernt werden.");
+			isLeaved = false;
+			return list;
+		} else {
+		list.removeFirst(list);
+		isLeaved = true;
+		return list;
+		}
+	}
+
+	@Override
+	public int front(LinkedList list) {
+		int element = list.getFirst(list);
+		return element;
+	}
+
+	@Override
+	public LinkedList emptyQueue() {
+		LinkedList list = new LinkedList();
+
+		return list;
 	}
 }
