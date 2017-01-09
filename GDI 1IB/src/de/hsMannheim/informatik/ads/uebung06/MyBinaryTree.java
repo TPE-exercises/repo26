@@ -77,7 +77,8 @@ public class MyBinaryTree implements BinaryTree {
 	/**
 	 * Fügt alle Elemente des übergebenen Baums (otherTree) in den aktuellen Baum ein.
 	 */
-	addAll(BinaryTree otherTree){
+	public boolean addAll(BinaryTree otherTree){
+		return false;
 		
 	}
 	
@@ -126,6 +127,7 @@ public class MyBinaryTree implements BinaryTree {
 	 * @return
 	 */
 	BinaryTree empty (){
+		return null;
 		
 	}
 
@@ -133,5 +135,6 @@ public class MyBinaryTree implements BinaryTree {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }

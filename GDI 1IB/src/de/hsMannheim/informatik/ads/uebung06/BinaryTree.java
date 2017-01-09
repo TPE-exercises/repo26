@@ -50,7 +50,7 @@ public interface BinaryTree {
 	/**
 	 * Fugt alle Elemente des übergebenen Baums (otherTree) in den aktuellen Baum ein.
 	 */
-	addAll(BinaryTree otherTree);
+	boolean addAll(BinaryTree otherTree);
 
 	/**
 	 * Gibt Baum in Inorder aus.
