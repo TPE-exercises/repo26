@@ -23,8 +23,12 @@ public class DateImplementation implements Date {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		DateImplementation name = new DateImplementation(29, 2, 2016);
+//		println(name.toString());
+		DateImplementation name2 = new DateImplementation(10, 1, 2017);
+		println((name.differenceInDays(name2)));
+//		println(name.add(365));
+		
 	}
 
 	@Override
@@ -135,7 +139,7 @@ public class DateImplementation implements Date {
 			break;
 		case (2):
 			monthDays = 28;
-			if ((year - 1900) % 4 == 0)
+			if ((year - 1900) % 4 == 0 && year % 400 == 0)
 				monthDays += 1;
 			break;
 		case (3):
