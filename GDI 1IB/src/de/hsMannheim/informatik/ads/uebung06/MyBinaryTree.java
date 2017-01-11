@@ -2,6 +2,8 @@ package de.hsMannheim.informatik.ads.uebung06;
 
 import static gdi.MakeItSimple.*;
 
+import gdi.MakeItSimple.GDIException;
+
 public class MyBinaryTree implements BinaryTree {
 	public static TreeNode root;
 	private static MyBinaryTree tree = new MyBinaryTree();
@@ -56,7 +58,14 @@ public class MyBinaryTree implements BinaryTree {
 
 				break;
 			case (2): // insert (file)
-				// _______________________________________________________________________<--
+				print("Geben Sie den Dateinamen ein: ");
+				String filename = readLine();
+				
+				if(tree.insert(filename))
+					println("Werte aus der Datei wurden eingefügt");
+				else
+					println("Werte aus der Datei wurden nicht eingefügt");
+				
 				separator();
 				break;
 			case (3): // contains
@@ -174,8 +183,22 @@ public class MyBinaryTree implements BinaryTree {
 	 * Fügt die int-Werte, die in der Datei stehen in den Baum ein.
 	 */
 	public boolean insert(String filename) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		if (isFilePresent(filename)) {
+			Object datei = openInputFile(filename);
+
+			while( !isEndOfInputFile(datei)){
+				int val = readInt(datei);
+				tree.insert(val);
+			}
+
+			closeInputFile(datei);
+			return true; 
+		}
+		else
+			return false;
+		
+		
 	}
 
 	/**
