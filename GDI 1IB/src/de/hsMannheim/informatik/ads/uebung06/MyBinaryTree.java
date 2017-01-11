@@ -7,7 +7,12 @@ import gdi.MakeItSimple.GDIException;
 public class MyBinaryTree implements BinaryTree {
 	public static TreeNode root;
 	private static MyBinaryTree tree = new MyBinaryTree();
+	private static MyBinaryTree otherTree = new MyBinaryTree();
+
 	private static MyBinaryTree cloneTree = new MyBinaryTree();
+	static int inserts = 0;
+	int height = 0;
+	int size = 0;
 
 	MyBinaryTree() {
 		root = null;
@@ -15,6 +20,10 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	public static void main(String[] args) {
+		// otherTree.insert(10);
+		// otherTree.insert(5);
+		// otherTree.insert(15);
+		// otherTree.insert(16);
 
 		boolean done = false;
 		while (!done) {
@@ -48,9 +57,7 @@ public class MyBinaryTree implements BinaryTree {
 				readLine();
 				boolean succses = false;
 
-				succses = tree.insert(val);
-
-				if (succses)
+				if (tree.insert(val))
 					println("Der Wert " + val + " wurde erfolgreich eingefügt.");
 				else
 					println("Der Wert " + val + " wurde nicht eingefügt.");
@@ -60,12 +67,12 @@ public class MyBinaryTree implements BinaryTree {
 			case (2): // insert (file)
 				print("Geben Sie den Dateinamen ein: ");
 				String filename = readLine();
-				
-				if(tree.insert(filename))
-					println("Werte aus der Datei wurden eingefügt");
+
+				if (tree.insert(filename))
+					println(inserts + " Werte aus der Datei wurden eingefügt");
 				else
 					println("Werte aus der Datei wurden nicht eingefügt");
-				
+
 				separator();
 				break;
 			case (3): // contains
@@ -81,11 +88,11 @@ public class MyBinaryTree implements BinaryTree {
 
 				break;
 			case (4): // size
-				// _______________________________________________________________________<--
+				println("Der Baum hat eine größe von " + tree.size());
 				separator();
 				break;
 			case (5): // hight
-				// _______________________________________________________________________<--
+				println("Der Baum hat eine höhe von " + tree.height());
 				separator();
 				break;
 			case (6): // getMax
@@ -116,7 +123,12 @@ public class MyBinaryTree implements BinaryTree {
 				separator();
 				break;
 			case (10): // addAll
-				// _______________________________________________________________________<--
+				println("Der Baum \"otherTree\" wurde bereits mit den Werten \"10\", \"5\", \"15\" und \"16\" belegt.");
+				println("Dieser Baum wird nun in \"tree\" eingefügt.");
+				if (tree.addAll(otherTree))
+					println(inserts + " Werte aus dem Baum \"otherTree\" wurden eingefügt.");
+				else
+					println("Der Baum \"otherTree\" konnte nicht eingefügt werden.");
 				separator();
 				break;
 			case (11): // printInorder
@@ -183,22 +195,22 @@ public class MyBinaryTree implements BinaryTree {
 	 * Fügt die int-Werte, die in der Datei stehen in den Baum ein.
 	 */
 	public boolean insert(String filename) {
-		
+
 		if (isFilePresent(filename)) {
+			inserts = 0;
 			Object datei = openInputFile(filename);
 
-			while( !isEndOfInputFile(datei)){
+			while (!isEndOfInputFile(datei)) {
 				int val = readInt(datei);
-				tree.insert(val);
+				if (tree.insert(val))
+					inserts++;
 			}
 
 			closeInputFile(datei);
-			return true; 
-		}
-		else
+			return true;
+		} else
 			return false;
-		
-		
+
 	}
 
 	/**
@@ -226,16 +238,79 @@ public class MyBinaryTree implements BinaryTree {
 	 * Ermittelt die Anzahl der Knoten im Baum.
 	 */
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		TreeNode node = root;
+		size = 0;
+
+		if (node != null) {
+			size++;
+			if (node.getLeft() != null) {
+				tree.size(node.getLeft());
+				size++;
+			}
+
+			if (node.getRight() != null) {
+				tree.size(node.getRight());
+				size++;
+			}
+
+			return size;
+		} else
+			return 0;
+	}
+
+	private void size(TreeNode node) {
+		if (node != null) {
+			if (node.getLeft() != null) {
+				tree.size(node.getLeft());
+				size++;
+			}
+
+			if (node.getRight() != null) {
+				tree.size(node.getRight());
+				size++;
+			}
+		}
 	}
 
 	/**
 	 * Ermittelt die Höhe des Baums.
 	 */
 	public int height() {
-		// TODO Auto-generated method stub
-		return 0;
+		TreeNode node = root;
+		height = 0;
+		if (node != null) {
+			height++;
+			if (node.getLeft() != null) {
+				tree.maxHight(node.getLeft(), 2);
+
+			}
+
+			if (node.getRight() != null) {
+				tree.maxHight(node.getRight(), 2);
+
+			}
+
+			return height;
+		} else
+			return 0;
+	}
+
+	private void maxHight(TreeNode node, int level) {
+
+		if (level > height)
+			height++;
+
+		if (node.getLeft() != null) {
+			tree.maxHight(node.getLeft(), level + 1);
+
+		}
+
+		if (node.getRight() != null) {
+			tree.maxHight(node.getRight(), level + 1);
+
+		}
+
 	}
 
 	/**
@@ -273,7 +348,7 @@ public class MyBinaryTree implements BinaryTree {
 	 */
 	public boolean remove(int val) {
 		TreeNode parent = null;
-		TreeNode child = root;
+		TreeNode child = tree.root;
 		TreeNode help = null;
 		TreeNode helpParent = null;
 		boolean walkLeft = false;
@@ -283,8 +358,7 @@ public class MyBinaryTree implements BinaryTree {
 			while (child != null) {
 
 				if (child.getValue() == val) {
-					// Suche einzufügenden Node
-					// ERR keine getLeft
+
 					if (child.getLeft() != null) {
 						help = child.getLeft();
 						while (help.getRight() != null) {
@@ -306,11 +380,16 @@ public class MyBinaryTree implements BinaryTree {
 						if (walkLeft)
 							parent.setLeft(help);
 						else
+
 							parent.setRight(help);
 
 						return true;
-					}else{
-						parent.setRight(child.getRight());
+					} else {
+						if (child.getRight() != null)
+							parent.setRight(child.getRight());
+						else
+							child = null;
+
 					}
 				} else if (child.getValue() > val) {
 					parent = child;
@@ -322,10 +401,11 @@ public class MyBinaryTree implements BinaryTree {
 					walkLeft = false;
 				}
 			}
-			return false;
 
+			return false;
 		} else
 			return false;
+
 	}
 
 	/**
@@ -344,7 +424,40 @@ public class MyBinaryTree implements BinaryTree {
 	 * Baum ein.
 	 */
 	public boolean addAll(BinaryTree otherTree) {
-		return false;
+		inserts = 0;
+		TreeNode node = otherTree.root;
+
+		if (node != null) {
+			if (tree.insert(node.getValue()))
+				inserts++;
+
+			if (node.getLeft() != null) {
+				tree.addAll(node.getLeft());
+			}
+
+			if (node.getRight() != null) {
+				tree.addAll(node.getRight());
+			}
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	private void addAll(TreeNode node) {
+
+		if (node != null) {
+			if (tree.insert(node.getValue()))
+				inserts++;
+
+			if (node.getLeft() != null) {
+				tree.addAll(node.getLeft());
+			}
+
+			if (node.getRight() != null) {
+				tree.addAll(node.getRight());
+			}
+		}
 
 	}
 
@@ -403,16 +516,16 @@ public class MyBinaryTree implements BinaryTree {
 
 		return cloneTree;
 	}
-	
-	public void cloneDeep(TreeNode node){
-		
+
+	public void cloneDeep(TreeNode node) {
+
 		cloneTree.insert(node.getValue());
-		
-		if(node.getLeft() != null)
+
+		if (node.getLeft() != null)
 			cloneDeep(node.getLeft());
-		if(node.getRight() != null)
+		if (node.getRight() != null)
 			cloneDeep(node.getRight());
-		
+
 	}
 
 	/**
