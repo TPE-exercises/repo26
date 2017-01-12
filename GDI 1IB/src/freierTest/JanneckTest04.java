@@ -1,78 +1,88 @@
 package freierTest;
 
-import static gdi.MakeItSimple.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JanneckTest04 {
-
-	static int[] gap = new int[] { 9, 7, 4, 1 };
-	static int[] arrayToSort = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-	static int comparerisenCounter = 0;
-	static int swaps = 0;
-
-	/**
-	 * 
-	 */
-	static void shellSort() {
-		
-		//the run-loop repeats the loop for every gap that is possible until the array is sorted
-		for (int run = 0; run < gap.length; run++) {
-
-			// sorts the array in the shell for the current gap with a insertion sort
-			int index1 = 0;
-			int index2 = index1 + gap[run];
-			for (int end = 0 + gap[run]; end < arrayToSort.length; end++) {
-				
-				//if the index1 is bigger swap it with index2 
-				comparerisenCounter++;
-				if (arrayToSort[index1] > arrayToSort[index2]) { 
-					swaps++;
-					int m = arrayToSort[index1];
-					arrayToSort[index1] = arrayToSort[index2];
-					arrayToSort[index2] = m;
-
-					//checking if the swap currently done made a previous swap incorrect 
-					//if thats true swap them and check again until the shell is sorted correctly
-					boolean smaleerSwaped = true;
-					int afterSwapIndex1 = index1 - gap[run];
-					int afterSwapIndex2 = index1;
-
-					while (smaleerSwaped && afterSwapIndex1 >= 0) {
-						
-						//if the afterSwapIndex1 is bigger swap it with afterSwapIndex2 
-						comparerisenCounter++;
-						if (arrayToSort[afterSwapIndex1] > arrayToSort[afterSwapIndex2]) {
-							swaps++;
-							m = arrayToSort[afterSwapIndex1];
-							arrayToSort[afterSwapIndex1] = arrayToSort[afterSwapIndex2];
-							arrayToSort[afterSwapIndex2] = m;
-							afterSwapIndex1 -= gap[run];
-							afterSwapIndex2 -= gap[run];
-						} 
-						else { //!(arrayToSort[afterSwapIndex1] > arrayToSort[afterSwapIndex2])
-							smaleerSwaped = false;
-						}
-					}
-					
-					index1++;
-					index2++;
-
-				} 
-				else {// !(arrayToSort[index1] > arrayToSort[index2])
-					index1++;
-					index2++;
-				}
-			}
-			
-		}
-	}
+	private static boolean PRINT = false;
+	private static boolean DEBUG = false;
 	
 	public static void main(String[] args) {
 		
-		shellSort();
-		println("Vergleiche: " + comparerisenCounter + ", Vertauschungen: " + swaps);
-		for(int i = 0; i < arrayToSort.length;i++){
-			print(arrayToSort[i] + " ");
+		//maxThreads = Integer.valueOf(args[0]);
+		
+		long timeBefore = System.nanoTime();
+		long time = System.nanoTime();
+		
+		int count = 0;
+		
+		int max = 100000000;
+		
+		numbers = new boolean[max];
+		List<Integer> numbers;
+		
+		while(true) {
+			count++;
+			
+			numbers = new ArrayList<>();
+			long timeBegin = System.nanoTime();
+			numbers = calcPrimes(max);
+			time = System.nanoTime() - timeBegin;
+			
+			if(time < timeBefore) {
+				timeBefore = time;
+				
+				System.out.println();
+				System.out.println("Count: " + count);
+				System.out.println("Time: " + ((double) time / 1000000d)+ " Milli-Sekunden");
+			
+				if(PRINT) {
+					for(int i = 0; i< numbers.size(); i++) {
+						System.out.print(numbers.get(i) + " ");
+						if(i % 100 == 0) 
+							System.out.println();
+					}
+				}
+			}
 		}
 	}
-
+	
+	private static boolean[] numbers;
+	private static int maxThreads = 5;
+	
+	private static List<Integer> calcPrimes(int max) {		
+		//true normal / marked number
+		//false deleted number
+		
+		List<Integer> primzahlen = new ArrayList<>();
+		
+		for(int i = 0; i < numbers.length; i++) {
+			numbers[i] = true;
+		}
+		
+		int squareRoot = (int) Math.sqrt(max);
+		
+		for(int i = 2; i <= squareRoot; i++) {
+			boolean boolInArray = numbers[i];
+			
+			if (boolInArray) {				
+				deleteNumber(i);				
+				primzahlen.add(i);	
+			}			
+		}
+		
+		for(int i = squareRoot + 1; i < numbers.length; i++) {
+			if(numbers[i]) {
+				primzahlen.add(i);
+			}
+		}
+		
+		return primzahlen;
+	}
+	
+	private static void deleteNumber(final int i) {
+		for(int j = i * 2; j < numbers.length; j += i) {
+			numbers[j] = false;
+		}	
+	}
 }

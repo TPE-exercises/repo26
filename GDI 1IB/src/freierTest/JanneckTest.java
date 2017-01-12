@@ -15,7 +15,7 @@ public class JanneckTest {
 		//arguments in Runconfiguration-> arguiments-> VM!!!
 		//-Xmx3G -Xms3G
 		//maxThreads = Integer.valueOf(args[0]);
-		maxThreads = 8;
+		maxThreads = 2;
 		
 		long timeBefore = System.nanoTime();
 		long time = System.nanoTime();
