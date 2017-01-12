@@ -1,82 +1,111 @@
 package freierTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static gdi.MakeItSimple.*;
 
-import gdi.MakeItSimple.GDIException;
-
 public class JanneckTest {
-//Fibunacchi
 	
-	static int a1(int n){
-		int sum = 0;
-
-		if (n < 0){
-			throw new GDIException("Ungültiger Parameter! "
-					+ "Es wird eine Zahl größer/gleich 0 erwartet!");
-		}
-		if (n == 0 || n == 1) {
-			return 1;
-		} else {
-			int[] zahlenFolge = new int[n];
-
-			int i = 0;
-			if (n >= 1)
-				zahlenFolge[i] = 1;
-			i++;
-			if (n >= 2)
-				zahlenFolge[i] = 1;
-			i++;
-			if (n >= 3)
-				while (i < n) {
-					zahlenFolge[i] = zahlenFolge[i - 2] + 
-							zahlenFolge[i - 1];
-					i++;
-				}
-			sum = zahlenFolge[n - 1] + zahlenFolge[n - 2];
-			return sum;
-		}
-	}
-
-	static int a2(int n) {
-		int a = 1;
-		int b = 1;
-		int zwischenSpeicher = 0;
-		
-		if (n < 0){
-			throw new GDIException("Ungültiger Parameter! "
-					+ "Es wird eine Zahl größer/gleich 0 erwartet!");
-		}
-		
-		while (n!=0){
-			n = n-1;
-			zwischenSpeicher = b;
-			b = a+b;
-			a = zwischenSpeicher;
-		}
-		return a;
-	}
-
+	private static boolean PRINT = false;
+	private static boolean DEBUG = false;
+	
 	public static void main(String[] args) {
-
-		println("Welchen Stelle der Fibonacci-Folge "
-				+ "wollen sie berechnen?");
-		int n = readInt();
-
-		println("Wollen sie nach A1 oder nach A2 verfahren?");
-		println("Geben sie 1 für A1 ein und 2 für A2");
-		int wahl = readInt();
-		int a;
-
-		if (wahl == 1) {
-			a=a1(n);
-		} else if (wahl == 2) {
-			a=a2(n);
-
-		} else {
-			println("Fehlerhafte eingabe");
-			return;
+		
+		//maxThreads = Integer.valueOf(args[0]);
+		maxThreads = 8;
+		
+		long timeBefore = System.nanoTime();
+		long time = System.nanoTime();
+		
+		int count = 0;
+		
+		int max = 100000000;
+		
+		numbers = new boolean[max];
+		
+		while(true) {
+			count++;
+			
+			List<Integer> numbers = new ArrayList<>();
+			long timeBegin = System.nanoTime();
+			numbers = calcPrimes(max);
+			time = System.nanoTime() - timeBegin;
+			
+			if(time < timeBefore) {
+				timeBefore = time;
+				
+				System.out.println();
+				System.out.println("Count: " + count);
+				System.out.println("Time: " + ((double) time / 1000000d)+ " Milli-Sekunden");
+			
+				if(PRINT) {
+					for(int i = 0; i< numbers.size(); i++) {
+						System.out.print(numbers.get(i) + " ");
+						if(i % 100 == 0) 
+							System.out.println();
+					}
+				}
+			}
 		}
-		println("Die Gesuchte Zahl ist: " + a);
-
 	}
+	
+	private static boolean[] numbers;
+	private static int maxThreads;
+	
+	private static List<Integer> calcPrimes(int max) {		
+		//true normal / marked number
+		//false deleted number
+		
+		List<Integer> primzahlen = new ArrayList<>();
+		
+		for(int i = 0; i < numbers.length; i++) {
+			numbers[i] = true;
+		}
+		
+		int squareRoot = (int) Math.sqrt(max);
+		
+		for(int i = 2; i <= squareRoot; i++) {
+			boolean boolInArray = numbers[i];
+			
+			if (boolInArray) {				
+				deleteNumber(i);				
+				primzahlen.add(i);				
+				
+				while(java.lang.Thread.activeCount() > maxThreads) {
+					//Wait until threads are finished
+					//System.out.println("Waiting");
+				}
+			}			
+		}
+		
+		while(java.lang.Thread.activeCount() > 1) {
+			//Wait until every thread is finished
+		}
+		
+		for(int i = squareRoot + 1; i < numbers.length; i++) {
+			if(numbers[i]) {
+				primzahlen.add(i);
+			}
+		}
+		
+		return primzahlen;
+	}
+	
+	private static void deleteNumber(final int i) {
+		
+		Thread background = new Thread ( new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				for(int j = i * 2; j < numbers.length; j += i) {
+					numbers[j] = false;
+				}	
+			}
+		});
+		
+		background.start();
+	}
+
 }
