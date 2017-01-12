@@ -12,11 +12,7 @@ private TreeNode left;
  * @param left
  */
 
-public int compareTo(int value){
-	
-	return value;
-	
-}
+
 
 	public TreeNode(int value){
 		this.value = value;

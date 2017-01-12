@@ -4,26 +4,26 @@ import static gdi.MakeItSimple.*;
 
 import gdi.MakeItSimple.GDIException;
 
-public class MyBinaryTree implements BinaryTree {
+public class MyBinaryTree implements BinaryTree {	
+	MyBinaryTree() {
+		root = null;
+	}
 	public static TreeNode root;
 	private static MyBinaryTree tree = new MyBinaryTree();
 	private static MyBinaryTree otherTree = new MyBinaryTree();
-
 	private static MyBinaryTree cloneTree = new MyBinaryTree();
+	static boolean insertSucsess = false;
+    public static int[] sortedTree;
+    public static int[] sortedTreeHeight;
+    public static int sortedTreeCounter = 0;
+    public static int nodeHeight = 1; 
 	static int inserts = 0;
 	int height = 0;
 	int size = 0;
 
-	MyBinaryTree() {
-		root = null;
 
-	}
 
 	public static void main(String[] args) {
-		// otherTree.insert(10);
-		// otherTree.insert(5);
-		// otherTree.insert(15);
-		// otherTree.insert(16);
 
 		boolean done = false;
 		while (!done) {
@@ -55,7 +55,6 @@ public class MyBinaryTree implements BinaryTree {
 				print("Geben Sie den Wert ein, den sie einfügen wollen: ");
 				int val = readInt();
 				readLine();
-				boolean succses = false;
 
 				if (tree.insert(val))
 					println("Der Wert " + val + " wurde erfolgreich eingefügt.");
@@ -132,19 +131,19 @@ public class MyBinaryTree implements BinaryTree {
 				separator();
 				break;
 			case (11): // printInorder
-				// _______________________________________________________________________<--
+				tree.printInorder();
 				separator();
 				break;
 			case (12): // printPostorder
-				// _______________________________________________________________________<--
+				tree.printPostorder();
 				separator();
 				break;
 			case (13): // printPreorder
-				// _______________________________________________________________________<--
+				tree.printPreorder();
 				separator();
 				break;
 			case (14): // printLevelorder
-				// _______________________________________________________________________<--
+				tree.printLevelorder();
 				separator();
 				break;
 			case (15): // clone (deep)
@@ -164,31 +163,41 @@ public class MyBinaryTree implements BinaryTree {
 
 	/**
 	 * Fügt val in den Baum ein.
+	 * 
+	 * @return
 	 */
+
 	public boolean insert(int val) {
+		insertSucsess = false;
+		root = insertRec(root, val);
 
-		TreeNode parent = null;
-		TreeNode child = root;
+		if (insertSucsess)
+			return true;
+		else
+			return false;
+	}
 
-		while (child != null) {
-			parent = child;
-			if (child.getValue() == val)
-				return false;
-			else if (child.getValue() > val)
-				child = child.getLeft();
-			else
-				child = child.getRight();
+	/**
+	 * methode only for insert(int)
+	 * 
+	 * @param node
+	 * @param val
+	 * @return
+	 */
+	private TreeNode insertRec(TreeNode node, int val) {
+
+		if (node == null) {
+			node = new TreeNode(val);
+			insertSucsess = true;
+			return node;
 		}
 
-		if (parent == null)
-			root = new TreeNode(val);
-		else if (parent.getValue() > val)
-			parent.setLeft(new TreeNode(val));
-		else
-			parent.setRight(new TreeNode(val));
+		if (val < node.getValue())
+			node.setLeft(insertRec(node.getLeft(), val));
+		else if (val > node.getValue())
+			node.setRight(insertRec(node.getRight(), val));
 
-		return true;
-
+		return node; // return false;
 	}
 
 	/**
@@ -218,11 +227,10 @@ public class MyBinaryTree implements BinaryTree {
 	 */
 	public boolean contains(int val) {
 
-		TreeNode parent = null;
 		TreeNode child = root;
 
 		while (child != null) {
-			parent = child;
+
 			if (child.getValue() == val)
 				return true;
 			else if (child.getValue() > val)
@@ -243,20 +251,10 @@ public class MyBinaryTree implements BinaryTree {
 		size = 0;
 
 		if (node != null) {
+			size(node);
 			size++;
-			if (node.getLeft() != null) {
-				tree.size(node.getLeft());
-				size++;
-			}
-
-			if (node.getRight() != null) {
-				tree.size(node.getRight());
-				size++;
-			}
-
-			return size;
-		} else
-			return 0;
+		}
+		return size;
 	}
 
 	private void size(TreeNode node) {
@@ -281,34 +279,22 @@ public class MyBinaryTree implements BinaryTree {
 		height = 0;
 		if (node != null) {
 			height++;
-			if (node.getLeft() != null) {
-				tree.maxHight(node.getLeft(), 2);
-
-			}
-
-			if (node.getRight() != null) {
-				tree.maxHight(node.getRight(), 2);
-
-			}
-
-			return height;
-		} else
-			return 0;
+			height(node, 1);
+		}
+		return height;
 	}
 
-	private void maxHight(TreeNode node, int level) {
+	private void height(TreeNode node, int level) {
 
 		if (level > height)
 			height++;
 
 		if (node.getLeft() != null) {
-			tree.maxHight(node.getLeft(), level + 1);
-
+			tree.height(node.getLeft(), level + 1);
 		}
 
 		if (node.getRight() != null) {
-			tree.maxHight(node.getRight(), level + 1);
-
+			tree.height(node.getRight(), level + 1);
 		}
 
 	}
@@ -349,10 +335,7 @@ public class MyBinaryTree implements BinaryTree {
 	public boolean remove(int val) {
 		TreeNode parent = null;
 		TreeNode child = tree.root;
-		TreeNode help = null;
-		TreeNode helpParent = null;
 		boolean walkLeft = false;
-		boolean noHelpParen = false;
 
 		if (tree.contains(val)) {
 			while (child != null) {
@@ -360,37 +343,9 @@ public class MyBinaryTree implements BinaryTree {
 				if (child.getValue() == val) {
 
 					if (child.getLeft() != null) {
-						help = child.getLeft();
-						while (help.getRight() != null) {
-							helpParent = help;
-							help = help.getRight();
-							noHelpParen = true;
-						}
-						if (!noHelpParen) {
-							child.setLeft(null);
-						} else {
-							helpParent.setRight(null);
-						}
-
-						if (child.getLeft() != null)
-							help.setLeft(child.getLeft());
-						if (child.getRight() != null)
-							help.setRight(child.getRight());
-						child = help;
-						if (walkLeft)
-							parent.setLeft(help);
-						else
-
-							parent.setRight(help);
-
-						return true;
-					} else {
-						if (child.getRight() != null)
-							parent.setRight(child.getRight());
-						else
-							child = null;
-
+						// Weiter aus OneNode
 					}
+
 				} else if (child.getValue() > val) {
 					parent = child;
 					child = child.getLeft();
@@ -462,36 +417,158 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Gibt Baum in Inorder aus.
-	 */
-	public void printInorder() {
-		// TODO Auto-generated method stub
+     * Gibt Baum in Inorder aus.
+     */
+    public void printInorder() {
+        // Check if the current node is empty / null
+        // Traverse the left subtree by recursively calling the in-order
+        // function.
+        // Display the data part of the root (or current node).
+        // Traverse the right subtree by recursively calling the in-order
+        // function.
+        TreeNode node = root;
+        if (node == null)
+            println("Hurensohn");
+        else {
+            sortedTree = new int[tree.size];
+            inorder(node);
+        }
+        String output = null;
+        while (sortedTreeCounter != 0) {
+            output += sortedTree[sortedTreeCounter];
+            sortedTreeCounter--;
+        }
+        println(output);
+    }
+    private void inorder(TreeNode node) {
+        if (node.getLeft() != null) {
+            inorder(node.getLeft());
+        }
+        sortedTree[sortedTreeCounter] = node.getValue();
+        sortedTreeCounter++;
+        if (node.getRight() != null) {
+            inorder(node.getRight());
+        }
+    }
+    /**
+     * Gibt Baum in Postorder aus.
+     */
+    public void printPostorder() {
+        // Check if the current node is empty / null
+        // Traverse the left subtree by recursively calling the post-order
+        // function.
+        // Traverse the right subtree by recursively calling the post-order
+        // function.
+        // Display the data part of the root (or current node).
+        TreeNode node = root;
+        if (node == null)
+            println("Hurensohn");
+        else {
+            sortedTree = new int[tree.size];
+            postorder(node);
+        }
+        String output = null;
+        while (sortedTreeCounter != 0) {
+            output += sortedTree[sortedTreeCounter];
+            sortedTreeCounter--;
+        }
+        println(output);
+    }
+    private void postorder(TreeNode node) {
+        if (node.getLeft() != null) {
+            inorder(node.getLeft());
+        }
+        if (node.getRight() != null) {
+            inorder(node.getRight());
+            sortedTree[sortedTreeCounter] = node.getValue();
+            sortedTreeCounter++;
+        }
+    }
+    /**
+     * Gibt Baum in Preorder aus.
+     */
+    public void printPreorder() {
+        // Check if the current node is empty / null
+        // Display the data part of the root (or current node).
+        // Traverse the left subtree by recursively calling the pre-order
+        // function.
+        // Traverse the right subtree by recursively calling the pre-order
+        // function.
+        TreeNode node = root;
+        if (node == null)
+            println("Hurensohn");
+        else {
+            sortedTree = new int[tree.size];
+            preorder(node);
+        }
+        String output = null;
+        while (sortedTreeCounter != 0) {
+            output += sortedTree[sortedTreeCounter];
+            sortedTreeCounter--;
+        }
+        println(output);
+    }
+    private void preorder(TreeNode node) {
+        sortedTree[sortedTreeCounter] = node.getValue();
+        sortedTreeCounter++;
+        if (node.getLeft() != null) {
+            inorder(node.getLeft());
+        }
+        if (node.getRight() != null) {
+            inorder(node.getRight());
+        }
+    }
+    public void currentHeight(TreeNode node) {
+        nodeHeight = 1;
+        int search = node.getValue();
+        currentHeightx(node, search);
+    }
+    private void currentHeightx(TreeNode node, int search) {
+        if (search == node.getValue())
+            nodeHeight = search;
+        if (node == null)
+            nodeHeight--;
+        else {
+            nodeHeight++;
+            currentHeightx(node.getLeft(), search);
+            nodeHeight++;
+            currentHeightx(node.getLeft(), search);
+        }
+    }
+    /**
+     * Gibt Baum in Levelorder aus.
+     */
+    public void printLevelorder() {
+        TreeNode node = root;
+        if (node == null)
+            println("Hurensohn");
+        else {
+            sortedTreeHeight = new int[tree.size];
+            sortedTree = new int[tree.size];
+            levelorder(node);
+            String output = " ";
+            for (int i = 1; i <= tree.height(); i++) {
+                for (int i2 = 1; i2 <= tree.size(); i2++) {
+                    if (i == sortedTreeHeight[i])
+                        output += sortedTree[i];
+                }
+            }
+            println();
+        }
+    }
+    private void levelorder(TreeNode node) {
+        currentHeight(node);
+        sortedTreeHeight[sortedTreeCounter] = nodeHeight;
+        sortedTree[sortedTreeCounter] = node.getValue();
+        sortedTreeCounter++;
+        if (node.getLeft() != null) {
+            inorder(node.getLeft());
+        }
+        if (node.getRight() != null) {
+            inorder(node.getRight());
+        }
+    }
 
-	}
-
-	/**
-	 * Gibt Baum in Postorder aus.
-	 */
-	public void printPostorder() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Gibt Baum in Preorder aus.
-	 */
-	public void printPreorder() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * Gibt Baum in Levelorder aus.
-	 */
-	public void printLevelorder() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Erzeugt eine tiefe Kopie des Baums.
