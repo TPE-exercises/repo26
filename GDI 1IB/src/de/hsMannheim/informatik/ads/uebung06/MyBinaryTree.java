@@ -349,47 +349,41 @@ public class MyBinaryTree implements BinaryTree {
 	public boolean remove(int val) {
 		TreeNode parent = null;
 		TreeNode child = tree.root;
-		TreeNode help = null;
-		TreeNode helpParent = null;
 		boolean walkLeft = false;
-		boolean noHelpParen = false;
 
 		if (tree.contains(val)) {
 			while (child != null) {
-
 				if (child.getValue() == val) {
 
 					if (child.getLeft() != null) {
-						help = child.getLeft();
+						TreeNode help = child.getLeft();
+						TreeNode hparent = child;
 						while (help.getRight() != null) {
-							helpParent = help;
+							hparent = help;
 							help = help.getRight();
-							noHelpParen = true;
-						}
-						if (!noHelpParen) {
-							child.setLeft(null);
-						} else {
-							helpParent.setRight(null);
 						}
 
-						if (child.getLeft() != null)
-							help.setLeft(child.getLeft());
-						if (child.getRight() != null)
-							help.setRight(child.getRight());
-						child = help;
+						if (hparent == child) {
+							child.setLeft(null);
+
+							if (child.getRight() != null)
+								help.setRight(child.getRight());
+						} else if (help.getLeft() != null)
+							hparent.setRight(child.getRight());
+						else
+							hparent.setRight(null);
 						if (walkLeft)
 							parent.setLeft(help);
 						else
-
 							parent.setRight(help);
 
-						return true;
+						
 					} else {
 						if (child.getRight() != null)
 							parent.setRight(child.getRight());
 						else
 							child = null;
-
+return true;
 					}
 				} else if (child.getValue() > val) {
 					parent = child;
