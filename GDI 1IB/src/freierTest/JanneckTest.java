@@ -12,6 +12,8 @@ public class JanneckTest {
 	
 	public static void main(String[] args) {
 		
+		//arguments in Runconfiguration-> arguiments-> VM!!!
+		//-Xmx3G -Xms3G
 		//maxThreads = Integer.valueOf(args[0]);
 		maxThreads = 8;
 		
