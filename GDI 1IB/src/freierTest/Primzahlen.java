@@ -1,35 +1,30 @@
-package freierTest;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static gdi.MakeItSimple.*;
 
-public class JanneckTest {
+public class Primzahlen {
 	
 	private static boolean PRINT = false;
 	private static boolean DEBUG = false;
 	
 	public static void main(String[] args) {
 		
-		//maxThreads = Integer.valueOf(args[0]);
-		maxThreads = 8;
+		maxThreads = Integer.valueOf(args[0]);
 		
 		long timeBefore = System.nanoTime();
 		long time = System.nanoTime();
 		
 		int count = 0;
 		
-		int max = 100000000;
-		
-		numbers = new boolean[max];
-		
 		while(true) {
 			count++;
 			
 			List<Integer> numbers = new ArrayList<>();
 			long timeBegin = System.nanoTime();
-			numbers = calcPrimes(max);
+			numbers = calcPrimes(100000000);
 			time = System.nanoTime() - timeBegin;
 			
 			if(time < timeBefore) {
@@ -50,7 +45,7 @@ public class JanneckTest {
 		}
 	}
 	
-	private static boolean[] numbers;
+	private static Boolean[] numbers;
 	private static int maxThreads;
 	
 	private static List<Integer> calcPrimes(int max) {		
@@ -58,6 +53,7 @@ public class JanneckTest {
 		//false deleted number
 		
 		List<Integer> primzahlen = new ArrayList<>();
+		numbers = new Boolean[max];
 		
 		for(int i = 0; i < numbers.length; i++) {
 			numbers[i] = true;
