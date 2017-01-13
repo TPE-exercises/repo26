@@ -2,33 +2,37 @@ package de.hsMannheim.informatik.ads.uebung06;
 
 import static gdi.MakeItSimple.*;
 
-import gdi.MakeItSimple.GDIException;
-
-public class MyBinaryTree implements BinaryTree {	
-	MyBinaryTree() {
+class MyBinaryTree {
+	public MyBinaryTree() {
 		root = null;
 	}
-	public static TreeNode root;
+
+	private TreeNode root;
 	private static MyBinaryTree tree = new MyBinaryTree();
+	private static boolean existTree = true;
 	private static MyBinaryTree otherTree = new MyBinaryTree();
+	private static boolean existOtherTree = true;
 	private static MyBinaryTree cloneTree = new MyBinaryTree();
-	static boolean insertSucsess = false;
-    public static int[] sortedTree;
-    public static int[] sortedTreeHeight;
-    public static int sortedTreeCounter = 0;
-    public static int nodeHeight = 1; 
-	static int inserts = 0;
-	int height = 0;
-	int size = 0;
-
-
+	private static boolean existCloneTree = false;
+	private static MyBinaryTree tree1 = new MyBinaryTree();
+	private static boolean insertSucsess = false;
+	private static int inserts = 0;
+	private static int height = 0;
+	private static int size = 0;
 
 	public static void main(String[] args) {
 
-		boolean done = false;
-		while (!done) {
-			println("Was wollen Sie ausführen?");
-
+		boolean runMain = true;
+		do {
+			println("------------------- Verfügbare Listen -------------------");
+			if (existTree)
+				println("1: tree");
+			if (existOtherTree)
+				println("2: otherTree");
+			if (existCloneTree)
+				println("3: cloneList ");
+			println();
+			println("------------------- Menue -------------------");
 			println("1. insert (val)");
 			println("2. insert (file)");
 			println("3. contains");
@@ -48,6 +52,25 @@ public class MyBinaryTree implements BinaryTree {
 
 			int selection = readInt();
 			readLine();
+
+			println("Geben Sie an, welchen Baum sie bearbeiten wollen.");
+			int treeChoise = readInt();
+			readLine();
+			switch (treeChoise) {
+			case 1:
+				tree1 = tree;
+				break;
+			case 2:
+				tree1 = otherTree;
+				break;
+			case 3:
+				tree1 = cloneTree;
+				break;
+			default:
+				println("falsche eingabe");
+
+			}
+
 			separator();
 			switch (selection) {
 			case (1): // Insert (val)
@@ -56,7 +79,7 @@ public class MyBinaryTree implements BinaryTree {
 				int val = readInt();
 				readLine();
 
-				if (tree.insert(val))
+				if (tree1.insert(val))
 					println("Der Wert " + val + " wurde erfolgreich eingefügt.");
 				else
 					println("Der Wert " + val + " wurde nicht eingefügt.");
@@ -67,7 +90,7 @@ public class MyBinaryTree implements BinaryTree {
 				print("Geben Sie den Dateinamen ein: ");
 				String filename = readLine();
 
-				if (tree.insert(filename))
+				if (tree1.insert(filename))
 					println(inserts + " Werte aus der Datei wurden eingefügt");
 				else
 					println("Werte aus der Datei wurden nicht eingefügt");
@@ -79,7 +102,7 @@ public class MyBinaryTree implements BinaryTree {
 				val = readInt();
 				readLine();
 
-				if (tree.contains(val))
+				if (tree1.contains(val))
 					println("Der Wert " + val + " ist im Baum");
 				else
 					println("Der Wert " + val + " ist nicht im Baum");
@@ -87,20 +110,20 @@ public class MyBinaryTree implements BinaryTree {
 
 				break;
 			case (4): // size
-				println("Der Baum hat eine größe von " + tree.size());
+				println("Der Baum hat eine größe von " + tree1.size());
 				separator();
 				break;
 			case (5): // hight
-				println("Der Baum hat eine höhe von " + tree.height());
+				println("Der Baum hat eine höhe von " + tree1.height());
 				separator();
 				break;
 			case (6): // getMax
-				println("Der höchste Wert im Baum ist: " + tree.getMax());
+				println("Der höchste Wert im Baum ist: " + tree1.getMax());
 				separator();
 
 				break;
 			case (7): // getMin
-				println("Der kleinste Wert im Baum ist: " + tree.getMin());
+				println("Der kleinste Wert im Baum ist: " + tree1.getMin());
 				separator();
 				break;
 			case (8): // remove (val)
@@ -108,52 +131,52 @@ public class MyBinaryTree implements BinaryTree {
 				val = readInt();
 				readLine();
 
-				if (tree.remove(val))
+				if (tree1.remove(val))
 					println("Der Wert " + val + " wurde entfernt");
 				else
 					println("Der Wert " + val + " ist nicht im Baum");
 				separator();
 				break;
 			case (9): // isEmpty
-				if (tree.isEmpty())
+				if (tree1.isEmpty())
 					println("Der Baum ist leer.");
 				else
 					println("Der Baum ist nicht leer");
 				separator();
 				break;
 			case (10): // addAll
-				println("Der Baum \"otherTree\" wurde bereits mit den Werten \"10\", \"5\", \"15\" und \"16\" belegt.");
-				println("Dieser Baum wird nun in \"tree\" eingefügt.");
-				if (tree.addAll(otherTree))
+				println("\"otherTree\" wird dem ausgewähltem Baum hinzugefügt.");
+				if (tree1.addAll(otherTree))
 					println(inserts + " Werte aus dem Baum \"otherTree\" wurden eingefügt.");
 				else
 					println("Der Baum \"otherTree\" konnte nicht eingefügt werden.");
 				separator();
 				break;
 			case (11): // printInorder
-				tree.printInorder();
+				tree1.printInorder();
 				separator();
 				break;
 			case (12): // printPostorder
-				tree.printPostorder();
+				tree1.printPostorder();
 				separator();
 				break;
 			case (13): // printPreorder
-				tree.printPreorder();
+				tree1.printPreorder();
 				separator();
 				break;
 			case (14): // printLevelorder
-				tree.printLevelorder();
+				tree1.printLevelorder();
 				separator();
 				break;
 			case (15): // clone (deep)
-				tree.clone();
+				tree1.clone();
+				existCloneTree = true;
 				separator();
 				break;
 			case (0):
-				done = true;
+				runMain = false;
 			}
-		}
+		} while (runMain);
 
 	}
 
@@ -162,9 +185,11 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Fügt val in den Baum ein.
+	 * inserts val in tree
 	 * 
-	 * @return
+	 * @param int
+	 *            val
+	 * @return boolean succsessfull inserted
 	 */
 
 	public boolean insert(int val) {
@@ -180,9 +205,11 @@ public class MyBinaryTree implements BinaryTree {
 	/**
 	 * methode only for insert(int)
 	 * 
-	 * @param node
-	 * @param val
-	 * @return
+	 * @param TreeNode
+	 *            node
+	 * @param int
+	 *            val
+	 * @return TreeNode
 	 */
 	private TreeNode insertRec(TreeNode node, int val) {
 
@@ -201,7 +228,11 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Fügt die int-Werte, die in der Datei stehen in den Baum ein.
+	 * Inserts Values from file
+	 * 
+	 * @param String
+	 *            filename
+	 * @return boolean
 	 */
 	public boolean insert(String filename) {
 
@@ -211,7 +242,7 @@ public class MyBinaryTree implements BinaryTree {
 
 			while (!isEndOfInputFile(datei)) {
 				int val = readInt(datei);
-				if (tree.insert(val))
+				if (tree1.insert(val))
 					inserts++;
 			}
 
@@ -223,7 +254,11 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Testet, ob val im Baum vorhanden ist.
+	 * Test if val is in the tree
+	 * 
+	 * @param int
+	 *            val
+	 * @return boolean
 	 */
 	public boolean contains(int val) {
 
@@ -243,7 +278,9 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Ermittelt die Anzahl der Knoten im Baum.
+	 * calculate nodes in the tree
+	 * 
+	 * @return int size
 	 */
 	public int size() {
 
@@ -257,6 +294,11 @@ public class MyBinaryTree implements BinaryTree {
 		return size;
 	}
 
+	/**
+	 * only for size()
+	 * 
+	 * @param node
+	 */
 	private void size(TreeNode node) {
 		if (node != null) {
 			if (node.getLeft() != null) {
@@ -272,7 +314,9 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Ermittelt die Höhe des Baums.
+	 * calculate the height of the tree
+	 * 
+	 * @return int height
 	 */
 	public int height() {
 		TreeNode node = root;
@@ -284,6 +328,14 @@ public class MyBinaryTree implements BinaryTree {
 		return height;
 	}
 
+	/**
+	 * only for height()
+	 * 
+	 * @param TreeNode
+	 *            node
+	 * @param int
+	 *            level
+	 */
 	private void height(TreeNode node, int level) {
 
 		if (level > height)
@@ -300,7 +352,9 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Liefert das größte Element im Baum.
+	 * gives you the biggest Value
+	 * 
+	 * @returnint maxValue
 	 */
 	public int getMax() {
 		TreeNode child = root;
@@ -315,7 +369,9 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Liefert das kleinste Element im Baum.
+	 * gives you the smalest Value
+	 * 
+	 * @return minValue
 	 */
 	public int getMin() {
 		TreeNode child = root;
@@ -330,41 +386,109 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Entfernt val aus dem Baum.
+	 * remove val in tree
+	 * @param int val
+	 * @return boolean
 	 */
 	public boolean remove(int val) {
-		TreeNode parent = null;
-		TreeNode child = tree.root;
 		boolean walkLeft = false;
-
-		if (tree.contains(val)) {
-			while (child != null) {
-
-				if (child.getValue() == val) {
-
-					if (child.getLeft() != null) {
-						// Weiter aus OneNode
+		if (!tree.contains(val))
+			return false;
+		if (root.getValue() == val) {
+			if (root.getLeft() == null && root.getRight() == null) {
+				root = null;
+				return true;
+			}
+			if (root.getLeft() == null && root.getRight() != null) {
+				root = root.getRight();
+				return true;
+			}
+			if (root.getLeft() != null && root.getRight() == null) {
+				root = root.getLeft();
+				return true;
+			}
+			if (root.getLeft() != null && root.getRight() != null) {
+				TreeNode parent = root.getLeft();
+				if (parent.getRight() == null) {
+					root.setValue(parent.getValue());
+					root.setLeft(parent.getLeft());
+					return true;
+				} else {
+					TreeNode child = parent.getRight();
+					int valMax = child.getValue();
+					while (child.getRight() != null) {
+						child = child.getRight();
+						valMax = child.getValue();
+						parent = parent.getRight();
 					}
-
-				} else if (child.getValue() > val) {
-					parent = child;
-					child = child.getLeft();
+					if (child.getLeft() != null)
+						parent.setRight(child.getLeft());
+					else
+						parent.setRight(null);
+					root.setValue(valMax);
+					return true;
+				}
+			}
+		} else {
+			TreeNode parent = root;
+			TreeNode child = null;
+			TreeNode tmp = null;
+			TreeNode deleteNode = root;
+			while (deleteNode.getValue() != val) {
+				parent = deleteNode;
+				if (deleteNode.getValue() > val) {
+					deleteNode = deleteNode.getLeft();
 					walkLeft = true;
 				} else {
-					parent = child;
-					child = child.getRight();
+					deleteNode = deleteNode.getRight();
 					walkLeft = false;
 				}
 			}
-
-			return false;
-		} else
-			return false;
+			//entferne knoten ohne nachfolger
+			if (deleteNode.getLeft() == null && deleteNode.getRight() == null) {
+				deleteNode = null;
+				return true;
+			}
+			//entferne knoten mit nachfolger
+			if (deleteNode.getLeft() != null) {
+				tmp = deleteNode.getLeft();
+				if (tmp.getRight() == null) {
+					deleteNode.setValue(tmp.getValue());
+					deleteNode.setLeft(tmp.getLeft());
+					return true;
+				} else {
+					child = tmp.getRight();
+					int valMax = child.getValue();
+					while (child.getRight() != null) {
+						child = child.getRight();
+						valMax = child.getValue();
+						tmp = tmp.getRight();
+					}
+					if (child.getLeft() != null)
+						tmp.setRight(child.getLeft());
+					else
+						tmp.setRight(null);
+					deleteNode.setValue(valMax);
+					return true;
+				}
+			}
+			//entferne knoten ohne linken nachfolger
+			if (deleteNode.getLeft() == null && deleteNode.getRight() != null) {
+				if(walkLeft)
+					parent.setLeft(deleteNode.getRight());
+				else 
+					parent.setRight(deleteNode.getRight());
+				return true;
+			}
+		}
+		return false;
 
 	}
 
 	/**
-	 * true genau dann, wenn der Baum leer ist.
+	 * retruns true if tree is empty
+	 * 
+	 * @return boolean
 	 */
 	public boolean isEmpty() {
 		TreeNode child = root;
@@ -375,247 +499,225 @@ public class MyBinaryTree implements BinaryTree {
 	}
 
 	/**
-	 * Fügt alle Elemente des übergebenen Baums (otherTree) in den aktuellen
-	 * Baum ein.
+	 * inserts all Values from otherTree in tree
+	 * 
+	 * @param MyBinaryTree
+	 *            otherTree
+	 * @return boolean
 	 */
-	public boolean addAll(BinaryTree otherTree) {
+	public boolean addAll(MyBinaryTree otherTree) {
 		inserts = 0;
+
 		TreeNode node = otherTree.root;
 
-		if (node != null) {
-			if (tree.insert(node.getValue()))
-				inserts++;
+		tree.addAll(node);
 
-			if (node.getLeft() != null) {
-				tree.addAll(node.getLeft());
-			}
-
-			if (node.getRight() != null) {
-				tree.addAll(node.getRight());
-			}
-		} else {
-			return false;
-		}
 		return true;
 	}
 
+	/**
+	 * only for addAll(MyBinaryTree)
+	 * 
+	 * @param node
+	 */
 	private void addAll(TreeNode node) {
-
 		if (node != null) {
-			if (tree.insert(node.getValue()))
-				inserts++;
+			tree1.insert(node.getValue());
+			inserts++;
+			if (node.getLeft() != null)
+				addAll(node.getLeft());
+			if (node.getRight() != null)
+				addAll(node.getRight());
+		} else
+			return;
+	}
 
-			if (node.getLeft() != null) {
-				tree.addAll(node.getLeft());
-			}
+	/**
+	 *
+	 * print tree in Inorder
+	 *
+	 */
+	public void printInorder() {
+		// Check if the current node is empty / null
+		// Traverse the left subtree by recursively calling the in-order
+		// function.
+		// Display the data part of the root (or current node).
+		// Traverse the right subtree by recursively calling the in-order
+		// function.
+		TreeNode node = root;
+		if (node == null)
+			println("Der Baum ist leer.");
+		else {
 
-			if (node.getRight() != null) {
-				tree.addAll(node.getRight());
-			}
+			inorder(node);
+			println();
 		}
 
 	}
 
 	/**
-     * Gibt Baum in Inorder aus.
-     */
-    public void printInorder() {
-        // Check if the current node is empty / null
-        // Traverse the left subtree by recursively calling the in-order
-        // function.
-        // Display the data part of the root (or current node).
-        // Traverse the right subtree by recursively calling the in-order
-        // function.
-        TreeNode node = root;
-        if (node == null)
-            println("Hurensohn");
-        else {
-            sortedTree = new int[tree.size];
-            inorder(node);
-        }
-        String output = null;
-        while (sortedTreeCounter != 0) {
-            output += sortedTree[sortedTreeCounter];
-            sortedTreeCounter--;
-        }
-        println(output);
-    }
-    private void inorder(TreeNode node) {
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-        sortedTree[sortedTreeCounter] = node.getValue();
-        sortedTreeCounter++;
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-        }
-    }
-    /**
-     * Gibt Baum in Postorder aus.
-     */
-    public void printPostorder() {
-        // Check if the current node is empty / null
-        // Traverse the left subtree by recursively calling the post-order
-        // function.
-        // Traverse the right subtree by recursively calling the post-order
-        // function.
-        // Display the data part of the root (or current node).
-        TreeNode node = root;
-        if (node == null)
-            println("Hurensohn");
-        else {
-            sortedTree = new int[tree.size];
-            postorder(node);
-        }
-        String output = null;
-        while (sortedTreeCounter != 0) {
-            output += sortedTree[sortedTreeCounter];
-            sortedTreeCounter--;
-        }
-        println(output);
-    }
-    private void postorder(TreeNode node) {
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-            sortedTree[sortedTreeCounter] = node.getValue();
-            sortedTreeCounter++;
-        }
-    }
-    /**
-     * Gibt Baum in Preorder aus.
-     */
-    public void printPreorder() {
-        // Check if the current node is empty / null
-        // Display the data part of the root (or current node).
-        // Traverse the left subtree by recursively calling the pre-order
-        // function.
-        // Traverse the right subtree by recursively calling the pre-order
-        // function.
-        TreeNode node = root;
-        if (node == null)
-            println("Hurensohn");
-        else {
-            sortedTree = new int[tree.size];
-            preorder(node);
-        }
-        String output = null;
-        while (sortedTreeCounter != 0) {
-            output += sortedTree[sortedTreeCounter];
-            sortedTreeCounter--;
-        }
-        println(output);
-    }
-    private void preorder(TreeNode node) {
-        sortedTree[sortedTreeCounter] = node.getValue();
-        sortedTreeCounter++;
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-        }
-    }
-    public void currentHeight(TreeNode node) {
-        nodeHeight = 1;
-        int search = node.getValue();
-        currentHeightx(node, search);
-    }
-    private void currentHeightx(TreeNode node, int search) {
-        if (search == node.getValue())
-            nodeHeight = search;
-        if (node == null)
-            nodeHeight--;
-        else {
-            nodeHeight++;
-            currentHeightx(node.getLeft(), search);
-            nodeHeight++;
-            currentHeightx(node.getLeft(), search);
-        }
-    }
-    /**
-     * Gibt Baum in Levelorder aus.
-     */
-    public void printLevelorder() {
-        TreeNode node = root;
-        if (node == null)
-            println("Hurensohn");
-        else {
-            sortedTreeHeight = new int[tree.size];
-            sortedTree = new int[tree.size];
-            levelorder(node);
-            String output = " ";
-            for (int i = 1; i <= tree.height(); i++) {
-                for (int i2 = 1; i2 <= tree.size(); i2++) {
-                    if (i == sortedTreeHeight[i])
-                        output += sortedTree[i];
-                }
-            }
-            println();
-        }
-    }
-    private void levelorder(TreeNode node) {
-        currentHeight(node);
-        sortedTreeHeight[sortedTreeCounter] = nodeHeight;
-        sortedTree[sortedTreeCounter] = node.getValue();
-        sortedTreeCounter++;
-        if (node.getLeft() != null) {
-            inorder(node.getLeft());
-        }
-        if (node.getRight() != null) {
-            inorder(node.getRight());
-        }
-    }
-
+	 * only for printInorder
+	 * 
+	 * @param node
+	 */
+	private void inorder(TreeNode node) {
+		if (node.getLeft() != null) {
+			inorder(node.getLeft());
+		}
+		print(node.getValue() + "  ");
+		if (node.getRight() != null) {
+			inorder(node.getRight());
+		}
+	}
 
 	/**
-	 * Erzeugt eine tiefe Kopie des Baums.
+	 *
+	 * prints tree in Postorder
+	 *
 	 */
-	public BinaryTree clone() {
-		
-		
+	public void printPostorder() {
+		// Check if the current node is empty / null
+		// Traverse the left subtree by recursively calling the post-order
+		// function.
+		// Traverse the right subtree by recursively calling the post-order
+		// function.
+		// Display the data part of the root (or current node).
 		TreeNode node = root;
-		
-		if(node == null)
-			return cloneTree;
-		
-		TreeNode
-		
-		node.setValue();
-		cloneTree.insert(node.getValue());
-		
-		if(node.getLeft() != null)
-			cloneDeep(node.getLeft());
-		if(node.getRight() != null)
-			cloneDeep(node.getRight());
+		if (node == null)
+			println("Der Baum ist leer");
+		else {
+
+			postorder(node);
+			println();
+		}
+
+	}
+
+	/**
+	 * only for printPostorder
+	 * 
+	 * @param node
+	 */
+	private void postorder(TreeNode node) {
+		if (node.getLeft() != null) {
+			inorder(node.getLeft());
+		}
+		if (node.getRight() != null) {
+			inorder(node.getRight());
+			print(node.getValue() + "  ");
+		}
+	}
+
+	/**
+	 * prints tree in Preorder
+	 */
+	public void printPreorder() {
+		// Check if the current node is empty / null
+		// Display the data part of the root (or current node).
+		// Traverse the left subtree by recursively calling the pre-order
+		// function.
+		// Traverse the right subtree by recursively calling the pre-order
+		// function.
+		TreeNode node = root;
+		if (node == null)
+			println("Der Baum ist leer");
+		else {
+
+			preorder(node);
+			println();
+		}
+
+	}
+
+	/**
+	 * only for printPreorder
+	 * 
+	 * @param node
+	 */
+	private void preorder(TreeNode node) {
+		print(node.getValue() + "  ");
+
+		if (node.getLeft() != null) {
+			inorder(node.getLeft());
+		}
+		if (node.getRight() != null) {
+			inorder(node.getRight());
+		}
+	}
+
+	/**
+	 *
+	 * prints tee in Levelorder
+	 *
+	 */
+	public void printLevelorder() {
+		TreeNode node = root;
+
+		if (node != null) {
+			for (int i = 0; i < tree1.height(); i++) {
+				levelorder(node, i);
+				println();
+			}
+		} else
+			println("Der Baum ist leer");
+	}
+
+	/**
+	 * only for printLevelorder
+	 * 
+	 * @param node
+	 * @param level
+	 */
+	private void levelorder(TreeNode node, int level) {
+		if (level == 0) {
+			print(node.getValue() + " ");
+		} else {
+			level--;
+			if (node.getLeft() != null)
+				levelorder(node.getLeft(), level);
+
+			if (node.getRight() != null)
+				levelorder(node.getRight(), level);
+		}
+	}
+
+	/**
+	 * creates a deep clone
+	 */
+	public MyBinaryTree clone() {
+
+		TreeNode node = root;
+
+		tree1.cloneDeep(node);
 
 		return cloneTree;
-	}
-
-	public void cloneDeep(TreeNode node) {
-
-		cloneTree.insert(node.getValue());
-
-		if (node.getLeft() != null)
-			cloneDeep(node.getLeft());
-		if (node.getRight() != null)
-			cloneDeep(node.getRight());
 
 	}
 
 	/**
-	 * Erzeugt einen leeren neuen Baum
+	 * only for clone
 	 * 
-	 * @return
+	 * @param node
 	 */
-	BinaryTree empty() {
+	public void cloneDeep(TreeNode node) {
 
-		MyBinaryTree newTree = new MyBinaryTree();
+		if (node != null) {
+			cloneTree.insert(node.getValue());
 
-		return newTree;
-
+			if (node.getLeft() != null)
+				cloneDeep(node.getLeft());
+			if (node.getRight() != null)
+				cloneDeep(node.getRight());
+		} else
+			return;
 	}
 
+	/**
+	 * creates an empty tree
+	 * 
+	 * @return MyBinaryTree newTree
+	 */
+	MyBinaryTree empty() {
+		return new MyBinaryTree();
+	}
 }
