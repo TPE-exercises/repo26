@@ -5,7 +5,7 @@ import static gdi.MakeItSimple.*;
 public class HelloWorld {
 	
 	public static void main(String[] args) {
-		println("BENtastisch.");
+		println("Hallo xD.");
 	}
 
 }
