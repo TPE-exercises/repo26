@@ -1,5 +1,7 @@
 package freierTest;
-
+/*
+ *Performencetest per Priemzahlen
+ */
 import java.util.ArrayList;
 import java.util.List;
 
