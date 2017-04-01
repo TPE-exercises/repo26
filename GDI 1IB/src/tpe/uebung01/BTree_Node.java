@@ -2,8 +2,8 @@ package tpe.uebung01;
 
 public class BTree_Node {
 
-	private Integer[] value = new Integer[2 * m + 1];
-	private BTree_Node[] bTreeNode = new BTree_Node[2 * m + 2];
+	private Integer[] value = new Integer[2 * BTree.m + 1];
+	private BTree_Node[] bTreeNode = new BTree_Node[2 * BTree.m + 2];
 
 	/**
 	 * 
@@ -17,15 +17,16 @@ public class BTree_Node {
 		this.bTreeNode = bTreeNode;
 	}
 
+
 	/**
 	 * 
 	 * @param Integer...o[not more than m]
 	 */
 	public BTree_Node(Integer... o) {
 		
-		Integer[] value = new Integer[2 * m + 1];
-		BTree_Node[] bTreeNode = new BTree_Node[2 * m + 2];
-		for (int i : o) {
+		Integer[] value = new Integer[2 * BTree.m + 1];
+		BTree_Node[] bTreeNode = new BTree_Node[2 * BTree.m + 2];
+		for (int i=0;i<o.length; i++) {
 			value[i]=o[i];
 		}
 		this.value=value;
@@ -70,7 +71,7 @@ public class BTree_Node {
 
 	/**
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isFull() {
 		for (int i = 0; i < this.value.length; i++) {
@@ -78,6 +79,26 @@ public class BTree_Node {
 				return false;
 		}
 		return true;
+	}
+	/**
+	 * move inclusive index 
+	 * @param int index
+	 */
+	public void moveForward(int index){
+		
+
+		for(int i=2*BTree.m;i>index;i--){
+			Integer integer; 
+			if(this.value[i-1]==null){
+				integer = new Integer(0);
+			}
+			else{
+				integer = new Integer(this.value[i-1]);
+			}
+		value[i]=integer;
+		}
+		
+		
 	}
 
 }

@@ -1,17 +1,14 @@
 package tpe.uebung01;
 
-import gdi.MakeItSimple.*;
+
 
 public class BTree implements BTree_Interface {
 
-	public int m;
+	public static int m;
 	private BTree_Node root;
-	private BTree tree = new BTree(1);
-	private BTree otherTree = new BTree(1);
 
 	BTree(int ordnung) {
 		this.root = null;
-		this.m = ordnung;
 	}
 
 	@Override
@@ -26,24 +23,34 @@ public class BTree implements BTree_Interface {
 		} else
 			return rec_insert(o, root, 0);
 
-		// 2. insert
 		// 3. burst?
 
 	}
 
+	/**
+	 * @TODO testen
+	 * @param Integer o
+	 * @param BTree_Node node
+	 * @param int index
+	 * @return boolean
+	 */
 	private boolean rec_insert(Integer o, BTree_Node node, int index) {
-		if(o<node.getValue(index)){
-			if(node.getNode(index)!=null){
+		if (node.getValue(index) == 0) {
+			node.setValue(o, index);
+			return true;
+		} else if (o < node.getValue(index)) {
+			if (node.getNode(index) != null) {
 				return rec_insert(o, node.getNode(index), 0);
-			}else{
-				
+			} else {
+				node.moveForward(index);
+				node.setValue(o, index);
+				// TODO verknüpungen anhängen
+				return true;
 			}
+		} else/* (o>node.getValue(index)) */ {
+			return rec_insert(o, node, index + 1);
 		}
-		
-		
-		return false;
 	}
-	
 
 	@Override
 	public boolean insert(String filename) {
@@ -54,8 +61,11 @@ public class BTree implements BTree_Interface {
 	/**
 	 * 
 	 */
-	private void burst() {
-		// TODO Auto-generated method stub
+	private void burst(BTree_Node node, BTree_Node parent) {
+		int mid = (2*m+1)/2;
+		
+		
+		
 	}
 
 	@Override
@@ -74,17 +84,18 @@ public class BTree implements BTree_Interface {
 	 * @return
 	 */
 	private boolean rec_contains(Integer o, BTree_Node node, int index) {
-		if (o.intValue() == node.getValue(index)) {
+		if (node.getValue(index) == null) {
+			System.out.println("test");
+			return true;
+		} else if (o == node.getValue(index)) {
 			return true;
 		} else if (o.intValue() < node.getValue(index)) {
 			if (node.getNode(index) != null) {
 				return rec_contains(o, node.getNode(index), 0);
 			} else
 				return false;
-		}
-		// (o.intValue() > node.getValue(index))
-		else {
-			if (index < 2 * m) {
+		}else 	/* (o.intValue() > node.getValue(index))*/{
+			if (index < 2 * getM()) {
 				return rec_contains(o, node, ++index);
 			} else
 				return false;
@@ -119,7 +130,7 @@ public class BTree implements BTree_Interface {
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -155,6 +166,14 @@ public class BTree implements BTree_Interface {
 	public void printLevelorder() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public int getM() {
+		return m;
+	}
+
+	public void setM(int m) {
+		this.m = m;
 	}
 
 }
