@@ -29,10 +29,10 @@ public class MenschAergereDichNicht {
 
 	static int farbe_start = 0;
 
-	static int rotAnzahlSteine = 4;
-	static int blauAnzahlSteine = 4;
-	static int gruenAnzahlSteine = 4;
-	static int gelbAnzahlSteine = 4;
+	public static int rotAnzahlSteine = 4;
+	public static int blauAnzahlSteine = 4;
+	public static int gruenAnzahlSteine = 4;
+	public static int gelbAnzahlSteine = 4;
 
 	static int farbeAnzahlSteine = 0;
 
@@ -41,12 +41,20 @@ public class MenschAergereDichNicht {
 	static int[] gruenPos = { 0, 0, 0, 0 };
 	static int[] gelbPos = { 0, 0, 0, 0 };
 
-	static int aktuellerSpieler;
+	public static int aktuellerSpieler;
 
 	static boolean kommRaus = false;
 	static boolean setzen = true;
+	static int augen = 0;
 
 	public static void main(String[] args) {
+
+	}
+
+	/**
+	 * 
+	 */
+	public static void spielvorbereitung() {
 		if (!isFilePresent("spielbrett.txt") || !isFilePresent("spielbrettKopie.txt") || !isFilePresent("hausRot.txt")
 				|| !isFilePresent("hausBlau.txt") || !isFilePresent("hausGruen.txt") || !isFilePresent("hausGelb.txt")
 				|| !isFilePresent("brettKopie.txt")) {
@@ -78,41 +86,22 @@ public class MenschAergereDichNicht {
 			break;
 		}
 		printSeperator();
-		aktuellerSpieler--;
-		do {
-			aktuellerSpieler++;
-			if (aktuellerSpieler == 5)
-				aktuellerSpieler = 1;
-			boolean wuerfelstop = false;
-			int augen = 0;
-			kommRaus = false;
-			setzen = true;
+	}
 
-			printStatus(aktuellerSpieler);
+	/**
+	 * 
+	 */
+	public static void spielablauf(int augen) {
 
-			if (dreiMalWürfeln(aktuellerSpieler)) {
-				inizialisiereWürfel();
-				setzen = false;
-				println("Du darfst 3 mal Würfeln");
-				for (int i = 0; i < 3 && !wuerfelstop; i++) {
-					augen = wuerfel();
-					if (augen == 6) {
-						setzen = true;
-						kommRaus = true;
-						wuerfelstop = true;
-					}
-				}
-			}
-			if (!setzen)
-				println("Du kannst nicht setzen");
+		if (dreiMalWürfeln(aktuellerSpieler) && heufigkeitWuerfel == 0) {
+			println("Du kannst nicht setzen");
+			starteNeueRunde();
 
+		} else if (dreiMalWürfeln(aktuellerSpieler) && augen != 6) {
+
+		} else {
+			System.out.println("---------------->Setzen: " + setzen + " kommRaus: " + kommRaus);
 			while (setzen) {
-				inizialisiereWürfel();
-				if (!kommRaus) {
-					augen = wuerfel();
-					if (augen == 6)
-						kommRaus = true;
-				}
 
 				if (kommRaus) {
 					kommRaus(aktuellerSpieler, augen);
@@ -121,14 +110,47 @@ public class MenschAergereDichNicht {
 				}
 			}
 
-			printSeperator();
+			if (gameOver(aktuellerSpieler)) {
+				System.out.println("Game Over");
+			}
 
-		} while (!gameOver(aktuellerSpieler));
-
-		println("Spieler " + aktuellerSpieler + " hat das Spiel gewonnen.");
+		}
 	}
 
-	private static void inizialisiereWürfel() {
+	public static int heufigkeitWuerfel = 0;
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static int wuerfeln() {
+		int augen = 0;
+		setzen = false;
+		kommRaus = false;
+
+		// würfle
+		if (heufigkeitWuerfel > 0) {
+			heufigkeitWuerfel--;
+			augen = wuerfel();
+			setzen = true;
+			if (augen == 6) {
+				heufigkeitWuerfel = 1;
+				kommRaus = true;
+			}
+		}
+		return augen;
+	}
+
+	/**
+	 * 
+	 */
+	public static void starteNeueRunde() {
+		// bestimme heufigkeit des würfelns
+		if (dreiMalWürfeln(aktuellerSpieler))
+			heufigkeitWuerfel = 3;
+		else
+			heufigkeitWuerfel = 1;
+
 		switch (aktuellerSpieler) {
 		case (ROT):
 			println("Spieler ROT muss Würfeln");
@@ -150,7 +172,21 @@ public class MenschAergereDichNicht {
 			farbeAnzahlSteine = gelbAnzahlSteine;
 			farbe_start = GELB_START;
 			break;
+			
 		}
+		System.out.println("---------------->neue Runde");
+		printSeperator();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static int wuerfel() {
+		int augen = (int) Math.floor(Math.random() * 6) + 1;
+		println("Du hast eine " + augen + " gewürfelt.");
+		MenschAergereDichNicht_GUI.augen = augen;
+		return augen;
 	}
 
 	/**
@@ -187,25 +223,24 @@ public class MenschAergereDichNicht {
 	private static void setzeFigur(int farbe, int augen) {
 
 		println("Wähle aus, welche Figur du setzten möchtest.");
-		printStatus(aktuellerSpieler);
-		int x = 0;
-		while (!(x >= 1 && x <= 4)) {
-			x = readInt();
-			readLine();
+		// printStatus(aktuellerSpieler);
+		welcheFigur = 0;
+		while (!(welcheFigur >= 1 && welcheFigur <= 4)) {
+
 		}
 		int position = 0;
 		switch (aktuellerSpieler) {
 		case (ROT):
-			position = rotPos[x - 1];
+			position = rotPos[welcheFigur - 1];
 			break;
 		case (BLAU):
-			position = blauPos[x - 1];
+			position = blauPos[welcheFigur - 1];
 			break;
 		case (GRUEN):
-			position = gruenPos[x - 1];
+			position = gruenPos[welcheFigur - 1];
 			break;
 		case (GELB):
-			position = gelbPos[x - 1];
+			position = gelbPos[welcheFigur - 1];
 			break;
 		}
 		if (zugMoeglich(position, augen, aktuellerSpieler)) {
@@ -289,19 +324,6 @@ public class MenschAergereDichNicht {
 	 */
 	private static void printSeperator() {
 		println("---------------------------------");
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	private static int wuerfel() {
-		println("Dücke eine Taste zum Würfeln.");
-		readLine();
-		int augen = (int) Math.floor(Math.random() * 6) + 1;
-		println("Du hast eine " + augen + " gewürfelt.");
-		return augen;
-
 	}
 
 	private static boolean startBelegt(int farbe) {
@@ -639,13 +661,14 @@ public class MenschAergereDichNicht {
 
 		closeOutputFile(spielbrett);
 		closeInputFile(kopie);
-
+		MenschAergereDichNicht_GUI.setzeFarbe(pos, farbe);
 		switch (farbe) {
 		case (ROT):
 			for (int i = 0; i < 4; i++) {
 				if (rotPos[i] == 0) {
 					rotPos[i] = pos;
 					rotAnzahlSteine--;
+
 					return;
 				}
 			}
@@ -693,7 +716,9 @@ public class MenschAergereDichNicht {
 		// schreiben
 		Object spielbrett = openOutputFile("spielbrett.txt");
 		int value;
+		// über "0" wechsel
 		if (pos + schritte > 40) {
+			// kopiere bis posNeu und setze Figur
 			for (int i = 1; i < pos + schritte - 40; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
@@ -701,29 +726,34 @@ public class MenschAergereDichNicht {
 			}
 			println(spielbrett, farbe);
 			readInt(kopie);
+			// kopiere bis pos und lösche
 			for (int i = pos + schritte - 40 + 1; i < pos; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
 			}
-			println(spielbrett, 0);
+			println(spielbrett, LEER);
 			readInt(kopie);
+			// kopiere bis ende
 			for (int i = pos + 1; i <= 40; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
 			}
 		} else {
+			// kopiere bis pos und lösche
 			for (int i = 1; i < pos; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
 			}
-			println(spielbrett, 0);
+			println(spielbrett, LEER);
 			readInt(kopie);
+			// kopiere bis posNeu und Setze Figur
 			for (int i = pos + 1; i < pos + schritte; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
 			}
 			println(spielbrett, farbe);
 			readInt(kopie);
+			// kopiere Rest
 			for (int i = pos + schritte + 1; i <= 40; i++) {
 				value = readInt(kopie);
 				println(spielbrett, value);
@@ -733,6 +763,9 @@ public class MenschAergereDichNicht {
 		closeOutputFile(spielbrett);
 		closeInputFile(kopie);
 
+		MenschAergereDichNicht_GUI.setzeFarbe(pos + schritte, farbe);
+		MenschAergereDichNicht_GUI.setzeFarbe(pos, LEER);
+		// Speichere Positionen des Spielers im Array
 		switch (farbe) {
 		case (ROT):
 			for (int i = 0; i < 4; i++) {
@@ -795,6 +828,8 @@ public class MenschAergereDichNicht {
 
 		closeOutputFile(spielbrett);
 		closeInputFile(kopie);
+
+		MenschAergereDichNicht_GUI.setzeFarbe(pos, LEER);
 
 	}
 
