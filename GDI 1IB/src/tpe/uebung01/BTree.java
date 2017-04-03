@@ -1,7 +1,5 @@
 package tpe.uebung01;
 
-
-
 public class BTree implements BTree_Interface {
 
 	public static int m;
@@ -29,9 +27,12 @@ public class BTree implements BTree_Interface {
 
 	/**
 	 * @TODO testen
-	 * @param Integer o
-	 * @param BTree_Node node
-	 * @param int index
+	 * @param Integer
+	 *            o
+	 * @param BTree_Node
+	 *            node
+	 * @param int
+	 *            index
 	 * @return boolean
 	 */
 	private boolean rec_insert(Integer o, BTree_Node node, int index) {
@@ -62,9 +63,37 @@ public class BTree implements BTree_Interface {
 	 * 
 	 */
 	private void burst(BTree_Node node, BTree_Node parent) {
-		int mid = (2*m+1)/2;
+		int m1 = 2 * m + 1;
+		int mid = m1 / 2;
 		
+		Integer newParent = new Integer(node.getValue(mid));
 		
+		Integer[] child1 = new Integer[m1];
+		Integer[] child2 = new Integer[m1];
+		BTree_Node[] node1 = new BTree_Node[m1+1];
+		BTree_Node[] node2 = new BTree_Node[m1+1];
+
+		int i=0,j=0;
+		while ( i < mid) {
+			child1[i]=node.getValue(i);
+			node1[i]=node.getNode(i);
+			i++;
+		}
+		node1[i]=node.getNode(i);
+		i++;
+		while ( i < child2.length) {
+			child2[j]=node.getValue(i);
+			node2[j]=node.getNode(i);
+			j++;i++;
+		}
+		node2[j]=node.getNode(i);
+		
+		BTree_Node n1 = new BTree_Node(child1, node1);
+		BTree_Node n2 = new BTree_Node(child2, node2);
+		
+		//TODO aufrücken in der node
+		//TODO newParent in Parent einfügen wenn vorhanden
+		//TODO verknüpfen
 		
 	}
 
@@ -94,7 +123,7 @@ public class BTree implements BTree_Interface {
 				return rec_contains(o, node.getNode(index), 0);
 			} else
 				return false;
-		}else 	/* (o.intValue() > node.getValue(index))*/{
+		} else /* (o.intValue() > node.getValue(index)) */ {
 			if (index < 2 * getM()) {
 				return rec_contains(o, node, ++index);
 			} else

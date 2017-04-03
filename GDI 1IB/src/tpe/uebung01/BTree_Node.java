@@ -5,23 +5,12 @@ public class BTree_Node {
 	private Integer[] value = new Integer[2 * BTree.m + 1];
 	private BTree_Node[] bTreeNode = new BTree_Node[2 * BTree.m + 2];
 
-	/**
-	 * 
-	 * @param Integer[]
-	 *            value
-	 * @param BTree_Node[]
-	 *            bTreeNode
-	 */
+
 	public BTree_Node(Integer[] value, BTree_Node[] bTreeNode) {
 		this.value = value;
 		this.bTreeNode = bTreeNode;
 	}
 
-
-	/**
-	 * 
-	 * @param Integer...o[not more than m]
-	 */
 	public BTree_Node(Integer... o) {
 		
 		Integer[] value = new Integer[2 * BTree.m + 1];
@@ -32,6 +21,8 @@ public class BTree_Node {
 		this.value=value;
 		this.bTreeNode=bTreeNode;
 	}
+
+
 
 	/**
 	 * 
