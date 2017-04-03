@@ -27,7 +27,7 @@ public class BTree implements BTree_Interface {
 			root = node;
 			return true;
 		} else
-			return rec_insert(o, root, 0);
+			return this.rec_insert(o, root, 0);
 
 		// 3. burst?
 
@@ -109,7 +109,7 @@ public class BTree implements BTree_Interface {
 	public boolean contains(Integer o) {
 		if (isEmpty())
 			return false;
-		return rec_contains(o, root, 0);
+		return this.rec_contains(o, root, 0);
 
 	}
 
@@ -132,7 +132,7 @@ public class BTree implements BTree_Interface {
 			} else
 				return false;
 		} else /* (o.intValue() > node.getValue(index)) */ {
-			if (index < 2 * getM()) {
+			if (index < 2 * this.m) {
 				return rec_contains(o, node, ++index);
 			} else
 				return false;

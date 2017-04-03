@@ -4,9 +4,9 @@ public class Menue {
 
 	public static void main(String[] args) {
 		print("geben sie m |m>0 an: ");
-		BTree.m = readInt();
+		 int m = readInt();
 
-		BTree tree = new BTree(1);
+		BTree tree = new BTree(m);
 
 		tree.insert(5);
 		tree.insert(4);
