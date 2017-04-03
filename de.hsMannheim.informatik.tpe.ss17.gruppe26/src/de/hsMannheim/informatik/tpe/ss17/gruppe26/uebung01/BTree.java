@@ -5,32 +5,38 @@ public class BTree implements BTree_Interface {
 	public int m;
 	private BTree_Node root;
 
-	BTree(){
-		this.root = null;
+	BTree() {
+		this.setRoot(null);
 		this.m = 1;
 		System.out.println("Construktor 0 Class BTree");
 	}
-	
+
 	BTree(int ordnung) {
 		this();
 		this.m = ordnung;
-		System.out.println("Construktor 1 Class BTree");
+		System.out.println("Construktor 1 Class BTree [m=" + m + "]");
 	}
 
-	public void getM(){
-		System.out.println("Ordnung " + this.m);
+	public void printM() {
+
 	}
+
 	@Override
 	public boolean insert(Integer o) {
-		if (this.contains(o))
-			return false;
 
-		if (root == null) {
-			BTree_Node node = new BTree_Node(o);
-			root = node;
+		if (this.contains(o)) {
+			System.out.println("Füge " + o + " nicht ein.");
+			return false;
+		}
+
+		if (getRoot() == null) {
+			BTree_Node node = new BTree_Node(this.m);
+			node.setValue(o, 0);
+			setRoot(node);
 			return true;
-		} else
-			return this.rec_insert(o, root, 0);
+		} else {
+			return this.rec_insert(o, getRoot(), 0);
+		}
 
 		// 3. burst?
 
@@ -47,7 +53,8 @@ public class BTree implements BTree_Interface {
 	 * @return boolean
 	 */
 	private boolean rec_insert(Integer o, BTree_Node node, int index) {
-		if (node.getValue(index) == 0) {
+		// TODO Linken Pfad einfügen klappt aber rechter kommt nich in child
+		if (node.getValue(index) == null) {
 			node.setValue(o, index);
 			return true;
 		} else if (o < node.getValue(index)) {
@@ -73,46 +80,57 @@ public class BTree implements BTree_Interface {
 	/**
 	 * 
 	 */
-	private void burst(BTree_Node node, BTree_Node parent) {
+	public void burst(BTree_Node node, BTree_Node parent) {
+		// Hilfsvariablen
 		int m1 = 2 * m + 1;
 		int mid = m1 / 2;
-		
-		Integer newParent = new Integer(node.getValue(mid));
-		
-		Integer[] child1 = new Integer[m1];
-		Integer[] child2 = new Integer[m1];
-		BTree_Node[] node1 = new BTree_Node[m1+1];
-		BTree_Node[] node2 = new BTree_Node[m1+1];
 
-		int i=0,j=0;
-		while ( i < mid) {
-			child1[i]=node.getValue(i);
-			node1[i]=node.getNode(i);
+		// Platze node
+		Integer newParent = new Integer(node.getValue(mid));
+		BTree_Node n1 = new BTree_Node(this.m);
+		BTree_Node n2 = new BTree_Node(this.m);
+
+		int i = 0, j = 0;
+		// Belege n1
+		while (i < mid) {
+			n1.setValue(node.getValue(i), i);
+			n1.setNode(node.getNode(i), i);
 			i++;
 		}
-		node1[i]=node.getNode(i);
+		n1.setNode(node.getNode(i), i);
 		i++;
-		while ( i < child2.length) {
-			child2[j]=node.getValue(i);
-			node2[j]=node.getNode(i);
-			j++;i++;
+		// Belege n2
+		while (i < m1) {
+			n2.setValue(node.getValue(i), j);
+			n2.setNode(node.getNode(i), j);
+			j++;
+			i++;
 		}
-		node2[j]=node.getNode(i);
-		
-		BTree_Node n1 = new BTree_Node(child1, node1);
-		BTree_Node n2 = new BTree_Node(child2, node2);
-		
-		//TODO aufrücken in der node
-		//TODO newParent in Parent einfügen wenn vorhanden
-		//TODO verknüpfen
-		
+		n2.setNode(node.getNode(i), j);
+
+		// bringe alles an die richtige stelle
+		int index = 0;
+		if (this.getRoot() == parent) {
+			BTree_Node newRoot = new BTree_Node(this.m);
+			newRoot.setValue(newParent, index);
+			newRoot.setNode(n1, index);
+			newRoot.setNode(n2, index + 1);
+			setRoot(newRoot);
+		} else {
+			index = parent.getIndexForO(newParent);
+			parent.moveForward(index, this.m);
+			parent.setValue(newParent, index);
+			parent.setNode(n1, index);
+			parent.setNode(n2, index + 1);
+		}
+
 	}
 
 	@Override
 	public boolean contains(Integer o) {
 		if (isEmpty())
 			return false;
-		return this.rec_contains(o, root, 0);
+		return this.rec_contains(o, getRoot(), 0);
 
 	}
 
@@ -125,8 +143,7 @@ public class BTree implements BTree_Interface {
 	 */
 	private boolean rec_contains(Integer o, BTree_Node node, int index) {
 		if (node.getValue(index) == null) {
-			System.out.println("test");
-			return true;
+			return false;
 		} else if (o == node.getValue(index)) {
 			return true;
 		} else if (o.intValue() < node.getValue(index)) {
@@ -169,8 +186,7 @@ public class BTree implements BTree_Interface {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return true;
+		return this.getRoot() == null ? true : false;
 	}
 
 	@Override
@@ -206,6 +222,14 @@ public class BTree implements BTree_Interface {
 	public void printLevelorder() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public BTree_Node getRoot() {
+		return root;
+	}
+
+	public void setRoot(BTree_Node root) {
+		this.root = root;
 	}
 
 }

@@ -24,12 +24,12 @@ public class BTree_Node {
 	public BTree_Node(int m) {
 
 		Integer[] integerArray = new Integer[2 * m + 1];
-		BTree_Node[] bTreeNodeArray = new BTree_Node[2 * m + 1];
+		BTree_Node[] bTreeNodeArray = new BTree_Node[2 * m + 2];
 
 		this.m = m;
 		this.integerArray = integerArray;
 		this.bTreeNodeArray = bTreeNodeArray;
-		System.out.println("Construktor 1 Class BTree_Node");
+		System.out.println("Construktor 1 Class BTree_Node [m=" + m +"]");
 	}
 
 	// /**
@@ -68,7 +68,9 @@ public class BTree_Node {
 	 * @param index
 	 */
 	public void setValue(Integer value, int index) {
+
 		this.integerArray[index] = value;
+	
 	}
 
 	/**
@@ -120,6 +122,16 @@ public class BTree_Node {
 		}
 
 	}
+	
+	public int getIndexForO(Integer o){
+		
+		int index=0;
+		while(0>integerArray[index]){
+			index++;
+		}
+		
+		return index;
+	}
 
 	/**
 	 * clone
@@ -150,11 +162,12 @@ public class BTree_Node {
 				res+=" y ";
 			else
 				res+=" n ";
-			
-			
+
 			
 			if (this.getValue(i) != null)
 				res += "| " + this.getValue(i) + " |";
+			else
+				res+= "| null |";
 			
 			
 			i++;
