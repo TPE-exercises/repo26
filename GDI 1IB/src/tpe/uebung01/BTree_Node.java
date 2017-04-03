@@ -139,7 +139,7 @@ public class BTree_Node {
 	}
 
 	/**
-	 * 
+	 * @return String
 	 */
 	public String toString() {
 		String res = "[";
@@ -164,7 +164,7 @@ public class BTree_Node {
 		else
 			res+=" n ]";
 
-		return null;
+		return res;
 
 	}
 
