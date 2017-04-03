@@ -2,6 +2,7 @@ package tpe.uebung01;
 
 public class BTree_Node {
 
+	private int m;
 	private Integer[] integerArray;
 	private BTree_Node[] bTreeNodeArray;
 
@@ -9,7 +10,7 @@ public class BTree_Node {
 	 * Ordung ist festgelegt auf 1
 	 */
 	public BTree_Node() {
-		this(new Integer[3], new BTree_Node[4]);
+		this(1);
 		System.out.println("Construktor 0 Class BTree_Node");
 	}
 
@@ -20,32 +21,37 @@ public class BTree_Node {
 	 * @param BTree_Node[]
 	 *            bTreeNode
 	 */
-	public BTree_Node(Integer[] value, BTree_Node[] bTreeNode) {
-		this.integerArray = value;
-		this.bTreeNodeArray = bTreeNode;
+	public BTree_Node(int m) {
+
+		Integer[] integerArray = new Integer[2 * m + 1];
+		BTree_Node[] bTreeNodeArray = new BTree_Node[2 * m + 1];
+
+		this.m = m;
+		this.integerArray = integerArray;
+		this.bTreeNodeArray = bTreeNodeArray;
 		System.out.println("Construktor 1 Class BTree_Node");
 	}
 
-	/**
-	 * 
-	 * @param int
-	 *            ordnung des Baumes
-	 * @param Integer
-	 *            Restparameter
-	 */
-	public BTree_Node(int m, Integer... o) {
-
-		Integer[] value = new Integer[2 * m + 1];
-		BTree_Node[] bTreeNode = new BTree_Node[2 * m + 2];
-
-		for (int i = 0; i < o.length; i++) {
-			value[i] = o[i];
-		}
-		this.integerArray = value;
-		this.bTreeNodeArray = bTreeNode;
-
-		System.out.println("Construktor 2 Class BTree_Node");
-	}
+	// /**
+	// *
+	// * @param int
+	// * ordnung des Baumes
+	// * @param Integer
+	// * Restparameter
+	// */
+	// public BTree_Node(int m, Integer... o) {
+	//
+	// Integer[] value = new Integer[2 * m + 1];
+	// BTree_Node[] bTreeNode = new BTree_Node[2 * m + 1];
+	//
+	// for (int i = 0; i < o.length; i++) {
+	// value[i] = o[i];
+	// }
+	// this.integerArray = value;
+	// this.bTreeNodeArray = bTreeNode;
+	//
+	// System.out.println("Construktor 2 Class BTree_Node");
+	// }
 
 	/**
 	 * 
@@ -112,6 +118,53 @@ public class BTree_Node {
 			}
 			integerArray[i] = integer;
 		}
+
+	}
+
+	/**
+	 * clone
+	 * 
+	 * @return BTree_Node clone
+	 */
+	public BTree_Node clone() {
+		BTree_Node clone = new BTree_Node(this.m);
+
+		for (int i = 0; i < this.integerArray.length; i++) {
+			clone.setValue(this.getValue(i), i);
+			clone.setNode(this.getNode(i), i);
+		}
+
+		return clone;
+
+	}
+
+	/**
+	 * 
+	 */
+	public String toString() {
+		String res = "[";
+
+		int i=0;
+		while (i < this.integerArray.length) {
+			if(this.getNode(i)!=null)
+				res+=" y ";
+			else
+				res+=" n ";
+			
+			
+			
+			if (this.getValue(i) != null)
+				res += "| " + this.getValue(i) + " |";
+			
+			
+			i++;
+		}
+		if(this.getNode(i)!=null)
+			res+=" y ]";
+		else
+			res+=" n ]";
+
+		return null;
 
 	}
 
