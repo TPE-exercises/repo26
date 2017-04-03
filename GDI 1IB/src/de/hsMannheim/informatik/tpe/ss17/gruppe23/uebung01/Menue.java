@@ -1,4 +1,4 @@
-package tpe.uebung01;
+package de.hsMannheim.informatik.tpe.ss17.gruppe23.uebung01;
 import static gdi.MakeItSimple.*;
 public class Menue {
 
