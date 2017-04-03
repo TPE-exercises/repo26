@@ -17,6 +17,9 @@ public class BTree implements BTree_Interface {
 		System.out.println("Construktor 1 Class BTree");
 	}
 
+	public void getM(){
+		System.out.println("Ordnung " + this.m);
+	}
 	@Override
 	public boolean insert(Integer o) {
 		if (this.contains(o))
