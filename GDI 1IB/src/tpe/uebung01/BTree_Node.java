@@ -2,8 +2,8 @@ package tpe.uebung01;
 
 public class BTree_Node {
 
-	private Integer[] value;
-	private BTree_Node[] bTreeNode;
+	private Integer[] integerArray;
+	private BTree_Node[] bTreeNodeArray;
 
 	/**
 	 * Ordung ist festgelegt auf 1
@@ -21,8 +21,8 @@ public class BTree_Node {
 	 *            bTreeNode
 	 */
 	public BTree_Node(Integer[] value, BTree_Node[] bTreeNode) {
-		this.value = value;
-		this.bTreeNode = bTreeNode;
+		this.integerArray = value;
+		this.bTreeNodeArray = bTreeNode;
 		System.out.println("Construktor 1 Class BTree_Node");
 	}
 
@@ -41,8 +41,8 @@ public class BTree_Node {
 		for (int i = 0; i < o.length; i++) {
 			value[i] = o[i];
 		}
-		this.value = value;
-		this.bTreeNode = bTreeNode;
+		this.integerArray = value;
+		this.bTreeNodeArray = bTreeNode;
 
 		System.out.println("Construktor 2 Class BTree_Node");
 	}
@@ -53,7 +53,7 @@ public class BTree_Node {
 	 * @return Integer
 	 */
 	public Integer getValue(int index) {
-		return this.value[index];
+		return this.integerArray[index];
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class BTree_Node {
 	 * @param index
 	 */
 	public void setValue(Integer value, int index) {
-		this.value[index] = value;
+		this.integerArray[index] = value;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class BTree_Node {
 	 * @return
 	 */
 	public BTree_Node getNode(int index) {
-		return this.bTreeNode[index];
+		return this.bTreeNodeArray[index];
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class BTree_Node {
 	 * @param index
 	 */
 	public void setNode(BTree_Node node, int index) {
-		this.bTreeNode[index] = node;
+		this.bTreeNodeArray[index] = node;
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class BTree_Node {
 	 * @return boolean
 	 */
 	public boolean isFull() {
-		for (int i = 0; i < this.value.length; i++) {
-			if (this.value[i] == null)
+		for (int i = 0; i < this.integerArray.length; i++) {
+			if (this.integerArray[i] == null)
 				return false;
 		}
 		return true;
@@ -105,12 +105,12 @@ public class BTree_Node {
 
 		for (int i = 2 * m; i > index; i--) {
 			Integer integer;
-			if (this.value[i - 1] == null) {
+			if (this.integerArray[i - 1] == null) {
 				integer = new Integer(0);
 			} else {
-				integer = new Integer(this.value[i - 1]);
+				integer = new Integer(this.integerArray[i - 1]);
 			}
-			value[i] = integer;
+			integerArray[i] = integer;
 		}
 
 	}
