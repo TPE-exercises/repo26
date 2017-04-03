@@ -21,7 +21,7 @@ public class Menue {
 		
 		
 		System.out.println("Starte Programm: 50%");
-//		System.out.println("Starte Programm: 75%");
+		System.out.println("Starte Programm: 75%");
 		
 		System.out.println("Programm gestartet. (100%)");
 		
@@ -39,6 +39,7 @@ public class Menue {
 			break;
 		case(6)://getMax();
 			break;
+		//TODO alles weitere
 		}
 		tree.insert(0);
 		
