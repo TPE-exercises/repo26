@@ -205,12 +205,4 @@ public class BTree implements BTree_Interface {
 
 	}
 
-	public int getM() {
-		return m;
-	}
-
-	public void setM(int m) {
-		this.m = m;
-	}
-
 }
