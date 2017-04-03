@@ -2,11 +2,19 @@ package tpe.uebung01;
 
 public class BTree implements BTree_Interface {
 
-	public static int m;
+	public int m;
 	private BTree_Node root;
 
-	BTree(int ordnung) {
+	BTree(){
 		this.root = null;
+		this.m = 1;
+		System.out.println("Construktor 0 Class BTree");
+	}
+	
+	BTree(int ordnung) {
+		this();
+		this.m = ordnung;
+		System.out.println("Construktor 1 Class BTree");
 	}
 
 	@Override
@@ -43,7 +51,7 @@ public class BTree implements BTree_Interface {
 			if (node.getNode(index) != null) {
 				return rec_insert(o, node.getNode(index), 0);
 			} else {
-				node.moveForward(index);
+				node.moveForward(index, this.m);
 				node.setValue(o, index);
 				// TODO verknüpungen anhängen
 				return true;

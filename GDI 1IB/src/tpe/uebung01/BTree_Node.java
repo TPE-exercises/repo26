@@ -2,27 +2,50 @@ package tpe.uebung01;
 
 public class BTree_Node {
 
-	private Integer[] value = new Integer[2 * BTree.m + 1];
-	private BTree_Node[] bTreeNode = new BTree_Node[2 * BTree.m + 2];
+	private Integer[] value;
+	private BTree_Node[] bTreeNode;
 
+	/**
+	 * Ordung ist festgelegt auf 1
+	 */
+	public BTree_Node() {
+		this(new Integer[3], new BTree_Node[4]);
+		System.out.println("Construktor 0 Class BTree_Node");
+	}
 
+	/**
+	 * 
+	 * @param Integer[]
+	 *            value
+	 * @param BTree_Node[]
+	 *            bTreeNode
+	 */
 	public BTree_Node(Integer[] value, BTree_Node[] bTreeNode) {
 		this.value = value;
 		this.bTreeNode = bTreeNode;
+		System.out.println("Construktor 1 Class BTree_Node");
 	}
 
-	public BTree_Node(Integer... o) {
-		
-		Integer[] value = new Integer[2 * BTree.m + 1];
-		BTree_Node[] bTreeNode = new BTree_Node[2 * BTree.m + 2];
-		for (int i=0;i<o.length; i++) {
-			value[i]=o[i];
+	/**
+	 * 
+	 * @param int
+	 *            ordnung des Baumes
+	 * @param Integer
+	 *            Restparameter
+	 */
+	public BTree_Node(int m, Integer... o) {
+
+		Integer[] value = new Integer[2 * m + 1];
+		BTree_Node[] bTreeNode = new BTree_Node[2 * m + 2];
+
+		for (int i = 0; i < o.length; i++) {
+			value[i] = o[i];
 		}
-		this.value=value;
-		this.bTreeNode=bTreeNode;
+		this.value = value;
+		this.bTreeNode = bTreeNode;
+
+		System.out.println("Construktor 2 Class BTree_Node");
 	}
-
-
 
 	/**
 	 * 
@@ -71,25 +94,25 @@ public class BTree_Node {
 		}
 		return true;
 	}
-	/**
-	 * move inclusive index 
-	 * @param int index
-	 */
-	public void moveForward(int index){
-		
 
-		for(int i=2*BTree.m;i>index;i--){
-			Integer integer; 
-			if(this.value[i-1]==null){
+	/**
+	 * move inclusive index
+	 * 
+	 * @param int
+	 *            index
+	 */
+	public void moveForward(int index, int m) {
+
+		for (int i = 2 * m; i > index; i--) {
+			Integer integer;
+			if (this.value[i - 1] == null) {
 				integer = new Integer(0);
+			} else {
+				integer = new Integer(this.value[i - 1]);
 			}
-			else{
-				integer = new Integer(this.value[i-1]);
-			}
-		value[i]=integer;
+			value[i] = integer;
 		}
-		
-		
+
 	}
 
 }
