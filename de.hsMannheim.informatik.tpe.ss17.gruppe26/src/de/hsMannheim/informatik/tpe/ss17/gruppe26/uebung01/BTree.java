@@ -224,7 +224,10 @@ public class BTree implements BTree_Interface {
 	public int size() {
 		if (isEmpty())
 			return 0;
-		else
+		else{
+			
+		}
+		return m;
 		
 	}
 
@@ -232,7 +235,10 @@ public class BTree implements BTree_Interface {
 	public int height() {
 		if (isEmpty())
 			return 0;
-		else
+		else{
+			
+		}
+		return m;
 	
 	}
 
@@ -240,7 +246,10 @@ public class BTree implements BTree_Interface {
 	public Integer getMax() {
 		if (isEmpty())
 			return null;
-		else
+		else{
+			
+		}
+		return m;
 
 	}
 
@@ -252,8 +261,8 @@ public class BTree implements BTree_Interface {
 			return null;
 		else
 			while (node.getNode(0) != null){
-				node.getNode(0)
-			}do valMin = node.getValue(0);
+				node.getNode(0);
+			}do (valMin == node.getValue(0));
 		return valMin;
 	}
 
