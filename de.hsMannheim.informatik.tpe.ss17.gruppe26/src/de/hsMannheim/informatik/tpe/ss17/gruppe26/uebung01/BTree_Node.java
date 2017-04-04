@@ -7,11 +7,11 @@ public class BTree_Node {
 	private BTree_Node[] bTreeNodeArray;
 
 	/**
-	 * Ordung ist festgelegt auf 1
+	 * Ordnung ist festgelegt auf 1
 	 */
 	public BTree_Node() {
 		this(1);
-		System.out.println("Construktor 0 Class BTree_Node");
+		System.out.println("Constructor 0 Class BTree_Node");
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class BTree_Node {
 		this.m = m;
 		this.integerArray = integerArray;
 		this.bTreeNodeArray = bTreeNodeArray;
-		System.out.println("Construktor 1 Class BTree_Node [m=" + m +"]");
+		System.out.println("Constructor 1 Class BTree_Node [m=" + m +"]");
 	}
 
 	// /**
@@ -50,7 +50,7 @@ public class BTree_Node {
 	// this.integerArray = value;
 	// this.bTreeNodeArray = bTreeNode;
 	//
-	// System.out.println("Construktor 2 Class BTree_Node");
+	// System.out.println("Constructor 2 Class BTree_Node");
 	// }
 
 	/**

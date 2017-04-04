@@ -1,5 +1,7 @@
 package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
+import de.hsMannheim.informatik.ads.uebung06.TreeNode;
+
 public class BTree implements BTree_Interface {
 
 	public int m;
@@ -25,7 +27,7 @@ public class BTree implements BTree_Interface {
 	public boolean insert(Integer o) {
 
 		if (this.contains(o)) {
-			System.out.println("Füge " + o + " nicht ein.");
+			System.out.println("Fuege " + o + " nicht ein.");
 			return false;
 		}
 
@@ -52,7 +54,7 @@ public class BTree implements BTree_Interface {
 	 * @return boolean
 	 */
 	private boolean rec_insert(Integer o, BTree_Node node, int index) {
-		// TODO Linken Pfad einfügen klappt aber rechter kommt nich in child
+		// TODO Linken Pfad einfï¿½gen klappt aber rechter kommt nich in child
 		if (node.getValue(index) == null) {
 			if (node.getNode(index) != null)
 				return rec_insert(o, node.getNode(index), 0);
@@ -65,7 +67,7 @@ public class BTree implements BTree_Interface {
 			} else {
 				node.moveForward(index, this.m);
 				node.setValue(o, index);
-				// TODO verknüpungen anhängen
+				// TODO verknï¿½pungen anhï¿½ngen
 				return true;
 			}
 		} else/* (o>node.getValue(index)) */ {
@@ -77,7 +79,7 @@ public class BTree implements BTree_Interface {
 	@Override
 	public boolean insert(String filename) {
 		// Schleife -> insert
-		//@Ben
+		// @Ben
 		return false;
 	}
 
@@ -101,6 +103,7 @@ public class BTree implements BTree_Interface {
 
 	/**
 	 * TODO not working atm
+	 * 
 	 * @param nodes
 	 * @return
 	 */
@@ -219,30 +222,39 @@ public class BTree implements BTree_Interface {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		//@Ben
-		return 0;
+		if (isEmpty())
+			return 0;
+		else
+		
 	}
 
 	@Override
 	public int height() {
-		// TODO Auto-generated method stub
-		//@Ben
-		return 0;
+		if (isEmpty())
+			return 0;
+		else
+	
 	}
 
 	@Override
 	public Integer getMax() {
-		// TODO Auto-generated method stub
-		//@Ben
-		return null;
+		if (isEmpty())
+			return null;
+		else
+
 	}
 
 	@Override
 	public Integer getMin() {
-		// TODO Auto-generated method stub
-		//@Ben
-		return null;
+		BTree_Node node = root;
+		Integer valMin;
+		if (isEmpty())
+			return null;
+		else
+			while (node.getNode(0) != null){
+				node.getNode(0)
+			}do valMin = node.getValue(0);
+		return valMin;
 	}
 
 	@Override
