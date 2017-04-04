@@ -15,8 +15,8 @@ public class Menue {
 
 		System.out.println("...erstelle Baum");
 		System.out.println("Welche Ordnung soll der Baum haben?");
-		BTree tree = new BTree(readInt());
-		tree.printM();
+		BTree_Interface tree = new BTree(readInt());
+		((BTree) tree).printM();
 		System.out.println("...Baum erstelt");
 
 		System.out.println("Starte Programm: 50%");
@@ -30,10 +30,6 @@ public class Menue {
 			tree.insert(3);
 			tree.insert(5);
 			tree.insert(4);
-			tree.burst(tree.getRoot(),tree.getRoot());
-			tree.insert(2);
-			tree.insert(1);
-			tree.insert(6);
 			break;
 		case (2):// insert(file)
 			break;

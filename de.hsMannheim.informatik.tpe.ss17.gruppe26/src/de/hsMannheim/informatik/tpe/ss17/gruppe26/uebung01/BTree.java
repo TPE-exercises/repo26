@@ -33,12 +33,11 @@ public class BTree implements BTree_Interface {
 			BTree_Node node = new BTree_Node(this.m);
 			node.setValue(o, 0);
 			setRoot(node);
+			this.burst();
 			return true;
 		} else {
 			return this.rec_insert(o, getRoot(), 0);
 		}
-
-		// 3. burst?
 
 	}
 
@@ -55,7 +54,10 @@ public class BTree implements BTree_Interface {
 	private boolean rec_insert(Integer o, BTree_Node node, int index) {
 		// TODO Linken Pfad einfügen klappt aber rechter kommt nich in child
 		if (node.getValue(index) == null) {
-			node.setValue(o, index);
+			if (node.getNode(index) != null)
+				return rec_insert(o, node.getNode(index), 0);
+			else
+				node.setValue(o, index);
 			return true;
 		} else if (o < node.getValue(index)) {
 			if (node.getNode(index) != null) {
@@ -69,6 +71,7 @@ public class BTree implements BTree_Interface {
 		} else/* (o>node.getValue(index)) */ {
 			return rec_insert(o, node, index + 1);
 		}
+
 	}
 
 	@Override
@@ -79,11 +82,64 @@ public class BTree implements BTree_Interface {
 
 	/**
 	 * 
+	 * @return BTree_Node[] (array: {node,parent}) -> null when nothing burst
 	 */
-	public void burst(BTree_Node node, BTree_Node parent) {
+	private BTree_Node[] whoBurst() {
+
+		BTree_Node child = root;
+		BTree_Node parent = null;
+		BTree_Node[] nodes = { child, parent };
+
+		if (root == null)
+			return null;
+
+		return rec_whoBurst(nodes, 0);
+	}
+
+	private static boolean needToBurst = false;
+
+	/**
+	 * TODO not working atm
+	 * @param nodes
+	 * @return
+	 */
+	private BTree_Node[] rec_whoBurst(BTree_Node[] nodes, int index) {
+		BTree_Node child = nodes[0];
+		BTree_Node parent = nodes[1];
+
+		if (child.isFull()) {
+			needToBurst = true;
+			return nodes;
+		} else {
+			while (!needToBurst && index < 2 * this.m + 1) {
+				if (child.getNode(index) == null) {
+					return nodes;
+				} else {
+					nodes[0] = child.getNode(index);
+					nodes[1] = child;
+					rec_whoBurst(nodes, index);
+					index++;
+				}
+			}
+			return nodes;
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public void burst() {
+		BTree_Node[] nodes = whoBurst();
+
+		if (nodes == null)
+			return;
+
 		// Hilfsvariablen
 		int m1 = 2 * m + 1;
 		int mid = m1 / 2;
+		BTree_Node node = nodes[0];
+		BTree_Node parent = nodes[1];
 
 		// Platze node
 		Integer newParent = new Integer(node.getValue(mid));
