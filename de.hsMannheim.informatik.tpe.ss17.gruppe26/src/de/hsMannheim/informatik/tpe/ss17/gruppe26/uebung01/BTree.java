@@ -77,6 +77,7 @@ public class BTree implements BTree_Interface {
 	@Override
 	public boolean insert(String filename) {
 		// Schleife -> insert
+		//@Ben
 		return false;
 	}
 
@@ -231,12 +232,14 @@ public class BTree implements BTree_Interface {
 	@Override
 	public Integer getMax() {
 		// TODO Auto-generated method stub
+		//@Ben
 		return null;
 	}
 
 	@Override
 	public Integer getMin() {
 		// TODO Auto-generated method stub
+		//@Ben
 		return null;
 	}
 
