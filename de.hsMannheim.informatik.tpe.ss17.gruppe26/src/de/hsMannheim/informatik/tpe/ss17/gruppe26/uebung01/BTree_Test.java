@@ -27,6 +27,12 @@ public class BTree_Test {
 
 	@Test
 	public final void contains(){
+		tree.insert(new Integer(2));
+		tree.insert(new Integer(6));
+		tree.insert(new Integer(7));
+		tree.insert(new Integer(3));
+		tree.insert(new Integer(200));
+		
 		assertEquals("contains(2): ", true, tree.contains(new Integer(2)));
 		assertEquals("contains(5): ", false, tree.contains(new Integer(5)));
 		assertEquals("contains(200): ", true, tree.contains(new Integer(200)));
@@ -47,6 +53,8 @@ public class BTree_Test {
 	
 	@Test
 	public final void isEmpty(){
+		assertEquals("isEmpty: ", true, tree.isEmpty());
+		tree.insert(new Integer(2));
 		assertEquals("isEmpty: ", false, tree.isEmpty());
 	}
 	
