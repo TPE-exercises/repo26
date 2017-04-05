@@ -252,11 +252,15 @@ public class BTree implements BTree_Interface {
 			for (int i = 0; i <= m * 2; i++) {
 				valToCheck = node.getValue(i);
 				if (valToCheck == 0) {
-					System.out.println("DEBUG: Der größte Wert ist: " + valMax);
-					return valMax;
+					if (i > 0 && node.getNode(i) == null) {
+						System.out.println("DEBUG: Der größte Wert ist: " + valMax);
+						return valMax;
+					} else {
+						node = node.getNode(i);
+						i = 0;
+					}
 				}
 				valMax = valToCheck;
-				
 			}
 			System.out.println("DEBUG: Schleife falsch" + valMax);
 			return valMax;
