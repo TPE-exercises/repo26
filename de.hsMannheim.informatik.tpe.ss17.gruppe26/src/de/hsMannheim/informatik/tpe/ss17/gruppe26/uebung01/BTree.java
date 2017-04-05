@@ -1,7 +1,5 @@
 package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
-import de.hsMannheim.informatik.ads.uebung06.TreeNode;
-
 public class BTree implements BTree_Interface {
 
 	public int m;
@@ -224,30 +222,30 @@ public class BTree implements BTree_Interface {
 	public int size() {
 		if (isEmpty())
 			return 0;
-		else{
-			
+		else {
+
 		}
 		return m;
-		
+
 	}
 
 	@Override
 	public int height() {
 		if (isEmpty())
 			return 0;
-		else{
-			
+		else {
+
 		}
 		return m;
-	
+
 	}
 
 	@Override
 	public Integer getMax() {
 		if (isEmpty())
 			return null;
-		else{
-			
+		else {
+
 		}
 		return m;
 
@@ -257,13 +255,17 @@ public class BTree implements BTree_Interface {
 	public Integer getMin() {
 		BTree_Node node = root;
 		Integer valMin;
-		if (isEmpty())
+		if (isEmpty()) {
+			System.out.println("HINWEIS: Der Baum ist leer!");
 			return null;
-		else
-			while (node.getNode(0) != null){
+		} else {
+			while (node.getNode(0) != null) {
 				node.getNode(0);
-			}do (valMin == node.getValue(0));
-		return valMin;
+			}
+			valMin = node.getValue(0);
+			System.out.println("Der kleinste Wert ist: " + valMin);
+			return valMin;
+		}
 	}
 
 	@Override

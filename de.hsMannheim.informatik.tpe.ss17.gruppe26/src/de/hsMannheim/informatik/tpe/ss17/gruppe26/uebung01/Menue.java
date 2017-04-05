@@ -7,7 +7,7 @@ public class Menue {
 	public static void main(String[] args) {
 
 		System.out.println("Version 1.0 (4/2017)");
-		System.out.println("Erstellt von: Sch�nke und Lange");
+		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
 		System.out.println("___________________________________________________");
 		System.out.println("Starte Programm: 0%");
@@ -25,21 +25,31 @@ public class Menue {
 		System.out.println("Programm gestartet. (100%)");
 
 		System.out.println("Was wollen Sie machen?");
+		System.out.println("(1) Werte manuell einfügen");
+		System.out.println("(2) Werte über Datei einfügen");
+		System.out.println("(3) Wert finden");
+		System.out.println("(4) Anzahl der Werte zählen lassen");
+		System.out.println("(5) Höhe des Baumes ausgeben lassen");
+		System.out.println("(6) Größtes Element ausgeben lassen");
+		System.out.println("(7) Kleinestes Element ausgeben lassen");
 		switch (readInt()) {
 		case (1):// insert(integer)
-			tree.insert(3);
-			tree.insert(5);
-			tree.insert(4);
-			break;
+		//	tree.insert(3);
+		//	tree.insert(5);
+		//	tree.insert(4);
+			//break;
 		case (2):// insert(file)
-			break;
+			//break;
 		case (3):// contains(integer)
-			break;
+			//break;
 		case (4):// size()
-			break;
+			//break;
 		case (5):// height()
-			break;
+			//break;
 		case (6):// getMax();
+			//break;
+		case (7):// getMin();
+			tree.getMin();
 			break;
 		// TODO alles weitere
 		}
