@@ -27,7 +27,7 @@ public class Menue {
 		System.out.println(".......................");
 		System.out.println("Programm gestartet. (100%)");
 		while (weitermachen) {
-			System.out.println(".......................................................");
+			System.out.println("___________________________________________________");
 			switch (zurueck) {
 			case (1):
 				System.out.println("Doch anders entschieden?");
@@ -62,13 +62,13 @@ public class Menue {
 				weitermachen = false;
 				break;
 			}
-			System.out.println("........................");
-
+			System.out.println();
 			if (numberOfRuns == 0)
 				System.out.println("Was wollen Sie machen?");
 			else
 				System.out.println("Was wollen Sie als nächste tun?");
 			numberOfRuns++;
+			System.out.println();
 			System.out.println("(1) Werte in Baum einfügen");
 			System.out.println("(2) Werte finden");
 			System.out.println("(3) Baum auf Leere prüfen");
@@ -78,7 +78,7 @@ public class Menue {
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): // Werte in Baum einfügen
-				System.out.println(".......................................................");
+				System.out.println("..........................................");
 				System.out.println("Wie wollen Sie Werte in den Baum einfügen?");
 				System.out.println("(1) Werte per Hand eingeben");
 				System.out.println("(2) Werte per Datei einfügen");
@@ -88,7 +88,7 @@ public class Menue {
 					System.out.println("Werte werden in den Baum eingefügt...");
 					tree.insert(5);
 					tree.insert(3);
-					tree.insert(4);
+					// tree.insert(4);
 					break;
 				case (2): // TODO
 					// insert(file);
@@ -99,7 +99,7 @@ public class Menue {
 				}
 				break;
 			case (2): // Werte finden
-				System.out.println(".......................................................");
+				System.out.println("................................................");
 				System.out.println("Welche Werte möchten Sie finden/ausgeben lassen?");
 				System.out.println("(1) Einen bestimmten Wert finden");
 				System.out.println("(2) Die Größe des Baumes herausfinden");
@@ -159,11 +159,21 @@ public class Menue {
 						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
 				break;
 			case (5): // Aktuellen Baum klonen
-				System.out.println(
-						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+				if (tree.isEmpty()) {
+					System.out.println("Sie müssen erst einen Baum erstellen, bevor Sie ihn klonen können!");
+					break;
+				} else
+					System.out.println(
+							"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+			BTree_Interface othertree;
+			othertree = tree.clone();
 				break;
 			case (6): // Baum ausgeben lassen
-				System.out.println(".......................................................");
+				if (tree.isEmpty()) {
+					System.out.println("Es gibt noch keinen Baum, den Sie ausgeben lassen können!");
+					break;
+				}
+				System.out.println("....................................");
 				System.out.println("Wie soll der Baum ausgegeben werden?");
 				System.out.println("(1) Baum als Inorder ausgeben lassen");
 				System.out.println("(2) Baum als Postorder ausgeben lassen");
@@ -193,26 +203,8 @@ public class Menue {
 				}
 				break;
 			case (0): // Programm beenden
-				System.out.println("Neeeeeeeeeeeeeeeeeeiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnn");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 				System.out.println("Programm wird beendet...");
-				System.out.println("!!!");
-				System.out.println("NIIIIICCCCHTTT!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 75%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 50%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("AAAAAAAAAAAAAAAhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh........");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 25%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("hhhhhhhhhhhh........");
-				System.out.println(".......................................................");
-				System.out.println(".........................");
 				System.out.println("......");
 				System.out.println();
 				weitermachen = false;
