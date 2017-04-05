@@ -15,13 +15,13 @@ public class BTree_Test {
 		tree2.insert(new Integer(2));
 		assertEquals("Insert(2): ", false, tree.insert(new Integer(2)));
 		assertEquals("Insert(6): ", true, tree.insert(new Integer(6)));
-		tree2.insert(new Integer(6));
-		assertEquals("Insert(7): ", true, tree.insert(new Integer(7)));
-		tree2.insert(new Integer(7));
-		assertEquals("Insert(3): ", true, tree.insert(new Integer(3)));
-		tree2.insert(new Integer(3));
-		assertEquals("Insert(200): ", true, tree.insert(new Integer(200)));
-		tree2.insert(new Integer(200));
+//		tree2.insert(new Integer(6));
+//		assertEquals("Insert(7): ", true, tree.insert(new Integer(7)));
+//		tree2.insert(new Integer(7));
+//		assertEquals("Insert(3): ", true, tree.insert(new Integer(3)));
+//		tree2.insert(new Integer(3));
+//		assertEquals("Insert(200): ", true, tree.insert(new Integer(200)));
+//		tree2.insert(new Integer(200));
 		
 	}
 
