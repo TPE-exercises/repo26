@@ -75,9 +75,8 @@ public class BTree implements BTree_Interface {
 	}
 
 	@Override
-	public boolean insert(String filename) {
+	public boolean insert(String filename) { // TODO @BEN
 		// Schleife -> insert
-		// @Ben
 		return false;
 	}
 
@@ -219,58 +218,64 @@ public class BTree implements BTree_Interface {
 	}
 
 	@Override
-	public int size() {
-		if (isEmpty())
-			return 0;
-		else {
-
-		}
-		return m;
-
-	}
-
-	@Override
-	public int height() {
-		if (isEmpty())
-			return 0;
-		else {
-
-		}
-		return m;
-
-	}
-
-	@Override
-	public Integer getMax() {
-		if (isEmpty())
-			return null;
-		else {
-
-		}
-		return m;
-
-	}
-
-	@Override
-	public Integer getMin() {
-		BTree_Node node = root;
-		Integer valMin;
+	public int size() { // TODO @BEN
+		int sizeNumber = 0;
 		if (isEmpty()) {
-			System.out.println("HINWEIS: Der Baum ist leer!");
+			System.out.println("DEBUG: Es gibt Element im Baum! ");
+			return sizeNumber;
+		} else {
+			return sizeNumber;
+		}
+	}
+
+	@Override
+	public int height() { // TODO @BEN
+		int heightNumber = 0;
+		if (isEmpty()) {
+			System.out.println("DEBUG: Die Höhe ist Null! ");
+			return heightNumber;
+		} else {
+			return heightNumber;
+		}
+	}
+
+	@Override
+	public Integer getMax() { // TODO @BEN
+		BTree_Node node = root;
+		Integer valMax = null;
+		if (isEmpty()) {
+			System.out.println("Es gibt kein größtes Element.");
+			return null;
+		} else {
+			return valMax;
+		}
+	}
+
+	@Override
+	public Integer getMin() { // TODO @BEN
+		BTree_Node node = root;
+		Integer valMin = null;
+		if (isEmpty()) {
+			System.out.println("Es gibt kein kleinstes Element.");
 			return null;
 		} else {
 			while (node.getNode(0) != null) {
 				node.getNode(0);
 			}
 			valMin = node.getValue(0);
-			System.out.println("Der kleinste Wert ist: " + valMin);
+			System.out.println("DEBUG: Der kleinste Wert ist: " + valMin);
 			return valMin;
 		}
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return this.getRoot() == null ? true : false;
+		if (this.getRoot() == null) {
+			System.out.println("HINWEIS: Der Baum ist leer!");
+			return true;
+		} else
+			return false;
+		// return this.getRoot() == null ? true : false;
 	}
 
 	@Override
