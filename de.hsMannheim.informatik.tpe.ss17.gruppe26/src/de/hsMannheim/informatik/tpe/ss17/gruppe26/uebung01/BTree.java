@@ -52,16 +52,16 @@ public class BTree implements BTree_Interface {
 	 */
 	private boolean rec_insert(Integer o, BTree_Node node, BTree_Node parent, int index) {
 		// TODO Linken Pfad einf�gen klappt aber rechter kommt nich in child
-		
+
 		if (node.getValue(index) == null) {
 			if (node.getNode(index) != null)
-				return rec_insert(o, node.getNode(index),node, 0);
-			else{
+				return rec_insert(o, node.getNode(index), node, 0);
+			else {
 				node.setValue(o, index);
-				//TODO Debug
+				// TODO Debug
 				System.out.println("teste ob platzt 1 [index=" + index + "]");
-				if(index==2*this.m){
-					BTree_Node[] nodes = {node, parent};
+				if (index == 2 * this.m) {
+					BTree_Node[] nodes = { node, parent };
 					burst(nodes);
 				}
 				return true;
@@ -72,15 +72,15 @@ public class BTree implements BTree_Interface {
 			} else {
 				boolean needToBurst = node.moveForward(index, this.m);
 				node.setValue(o, index);
-				
-				//TODO Debug
+
+				// TODO Debug
 				System.out.println("Wert: " + o + " eingefügt");
 				System.out.println("teste ob platzt 2 [index=" + index + "]");
-				if(index==2*this.m || needToBurst){
-					BTree_Node[] nodes = {node, parent};
+				if (index == 2 * this.m || needToBurst) {
+					BTree_Node[] nodes = { node, parent };
 					burst(nodes);
 				}
-				
+
 				// TODO verkn�pungen anh�ngen
 				return true;
 			}
@@ -96,27 +96,23 @@ public class BTree implements BTree_Interface {
 		return false;
 	}
 
-
 	/**
 	 * 
 	 */
 	public void burst(BTree_Node[] nodes) {
-		
-		
-		if (nodes == null){
+
+		if (nodes == null) {
 			return;
 		}
-		
+
 		// Hilfsvariablen
 		int m1 = 2 * m + 1;
 		int mid = m1 / 2;
 		BTree_Node node = nodes[0];
 		BTree_Node parent = nodes[1];
-		
-		
-		
+
 		// Platze node
-		//TODO NullPointer verhindern
+		// TODO NullPointer verhindern
 		Integer newParent = new Integer(node.getValue(mid));
 		BTree_Node n1 = new BTree_Node(this.m);
 		BTree_Node n2 = new BTree_Node(this.m);
@@ -156,7 +152,8 @@ public class BTree implements BTree_Interface {
 		}
 
 	}
-//TODO nie getestet -> testen!
+
+	// TODO nie getestet -> testen!
 	@Override
 	public boolean contains(Integer o) {
 		if (isEmpty())
@@ -194,7 +191,7 @@ public class BTree implements BTree_Interface {
 	public int size() { // TODO @BEN
 		int countingNumber = 0;
 		if (isEmpty()) {
-			System.out.println("DEBUG: Es gibt Element im Baum!");
+			System.out.println("Hinweis: Es gibt kein Element im Baum!");
 			return countingNumber;
 		} else {
 			return countingNumber;
@@ -206,35 +203,38 @@ public class BTree implements BTree_Interface {
 		BTree_Node node = root;
 		int heightNumber = 1;
 		if (isEmpty()) {
-			System.out.println("DEBUG: Die Höhe ist Null!");
+			// System.out.println("DEBUG: Die Höhe ist Null!");
 			return 0;
 		} else {
 			while (node.getNode(0) != null) {
 				node.getNode(0);
 				heightNumber++;
 			}
-			System.out.println("DEBUG: Die Höhe des B-Baumes ist: " + heightNumber);
+			// System.out.println("DEBUG: Die Höhe des B-Baumes ist: " +
+			// heightNumber);
 			return heightNumber;
-
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Integer getMax() { // TODO @BEN
 		BTree_Node node = root;
 		Integer valMax = 0;
 		Integer valToCheck = 0;
-
 		if (isEmpty()) {
-			//TODO [Verbesserung: ] println in Menue verschieben, ausgabe "null" kommentieren im JavaDoc
-			System.out.println("Es gibt kein größtes Element.");
+			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
+			// System.out.println("DEBUG: Es gibt kein größtes Element.");
 			return null;
 		} else {
 			for (int i = 0; i <= m * 2; i++) {
 				valToCheck = node.getValue(i);
 				if (valToCheck == 0) {
 					if (i > 0 && node.getNode(i) == null) {
-						System.out.println("***DEBUG: Der größte Wert ist: " + valMax);
+						// System.out.println("***DEBUG: Der größte Wert ist: "
+						// + valMax);
 						return valMax;
 					} else {
 						node = node.getNode(i);
@@ -248,25 +248,32 @@ public class BTree implements BTree_Interface {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public Integer getMin() { // TODO @BEN
 		BTree_Node node = root;
-		Integer valMin = null;
+
 		if (isEmpty()) {
-			//TODO [Verbesserung: ] println in Menue verschieben, ausgabe "null" kommentieren im JavaDoc
-			System.out.println("Es gibt kein kleinstes Element.");
+			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
+			// System.out.println("DEBUG: Es gibt kein kleinstes Element.");
 			return null;
 		} else {
 			while (node.getNode(0) != null) {
 				node.getNode(0);
 			}
-			//TODO [Verbesserung / Programmoptimierung : ] valMin wird nicht benötigt (return node.getValue(0).intValue();)
-			valMin = node.getValue(0);
-			System.out.println("***DEBUG: Der kleinste Wert ist: " + valMin);
-			return valMin;
+			// TODO [Verbesserung / Programmoptimierung : ] valMin wird nicht
+			// benötigt (return node.getValue(0).intValue();)
+			// System.out.println("***DEBUG: Der kleinste Wert ist: " +
+			// node.getValue(0));
+			return node.getValue(0);
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isEmpty() {
 		if (this.getRoot() == null) {
