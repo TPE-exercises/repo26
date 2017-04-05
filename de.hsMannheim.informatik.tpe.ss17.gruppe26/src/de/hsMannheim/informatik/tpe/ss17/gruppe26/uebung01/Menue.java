@@ -72,7 +72,7 @@ public class Menue {
 				if (size == 0)
 					System.out.println("Es gibt kein Element im Baum!");
 				System.out.println("[size] Im B-Baum gibt es " + size + "Elemente.");
-				/break;
+				break;
 			case (5): // Aktuellen Baum klonen
 				int height = 0;
 				height = tree.height();
