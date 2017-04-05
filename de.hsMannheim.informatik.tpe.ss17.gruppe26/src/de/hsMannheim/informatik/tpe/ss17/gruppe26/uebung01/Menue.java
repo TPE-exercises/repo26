@@ -37,7 +37,7 @@ public class Menue {
 			tree.insert(5);
 			tree.insert(3);
 			tree.insert(4);
-			// break;
+			 break;
 		case (2):// insert(file);
 			// break;
 		case (3): // contains(integer);
