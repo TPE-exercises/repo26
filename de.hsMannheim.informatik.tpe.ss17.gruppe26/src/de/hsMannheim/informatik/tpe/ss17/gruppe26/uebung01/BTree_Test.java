@@ -15,13 +15,13 @@ public class BTree_Test {
 		tree2.insert(new Integer(2));
 		assertEquals("Insert(2): ", false, tree.insert(new Integer(2)));
 		assertEquals("Insert(6): ", true, tree.insert(new Integer(6)));
-//		tree2.insert(new Integer(6));
-//		assertEquals("Insert(7): ", true, tree.insert(new Integer(7)));
-//		tree2.insert(new Integer(7));
-//		assertEquals("Insert(3): ", true, tree.insert(new Integer(3)));
-//		tree2.insert(new Integer(3));
-//		assertEquals("Insert(200): ", true, tree.insert(new Integer(200)));
-//		tree2.insert(new Integer(200));
+		tree2.insert(new Integer(6));
+		assertEquals("Insert(7): ", true, tree.insert(new Integer(7)));
+		tree2.insert(new Integer(7));
+		assertEquals("Insert(3): ", true, tree.insert(new Integer(3)));
+		tree2.insert(new Integer(3));
+		assertEquals("Insert(200): ", true, tree.insert(new Integer(200)));
+		tree2.insert(new Integer(200));
 		
 	}
 
@@ -61,6 +61,6 @@ public class BTree_Test {
 	@Test
 	public final void cloneTest(){
 		//dürfte nicht klappen, da nur Speicheradressen verglichen werden
-		assertEquals("clone: ", tree2, tree.clone());
+		assertEquals("clone: ", tree, tree.clone());
 	}
 }

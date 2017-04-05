@@ -20,16 +20,23 @@ public class BTree implements BTree_Interface {
 	public void printM() {
 
 	}
-
+	private boolean needToBurst;
+	private BTree_Node burstNode;
+	private BTree_Node burstParent;
+	
+	
 	@Override
 	public boolean insert(Integer o) {
-
+		needToBurst = false;
+		burstNode = null;
+		burstParent = null;
+		
 		if (this.contains(o)) {
-			System.out.println("Fuege " + o + " nicht ein.");
+			System.out.println("***Debug: Wert " + o + " ist bereits im Baum.");
 			return false;
 		}
-
-		if (getRoot() == null) {
+		else if (getRoot() == null) {
+			System.out.println("***Debug: Wert " + o + " ist der erste Wert im Baum (neue Wurzel).");
 			BTree_Node node = new BTree_Node(this.m);
 			node.setValue(o, 0);
 			setRoot(node);
@@ -40,54 +47,53 @@ public class BTree implements BTree_Interface {
 
 	}
 
+
 	/**
-	 * @TODO testen
-	 * @param Integer
-	 *            o
-	 * @param BTree_Node
-	 *            node
-	 * @param int
-	 *            index
-	 * @return boolean
+	 * 
+	 * @param o
+	 * @param node
+	 * @param parent
+	 * @param index
+	 * @return
 	 */
 	private boolean rec_insert(Integer o, BTree_Node node, BTree_Node parent, int index) {
-		// TODO Linken Pfad einf�gen klappt aber rechter kommt nich in child
 
-		if (node.getValue(index) == null) {
-			if (node.getNode(index) != null)
-				return rec_insert(o, node.getNode(index), node, 0);
-			else {
+		//Position ist frei
+		if(node.getValue(index)==null){
+			//kein Kind an dieser Stelle -> Position richtig
+			if (node.getNode(index) == null){
 				node.setValue(o, index);
-				// TODO Debug
-				System.out.println("teste ob platzt 1 [index=" + index + "]");
+				
+				//Platze wenn index die letzte position ist
 				if (index == 2 * this.m) {
-					BTree_Node[] nodes = { node, parent };
-					burst(nodes);
+					do{
+						//TODO platze
+					}while(needToBurst);
 				}
 				return true;
 			}
-		} else if (o < node.getValue(index)) {
-			if (node.getNode(index) != null) {
+			//es gibt noch ein Kind!
+			else{
 				return rec_insert(o, node.getNode(index), node, 0);
-			} else {
-				boolean needToBurst = node.moveForward(index, this.m);
-				node.setValue(o, index);
-
-				// TODO Debug
-				System.out.println("Wert: " + o + " eingefügt");
-				System.out.println("teste ob platzt 2 [index=" + index + "]");
-				if (index == 2 * this.m || needToBurst) {
-					BTree_Node[] nodes = { node, parent };
-					burst(nodes);
-				}
-
-				// TODO verkn�pungen anh�ngen
-				return true;
 			}
-		} else/* (o>node.getValue(index)) */ {
+		}
+		//wert ist kleiner
+		else if(o < node.getValue(index)){
+			//kein Kind an dieser Stelle -> Position richtig aber möglicherweise belegt
+			if(node.getNode(index) == null){
+				//TODO ggf prüfen, ob geschoben werden muss
+				boolean needToBurst = node.moveForward(index, this.m);
+				return rec_insert(o, node, parent, index);
+			}
+			else{
+				return rec_insert(o, node.getNode(index), node, 0);
+			}
+		}
+		//wert ist größer
+		else{
 			return rec_insert(o, node, parent, index + 1);
 		}
-
+		
 	}
 
 	@Override
@@ -216,9 +222,7 @@ public class BTree implements BTree_Interface {
 		}
 	}
 
-	/**
-	 * 
-	 */
+
 	@Override
 	public Integer getMax() { // TODO @BEN
 		BTree_Node node = root;
@@ -248,9 +252,7 @@ public class BTree implements BTree_Interface {
 		}
 	}
 
-	/**
-	 * 
-	 */
+
 	@Override
 	public Integer getMin() { // TODO @BEN
 		BTree_Node node = root;
@@ -271,9 +273,7 @@ public class BTree implements BTree_Interface {
 		}
 	}
 
-	/**
-	 * 
-	 */
+
 	@Override
 	public boolean isEmpty() {
 		if (this.getRoot() == null) {
