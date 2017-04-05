@@ -33,7 +33,7 @@ public class BTree implements BTree_Interface {
 			BTree_Node node = new BTree_Node(this.m);
 			node.setValue(o, 0);
 			setRoot(node);
-			this.burst();
+			// this.burst();
 			return true;
 		} else {
 			return this.rec_insert(o, getRoot(), 0);
@@ -219,12 +219,12 @@ public class BTree implements BTree_Interface {
 
 	@Override
 	public int size() { // TODO @BEN
-		int sizeNumber = 0;
+		int countingNumber = 0;
 		if (isEmpty()) {
-			System.out.println("DEBUG: Es gibt Element im Baum! ");
-			return sizeNumber;
+			System.out.println("DEBUG: Es gibt Element im Baum!");
+			return countingNumber;
 		} else {
-			return sizeNumber;
+			return countingNumber;
 		}
 	}
 
@@ -232,7 +232,7 @@ public class BTree implements BTree_Interface {
 	public int height() { // TODO @BEN
 		int heightNumber = 0;
 		if (isEmpty()) {
-			System.out.println("DEBUG: Die Höhe ist Null! ");
+			System.out.println("DEBUG: Die Höhe ist Null!");
 			return heightNumber;
 		} else {
 			return heightNumber;
@@ -242,11 +242,23 @@ public class BTree implements BTree_Interface {
 	@Override
 	public Integer getMax() { // TODO @BEN
 		BTree_Node node = root;
-		Integer valMax = null;
+		Integer valMax = 0;
+		Integer valToCheck = 0;
+
 		if (isEmpty()) {
 			System.out.println("Es gibt kein größtes Element.");
 			return null;
 		} else {
+			for (int i = 0; i <= m * 2; i++) {
+				valToCheck = node.getValue(i);
+				if (valToCheck == 0) {
+					System.out.println("DEBUG: Der größte Wert ist: " + valMax);
+					return valMax;
+				}
+				valMax = valToCheck;
+				
+			}
+			System.out.println("DEBUG: Schleife falsch" + valMax);
 			return valMax;
 		}
 	}
@@ -271,7 +283,7 @@ public class BTree implements BTree_Interface {
 	@Override
 	public boolean isEmpty() {
 		if (this.getRoot() == null) {
-			System.out.println("HINWEIS: Der Baum ist leer!");
+			System.out.println("DEBUG: Der Baum ist leer!");
 			return true;
 		} else
 			return false;

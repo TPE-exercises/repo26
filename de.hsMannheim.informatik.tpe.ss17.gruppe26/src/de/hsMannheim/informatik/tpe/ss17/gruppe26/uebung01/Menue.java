@@ -33,27 +33,34 @@ public class Menue {
 		System.out.println("(6) Größtes Element ausgeben lassen");
 		System.out.println("(7) Kleinestes Element ausgeben lassen");
 		switch (readInt()) {
-		case (1):// insert(integer)
-		//	tree.insert(3);
-		//	tree.insert(5);
-		//	tree.insert(4);
-			//break;
-		case (2):// insert(file)
-			//break;
-		case (3):// contains(integer)
-			//break;
-		case (4):// size()
-			//break;
-		case (5):// height()
-			//break;
-		case (6):// getMax();
-			//break;
-		case (7):// getMin();
-			tree.getMin();
+		case (1):
+			tree.insert(5);
+			tree.insert(3);
+			tree.insert(4);
+			// break;
+		case (2):// insert(file);
+			// break;
+		case (3): // contains(integer);
+			// break;
+		case (4):
+			// tree.size();
+			// break;
+		case (5)://
+			// tree.height();
+			// break;
+		case (6):
+			Integer maxVal = null;
+			maxVal = tree.getMax();
+			System.out.println("Der größte Wert ist: " + maxVal);
+			// break;
+		case (7):
+			Integer minVal = null;
+			minVal = tree.getMin();
+			System.out.println("Der kleinste Wert ist: " + minVal);
 			break;
 		// TODO alles weitere
 		}
-System.out.println("ENDE");
+		System.out.println("ENDE");
 	}
 
 }
