@@ -61,6 +61,6 @@ public class BTree_Test {
 	@Test
 	public final void cloneTest(){
 		//dürfte nicht klappen, da nur Speicheradressen verglichen werden
-		assertEquals("clone: ", tree2, tree.clone());
+		assertEquals("clone: ", tree, tree.clone());
 	}
 }

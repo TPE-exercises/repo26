@@ -112,16 +112,14 @@ public class BTree_Node {
 	 */
 	public boolean moveForward(int index, int m) {
 
+		// Verschiebe alle nodes [bis] index um einen nach hinten
 		for (int i = 2 * m; i > index; i--) {
-			Integer integer;
-			if (this.integerArray[i - 1] == null) {
-				integer = new Integer(0);
-			} else {
-				integer = new Integer(this.integerArray[i - 1]);
-			}
-			integerArray[i] = integer;
+			this.integerArray[i] = this.integerArray[i - 1];
 		}
-		if(integerArray[2*this.m] != null){
+		// mache position frei
+		integerArray[index] = null;
+		// prüfe ob node nun voll ist
+		if (integerArray[2 * this.m] != null) {
 			System.out.println("***Debug: moveForward hat die Node zum Platzen gebracht");
 			return true;
 		}
@@ -165,9 +163,9 @@ public class BTree_Node {
 		int i = 0;
 		while (i < this.integerArray.length) {
 			if (this.getNode(i) != null)
-				res += " y ";
+				res += " -y- ";
 			else
-				res += " n ";
+				res += " -n- ";
 
 			if (this.getValue(i) != null)
 				res += "| " + this.getValue(i) + " |";
@@ -177,9 +175,9 @@ public class BTree_Node {
 			i++;
 		}
 		if (this.getNode(i) != null)
-			res += " y ]";
+			res += " -y- ]";
 		else
-			res += " n ]";
+			res += " -n- ]";
 
 		return res;
 
