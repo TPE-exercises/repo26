@@ -29,7 +29,7 @@ public class BTree_Node {
 		this.m = m;
 		this.integerArray = integerArray;
 		this.bTreeNodeArray = bTreeNodeArray;
-		System.out.println("Constructor 1 Class BTree_Node [m=" + m +"]");
+		System.out.println("Constructor 1 Class BTree_Node [m=" + m + "]");
 	}
 
 	// /**
@@ -70,7 +70,7 @@ public class BTree_Node {
 	public void setValue(Integer value, int index) {
 
 		this.integerArray[index] = value;
-	
+
 	}
 
 	/**
@@ -108,8 +108,9 @@ public class BTree_Node {
 	 * 
 	 * @param int
 	 *            index
+	 * @return true when last index belegt wurde
 	 */
-	public void moveForward(int index, int m) {
+	public boolean moveForward(int index, int m) {
 
 		for (int i = 2 * m; i > index; i--) {
 			Integer integer;
@@ -120,16 +121,21 @@ public class BTree_Node {
 			}
 			integerArray[i] = integer;
 		}
+		if(integerArray[2*this.m] != null){
+			System.out.println("***Debug: moveForward hat die Node zum Platzen gebracht");
+			return true;
+		}
+		return false;
 
 	}
-	
-	public int getIndexForO(Integer o){
-		
-		int index=0;
-		while(0>integerArray[index]){
+
+	public int getIndexForO(Integer o) {
+
+		int index = 0;
+		while (0 > integerArray[index]) {
 			index++;
 		}
-		
+
 		return index;
 	}
 
@@ -156,26 +162,24 @@ public class BTree_Node {
 	public String toString() {
 		String res = "[";
 
-		int i=0;
+		int i = 0;
 		while (i < this.integerArray.length) {
-			if(this.getNode(i)!=null)
-				res+=" y ";
+			if (this.getNode(i) != null)
+				res += " y ";
 			else
-				res+=" n ";
+				res += " n ";
 
-			
 			if (this.getValue(i) != null)
 				res += "| " + this.getValue(i) + " |";
 			else
-				res+= "| null |";
-			
-			
+				res += "| null |";
+
 			i++;
 		}
-		if(this.getNode(i)!=null)
-			res+=" y ]";
+		if (this.getNode(i) != null)
+			res += " y ]";
 		else
-			res+=" n ]";
+			res += " n ]";
 
 		return res;
 

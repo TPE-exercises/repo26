@@ -156,13 +156,12 @@ public class BTree implements BTree_Interface {
 		}
 
 	}
-
+//TODO nie getestet -> testen!
 	@Override
 	public boolean contains(Integer o) {
 		if (isEmpty())
 			return false;
 		return this.rec_contains(o, getRoot(), 0);
-
 	}
 
 	/**
