@@ -242,7 +242,6 @@ public class BTree implements BTree_Interface {
 			}
 			System.out.println("DEBUG: Die Höhe des B-Baumes ist: " + heightNumber);
 			return heightNumber;
-
 		}
 	}
 
@@ -251,7 +250,6 @@ public class BTree implements BTree_Interface {
 		BTree_Node node = root;
 		Integer valMax = 0;
 		Integer valToCheck = 0;
-
 		if (isEmpty()) {
 			System.out.println("Es gibt kein größtes Element.");
 			return null;
