@@ -65,9 +65,10 @@ public class BTree implements BTree_Interface {
 				node.setValue(o, index);
 				
 				//Platze wenn index die letzte position ist
-				if (index == 2 * this.m) {
+				if (index == 2 * this.m || needToBurst) {
 					do{
-						//TODO platze
+						BTree_Node[] nodes = {node, parent};
+						burst(nodes);
 					}while(needToBurst);
 				}
 				return true;
