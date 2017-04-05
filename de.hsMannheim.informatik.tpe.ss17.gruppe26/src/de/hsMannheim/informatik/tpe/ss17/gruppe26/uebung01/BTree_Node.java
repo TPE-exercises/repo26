@@ -163,9 +163,9 @@ public class BTree_Node {
 		int i = 0;
 		while (i < this.integerArray.length) {
 			if (this.getNode(i) != null)
-				res += " y ";
+				res += " -y- ";
 			else
-				res += " n ";
+				res += " -n- ";
 
 			if (this.getValue(i) != null)
 				res += "| " + this.getValue(i) + " |";
@@ -175,9 +175,9 @@ public class BTree_Node {
 			i++;
 		}
 		if (this.getNode(i) != null)
-			res += " y ]";
+			res += " -y- ]";
 		else
-			res += " n ]";
+			res += " -n- ]";
 
 		return res;
 
