@@ -230,12 +230,19 @@ public class BTree implements BTree_Interface {
 
 	@Override
 	public int height() { // TODO @BEN
-		int heightNumber = 0;
+		BTree_Node node = root;
+		int heightNumber = 1;
 		if (isEmpty()) {
 			System.out.println("DEBUG: Die Höhe ist Null!");
-			return heightNumber;
+			return 0;
 		} else {
+			while (node.getNode(0) != null) {
+				node.getNode(0);
+				heightNumber++;
+			}
+			System.out.println("DEBUG: Die Höhe des B-Baumes ist: " + heightNumber);
 			return heightNumber;
+
 		}
 	}
 

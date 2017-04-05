@@ -46,7 +46,9 @@ public class Menue {
 			// tree.size();
 			// break;
 		case (5)://
-			// tree.height();
+			int height = 0;
+			height = tree.height();
+			System.out.println("Die Höhe des B-Baumes ist: " + height);
 			// break;
 		case (6):
 			Integer maxVal = null;
