@@ -193,28 +193,9 @@ public class Menue {
 				}
 				break;
 			case (0): // Programm beenden
-				System.out.println("Neeeeeeeeeeeeeeeeeeiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnn");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 				System.out.println("Programm wird beendet...");
-				System.out.println("!!!");
-				System.out.println("NIIIIICCCCHTTT!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 75%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 50%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("AAAAAAAAAAAAAAAhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh........");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("Beende Programm: 25%");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("hhhhhhhhhhhh........");
-				System.out.println(".......................................................");
-				System.out.println(".........................");
-				System.out.println("......");
-				System.out.println();
+
 				weitermachen = false;
 				break;
 			// TODO alles weitere
