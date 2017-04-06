@@ -64,7 +64,7 @@ public class BTree implements BTree_Interface {
 	System.out.println("***Debug: Ein Wert wurde eingefügt -->" + o);
 				//Platze wenn index die letzte position ist
 				if (index == 2 * this.m || needToBurst) {
-					do{
+					do{//TODO klappt beim 2. mal nicht! parent ist unbekannt child= parent
 						BTree_Node[] nodes = {node, parent};
 						burst(nodes);
 	System.out.println("***Debug: BURST!!!");
@@ -161,7 +161,7 @@ public class BTree implements BTree_Interface {
 
 	}
 
-	// TODO nie getestet -> testen!
+	// TODO klappt nicht
 	@Override
 	public boolean contains(Integer o) {
 		if (isEmpty())
@@ -226,7 +226,7 @@ public class BTree implements BTree_Interface {
 
 
 	@Override
-	public Integer getMax() { // TODO @BEN
+	public Integer getMax() { 
 		BTree_Node node = root;
 		Integer valMax = 0;
 		Integer valToCheck = 0;
@@ -256,7 +256,7 @@ public class BTree implements BTree_Interface {
 
 
 	@Override
-	public Integer getMin() { // TODO @BEN
+	public Integer getMin() { 
 		BTree_Node node = root;
 
 		if (isEmpty()) {
