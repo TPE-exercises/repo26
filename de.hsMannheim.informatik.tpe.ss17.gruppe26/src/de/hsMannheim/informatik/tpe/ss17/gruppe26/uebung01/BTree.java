@@ -303,27 +303,39 @@ public class BTree implements BTree_Interface {
 	}
 
 	@Override
-	public void printInorder() {
-		// TODO Auto-generated method stub
+	public void printInorder() { // TODO @Ben
 
 	}
 
 	@Override
-	public void printPostorder() {
-		// TODO Auto-generated method stub
-
+	public void printPostorder() { // TODO @Ben
+		BTree_Node node = root;
+		while (node.getNode(0) != null) {
+			node = node.getNode(0);
+		}
+		System.out.println(node.toString());
 	}
 
 	@Override
-	public void printPreorder() {
-		// TODO Auto-generated method stub
-
+	public void printPreorder() { // TODO @Ben
+		BTree_Node node = root;
+		int ebene = 0;
+		System.out.println("Ebene " + ebene + ":" + node.toString());
+		while (node.getNode(0) != null) {
+			node = node.getNode(0);
+			ebene--;
+			System.out.println("Ebene " + ebene + ":" + node.toString());
+		}
+		
+		
+		
+		System.out.println("_Ende der Preorder-Ausgabe_");
 	}
 
 	@Override
-	public void printLevelorder() {
-		// TODO Auto-generated method stub
-
+	public void printLevelorder() { // TODO @Ben
+		BTree_Node node = root;
+		System.out.println(node.toString());
 	}
 
 	public BTree_Node getRoot() {
