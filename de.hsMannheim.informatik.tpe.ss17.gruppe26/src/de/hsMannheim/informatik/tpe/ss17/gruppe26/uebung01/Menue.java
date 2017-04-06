@@ -27,7 +27,7 @@ public class Menue {
 		System.out.println(".......................");
 		System.out.println("Programm gestartet. (100%)");
 		while (weitermachen) {
-			System.out.println(".......................................................");
+			System.out.println("___________________________________________________");
 			switch (zurueck) {
 			case (1):
 				System.out.println("Doch anders entschieden?");
