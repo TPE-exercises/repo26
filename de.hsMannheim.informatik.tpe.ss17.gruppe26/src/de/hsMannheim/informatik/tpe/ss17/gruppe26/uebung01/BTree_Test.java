@@ -6,22 +6,17 @@ import org.junit.*;
 public class BTree_Test {
 
 	BTree_Interface tree = new BTree(1);
-	BTree_Interface tree2 = new BTree(1);
+//	BTree_Interface tree2 = new BTree(1);
 
 
 	@Test
 	public final void insert() {
 		assertEquals("Insert(2): ", true, tree.insert(new Integer(2)));
-		tree2.insert(new Integer(2));
-		assertEquals("Insert(2): ", false, tree.insert(new Integer(2)));
 		assertEquals("Insert(6): ", true, tree.insert(new Integer(6)));
-		tree2.insert(new Integer(6));
+		assertEquals("Insert(2): ", false, tree.insert(new Integer(2)));
 		assertEquals("Insert(7): ", true, tree.insert(new Integer(7)));
-		tree2.insert(new Integer(7));
 		assertEquals("Insert(3): ", true, tree.insert(new Integer(3)));
-		tree2.insert(new Integer(3));
 		assertEquals("Insert(200): ", true, tree.insert(new Integer(200)));
-		tree2.insert(new Integer(200));
 		
 	}
 
@@ -43,11 +38,21 @@ public class BTree_Test {
 	
 	@Test
 	public final void getMax() {
+	tree.insert(new Integer(2));
+	tree.insert(new Integer(6));
+	tree.insert(new Integer(7));
+	tree.insert(new Integer(3));
+	tree.insert(new Integer(200));
 		assertEquals("GetMax: ", new Integer(200), tree.getMax());
 	}
 
 	@Test
 	public final void getMin() {
+		tree.insert(new Integer(2));
+		tree.insert(new Integer(6));
+		tree.insert(new Integer(7));
+		tree.insert(new Integer(3));
+		tree.insert(new Integer(200));
 		assertEquals("getMin: ",new Integer(2), tree.getMin());
 	}
 	
@@ -58,9 +63,9 @@ public class BTree_Test {
 		assertEquals("isEmpty: ", false, tree.isEmpty());
 	}
 	
-	@Test
-	public final void cloneTest(){
-		//dürfte nicht klappen, da nur Speicheradressen verglichen werden
-		assertEquals("clone: ", tree, tree.clone());
-	}
+//	@Test
+//	public final void cloneTest(){
+//		//dürfte nicht klappen, da nur Speicheradressen verglichen werden
+//		assertEquals("clone: ", tree, tree.clone());
+//	}
 }

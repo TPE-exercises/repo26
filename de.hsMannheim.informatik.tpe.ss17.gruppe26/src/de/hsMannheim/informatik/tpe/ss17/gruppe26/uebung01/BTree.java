@@ -20,17 +20,15 @@ public class BTree implements BTree_Interface {
 	public void printM() {
 
 	}
-	private boolean needToBurst;
-	private BTree_Node burstNode;
-	private BTree_Node burstParent;
+	private static boolean needToBurst;
+//	private BTree_Node burstNode;
+//	private BTree_Node burstParent;
 	
 	
 	@Override
 	public boolean insert(Integer o) {
 		needToBurst = false;
-		burstNode = null;
-		burstParent = null;
-		
+		System.out.println("***Debug: Wert " + o + " soll eingefügt werden.");
 		if (this.contains(o)) {
 			System.out.println("***Debug: Wert " + o + " ist bereits im Baum.");
 			return false;
@@ -63,12 +61,13 @@ public class BTree implements BTree_Interface {
 			//kein Kind an dieser Stelle -> Position richtig
 			if (node.getNode(index) == null){
 				node.setValue(o, index);
-				
+	System.out.println("***Debug: Ein Wert wurde eingefügt -->" + o);
 				//Platze wenn index die letzte position ist
 				if (index == 2 * this.m || needToBurst) {
 					do{
 						BTree_Node[] nodes = {node, parent};
 						burst(nodes);
+	System.out.println("***Debug: BURST!!!");
 					}while(needToBurst);
 				}
 				return true;
@@ -83,7 +82,7 @@ public class BTree implements BTree_Interface {
 			//kein Kind an dieser Stelle -> Position richtig aber möglicherweise belegt
 			if(node.getNode(index) == null){
 				//TODO ggf prüfen, ob geschoben werden muss
-				boolean needToBurst = node.moveForward(index, this.m);
+				needToBurst = node.moveForward(index, this.m);
 				return rec_insert(o, node, parent, index);
 			}
 			else{
@@ -144,15 +143,17 @@ public class BTree implements BTree_Interface {
 
 		// bringe alles an die richtige stelle
 		int index = 0;
-		if (this.getRoot() == parent) {
+		if(parent == null){
 			BTree_Node newRoot = new BTree_Node(this.m);
-			newRoot.setValue(newParent, index);
-			newRoot.setNode(n1, index);
-			newRoot.setNode(n2, index + 1);
+			newRoot.setValue(newParent, 0);
+			newRoot.setNode(n1, 0);
+			newRoot.setNode(n2, 1);
 			setRoot(newRoot);
-		} else {
+			needToBurst = false;
+		}
+		else{
 			index = parent.getIndexForO(newParent);
-			parent.moveForward(index, this.m);
+			needToBurst=parent.moveForward(index, this.m);
 			parent.setValue(newParent, index);
 			parent.setNode(n1, index);
 			parent.setNode(n2, index + 1);
@@ -236,7 +237,7 @@ public class BTree implements BTree_Interface {
 		} else {
 			for (int i = 0; i <= m * 2; i++) {
 				valToCheck = node.getValue(i);
-				if (valToCheck == 0) {
+				if (valToCheck == null) {
 					if (i > 0 && node.getNode(i) == null) {
 						// System.out.println("***DEBUG: Der größte Wert ist: "
 						// + valMax);
@@ -264,7 +265,7 @@ public class BTree implements BTree_Interface {
 			return null;
 		} else {
 			while (node.getNode(0) != null) {
-				node.getNode(0);
+				node = node.getNode(0);
 			}
 			// TODO [Verbesserung / Programmoptimierung : ] valMin wird nicht
 			// benötigt (return node.getValue(0).intValue();)
