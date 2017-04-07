@@ -13,7 +13,6 @@ public class Menue {
 	public static void main(String[] args) {
 		int numberOfRuns = 0;
 		boolean weitermachen = true;
-		int zurueck = 0;
 
 		System.out.println("Version 1.0 (4/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
@@ -62,7 +61,6 @@ public class Menue {
 					// insert(file);
 					break;
 				case (0):
-					zurueck++;
 					break;
 				}
 				break;
@@ -111,7 +109,6 @@ public class Menue {
 					System.out.println("[getMin] Der kleinste Wert ist: " + minVal);
 					break;
 				case (0):
-					zurueck++;
 					break;
 				}
 				break;
@@ -156,7 +153,6 @@ public class Menue {
 					tree.printLevelorder();
 					break;
 				case (0):
-					zurueck++;
 					break;
 				}
 				break;
