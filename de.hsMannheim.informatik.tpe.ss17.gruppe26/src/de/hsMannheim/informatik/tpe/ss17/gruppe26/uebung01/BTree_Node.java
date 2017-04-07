@@ -4,7 +4,8 @@ public class BTree_Node {
 
 	private int m;
 	private Integer[] integerArray;
-	private BTree_Node[] bTreeNodeArray;
+	private BTree_Node[] bTreeNodeChildArray;
+	private BTree_Node bTreeNodeParent;
 
 	/**
 	 * Ordnung ist festgelegt auf 1
@@ -25,33 +26,14 @@ public class BTree_Node {
 
 		Integer[] integerArray = new Integer[2 * m + 1];
 		BTree_Node[] bTreeNodeArray = new BTree_Node[2 * m + 2];
+		BTree_Node bTreeNodeParent = null;
 
 		this.m = m;
 		this.integerArray = integerArray;
-		this.bTreeNodeArray = bTreeNodeArray;
+		this.bTreeNodeChildArray = bTreeNodeArray;
+		this.bTreeNodeParent = bTreeNodeParent;
 		System.out.println("Constructor 1 Class BTree_Node [m=" + m + "]");
 	}
-
-	// /**
-	// *
-	// * @param int
-	// * ordnung des Baumes
-	// * @param Integer
-	// * Restparameter
-	// */
-	// public BTree_Node(int m, Integer... o) {
-	//
-	// Integer[] value = new Integer[2 * m + 1];
-	// BTree_Node[] bTreeNode = new BTree_Node[2 * m + 1];
-	//
-	// for (int i = 0; i < o.length; i++) {
-	// value[i] = o[i];
-	// }
-	// this.integerArray = value;
-	// this.bTreeNodeArray = bTreeNode;
-	//
-	// System.out.println("Constructor 2 Class BTree_Node");
-	// }
 
 	/**
 	 * 
@@ -79,7 +61,7 @@ public class BTree_Node {
 	 * @return
 	 */
 	public BTree_Node getNode(int index) {
-		return this.bTreeNodeArray[index];
+		return this.bTreeNodeChildArray[index];
 	}
 
 	/**
@@ -88,7 +70,22 @@ public class BTree_Node {
 	 * @param index
 	 */
 	public void setNode(BTree_Node node, int index) {
-		this.bTreeNodeArray[index] = node;
+		this.bTreeNodeChildArray[index] = node;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public BTree_Node getParent(){
+		return this.bTreeNodeParent;
+	}
+	/**
+	 * 
+	 * @param parent
+	 */
+	public void setParent(BTree_Node parent){
+		this.bTreeNodeParent=parent;
 	}
 
 	/**
@@ -115,7 +112,7 @@ public class BTree_Node {
 		// Verschiebe alle nodes [bis] index um einen nach hinten
 		for (int i = 2 * m; i > index; i--) {
 			this.integerArray[i] = this.integerArray[i - 1];
-			this.bTreeNodeArray[i+1] = this.bTreeNodeArray[i];
+			this.bTreeNodeChildArray[i+1] = this.bTreeNodeChildArray[i];
 		}
 		// mache position frei
 		integerArray[index] = null;

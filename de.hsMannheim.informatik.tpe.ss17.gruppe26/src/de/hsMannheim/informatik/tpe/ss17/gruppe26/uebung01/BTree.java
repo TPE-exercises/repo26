@@ -117,7 +117,6 @@ public class BTree implements BTree_Interface {
 		BTree_Node parent = nodes[1];
 
 		// Platze node
-		// TODO NullPointer verhindern
 		Integer newParent = new Integer(node.getValue(mid));
 		BTree_Node n1 = new BTree_Node(this.m);
 		BTree_Node n2 = new BTree_Node(this.m);
@@ -144,6 +143,8 @@ public class BTree implements BTree_Interface {
 		int index = 0;
 		if (parent == null) {
 			BTree_Node newRoot = new BTree_Node(this.m);
+			n1.setParent(newRoot);
+			n1.setParent(newRoot);
 			newRoot.setValue(newParent, 0);
 			newRoot.setNode(n1, 0);
 			newRoot.setNode(n2, 1);
@@ -153,6 +154,8 @@ public class BTree implements BTree_Interface {
 			index = parent.getIndexForO(newParent);
 			needToBurst = parent.moveForward(index, this.m);
 			parent.setValue(newParent, index);
+			n1.setParent(parent);
+			n2.setParent(parent);
 			parent.setNode(n1, index);
 			parent.setNode(n2, index + 1);
 		}
