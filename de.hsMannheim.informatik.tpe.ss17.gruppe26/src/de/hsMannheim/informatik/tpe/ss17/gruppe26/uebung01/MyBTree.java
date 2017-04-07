@@ -62,10 +62,22 @@ public class MyBTree implements BTree {
 				System.out.println("***Debug: Ein Wert wurde eingefügt -->" + o);
 				// Platze wenn index die letzte position ist
 				if (index == 2 * this.m || needToBurst) {
+					Node[] nodes = { node, parent };
 					do {// TODO klappt beim 2. mal nicht! parent ist unbekannt
 						// child= parent
-						Node[] nodes = { node, parent };
 						burst(nodes);
+
+						if (parent != null) {
+							nodes[0] = parent;
+							if (parent.getParent() != null) {
+								nodes[1] = parent.getParent();
+							} else
+								nodes[1] = null;
+						} else {
+							nodes[0] = null;
+							nodes[1] = null;
+						}
+
 						System.out.println("***Debug: BURST!!!");
 					} while (needToBurst);
 				}
@@ -176,27 +188,27 @@ public class MyBTree implements BTree {
 	 * @return
 	 */
 	private boolean rec_contains(Integer o, Node node, int index) {
-//		 System.out.println("**Debug: Ist Wert " + o + " im baum?");
-		 System.out.println(node.toString());
+		// System.out.println("**Debug: Ist Wert " + o + " im baum?");
+		System.out.println(node.toString());
 		if (node.getValue(index) == null) {
-			if(node.getNode(index)==null){
+			if (node.getNode(index) == null) {
 				return false;
-			}else{
-			return rec_contains(o, node.getNode(index), 0);	
+			} else {
+				return rec_contains(o, node.getNode(index), 0);
 			}
-//			 System.out.println("**Debug: rec_contains getValue==null");
+			// System.out.println("**Debug: rec_contains getValue==null");
 
 		} else if (o.intValue() == node.getValue(index).intValue()) {
-//			 System.out.println("**Debug: rec_contains wert gefunden");
+			// System.out.println("**Debug: rec_contains wert gefunden");
 			return true;
 		} else if (o.intValue() < node.getValue(index).intValue()) {
-//			 System.out.println("**Debug: o<value");
+			// System.out.println("**Debug: o<value");
 			// wenn link == null -> o nicht vorhanden; else schaue node tiefer
 			return node.getNode(index) == null ? false : rec_contains(o, node.getNode(index), 0);
 
 		} else /* (o.intValue() > node.getValue(index)) */ {
-//			 System.out.println("**Debug: o>value");
-//			 System.out.println("***Debug: index: " +index);
+			// System.out.println("**Debug: o>value");
+			// System.out.println("***Debug: index: " +index);
 			index++;
 			// laufe index weiter, aber prüfe ob nicht zu weit
 			// letzte index muss nicht geprüft werden, da sollte nix sein
@@ -329,9 +341,7 @@ public class MyBTree implements BTree {
 			ebene--;
 			System.out.println("Ebene " + ebene + ":" + node.toString());
 		}
-		
-		
-		
+
 		System.out.println("_Ende der Preorder-Ausgabe_");
 	}
 
