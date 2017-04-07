@@ -3,7 +3,7 @@
 
 	int m=1;
 	
-	BTree_Node node = null;
+	Node node = null;
 
 	void printInorder() {
 

@@ -1,16 +1,16 @@
 package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
-public class BTree_Node {
+public class Node {
 
 	private int m;
 	private Integer[] integerArray;
-	private BTree_Node[] bTreeNodeChildArray;
-	private BTree_Node bTreeNodeParent;
+	private Node[] bTreeNodeChildArray;
+	private Node bTreeNodeParent;
 
 	/**
 	 * Ordnung ist festgelegt auf 1
 	 */
-	public BTree_Node() {
+	public Node() {
 		this(1);
 		System.out.println("Constructor 0 Class BTree_Node");
 	}
@@ -22,11 +22,11 @@ public class BTree_Node {
 	 * @param BTree_Node[]
 	 *            bTreeNode
 	 */
-	public BTree_Node(int m) {
+	public Node(int m) {
 
 		Integer[] integerArray = new Integer[2 * m + 1];
-		BTree_Node[] bTreeNodeArray = new BTree_Node[2 * m + 2];
-		BTree_Node bTreeNodeParent = null;
+		Node[] bTreeNodeArray = new Node[2 * m + 2];
+		Node bTreeNodeParent = null;
 
 		this.m = m;
 		this.integerArray = integerArray;
@@ -60,7 +60,7 @@ public class BTree_Node {
 	 * @param index
 	 * @return
 	 */
-	public BTree_Node getNode(int index) {
+	public Node getNode(int index) {
 		return this.bTreeNodeChildArray[index];
 	}
 
@@ -69,7 +69,7 @@ public class BTree_Node {
 	 * @param node
 	 * @param index
 	 */
-	public void setNode(BTree_Node node, int index) {
+	public void setNode(Node node, int index) {
 		this.bTreeNodeChildArray[index] = node;
 	}
 	
@@ -77,14 +77,14 @@ public class BTree_Node {
 	 * 
 	 * @return
 	 */
-	public BTree_Node getParent(){
+	public Node getParent(){
 		return this.bTreeNodeParent;
 	}
 	/**
 	 * 
 	 * @param parent
 	 */
-	public void setParent(BTree_Node parent){
+	public void setParent(Node parent){
 		this.bTreeNodeParent=parent;
 	}
 
@@ -140,8 +140,8 @@ public class BTree_Node {
 	 * 
 	 * @return BTree_Node clone
 	 */
-	public BTree_Node clone() {
-		BTree_Node clone = new BTree_Node(this.m);
+	public Node clone() {
+		Node clone = new Node(this.m);
 
 		for (int i = 0; i < this.integerArray.length; i++) {
 			clone.setValue(this.getValue(i), i);

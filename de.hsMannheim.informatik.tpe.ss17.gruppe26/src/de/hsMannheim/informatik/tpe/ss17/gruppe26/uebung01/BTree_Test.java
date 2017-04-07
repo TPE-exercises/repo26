@@ -5,7 +5,7 @@ import org.junit.*;
 
 public class BTree_Test {
 
-	BTree_Interface tree = new BTree(1);
+	BTree tree = new MyBTree(1);
 //	BTree_Interface tree2 = new BTree(1);
 
 

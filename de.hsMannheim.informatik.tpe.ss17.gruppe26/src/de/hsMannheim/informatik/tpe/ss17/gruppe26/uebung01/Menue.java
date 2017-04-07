@@ -18,8 +18,8 @@ public class Menue {
 		System.out.println("...erstelle Baum");
 		System.out.println("................");
 		System.out.println("Welche Ordnung soll der Baum haben?");
-		BTree_Interface tree = new BTree(readInt());
-		((BTree) tree).printM();
+		BTree tree = new MyBTree(readInt());
+		((MyBTree) tree).printM();
 		System.out.println("...Baum erstelt");
 		System.out.println("...............");
 		System.out.println("Starte Programm: 50%");
