@@ -4,6 +4,12 @@ import static gdi.MakeItSimple.*;
 
 public class Menue {
 
+	private static void printSeperatorLine(){
+		System.out.println("___________________________________________________");
+	}
+	private static void printSeperatorDots(){
+		System.out.println("...................................................");
+	}
 	public static void main(String[] args) {
 		int numberOfRuns = 0;
 		boolean weitermachen = true;
@@ -12,57 +18,13 @@ public class Menue {
 		System.out.println("Version 1.0 (4/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
-		System.out.println("___________________________________________________");
-		System.out.println("Starte Programm: 0%");
-		System.out.println("Starte Programm: 25%");
-		System.out.println("...erstelle Baum");
-		System.out.println("................");
+		printSeperatorLine();
 		System.out.println("Welche Ordnung soll der Baum haben?");
 		BTree tree = new MyBTree(readInt());
 		((MyBTree) tree).printM();
 		System.out.println("...Baum erstelt");
-		System.out.println("...............");
-		System.out.println("Starte Programm: 50%");
-		System.out.println("Starte Programm: 75%");
-		System.out.println(".......................");
-		System.out.println("Programm gestartet. (100%)");
 		while (weitermachen) {
-			System.out.println("___________________________________________________");
-			switch (zurueck) {
-			case (1):
-				System.out.println("Doch anders entschieden?");
-				break;
-			case (2):
-				System.out.println("Sie können sich wohl nicht entscheiden. Oder?");
-				break;
-			case (3):
-				System.out.println("Ist das Ihr erstes Mal?");
-				break;
-			case (4):
-				System.out.println("Was wollen Sie überhaupt hier?");
-				break;
-			case (5):
-				System.out.println("Hmmm....");
-				break;
-			case (6):
-				System.out.println("Was soll das?");
-				break;
-			case (7):
-				System.out.println("Wissen Sie überhaupt wozu das Programm gut ist?");
-				break;
-			case (8):
-				System.out.println("Übertreiben Sie es nicht!");
-				break;
-			case (9):
-				System.out.println("Wenn Sie so weitermachen, kann ich mich auch ganz schnell beenden!");
-				break;
-			case (10):
-				System.out.println(
-						"Okay. Sie haben es ja nicht anders gewollt. Aber ich gebe Ihnen noch eine allerletzte Chance!");
-				weitermachen = false;
-				break;
-			}
-			System.out.println("........................");
+			printSeperatorLine();
 
 			if (numberOfRuns == 0)
 				System.out.println("Was wollen Sie machen?");
@@ -78,7 +40,7 @@ public class Menue {
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): // Werte in Baum einfügen
-				System.out.println(".......................................................");
+				printSeperatorDots();
 				System.out.println("Wie wollen Sie Werte in den Baum einfügen?");
 				System.out.println("(1) Werte per Hand eingeben");
 				System.out.println("(2) Werte per Datei einfügen");
@@ -105,7 +67,7 @@ public class Menue {
 				}
 				break;
 			case (2): // Werte finden
-				System.out.println(".......................................................");
+				printSeperatorDots();
 				System.out.println("Welche Werte möchten Sie finden/ausgeben lassen?");
 				System.out.println("(1) Einen bestimmten Wert finden");
 				System.out.println("(2) Die Größe des Baumes herausfinden");
@@ -169,7 +131,7 @@ public class Menue {
 						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
 				break;
 			case (6): // Baum ausgeben lassen
-				System.out.println(".......................................................");
+				printSeperatorDots();
 				System.out.println("Wie soll der Baum ausgegeben werden?");
 				System.out.println("(1) Baum als Inorder ausgeben lassen");
 				System.out.println("(2) Baum als Postorder ausgeben lassen");
@@ -207,10 +169,6 @@ public class Menue {
 			// TODO alles weitere
 			}
 		}
-		if (zurueck >= 10) {
-			System.out.println("Tschüss!");
-			System.out.println("Ich hoffe, ich muss Sie nie wiedersehen!...");
-		} else
-			System.out.println("Programm beendet.");
+		System.out.println("Programm beendet.");
 	}
 }
