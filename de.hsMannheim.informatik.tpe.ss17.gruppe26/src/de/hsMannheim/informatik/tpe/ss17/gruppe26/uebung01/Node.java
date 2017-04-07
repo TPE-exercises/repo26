@@ -128,6 +128,7 @@ public class Node {
 	public int getIndexForO(Integer o) {
 
 		int index = 0;
+		//TODO NullPointer teilweise bei 0
 		while (0 > integerArray[index]) {
 			index++;
 		}
