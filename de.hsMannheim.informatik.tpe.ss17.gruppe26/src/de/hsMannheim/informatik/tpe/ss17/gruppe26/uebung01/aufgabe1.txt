@@ -1,11 +1,10 @@
 Aufgabe 1:  10 Punkte
 
-Wahlen Sie ein Paket-Benennungs-Schema fur Ihre Ubungsaufgaben zur Vorlesung TPE. Erklaren Sie Ihr
-Schema und begrunden Sie, warum es durch das von Ihnen gewahlte Schema nicht zu Kollisionen mit
+Waehlen Sie ein Paket-Benennungs-Schema fuer Ihre Uebungsaufgaben zur Vorlesung TPE. Erklaeren Sie Ihr
+Schema und begruenden Sie, warum es durch das von Ihnen gewaehlte Schema nicht zu Kollisionen mit
 anderen Gruppen und Entwicklern kommen kann.
-Abgabe 
 
-{ Schriftliche Begrundung der Namenswahl.
+Abgabe: Schriftliche Begruendung der Namenswahl.
 
 ____________________________________________________________________________________
 
