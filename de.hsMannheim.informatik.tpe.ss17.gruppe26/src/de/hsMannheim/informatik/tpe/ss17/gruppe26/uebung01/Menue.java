@@ -86,19 +86,14 @@ public class Menue {
 				switch (readInt()) {
 				case (1): // TODO manuelle Eingabe ermöglichen
 					System.out.println("Werte werden in den Baum eingefügt...");
-					tree.insert(2);
-					tree.insert(23);
-					tree.insert(4);
-					tree.insert(43);
-					tree.insert(45);
-					tree.insert(435);
-					tree.insert(23);
-					tree.insert(23);
-					tree.insert(45);
-					tree.insert(12);
 					tree.insert(5);
-					tree.insert(54);
-					tree.insert(87);
+					tree.insert(6);
+					tree.insert(7);
+					tree.insert(4);
+					tree.insert(3);
+					tree.insert(8);
+					tree.insert(9);
+
 					
 					break;
 				case (2): // TODO

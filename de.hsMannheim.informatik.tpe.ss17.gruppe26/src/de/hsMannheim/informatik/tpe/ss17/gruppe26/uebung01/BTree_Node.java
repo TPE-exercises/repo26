@@ -115,6 +115,7 @@ public class BTree_Node {
 		// Verschiebe alle nodes [bis] index um einen nach hinten
 		for (int i = 2 * m; i > index; i--) {
 			this.integerArray[i] = this.integerArray[i - 1];
+			this.bTreeNodeArray[i+1] = this.bTreeNodeArray[i];
 		}
 		// mache position frei
 		integerArray[index] = null;

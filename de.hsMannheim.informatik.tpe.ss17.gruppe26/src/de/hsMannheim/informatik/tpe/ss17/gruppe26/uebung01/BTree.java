@@ -104,7 +104,7 @@ public class BTree implements BTree_Interface {
 	/**
 	 * 
 	 */
-	public void burst(BTree_Node[] nodes) {
+	private void burst(BTree_Node[] nodes) {
 
 		if (nodes == null) {
 			return;
