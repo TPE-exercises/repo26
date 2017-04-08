@@ -55,7 +55,7 @@ public class Menue {
 					tree.insert(4);
 					tree.insert(3);
 					tree.insert(8);
-					tree.insert(9);
+//					tree.insert(9);
 
 					
 					break;
