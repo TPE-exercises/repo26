@@ -278,21 +278,14 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public Integer getMin() {
+	public Integer getMin() { // TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
 		Node node = root;
-
 		if (isEmpty()) {
-			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
-			// System.out.println("DEBUG: Es gibt kein kleinstes Element.");
 			return null;
 		} else {
 			while (node.getNode(0) != null) {
 				node = node.getNode(0);
 			}
-			// TODO [Verbesserung / Programmoptimierung : ] valMin wird nicht
-			// benötigt (return node.getValue(0).intValue();)
-			// System.out.println("***DEBUG: Der kleinste Wert ist: " +
-			// node.getValue(0));
 			return node.getValue(0);
 		}
 	}
@@ -322,7 +315,11 @@ public class MyBTree implements BTree {
 
 	@Override
 	public void printInorder() { // TODO @Ben
-
+		Node node = root;
+			while (node.getNode(0) != null) {
+				node = node.getNode(0);
+				System.out.println(node.toString());
+		}
 	}
 
 	@Override
