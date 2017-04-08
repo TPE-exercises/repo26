@@ -141,19 +141,19 @@ public class Menue {
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
 				case (1):
-					System.out.println("Der Baum wird als Inorder ausgegeben...");
+					System.out.println("Der Baum wird als Inorder ausgegeben:");
 					tree.printInorder();
 					break;
 				case (2):
-					System.out.println("Der Baum wird als Postorder ausgegeben...");
+					System.out.println("Der Baum wird als Postorder ausgegeben:");
 					tree.printPostorder();
 					break;
 				case (3):
-					System.out.println("Der Baum wird als Preorder ausgegeben...");
+					System.out.println("Der Baum wird als Preorder ausgegeben:");
 					tree.printPreorder();
 					break;
 				case (4):
-					System.out.println("Der Baum wird als Levelorder ausgegeben...");
+					System.out.println("Der Baum wird als Levelorder ausgegeben:");
 					tree.printLevelorder();
 					break;
 				case (0):
