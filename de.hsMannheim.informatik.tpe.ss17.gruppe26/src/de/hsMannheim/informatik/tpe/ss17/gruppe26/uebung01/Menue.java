@@ -4,11 +4,11 @@ import static gdi.MakeItSimple.*;
 
 public class Menue {
 
-	static int ordnung = 0;
-	public static BTree tree;
-	public static BTree otherTree;
-	
 	private static int numberOfChecks = 0;
+
+	private static int ordnung;
+
+	private static int ordnung;
 
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
