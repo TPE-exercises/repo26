@@ -3,7 +3,7 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 public interface BTree {
 
 	/**
-	 * inserts o in BTree
+	 * inserts number of Integer o in BTree
 	 * @param o
 	 * @return
 	 */
@@ -37,13 +37,13 @@ public interface BTree {
 	
 	/**
 	 * return max Element
-	 * @return
+	 * @return null, if it does not work
 	 */
 	Integer getMax();
 	
 	/**
 	 * return min Element
-	 * @return
+	 * @return null, if tree is empty
 	 */
 	Integer getMin();
 	
@@ -56,6 +56,7 @@ public interface BTree {
 	/**
 	 * inserts all elements from otherTree to BTree
 	 * @param otherTree
+	 * @return boolean, because using it to check, if it's work
 	 */
 	boolean addAll(BTree otherTree);
 	

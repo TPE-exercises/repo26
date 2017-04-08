@@ -278,7 +278,7 @@ public class Menue {
 				if (insertsucces)
 					System.out.println("Wert erfolgreich eingefügt.");
 				else {
-					System.out.println("Wert nicht eingefügt.");
+					System.out.println("ACHTUNG: Wert nicht eingefügt.");
 				}
 			}
 		} while (continueInsert);
@@ -287,7 +287,12 @@ public class Menue {
 	private static void insertFile(BTree tree){
 		readLine();
 		System.out.println("Geben Sie den Namen der Datei an:");
-		tree.insert(readLine());
+		boolean insertsucces = tree.insert(readLine());
+		if (insertsucces)
+			System.out.println("Werte aus Datei erfolgreich eingefügt.");
+		else {
+			System.out.println("ACHTUNG: Werte wurden nicht eingefügt.");
+		}
 	}
 	
 	/**
@@ -298,7 +303,7 @@ public class Menue {
 	 * @param code
 	 * @return
 	 */
-	private static Integer checkThis(String code) {
+	private static Integer checkThis(String code) { // TODO Eingabe der 0 funktioniert nicht!!!
 		int codeAsInt = 0;
 		for (int i = 0; i < code.length(); i++) {
 			codeAsInt *= 10;

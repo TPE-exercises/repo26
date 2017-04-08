@@ -130,10 +130,10 @@ public class MyBTree implements BTree {
 				this.insert(new Integer(readInt(datei)));
 			}
 			closeInputFile(datei);
+
+			return true;
 		} else
 			throw new GDIException("Die Datei " + filename + " konnte nicht gefunden werden.");
-
-		return false;
 	}
 
 	/**
@@ -307,8 +307,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public Integer getMax() { // TODO [Verbesserung: ] ausgabe "null"
-								// kommentieren im JavaDoc
+	public Integer getMax() {
 		Node node = root;
 		if (isEmpty()) {
 			return null;
@@ -316,7 +315,7 @@ public class MyBTree implements BTree {
 			for (int i = m * 2; i >= 0; i--) {
 				if (node.getNode(i) != null) {
 					node = node.getNode(i);
-					i = m * 2;
+					i = m * 2 + 1;
 				}
 			}
 			for (int i = m * 2 - 1; i >= 0; i--) {
@@ -329,8 +328,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public Integer getMin() { // TODO [Verbesserung: ] ausgabe "null"
-								// kommentieren im JavaDoc
+	public Integer getMin() {
 		Node node = root;
 		if (isEmpty()) {
 			return null;
@@ -354,17 +352,15 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public boolean addAll(BTree otherTree) { // TODO void wurde zu boolean
-												// geändert
+	public boolean addAll(BTree otherTree) {
 		int oldSize = this.size();
-
 		Node node = ((MyBTree) otherTree).getRoot();
 		this.addAll_rec(node);
 		int newSize = size();
-		if (debug){
-		System.out.println(" Alte Größe: " + oldSize);
-		System.out.println("Unterschied: " + difference);
-		System.out.println(" Neue Größe: " + newSize);
+		if (debug) {
+			System.out.println(" Alte Größe: " + oldSize);
+			System.out.println("Unterschied: " + difference);
+			System.out.println(" Neue Größe: " + newSize);
 		}
 		if (oldSize + difference == newSize)
 			return true;
@@ -372,31 +368,30 @@ public class MyBTree implements BTree {
 			return false;
 	}
 
-	public void addAll_rec(Node node) { // TODO void wurde zu boolean
-										// geändert
+	public void addAll_rec(Node node) {
 		if (debug)
-		System.out.println("Beginn addAll_rec");
+			System.out.println("Beginne neu addAll_rec");
 		boolean added;
 		for (int i = 0; i < 2 * m + 2; i++) {
 			if (debug)
-			System.out.println("Anfang Schleife " + i);
+				System.out.println("Anfang Schleife bei i = " + i);
 			if (node.getNode(i) != null) {
 				addAll_rec(node.getNode(i));
 			}
 			if (debug)
-			System.out.println("Zwischen Schleife");
+				System.out.println("Zwischen Schleife");
 			if (i < 2 * m + 1 && node.getValue(i) != null) {
 				if (debug)
-				System.out.println(" " + node.getValue(i) + " ");
+					System.out.println(" " + node.getValue(i) + " ");
 				added = this.insert(node.getValue(i));
 				if (added)
 					difference++;
 			}
 			if (debug)
-			System.out.println("Ende Schleife");
+				System.out.println("Ende Schleife");
 		}
 		if (debug)
-		System.out.println("Ende addAll_rec");
+			System.out.println("Ende addAll_rec");
 	}
 
 	@Override
