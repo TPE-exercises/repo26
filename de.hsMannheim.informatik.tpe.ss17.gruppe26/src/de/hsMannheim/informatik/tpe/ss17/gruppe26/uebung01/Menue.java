@@ -14,6 +14,8 @@ public class Menue {
 		int numberOfRuns = 0;
 		boolean weitermachen = true;
 
+		//TODO Falsche Eingaben abdecken
+		
 		System.out.println("Version 1.0 (4/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
@@ -53,7 +55,7 @@ public class Menue {
 					tree.insert(4);
 					tree.insert(3);
 					tree.insert(8);
-//					tree.insert(9);
+					tree.insert(9);
 
 					
 					break;
