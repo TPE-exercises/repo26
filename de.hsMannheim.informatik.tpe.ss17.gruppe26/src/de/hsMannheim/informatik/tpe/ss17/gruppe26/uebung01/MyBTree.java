@@ -356,11 +356,17 @@ public class MyBTree implements BTree {
 	@Override
 	public boolean addAll(BTree otherTree) { // TODO void wurde zu boolean
 												// geändert
+		int oldSize = this.size();
+
 		Node node = ((MyBTree) otherTree).getRoot();
 		this.addAll_rec(node);
-		difference = size() + difference;
-
-		if (difference == 0)
+		int newSize = size();
+		if (debug){
+		System.out.println(" Alte Größe: " + oldSize);
+		System.out.println("Unterschied: " + difference);
+		System.out.println(" Neue Größe: " + newSize);
+		}
+		if (oldSize + difference == newSize)
 			return true;
 		else
 			return false;
