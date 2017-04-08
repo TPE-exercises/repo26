@@ -207,7 +207,7 @@ public class MyBTree implements BTree {
 	 */
 	private boolean rec_contains(Integer o, Node node, int index) {
 		// System.out.println("**Debug: Ist Wert " + o + " im baum?");
-		System.out.println(node.toString());
+//		System.out.println(node.toString());
 		if (node.getValue(index) == null) {
 			if (node.getNode(index) == null) {
 				return false;
@@ -230,7 +230,7 @@ public class MyBTree implements BTree {
 			index++;
 			// laufe index weiter, aber prüfe ob nicht zu weit
 			// letzte index muss nicht geprüft werden, da sollte nix sein
-			return index < 2 * this.m ? rec_contains(o, node, index) : false;
+			return index < 2 * this.m+3 ? rec_contains(o, node, index) : false;
 		}
 	}
 
