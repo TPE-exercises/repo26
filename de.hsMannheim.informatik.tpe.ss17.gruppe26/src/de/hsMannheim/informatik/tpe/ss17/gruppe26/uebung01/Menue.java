@@ -4,18 +4,20 @@ import static gdi.MakeItSimple.*;
 
 public class Menue {
 
-	private static void printSeperatorLine(){
+	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
-	private static void printSeperatorDots(){
+
+	private static void printSeperatorDots() {
 		System.out.println("...................................................");
 	}
+
 	public static void main(String[] args) {
 		int numberOfRuns = 0;
 		boolean weitermachen = true;
 
-		//TODO Falsche Eingaben abdecken
-		
+		// TODO Falsche Eingaben abdecken
+
 		System.out.println("Version 1.0 (4/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
@@ -48,27 +50,23 @@ public class Menue {
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
 				case (1): // TODO manuelle Eingabe ermöglichen
-					System.out.println("Werte werden in den Baum eingefügt...");
-					tree.insert(0);
-					tree.insert(1);
-					tree.insert(2);
-					tree.insert(3);
-					tree.insert(4);
-					tree.insert(5);
-					tree.insert(6);
-					tree.insert(7);
-					tree.insert(8);
-					tree.insert(9);
-					tree.insert(10);
-					tree.insert(11);
-					tree.insert(17);
-					tree.insert(1);
-					tree.insert(21);
-					tree.insert(24);
-					tree.insert(17);
-					tree.insert(0);
-
-					
+					boolean continueInsert = true;
+					while (continueInsert) {
+						printSeperatorDots();
+						System.out.println("Geben Sie den Wert an, den Sie einfügen möchten: ");
+						boolean insertsucces = tree.insert(new Integer(readInt()));
+						if (insertsucces)
+							System.out.println("Wert erfolgreich eigefügt.");
+						else
+							System.out.println("Wert nicht eigefügt.");
+						System.out.println("Wollen Sie weitere Werte eingeben?");
+						System.out.println("(1) Ja | (0) Nein");
+						switch (readInt()) {
+						case 0:
+							continueInsert = false;
+						case 1:
+						}
+					}
 					break;
 				case (2): // TODO
 					readLine();
@@ -102,7 +100,7 @@ public class Menue {
 					break;
 				case (3):
 					System.out.println("Die Höhe des Baumes wird bestimmt...");
-					int height =tree.height();
+					int height = tree.height();
 					System.out.println("[height] Die Höhe des B-Baumes ist: " + height);
 					break;
 				case (4):
