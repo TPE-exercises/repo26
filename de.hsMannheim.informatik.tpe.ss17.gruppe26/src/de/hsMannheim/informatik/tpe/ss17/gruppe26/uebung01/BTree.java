@@ -57,7 +57,7 @@ public interface BTree {
 	 * inserts all elements from otherTree to BTree
 	 * @param otherTree
 	 */
-	void addAll(BTree otherTree);
+	boolean addAll(BTree otherTree);
 	
 	/**
 	 * create deep clone

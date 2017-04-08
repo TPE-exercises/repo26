@@ -10,6 +10,7 @@ public class MyBTree implements BTree {
 	private Node root;
 	public static boolean debug = false;
 	private static int difference = 0;
+	private static boolean needToBurst;
 
 	// MyBTree() {
 	// this.setRoot(null);
@@ -27,12 +28,8 @@ public class MyBTree implements BTree {
 	}
 
 	public void printM() {
-
+		System.out.println(this.m);
 	}
-
-	private static boolean needToBurst;
-	// private BTree_Node burstNode;
-	// private BTree_Node burstParent;
 
 	@Override
 	public boolean insert(Integer o) {
@@ -359,9 +356,9 @@ public class MyBTree implements BTree {
 	@Override
 	public boolean addAll(BTree otherTree) { // TODO void wurde zu boolean
 												// geändert
-		Node node = getRoot();
-		addAll_rec(node);
-		difference = Menue.tree.size() - difference;
+		Node node = ((MyBTree) otherTree).getRoot();
+		this.addAll_rec(node);
+		difference = size() + difference;
 
 		if (difference == 0)
 			return true;
@@ -371,20 +368,23 @@ public class MyBTree implements BTree {
 
 	public void addAll_rec(Node node) { // TODO void wurde zu boolean
 										// geändert
+		System.out.println("Beginn addAll_rec");
 		boolean added;
 		for (int i = 0; i < 2 * m + 2; i++) {
+			System.out.println("Anfang Schleife " + i);
 			if (node.getNode(i) != null) {
-				printInorder_rec(node.getNode(i));
+				addAll_rec(node.getNode(i));
 			}
+			System.out.println("Zwischen addAll_rec");
 			if (i < 2 * m + 1 && node.getValue(i) != null) {
-				added = insert(node.getValue(i));
+				System.out.println(" " + node.getValue(i) + " ");
+				added = this.insert(node.getValue(i));
 				if (added)
-					;
-				else {
 					difference++;
-				}
 			}
+			System.out.println("Ende Schleife");
 		}
+		System.out.println("Ende addAll_rec");
 	}
 
 	@Override
