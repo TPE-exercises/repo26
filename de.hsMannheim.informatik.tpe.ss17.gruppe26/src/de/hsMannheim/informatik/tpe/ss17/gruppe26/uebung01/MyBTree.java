@@ -63,7 +63,7 @@ public class MyBTree implements BTree {
 				// Platze wenn index die letzte position ist
 				if (index == 2 * this.m || needToBurst) {
 					Node[] nodes = { node, parent };
-					do {// TODO klappt beim 2. mal nicht! parent ist unbekannt
+					do {
 						// child= parent
 						burst(nodes);
 
@@ -94,7 +94,6 @@ public class MyBTree implements BTree {
 			// kein Kind an dieser Stelle -> Position richtig aber
 			// möglicherweise belegt
 			if (node.getNode(index) == null) {
-				// TODO ggf prüfen, ob geschoben werden muss
 				needToBurst = node.moveForward(index, this.m);
 				return rec_insert(o, node, parent, index);
 			} else {
@@ -177,7 +176,6 @@ public class MyBTree implements BTree {
 
 	}
 
-	// TODO klappt nicht
 	@Override
 	public boolean contains(Integer o) {
 		return isEmpty() ? false : this.rec_contains(o, getRoot(), 0);
@@ -215,7 +213,7 @@ public class MyBTree implements BTree {
 			index++;
 			// laufe index weiter, aber prüfe ob nicht zu weit
 			// letzte index muss nicht geprüft werden, da sollte nix sein
-			return index < 2 * this.m ? rec_contains(o, node, index) : false;
+			return index < 2 * this.m+1 ? rec_contains(o, node, index) : false;
 		}
 	}
 
