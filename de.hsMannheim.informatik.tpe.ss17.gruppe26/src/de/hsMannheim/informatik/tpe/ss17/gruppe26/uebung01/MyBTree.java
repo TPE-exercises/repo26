@@ -302,7 +302,6 @@ public class MyBTree implements BTree {
 	@Override
 	public Integer getMax() {
 		Node node = root;
-		Integer valMax = 0;
 		if (isEmpty()) {
 			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
 			return null;
@@ -315,12 +314,10 @@ public class MyBTree implements BTree {
 			}
 			for (int i = m * 2 - 1; i >= 0; i--){
 				if (node.getValue(i) != null){
-					valMax = node.getValue(i);
+					return node.getValue(i);
 				}	
 			}
-			
-			System.out.println("***DEBUG: ***ERR: [getMax()] Schleife falsch" + valMax);
-			return valMax;
+			return null;
 		}
 	}
 
