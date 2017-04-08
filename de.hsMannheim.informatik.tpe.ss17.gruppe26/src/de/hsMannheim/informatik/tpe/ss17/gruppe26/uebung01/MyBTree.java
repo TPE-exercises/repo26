@@ -275,7 +275,8 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public Integer getMin() { // TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
+	public Integer getMin() { // TODO [Verbesserung: ] ausgabe "null"
+								// kommentieren im JavaDoc
 		Node node = root;
 		if (isEmpty()) {
 			return null;
@@ -313,9 +314,28 @@ public class MyBTree implements BTree {
 	@Override
 	public void printInorder() { // TODO @Ben
 		Node node = root;
+		if (node == null)
+			System.out.println("Der Baum ist leer!");
+		else {
+			// printInorder_rec(node);
+
 			while (node.getNode(0) != null) {
 				node = node.getNode(0);
-				System.out.println(node.toString());
+			}
+			System.out.print(node.toString() + ", ");
+			
+		}
+		System.out.println();
+	}
+
+	public void printInorder_rec(Node node) { // TODO @Ben
+		for (int i = 0; i < 2 * this.m + 2; i++) {
+			if (node.getNode(i) != null) {
+				printInorder_rec(node.getNode(i));
+			}
+			if (i < 2 * m + 1 && node.getValue(i) != null) {
+				System.out.print(node.toString() + ", ");
+			}
 		}
 	}
 

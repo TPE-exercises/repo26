@@ -32,7 +32,7 @@ public class Node {
 		this.integerArray = integerArray;
 		this.bTreeNodeChildArray = bTreeNodeArray;
 		this.bTreeNodeParent = bTreeNodeParent;
-		System.out.println("Constructor 1 Class BTree_Node [m=" + m + "]");
+		System.out.println("Constructor 1 Class Node [m=" + m + "]");
 	}
 
 	/**
