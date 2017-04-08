@@ -67,22 +67,24 @@ public interface BTree {
 	
 	/**
 	 * @return 
-	 * 
+	 * prints numbers in natural order
 	 */
 	void printInorder();
-	
+
 	/**
-	 * 
+	 * prints at first the lowest children of the left parttree, then the
+	 * children of the right
 	 */
 	void printPostorder();
-	
+
 	/**
-	 * 
+	 * prints at first the root, then the left child, childs child,... and then
+	 * the other child of the lowest parent, after that of the other ones
 	 */
 	void printPreorder();
-	
+
 	/**
-	 * 
+	 * prints nodes of tree level per level
 	 */
 	void printLevelorder();
 
