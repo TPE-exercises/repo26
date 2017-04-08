@@ -2,7 +2,6 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
 import static gdi.MakeItSimple.*;
 
-
 import gdi.MakeItSimple.GDIException;
 
 public class MyBTree implements BTree {
@@ -114,12 +113,12 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public boolean insert(String filename) throws GDIException { 
+	public boolean insert(String filename) throws GDIException {
 
 		if (isFilePresent(filename)) {
 			Object datei = openInputFile(filename);
-			
-			while(!isEndOfInputFile(datei)){
+
+			while (!isEndOfInputFile(datei)) {
 				System.out.println("***Debug: Datei");
 				this.insert(new Integer(readInt(datei)));
 			}
@@ -335,18 +334,18 @@ public class MyBTree implements BTree {
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
 		else {
-			 printInorder_rec(node);
-		}		
-		System.out.println();		
+			printInorder_rec(node);
+		}
+		System.out.println();
 	}
 
-	public void printInorder_rec(Node node) { // TODO @Ben
+	private void printInorder_rec(Node node) { // TODO @Ben
 		System.out.print("[");
-		for (int i = 0; i < 2*this.m+2; i++) {
+		for (int i = 0; i < 2 * m + 2; i++) {
 			if (node.getNode(i) != null) {
 				printInorder_rec(node.getNode(i));
 			}
-			if (i < 2*m+1 && node.getValue(i) != null) {
+			if (i < 2 * m + 1 && node.getValue(i) != null) {
 				System.out.print(" " + node.getValue(i) + " ");
 			}
 		}
@@ -356,30 +355,78 @@ public class MyBTree implements BTree {
 	@Override
 	public void printPostorder() { // TODO @Ben
 		Node node = root;
-		while (node.getNode(0) != null) {
-			node = node.getNode(0);
+		if (node == null)
+			System.out.println("Der Baum ist leer!");
+		else {
+			printPostorder_rec(node);
 		}
-		System.out.println(node.toString());
+		System.out.println();
+	}
+
+	private void printPostorder_rec(Node node) {
+		System.out.print("[");
+		for (int i = 0; i < 2 * m + 2; i++) {
+			if (node.getNode(i) != null) {
+				printPostorder_rec(node.getNode(i));
+			}
+		}
+		for (int i = 0; i < 2 * m + 1; i++) {
+			if (node.getValue(i) != null)
+				System.out.print(" " + node.getValue(i) + " ");
+		}
+		System.out.print("]");
 	}
 
 	@Override
 	public void printPreorder() { // TODO @Ben
 		Node node = root;
-		int ebene = 0;
-		System.out.println("Ebene " + ebene + ":" + node.toString());
-		while (node.getNode(0) != null) {
-			node = node.getNode(0);
-			ebene--;
-			System.out.println("Ebene " + ebene + ":" + node.toString());
+		if (node == null)
+			System.out.println("Der Baum ist leer!");
+		else {
+			printPreorder_rec(node);
 		}
+		System.out.println();
+	}
 
-		System.out.println("_Ende der Preorder-Ausgabe_");
+	private void printPreorder_rec(Node node) {
+		System.out.print("[");
+		for (int i = 0; i < 2 * m + 1; i++) {
+			if (node.getValue(i) != null)
+				System.out.print(" " + node.getValue(i) + " ");
+		}
+		for (int i = 0; i < 2 * m + 2; i++) {
+			if (node.getNode(i) != null) {
+				printPreorder_rec(node.getNode(i));
+			}
+		}
+		System.out.print("]");
 	}
 
 	@Override
 	public void printLevelorder() { // TODO @Ben
 		Node node = root;
-		System.out.println(node.toString());
+		if (node == null)
+			System.out.println("Der Baum ist leer!");
+		else {
+			printLevelorder_rec(node);
+		}
+		System.out.println();
+	}
+
+	private void printLevelorder_rec(Node node) {
+		System.out.print("[");
+		for (int i = 0; i < 2 * m + 1; i++) {
+			if (node.getValue(i) != null) {
+				System.out.print(" " + node.getValue(i) + " ");
+			}
+		}
+		System.out.print("]");
+		
+		for (int i = 0; i < 2 * m + 1; i++) {
+			if (node.getNode(i) != null) {
+				printLevelorder_rec(node.getNode(i));
+			}
+		}
 	}
 
 	public Node getRoot() {
