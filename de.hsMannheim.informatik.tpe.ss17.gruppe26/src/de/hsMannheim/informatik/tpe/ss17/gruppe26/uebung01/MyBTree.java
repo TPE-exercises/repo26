@@ -264,30 +264,37 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public int size() { // TODO @BEN
-		int countingNumber = 0;
-		if (isEmpty()) {
-			System.out.println("Hinweis: Es gibt kein Element im Baum!");
-			return countingNumber;
-		} else {
-			return countingNumber;
+	public int size() {
+		Node node = root;
+		return size_rec(node, 0);
+	}
+
+	private int size_rec(Node node, int n) {
+		int countingNumber = +n;
+		for (int i = 0; i < 2 * m + 1; i++) {
+			if (node.getValue(i) != null) {
+				countingNumber++;
+			}
 		}
+		for (int i = 0; i < 2 * m + 2; i++) {
+			if (node.getNode(i) != null) {
+				countingNumber = +size_rec(node.getNode(i), countingNumber);
+			}
+		}
+		return countingNumber;
 	}
 
 	@Override
-	public int height() { // TODO @BEN
+	public int height() {
 		Node node = root;
 		int heightNumber = 1;
 		if (isEmpty()) {
-			// System.out.println("DEBUG: Die Höhe ist Null!");
 			return 0;
 		} else {
 			while (node.getNode(0) != null) {
-				node.getNode(0);
+				node = node.getNode(0);
 				heightNumber++;
 			}
-			// System.out.println("DEBUG: Die Höhe des B-Baumes ist: " +
-			// heightNumber);
 			return heightNumber;
 		}
 	}
@@ -348,18 +355,16 @@ public class MyBTree implements BTree {
 	@Override
 	public void addAll(BTree otherTree) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public MyBTree clone() {
 		// TODO Auto-generated method stub
-
 		return null;
 	}
 
 	@Override
-	public void printInorder() { // TODO @Ben
+	public void printInorder() {
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
@@ -369,7 +374,7 @@ public class MyBTree implements BTree {
 		System.out.println();
 	}
 
-	private void printInorder_rec(Node node) { // TODO @Ben
+	private void printInorder_rec(Node node) {
 		System.out.print("[");
 		for (int i = 0; i < 2 * m + 2; i++) {
 			if (node.getNode(i) != null) {
@@ -383,7 +388,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void printPostorder() { // TODO @Ben
+	public void printPostorder() {
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
@@ -408,7 +413,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void printPreorder() { // TODO @Ben
+	public void printPreorder() {
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
@@ -433,7 +438,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void printLevelorder() { // TODO @Ben
+	public void printLevelorder() {
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
