@@ -2,7 +2,7 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
 import static gdi.MakeItSimple.*;
 
-public class Menue {
+public class Menue { 
 
 	private static int numberOfChecks = 0;
 	private static int ordnung;
@@ -64,7 +64,7 @@ public class Menue {
 				System.out.println("(2) Werte per Datei einfügen");
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
-				case (1):
+				case (1): //////////////////////TODO Falsche Eingaben abfangen, wenn Buchstaben
 					boolean continueInsert = true;
 					while (continueInsert) {
 						printSeperatorDots();
@@ -126,10 +126,10 @@ public class Menue {
 						System.out.println("Der kleinste Wert ist: " + tree.getMin());
 						break;
 					case (9):
-						System.out.print("  Anzahl Elemente im Baum: " + tree.size());
-						System.out.print("          Höhe des Baumes: " + tree.height());
-						System.out.print("  Größtes Element im Baum: [" + tree.getMax() + "]");
-						System.out.print("Kleinstes Element im Baum: [" + tree.getMin() + "]");
+						System.out.println("  Anzahl Elemente im Baum: " + tree.size());
+						System.out.println("          Höhe des Baumes: " + tree.height());
+						System.out.println("  Größtes Element im Baum: [" + tree.getMax() + "]");
+						System.out.println("Kleinstes Element im Baum: [" + tree.getMin() + "]");
 						break;
 					case (0):
 						break;
@@ -200,6 +200,7 @@ public class Menue {
 						tree.printPreorder();
 						System.out.print("Der Baum als Levelorder: ");
 						tree.printLevelorder();
+						System.out.println();
 						break;
 					case (0):
 						break;

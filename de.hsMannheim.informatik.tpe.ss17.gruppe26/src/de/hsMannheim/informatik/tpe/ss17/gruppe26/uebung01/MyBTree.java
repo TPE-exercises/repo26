@@ -170,20 +170,20 @@ public class MyBTree implements BTree {
 		// bringe alles an die richtige stelle
 		int index = 0;
 		if (parent == null) {
-			//Erstelle neue Wurzel
+			// Erstelle neue Wurzel
 			Node newRoot = new Node(this.m);
 			newRoot.setValue(newParent, 0);
 			setRoot(newRoot);
-			
-			//Setze Kinder
+
+			// Setze Kinder
 			newRoot.setNode(n1, 0);
 			newRoot.setNode(n2, 1);
-			
-			//Setze Parent
+
+			// Setze Parent
 			n1.setParent(newRoot);
 			n2.setParent(newRoot);
 
-			//setze kindeskinder
+			// setze kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
 				if (n1.getNode(x) != null)
 					n1.getNode(x).setParent(n1);
@@ -192,22 +192,22 @@ public class MyBTree implements BTree {
 			}
 			needToBurst = false;
 		} else {
-			//Platziere wert in Parent
+			// Platziere wert in Parent
 			index = parent.getIndexForO(newParent);
 			needToBurst = parent.moveForward(index, this.m);
 			parent.setValue(newParent, index);
 			if (index == 2 * this.m)
 				needToBurst = true;
-			
-			//Setze Kinder
+
+			// Setze Kinder
 			parent.setNode(n1, index);
 			parent.setNode(n2, index + 1);
-			
-			//Setze Parent
+
+			// Setze Parent
 			n1.setParent(parent);
 			n2.setParent(parent);
 
-			//Setze Kindeskinder
+			// Setze Kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
 				if (n1.getNode(x) != null)
 					n1.getNode(x).setParent(n1);
@@ -303,26 +303,22 @@ public class MyBTree implements BTree {
 	public Integer getMax() {
 		Node node = root;
 		Integer valMax = 0;
-		Integer valToCheck = 0;
 		if (isEmpty()) {
 			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
-			// System.out.println("DEBUG: Es gibt kein größtes Element.");
 			return null;
 		} else {
-			for (int i = 0; i <= m * 2; i++) {
-				valToCheck = node.getValue(i);
-				if (valToCheck == null) {
-					if (i > 0 && node.getNode(i) == null) {
-						// System.out.println("***DEBUG: Der größte Wert ist: "
-						// + valMax);
-						return valMax;
-					} else {
-						node = node.getNode(i);
-						i = 0;
-					}
-				}
-				valMax = valToCheck;
+			for (int i = m * 2; i >= 0; i--) {
+				if (node.getNode(i) != null){
+					node = node.getNode(i);
+					i = m * 2;
+				}				
 			}
+			for (int i = m * 2 - 1; i >= 0; i--){
+				if (node.getValue(i) != null){
+					valMax = node.getValue(i);
+				}	
+			}
+			
 			System.out.println("***DEBUG: ***ERR: [getMax()] Schleife falsch" + valMax);
 			return valMax;
 		}
