@@ -10,10 +10,11 @@ public class Node {
 	/**
 	 * Ordnung ist festgelegt auf 1
 	 */
-	public Node() {
-		this(1);
-		System.out.println("Constructor 0 Class BTree_Node");
-	}
+	// public Node() {
+	// this(1);
+	// if (MyBTree.debug)
+	// System.out.println("Constructor 0 Class BTree_Node");
+	// }
 
 	/**
 	 * 
@@ -32,7 +33,8 @@ public class Node {
 		this.integerArray = integerArray;
 		this.bTreeNodeChildArray = bTreeNodeArray;
 		this.bTreeNodeParent = bTreeNodeParent;
-		System.out.println("Constructor 1 Class Node [m=" + m + "]");
+		if (MyBTree.debug)
+			System.out.println("Constructor 1 Class Node [m=" + m + "]");
 	}
 
 	/**
@@ -50,9 +52,7 @@ public class Node {
 	 * @param index
 	 */
 	public void setValue(Integer value, int index) {
-
 		this.integerArray[index] = value;
-
 	}
 
 	/**
@@ -119,11 +119,11 @@ public class Node {
 		integerArray[index] = null;
 		// prüfe ob node nun voll ist
 		if (integerArray[2 * this.m] != null) {
-			System.out.println("***Debug: moveForward hat die Node zum Platzen gebracht");
+			if (MyBTree.debug)
+				System.out.println("***Debug: moveForward hat die Node zum Platzen gebracht");
 			return true;
 		}
 		return false;
-
 	}
 
 	public int getIndexForO(Integer o) {
@@ -131,12 +131,10 @@ public class Node {
 		// TODO NullPointer teilweise bei 0
 		for (int i = 0; i < 2 * this.m + 1; i++) {
 			if (integerArray[i] != null && o.intValue() > integerArray[i]) {
-					index = i;
-			}
-			else if(integerArray[i] != null && o.intValue() < integerArray[i]){
+				index = i;
+			} else if (integerArray[i] != null && o.intValue() < integerArray[i]) {
 				return index;
-			}
-			else{
+			} else {
 				index++;
 				return index;
 			}
@@ -158,7 +156,6 @@ public class Node {
 		}
 
 		return clone;
-
 	}
 
 	/**
@@ -187,7 +184,5 @@ public class Node {
 			res += " -n- ]";
 
 		return res;
-
 	}
-
 }

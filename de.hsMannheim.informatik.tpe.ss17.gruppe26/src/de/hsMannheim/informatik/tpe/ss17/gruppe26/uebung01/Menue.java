@@ -2,11 +2,14 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
 import static gdi.MakeItSimple.*;
 
-public class Menue { 
+public class Menue {
 
-	private static int numberOfChecks = 0;
-	private static int ordnung;
+	static int ordnung = 0;
+	public static BTree tree;
+	public static BTree otherTree;
 	
+	private static int numberOfChecks = 0;
+
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
@@ -17,7 +20,7 @@ public class Menue {
 
 	private static void printEmptyTree() {
 		if (numberOfChecks == 0)
-		System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
+			System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
 		else
 			System.out.println("Der Baum ist immer noch leer.");
 		numberOfChecks++;
@@ -30,22 +33,28 @@ public class Menue {
 	public static void main(String[] args) {
 		boolean weitermachen = true;
 		int numberOfRuns = 0;
+		boolean added=false;
 
-		System.out.println("Version 1.0 (4/2017)");
+		System.out.println("Version 1.7 (08/04/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
 		printSeperatorLine();
-		System.out.println("Welche Ordnung soll der Baum haben?");
-		ordnung = readInt();
-		BTree tree = new MyBTree(ordnung);
+		System.out.println("Welche Ordnung soll der Baum haben?"); // TODO falsche Ordnungszahlen abfangen!
+		tree = new MyBTree(readInt());
 		((MyBTree) tree).printM();
 		System.out.println("...Baum erstelt");
 		while (weitermachen) {
 			printSeperatorLine();
+			System.out.print("(Debugging ist ");
+			if (MyBTree.debug)
+				System.out.println("aktiviert.)");
+			else
+				System.out.println("deaktiviert.)");
+			System.out.println("---------------------------");
 			if (numberOfRuns == 0)
 				System.out.println("Was möchten Sie machen?");
 			else
-				System.out.println("Was möchten Sie als nächste tun?");
+				System.out.println("Was möchten Sie als nächstes tun?");
 			numberOfRuns++;
 			System.out.println();
 			System.out.println("(1) Werte in Baum einfügen");
@@ -54,6 +63,7 @@ public class Menue {
 			System.out.println("(4) Anderen Baum zum aktuellen Baum hinzufügen");
 			System.out.println("(5) Aktuellen Baum klonen");
 			System.out.println("(6) Baum ausgeben lassen");
+			System.out.println("(7) DEBUGGING aktivieren/deaktivieren");
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): ////////////////////////////////////// Werte in Baum
@@ -64,24 +74,11 @@ public class Menue {
 				System.out.println("(2) Werte per Datei einfügen");
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
-				case (1): //////////////////////TODO Falsche Eingaben abfangen, wenn Buchstaben
-					boolean continueInsert = true;
-					while (continueInsert) {
-						printSeperatorDots();
-						System.out.println("Geben Sie den Wert an, den Sie einfügen möchten: ");
-						boolean insertsucces = tree.insert(new Integer(readInt()));
-						if (insertsucces)
-							System.out.println("Wert erfolgreich eingefügt.");
-						else {
-							System.out.println("Wert nicht eingefügt.");
-							continueInsert = false;
-						}
-					}
+				case (1): 
+					insertManually(tree);
 					break;
 				case (2):
-					readLine();
-					System.out.println("Geben Sie den Namen der Datei an:");
-					tree.insert(readLine());
+					insertFile(tree);
 					break;
 				case (0):
 					break;
@@ -126,8 +123,8 @@ public class Menue {
 						System.out.println("Der kleinste Wert ist: " + tree.getMin());
 						break;
 					case (9):
-						System.out.println("  Anzahl Elemente im Baum: " + tree.size());
-						System.out.println("          Höhe des Baumes: " + tree.height());
+						System.out.println("  Anzahl Elemente im Baum:  " + tree.size());
+						System.out.println("          Höhe des Baumes:  " + tree.height());
 						System.out.println("  Größtes Element im Baum: [" + tree.getMax() + "]");
 						System.out.println("Kleinstes Element im Baum: [" + tree.getMin() + "]");
 						break;
@@ -148,16 +145,40 @@ public class Menue {
 			case (4): // Anderen Baum zum aktuellen Baum hinzufügen
 				if (tree.isEmpty()) {
 					printEmptyTree();
-				} else
-				System.out.println(
-						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+				} else {
+					System.out.println("Welche Ordnung soll der neue Baum haben?");
+					BTree otherTree = new MyBTree(readInt());
+					((MyBTree) otherTree).printM();
+					System.out.println(
+							"Möchten Sie den neuen Baum selbst erstellen oder durch eine Datei einlesen lassen?");
+					System.out.println("(1) Werte selbst eingeben");
+					System.out.println("(2) Datei einlesen");
+					System.out.println("(0) ABBRUCH");
+					switch (readInt()) {
+					case (1): 
+						insertManually(otherTree);
+						break;
+					case (2):
+						insertFile(otherTree);
+						break;
+					case (0):
+						break;
+					default:
+						printDefault();
+					}
+					added = tree.addAll(otherTree);
+					if (added)
+						System.out.println("Der neue Baum wurde zum aktuellen Baum hinzugefügt.");
+					else
+						System.out.println("FEHLER! Der neue Baum wurde nicht hinzugefügt.");
+				}
 				break;
 			case (5): // Aktuellen Baum klonen
 				if (tree.isEmpty()) {
 					printEmptyTree();
 				} else
-				System.out.println(
-						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+					System.out.println(
+							"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
 				break;
 			case (6): // Baum ausgeben lassen
 				printSeperatorDots();
@@ -209,6 +230,15 @@ public class Menue {
 					}
 					break;
 				}
+			case (7): // Debugging
+				if (MyBTree.debug) {
+					MyBTree.debug = false;
+					System.out.println("DEBUGGING wurde deaktiviert.");
+				} else {
+					MyBTree.debug = true;
+					System.out.println("DEBUGGING wurde aktiviert.");
+				}
+				break;
 			case (0): // Programm beenden
 				weitermachen = false;
 			default:
@@ -218,7 +248,30 @@ public class Menue {
 		System.out.println("Programm beendet.");
 	}
 	
-	private static int checkThis(String code){
+	private static void insertManually(BTree tree){////////////////////// TODO Falsche Eingaben abfangen,
+		////////////////////// wenn Buchstaben
+		boolean continueInsert = true;
+		while (continueInsert) {
+			printSeperatorDots();
+			System.out.println("Geben Sie den Wert an, den Sie einfügen möchten: ");
+			System.out.println("(Doppelten Wert einfügen zum Abbrechen) ");
+			boolean insertsucces = tree.insert(new Integer(readInt()));
+			if (insertsucces)
+				System.out.println("Wert erfolgreich eingefügt.");
+			else {
+				System.out.println("Wert nicht eingefügt.");
+				continueInsert = false;
+			}
+		}
+	}
+	
+	private static void insertFile(BTree tree){
+		readLine();
+		System.out.println("Geben Sie den Namen der Datei an:");
+		tree.insert(readLine());
+	}
+
+	private static int checkThis(String code) {
 		int codeAsInt = 0;
 		for (int i = 0; i < code.length(); i--) {
 			codeAsInt *= 10;
@@ -260,8 +313,8 @@ public class Menue {
 			}
 			return codeAsInt;
 		}
-		
+
 		return numberOfChecks;
-		
+
 	}
 }

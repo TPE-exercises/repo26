@@ -8,17 +8,22 @@ public class MyBTree implements BTree {
 
 	public int m;
 	private Node root;
+	public static boolean debug = false;
+	private static int difference = 0;
 
-	MyBTree() {
-		this.setRoot(null);
-		this.m = 1;
-		System.out.println("Construktor 0 Class BTree");
-	}
+	// MyBTree() {
+	// this.setRoot(null);
+	// this.m = 1;
+	// if (debug)
+	// System.out.println("Construktor 0 Class BTree");
+	// }
 
 	MyBTree(int ordnung) {
-		this();
+		// this();
+		this.setRoot(null);
 		this.m = ordnung;
-		System.out.println("Construktor 1 Class BTree [m=" + m + "]");
+		if (debug)
+			System.out.println("Construktor 1 Class BTree [m=" + m + "]");
 	}
 
 	public void printM() {
@@ -32,12 +37,15 @@ public class MyBTree implements BTree {
 	@Override
 	public boolean insert(Integer o) {
 		needToBurst = false;
-		System.out.println("***Debug: Wert " + o + " soll eingefügt werden.");
+		if (debug)
+			System.out.println("***Debug: Wert " + o + " soll eingefügt werden.");
 		if (this.contains(o)) {
-			System.out.println("***Debug: Wert " + o + " ist bereits im Baum.");
+			if (debug)
+				System.out.println("***Debug: Wert " + o + " ist bereits im Baum.");
 			return false;
 		} else if (getRoot() == null) {
-			System.out.println("***Debug: Wert " + o + " ist der erste Wert im Baum (neue Wurzel).");
+			if (debug)
+				System.out.println("***Debug: Wert " + o + " ist der erste Wert im Baum (neue Wurzel).");
 			Node node = new Node(this.m);
 			node.setValue(o, 0);
 			setRoot(node);
@@ -63,7 +71,8 @@ public class MyBTree implements BTree {
 			// kein Kind an dieser Stelle -> Position richtig
 			if (node.getNode(index) == null) {
 				node.setValue(o, index);
-				System.out.println("***Debug: Ein Wert wurde eingefügt -->" + o);
+				if (debug)
+					System.out.println("***Debug: Ein Wert wurde eingefügt -->" + o);
 				// Platze wenn index die letzte position ist
 				if (index == 2 * this.m || needToBurst) {
 					Node[] nodes = { node, parent };
@@ -83,8 +92,8 @@ public class MyBTree implements BTree {
 							nodes[0] = null;
 							nodes[1] = null;
 						}
-
-						System.out.println("***Debug: BURST!!!");
+						if (debug)
+							System.out.println("***Debug: BURST!!!");
 					} while (needToBurst);
 				}
 				return true;
@@ -119,7 +128,8 @@ public class MyBTree implements BTree {
 			Object datei = openInputFile(filename);
 
 			while (!isEndOfInputFile(datei)) {
-				System.out.println("***Debug: Datei");
+				if (debug)
+					System.out.println("***Debug: Datei");
 				this.insert(new Integer(readInt(datei)));
 			}
 			closeInputFile(datei);
@@ -300,22 +310,22 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public Integer getMax() {
+	public Integer getMax() { // TODO [Verbesserung: ] ausgabe "null"
+								// kommentieren im JavaDoc
 		Node node = root;
 		if (isEmpty()) {
-			// TODO [Verbesserung: ] ausgabe "null" kommentieren im JavaDoc
 			return null;
 		} else {
 			for (int i = m * 2; i >= 0; i--) {
-				if (node.getNode(i) != null){
+				if (node.getNode(i) != null) {
 					node = node.getNode(i);
 					i = m * 2;
-				}				
+				}
 			}
-			for (int i = m * 2 - 1; i >= 0; i--){
-				if (node.getValue(i) != null){
+			for (int i = m * 2 - 1; i >= 0; i--) {
+				if (node.getValue(i) != null) {
 					return node.getValue(i);
-				}	
+				}
 			}
 			return null;
 		}
@@ -338,7 +348,8 @@ public class MyBTree implements BTree {
 	@Override
 	public boolean isEmpty() {
 		if (this.getRoot() == null) {
-			System.out.println("***DEBUG: Der Baum ist leer!");
+			if (debug)
+				System.out.println("***DEBUG: Der Baum ist leer!");
 			return true;
 		} else
 			return false;
@@ -346,13 +357,39 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void addAll(BTree otherTree) {
-		// TODO Auto-generated method stub
+	public boolean addAll(BTree otherTree) { // TODO void wurde zu boolean
+												// geändert
+		Node node = getRoot();
+		addAll_rec(node);
+		difference = Menue.tree.size() - difference;
+
+		if (difference == 0)
+			return true;
+		else
+			return false;
+	}
+
+	public void addAll_rec(Node node) { // TODO void wurde zu boolean
+										// geändert
+		boolean added;
+		for (int i = 0; i < 2 * m + 2; i++) {
+			if (node.getNode(i) != null) {
+				printInorder_rec(node.getNode(i));
+			}
+			if (i < 2 * m + 1 && node.getValue(i) != null) {
+				added = insert(node.getValue(i));
+				if (added)
+					;
+				else {
+					difference++;
+				}
+			}
+		}
 	}
 
 	@Override
-	public MyBTree clone() {
-		// TODO Auto-generated method stub
+	public MyBTree clone() { // TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -431,7 +468,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void printLevelorder() {
+	public void printLevelorder() { // TODO Muss noch korrigiert werden!
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
