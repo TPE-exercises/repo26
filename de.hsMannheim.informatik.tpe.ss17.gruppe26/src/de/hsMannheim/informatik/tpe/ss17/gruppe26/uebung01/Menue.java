@@ -56,16 +56,12 @@ public class Menue {
 						System.out.println("Geben Sie den Wert an, den Sie einfügen möchten: ");
 						boolean insertsucces = tree.insert(new Integer(readInt()));
 						if (insertsucces)
-							System.out.println("Wert erfolgreich eigefügt.");
-						else
-							System.out.println("Wert nicht eigefügt.");
-						System.out.println("Wollen Sie weitere Werte eingeben?");
-						System.out.println("(1) Ja | (0) Nein");
-						switch (readInt()) {
-						case 0:
+							System.out.println("Wert erfolgreich eingefügt.");
+						else {
+							System.out.println("Wert nicht eingefügt.");
 							continueInsert = false;
-						case 1:
 						}
+
 					}
 					break;
 				case (2): // TODO

@@ -335,26 +335,22 @@ public class MyBTree implements BTree {
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
 		else {
-			// printInorder_rec(node);
-
-			while (node.getNode(0) != null) {
-				node = node.getNode(0);
-			}
-			System.out.print(node.toString() + ", ");
-
-		}
-		System.out.println();
+			 printInorder_rec(node);
+		}		
+		System.out.println();		
 	}
 
 	public void printInorder_rec(Node node) { // TODO @Ben
-		for (int i = 0; i < 2 * this.m + 2; i++) {
+		System.out.print("[");
+		for (int i = 0; i < 2*this.m+2; i++) {
 			if (node.getNode(i) != null) {
 				printInorder_rec(node.getNode(i));
 			}
-			if (i < 2 * m + 1 && node.getValue(i) != null) {
-				System.out.print(node.toString() + ", ");
+			if (i < 2*m+1 && node.getValue(i) != null) {
+				System.out.print(" " + node.getValue(i) + " ");
 			}
 		}
+		System.out.print("]");
 	}
 
 	@Override
