@@ -95,36 +95,31 @@ public class Menue {
 					break;
 				case (2):
 					System.out.println("Anzahl der Elemente werden gezählt...");
-					int size = 0;
-					size = tree.size();
+					int size = tree.size();
 					if (size == 0)
 						System.out.println("Es gibt kein Element im Baum!");
 					System.out.println("Im B-Baum gibt es " + size + "Elemente.");
 					break;
 				case (3):
 					System.out.println("Die Höhe des Baumes wird bestimmt...");
-					int height = 0;
-					height = tree.height();
+					int height =tree.height();
 					System.out.println("[height] Die Höhe des B-Baumes ist: " + height);
 					break;
 				case (4):
 					System.out.println("Das größte Element im Baum wird ermittelt...");
-					Integer maxVal = null;
-					maxVal = tree.getMax();
+					Integer maxVal = tree.getMax();
 					if (maxVal == null)
 						System.out.println("Es gibt kein größtes Element!");
 					System.out.println("[getMax] Der größte Wert ist: " + maxVal);
 					break;
 				case (5):
 					System.out.println("Das kleinste Element im Baum wird ermittelt...");
-					Integer minVal = null;
-					minVal = tree.getMin();
+					Integer minVal = tree.getMin();
 					if (minVal == null)
 						System.out.println("Es gibt kein kleinstes Element!");
 					System.out.println("[getMin] Der kleinste Wert ist: " + minVal);
 					break;
 				case (0):
-					break;
 				}
 				break;
 			case (3): // Baum auf Leere prüfen
@@ -172,12 +167,7 @@ public class Menue {
 				}
 				break;
 			case (0): // Programm beenden
-
-				System.out.println("Programm wird beendet...");
-
 				weitermachen = false;
-				break;
-			// TODO alles weitere
 			}
 		}
 		System.out.println("Programm beendet.");
