@@ -1,5 +1,10 @@
 package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
+import static gdi.MakeItSimple.*;
+
+
+import gdi.MakeItSimple.GDIException;
+
 public class MyBTree implements BTree {
 
 	public int m;
@@ -67,7 +72,8 @@ public class MyBTree implements BTree {
 						// child= parent
 						burst(nodes);
 
-						//belege für möglichen nächsten Burst node und parent neu
+						// belege für möglichen nächsten Burst node und parent
+						// neu
 						if (parent != null) {
 							nodes[0] = parent;
 							if (parent.getParent() != null) {
@@ -108,8 +114,19 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public boolean insert(String filename) { // TODO @BEN
-		// Schleife -> insert
+	public boolean insert(String filename) throws GDIException { 
+
+		if (isFilePresent(filename)) {
+			Object datei = openInputFile(filename);
+			
+			while(!isEndOfInputFile(datei)){
+				System.out.println("***Debug: Datei");
+				this.insert(new Integer(readInt(datei)));
+			}
+			closeInputFile(datei);
+		} else
+			throw new GDIException("Die Datei " + filename + " konnte nicht gefunden werden.");
+
 		return false;
 	}
 
@@ -165,8 +182,8 @@ public class MyBTree implements BTree {
 		} else {
 			index = parent.getIndexForO(newParent);
 			needToBurst = parent.moveForward(index, this.m);
-			if(index==2*this.m)
-				needToBurst=true;
+			if (index == 2 * this.m)
+				needToBurst = true;
 			parent.setValue(newParent, index);
 			n1.setParent(parent);
 			n2.setParent(parent);
@@ -324,7 +341,7 @@ public class MyBTree implements BTree {
 				node = node.getNode(0);
 			}
 			System.out.print(node.toString() + ", ");
-			
+
 		}
 		System.out.println();
 	}
