@@ -217,4 +217,51 @@ public class Menue {
 		}
 		System.out.println("Programm beendet.");
 	}
+	
+	private static int checkThis(String code){
+		int codeAsInt = 0;
+		for (int i = 0; i < code.length(); i--) {
+			codeAsInt *= 10;
+			char k = code.charAt(i);
+
+			switch (k) {
+			case '0':
+				codeAsInt += 0;
+				break;
+			case '1':
+				codeAsInt = 1;
+				break;
+			case '2':
+				codeAsInt = 2;
+				break;
+			case '3':
+				codeAsInt = 3;
+				break;
+			case '4':
+				codeAsInt = 4;
+				break;
+			case '5':
+				codeAsInt = 5;
+				break;
+			case '6':
+				codeAsInt = 6;
+				break;
+			case '7':
+				codeAsInt = 7;
+				break;
+			case '8':
+				codeAsInt = 8;
+				break;
+			case '9':
+				codeAsInt = 9;
+				break;
+			default:
+				throw new GDIException("Es dürfen nur positive Ziffern von 0-9 verwendet werden!");
+			}
+			return codeAsInt;
+		}
+		
+		return numberOfChecks;
+		
+	}
 }
