@@ -4,8 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 public class BTree_Test {
-	
-	
+
 	BTree tree = new MyBTree(1);
 
 	@Test
@@ -35,13 +34,13 @@ public class BTree_Test {
 
 		System.out.println("*********Debug: TEST contains -> test");
 		assertTrue("contains(2): ", tree.contains(new Integer(1)));
-		assertTrue("contains(3): ",  tree.contains(new Integer(0)));
-		assertTrue("contains(7): ",  tree.contains(new Integer(-1)));
-		assertTrue("contains(5): ",  tree.contains(new Integer(Integer.MIN_VALUE)));
-		assertTrue("contains(10)): ",  tree.contains(new Integer(Integer.MAX_VALUE)));
-		assertTrue("contains(0): ",  tree.contains(new Integer(300)));
-		assertFalse("contains(0): ",  tree.contains(new Integer(400)));
-		assertFalse("contains(0): ",  tree.contains(new Integer(-5)));
+		assertTrue("contains(3): ", tree.contains(new Integer(0)));
+		assertTrue("contains(7): ", tree.contains(new Integer(-1)));
+		assertTrue("contains(5): ", tree.contains(new Integer(Integer.MIN_VALUE)));
+		assertTrue("contains(10)): ", tree.contains(new Integer(Integer.MAX_VALUE)));
+		assertTrue("contains(0): ", tree.contains(new Integer(300)));
+		assertFalse("contains(0): ", tree.contains(new Integer(400)));
+		assertFalse("contains(0): ", tree.contains(new Integer(-5)));
 
 	}
 
@@ -58,10 +57,12 @@ public class BTree_Test {
 	}
 
 	@Test
-	public void isEmpty(){
+	public void isEmpty() {
 		System.out.println("*********Debug: TEST isEmpty");
 		assertEquals("isEmpty: ", true, tree.isEmpty());
 		tree.insert(new Integer(2));
 		assertEquals("isEmpty: ", false, tree.isEmpty());
 	}
+
+
 }
