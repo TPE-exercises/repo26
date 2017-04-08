@@ -181,14 +181,14 @@ public class MyBTree implements BTree {
 			
 			//Setze Parent
 			n1.setParent(newRoot);
-			n1.setParent(newRoot);
+			n2.setParent(newRoot);
 
 			//setze kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
-				if (n1.getNode(i) != null)
-					n1.getNode(i).setParent(n1);
-				if (n2.getNode(i) != null)
-					n2.getNode(i).setParent(n2);
+				if (n1.getNode(x) != null)
+					n1.getNode(x).setParent(n1);
+				if (n2.getNode(x) != null)
+					n2.getNode(x).setParent(n2);
 			}
 			needToBurst = false;
 		} else {
@@ -209,10 +209,10 @@ public class MyBTree implements BTree {
 
 			//Setze Kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
-				if (n1.getNode(i) != null)
-					n1.getNode(i).setParent(n1);
-				if (n2.getNode(i) != null)
-					n2.getNode(i).setParent(n2);
+				if (n1.getNode(x) != null)
+					n1.getNode(x).setParent(n1);
+				if (n2.getNode(x) != null)
+					n2.getNode(x).setParent(n2);
 			}
 		}
 
