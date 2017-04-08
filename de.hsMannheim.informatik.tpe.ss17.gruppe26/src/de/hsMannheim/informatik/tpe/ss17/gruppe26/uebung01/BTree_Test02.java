@@ -19,7 +19,6 @@ public class BTree_Test02 {
 		tree.insert(new Integer(9));
 		tree.insert(new Integer(10));
 		tree.insert(new Integer(11));
-
 	}
 
 	@Test
@@ -27,7 +26,6 @@ public class BTree_Test02 {
 
 		String inorder = "[[[ 0 ] 1 [ 2 ]] 3 [[ 4 ] 6 [ 7 ]] 8 [[ 9 ] 10 [ 11 ]]]";
 		assertEquals("Inorder: ", inorder, ((MyBTree) tree).printInorderS());
-
 	}
 
 	@Test

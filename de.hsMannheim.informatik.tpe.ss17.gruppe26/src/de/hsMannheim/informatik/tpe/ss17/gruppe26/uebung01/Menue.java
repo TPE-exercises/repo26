@@ -2,11 +2,11 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
 import static gdi.MakeItSimple.*;
 
-public class Menue { 
+public class Menue {
 
 	private static int numberOfChecks = 0;
 	private static int ordnung;
-	
+
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
@@ -17,7 +17,7 @@ public class Menue {
 
 	private static void printEmptyTree() {
 		if (numberOfChecks == 0)
-		System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
+			System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
 		else
 			System.out.println("Der Baum ist immer noch leer.");
 		numberOfChecks++;
@@ -64,19 +64,29 @@ public class Menue {
 				System.out.println("(2) Werte per Datei einfügen");
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
-				case (1): //////////////////////TODO Falsche Eingaben abfangen, wenn Buchstaben
+				case (1): ////////////////////// TODO Falsche Eingaben abfangen,
+							////////////////////// wenn Buchstaben
 					boolean continueInsert = true;
-					while (continueInsert) {
+					readLine();
+					do {
+
 						printSeperatorDots();
-						System.out.println("Geben Sie den Wert an, den Sie einfügen möchten: ");
-						boolean insertsucces = tree.insert(new Integer(readInt()));
-						if (insertsucces)
-							System.out.println("Wert erfolgreich eingefügt.");
-						else {
-							System.out.println("Wert nicht eingefügt.");
+						System.out.println("INFO: Eingabe kann durch eingeben von Buchstaben abgebrochen werden. ");
+						System.out.print("Geben Sie den Wert an, den Sie einfügen möchten: ");
+						String rawCode = readLine();
+						Integer cleanCode = checkThis(rawCode);
+						if (cleanCode == null) {
+							System.out.println("Eingabe abgebrochen");
 							continueInsert = false;
+						} else {
+							boolean insertsucces = tree.insert(cleanCode);
+							if (insertsucces)
+								System.out.println("Wert erfolgreich eingefügt.");
+							else {
+								System.out.println("Wert nicht eingefügt.");
+							}
 						}
-					}
+					} while (continueInsert);
 					break;
 				case (2):
 					readLine();
@@ -149,15 +159,15 @@ public class Menue {
 				if (tree.isEmpty()) {
 					printEmptyTree();
 				} else
-				System.out.println(
-						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+					System.out.println(
+							"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
 				break;
 			case (5): // Aktuellen Baum klonen
 				if (tree.isEmpty()) {
 					printEmptyTree();
 				} else
-				System.out.println(
-						"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+					System.out.println(
+							"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
 				break;
 			case (6): // Baum ausgeben lassen
 				printSeperatorDots();
@@ -217,10 +227,16 @@ public class Menue {
 		}
 		System.out.println("Programm beendet.");
 	}
-	
-	private static int checkThis(String code){
+
+	/**
+	 * Spielerei
+	 * 
+	 * @param code
+	 * @return
+	 */
+	private static Integer checkThis(String code) {
 		int codeAsInt = 0;
-		for (int i = 0; i < code.length(); i--) {
+		for (int i = 0; i < code.length(); i++) {
 			codeAsInt *= 10;
 			char k = code.charAt(i);
 
@@ -256,12 +272,10 @@ public class Menue {
 				codeAsInt = 9;
 				break;
 			default:
-				throw new GDIException("Es dürfen nur positive Ziffern von 0-9 verwendet werden!");
+				return null;
 			}
-			return codeAsInt;
+
 		}
-		
-		return numberOfChecks;
-		
+		return codeAsInt;
 	}
 }
