@@ -64,7 +64,7 @@ public class Menue {
 
 					}
 					break;
-				case (2): // TODO
+				case (2): 
 					readLine();
 					System.out.println("Geben Sie den Namen der Datei an:");
 					tree.insert(readLine());

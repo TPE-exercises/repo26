@@ -173,10 +173,15 @@ public class MyBTree implements BTree {
 			Node newRoot = new Node(this.m);
 			n1.setParent(newRoot);
 			n1.setParent(newRoot);
+
 			newRoot.setValue(newParent, 0);
 			newRoot.setNode(n1, 0);
 			newRoot.setNode(n2, 1);
 			setRoot(newRoot);
+			for (int x = 0; x < 2 * this.m + 1; x++) {
+				n1.getNode(i).setParent(n1);
+				n2.getNode(i).setParent(n2);
+			}
 			needToBurst = false;
 		} else {
 			index = parent.getIndexForO(newParent);
@@ -186,8 +191,13 @@ public class MyBTree implements BTree {
 			parent.setValue(newParent, index);
 			n1.setParent(parent);
 			n2.setParent(parent);
+
 			parent.setNode(n1, index);
 			parent.setNode(n2, index + 1);
+			for (int x = 0; x < 2 * this.m + 1; x++) {
+				n1.getNode(i).setParent(n1);
+				n2.getNode(i).setParent(n2);
+			}
 		}
 
 	}
@@ -206,7 +216,7 @@ public class MyBTree implements BTree {
 	 */
 	private boolean rec_contains(Integer o, Node node, int index) {
 		// System.out.println("**Debug: Ist Wert " + o + " im baum?");
-		System.out.println(node.toString());
+		// System.out.println(node.toString());
 		if (node.getValue(index) == null) {
 			if (node.getNode(index) == null) {
 				return false;
@@ -229,7 +239,11 @@ public class MyBTree implements BTree {
 			index++;
 			// laufe index weiter, aber prüfe ob nicht zu weit
 			// letzte index muss nicht geprüft werden, da sollte nix sein
-			return index < 2 * this.m ? rec_contains(o, node, index) : false;
+
+			if (index < 2 * this.m + 1)
+				return rec_contains(o, node, index);
+			else
+				return false;
 		}
 	}
 
