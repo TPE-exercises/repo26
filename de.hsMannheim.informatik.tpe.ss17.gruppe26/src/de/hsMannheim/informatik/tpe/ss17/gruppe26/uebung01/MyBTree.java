@@ -179,8 +179,10 @@ public class MyBTree implements BTree {
 			newRoot.setNode(n2, 1);
 			setRoot(newRoot);
 			for (int x = 0; x < 2 * this.m + 1; x++) {
-				n1.getNode(i).setParent(n1);
-				n2.getNode(i).setParent(n2);
+				if (n1.getNode(i) != null)
+					n1.getNode(i).setParent(n1);
+				if (n2.getNode(i) != null)
+					n2.getNode(i).setParent(n2);
 			}
 			needToBurst = false;
 		} else {
@@ -195,8 +197,10 @@ public class MyBTree implements BTree {
 			parent.setNode(n1, index);
 			parent.setNode(n2, index + 1);
 			for (int x = 0; x < 2 * this.m + 1; x++) {
-				n1.getNode(i).setParent(n1);
-				n2.getNode(i).setParent(n2);
+				if (n1.getNode(i) != null)
+					n1.getNode(i).setParent(n1);
+				if (n2.getNode(i) != null)
+					n2.getNode(i).setParent(n2);
 			}
 		}
 
