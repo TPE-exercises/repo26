@@ -56,16 +56,22 @@ public class Menue {
 			System.out.println("(6) Baum ausgeben lassen");
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
-			case (1): ////////////////////////////////////// Werte in Baum
-						////////////////////////////////////// einfügen
+			case (1): /**
+						 * 
+						 * 
+						 * 
+						 * Werte in Baum einfügen
+						 * 
+						 * 
+						 * 
+						 **/
 				printSeperatorDots();
 				System.out.println("Wie wollen Sie Werte in den Baum einfügen?");
 				System.out.println("(1) Werte per Hand eingeben");
 				System.out.println("(2) Werte per Datei einfügen");
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
-				case (1): ////////////////////// TODO Falsche Eingaben abfangen,
-							////////////////////// wenn Buchstaben
+				case (1): 
 					boolean continueInsert = true;
 					readLine();
 					do {
@@ -99,8 +105,16 @@ public class Menue {
 					printDefault();
 				}
 				break;
-			case (2): //////////////////////////////////////////////////// Werte
-						//////////////////////////////////////////////////// finden
+			case (2): 
+				/**
+				 * 
+				 * 
+				 * 
+				 * Werte finden
+				 * 
+				 * 
+				 * 
+				 **/
 				if (tree.isEmpty()) {
 					printEmptyTree();
 					break;
@@ -229,7 +243,9 @@ public class Menue {
 	}
 
 	/**
-	 * Spielerei
+	 * Spielerei 
+	 * String wird zu Integer umgewandet
+	 * Null wenn buchstaben dabei sind
 	 * 
 	 * @param code
 	 * @return
