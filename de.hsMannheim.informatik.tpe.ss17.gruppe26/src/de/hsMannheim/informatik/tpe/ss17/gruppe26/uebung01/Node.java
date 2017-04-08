@@ -72,20 +72,21 @@ public class Node {
 	public void setNode(Node node, int index) {
 		this.bTreeNodeChildArray[index] = node;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public Node getParent(){
+	public Node getParent() {
 		return this.bTreeNodeParent;
 	}
+
 	/**
 	 * 
 	 * @param parent
 	 */
-	public void setParent(Node parent){
-		this.bTreeNodeParent=parent;
+	public void setParent(Node parent) {
+		this.bTreeNodeParent = parent;
 	}
 
 	/**
@@ -112,7 +113,7 @@ public class Node {
 		// Verschiebe alle nodes [bis] index um einen nach hinten
 		for (int i = 2 * m; i > index; i--) {
 			this.integerArray[i] = this.integerArray[i - 1];
-			this.bTreeNodeChildArray[i+1] = this.bTreeNodeChildArray[i];
+			this.bTreeNodeChildArray[i + 1] = this.bTreeNodeChildArray[i];
 		}
 		// mache position frei
 		integerArray[index] = null;
@@ -126,13 +127,20 @@ public class Node {
 	}
 
 	public int getIndexForO(Integer o) {
-
 		int index = 0;
-		//TODO NullPointer teilweise bei 0
-		while (0 > integerArray[index]) {
-			index++;
+		// TODO NullPointer teilweise bei 0
+		for (int i = 0; i < 2 * this.m + 1; i++) {
+			if (integerArray[i] != null && o.intValue() > integerArray[i]) {
+					index = i;
+			}
+			else if(integerArray[i] != null && o.intValue() < integerArray[i]){
+				return index;
+			}
+			else{
+				index++;
+				return index;
+			}
 		}
-
 		return index;
 	}
 

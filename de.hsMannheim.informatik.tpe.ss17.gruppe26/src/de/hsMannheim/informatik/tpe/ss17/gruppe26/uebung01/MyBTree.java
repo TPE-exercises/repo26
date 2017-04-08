@@ -67,6 +67,7 @@ public class MyBTree implements BTree {
 						// child= parent
 						burst(nodes);
 
+						//belege für möglichen nächsten Burst node und parent neu
 						if (parent != null) {
 							nodes[0] = parent;
 							if (parent.getParent() != null) {
@@ -165,6 +166,8 @@ public class MyBTree implements BTree {
 		} else {
 			index = parent.getIndexForO(newParent);
 			needToBurst = parent.moveForward(index, this.m);
+			if(index==2*this.m)
+				needToBurst=true;
 			parent.setValue(newParent, index);
 			n1.setParent(parent);
 			n2.setParent(parent);
