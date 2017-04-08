@@ -3,7 +3,7 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 import static org.junit.Assert.*;
 import org.junit.*;
 
-public class BTree_Test {
+public class BTree_Test01 {
 
 	BTree tree = new MyBTree(1);
 

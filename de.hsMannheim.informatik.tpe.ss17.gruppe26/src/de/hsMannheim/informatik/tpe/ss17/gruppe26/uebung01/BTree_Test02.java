@@ -3,7 +3,7 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 import static org.junit.Assert.*;
 import org.junit.*;
 
-public class BTree_Test_Print {
+public class BTree_Test02 {
 	BTree tree = new MyBTree(1);
 
 	@Before
@@ -51,5 +51,16 @@ public class BTree_Test_Print {
 		String levelorder = "[ 3  8 ][ 1 ][ 0 ][ 2 ][ 6 ][ 4 ][ 7 ][ 10 ][ 9 ][ 11 ]";
 
 		assertEquals("Levelorder: ", levelorder, ((MyBTree) tree).printLevelorderS());
+	}
+	
+	@Test
+	public void size() {
+		assertEquals("Size: ", 11, ((MyBTree) tree).size());
+
+	}
+	@Test
+	public void hight() {
+		assertEquals("Hight: ", 3, ((MyBTree) tree).height());
+
 	}
 }
