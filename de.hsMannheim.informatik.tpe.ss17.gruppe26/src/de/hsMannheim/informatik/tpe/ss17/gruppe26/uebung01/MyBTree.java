@@ -213,7 +213,7 @@ public class MyBTree implements BTree {
 			index++;
 			// laufe index weiter, aber prüfe ob nicht zu weit
 			// letzte index muss nicht geprüft werden, da sollte nix sein
-			return index < 2 * this.m+1 ? rec_contains(o, node, index) : false;
+			return index < 2 * this.m ? rec_contains(o, node, index) : false;
 		}
 	}
 
