@@ -170,14 +170,20 @@ public class MyBTree implements BTree {
 		// bringe alles an die richtige stelle
 		int index = 0;
 		if (parent == null) {
+			//Erstelle neue Wurzel
 			Node newRoot = new Node(this.m);
+			newRoot.setValue(newParent, 0);
+			setRoot(newRoot);
+			
+			//Setze Kinder
+			newRoot.setNode(n1, 0);
+			newRoot.setNode(n2, 1);
+			
+			//Setze Parent
 			n1.setParent(newRoot);
 			n1.setParent(newRoot);
 
-			newRoot.setValue(newParent, 0);
-			newRoot.setNode(n1, 0);
-			newRoot.setNode(n2, 1);
-			setRoot(newRoot);
+			//setze kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
 				if (n1.getNode(i) != null)
 					n1.getNode(i).setParent(n1);
@@ -186,16 +192,22 @@ public class MyBTree implements BTree {
 			}
 			needToBurst = false;
 		} else {
+			//Platziere wert in Parent
 			index = parent.getIndexForO(newParent);
 			needToBurst = parent.moveForward(index, this.m);
+			parent.setValue(newParent, index);
 			if (index == 2 * this.m)
 				needToBurst = true;
-			parent.setValue(newParent, index);
+			
+			//Setze Kinder
+			parent.setNode(n1, index);
+			parent.setNode(n2, index + 1);
+			
+			//Setze Parent
 			n1.setParent(parent);
 			n2.setParent(parent);
 
-			parent.setNode(n1, index);
-			parent.setNode(n2, index + 1);
+			//Setze Kindeskinder
 			for (int x = 0; x < 2 * this.m + 1; x++) {
 				if (n1.getNode(i) != null)
 					n1.getNode(i).setParent(n1);
