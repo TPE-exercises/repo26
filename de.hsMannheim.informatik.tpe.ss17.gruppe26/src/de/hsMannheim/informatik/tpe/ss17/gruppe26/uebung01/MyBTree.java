@@ -368,22 +368,28 @@ public class MyBTree implements BTree {
 
 	public void addAll_rec(Node node) { // TODO void wurde zu boolean
 										// geändert
+		if (debug)
 		System.out.println("Beginn addAll_rec");
 		boolean added;
 		for (int i = 0; i < 2 * m + 2; i++) {
+			if (debug)
 			System.out.println("Anfang Schleife " + i);
 			if (node.getNode(i) != null) {
 				addAll_rec(node.getNode(i));
 			}
-			System.out.println("Zwischen addAll_rec");
+			if (debug)
+			System.out.println("Zwischen Schleife");
 			if (i < 2 * m + 1 && node.getValue(i) != null) {
+				if (debug)
 				System.out.println(" " + node.getValue(i) + " ");
 				added = this.insert(node.getValue(i));
 				if (added)
 					difference++;
 			}
+			if (debug)
 			System.out.println("Ende Schleife");
 		}
+		if (debug)
 		System.out.println("Ende addAll_rec");
 	}
 
