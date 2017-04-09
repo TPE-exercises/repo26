@@ -7,18 +7,27 @@ public class Menue {
 	private static int numberOfChecks = 0;
 	private static int ordnung;
 
+	/**
+	 * Zeichnet eine Linie aus (_)
+	 */
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
-
+/**
+ * Zeichnet eine Linie aus (.)
+ */
 	private static void printSeperatorDots() {
 		System.out.println("...................................................");
 	}
-
+/**
+ * Zeichnet eine Linie aus (-)
+ */
 	private static void printSeperatorShortLines() {
 		System.out.println("---------------------------");
 	}
-
+/**
+ * Ausgabe, das der Baum leer ist
+ */
 	private static void printEmptyTree() {
 		if (numberOfChecks == 0)
 			System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
@@ -26,7 +35,9 @@ public class Menue {
 			System.out.println("Der Baum ist immer noch leer.");
 		numberOfChecks++;
 	}
-
+/**
+ * Ausgabe, fehlerhafte Menueeingabe
+ */
 	private static void printDefault() {
 		System.out.print("Fehlerhafte Eingabe! Bitte geben Sie eine gültige Zahl für den jeweiligen Menüpunkt ein! ");
 	}
@@ -292,6 +303,7 @@ public class Menue {
 				break;
 			case (0): // Programm beenden
 				weitermachen = false;
+			break;
 			default:
 				printDefault();
 			}
@@ -299,6 +311,10 @@ public class Menue {
 		System.out.println("Programm beendet.");
 	}
 
+	/**
+	 * Verbesserte, selbstständige Eingabe von mehreren Werten
+	 * @param tree
+	 */
 	private static void insertManually(BTree tree) {
 		boolean continueInsert = true;
 		readLine();
@@ -322,6 +338,10 @@ public class Menue {
 		} while (continueInsert);
 	}
 
+	/**
+	 * Gebe Werte per File in den Baum ein
+	 * @param tree
+	 */
 	private static void insertFile(BTree tree) {
 		readLine();
 		System.out.println("Geben Sie den Namen der Datei an:");
@@ -334,8 +354,9 @@ public class Menue {
 	}
 
 	/**
+	 * 
 	 * Spielerei String wird zu Integer umgewandelt Null wenn Buchstaben dabei
-	 * sind
+	 * sind, wird für mehrfacheingabe von Werten verwendet
 	 * 
 	 * @param code
 	 * @return
