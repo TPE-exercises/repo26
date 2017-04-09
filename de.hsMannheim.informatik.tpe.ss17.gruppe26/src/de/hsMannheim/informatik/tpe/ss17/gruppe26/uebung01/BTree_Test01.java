@@ -19,7 +19,7 @@ public class BTree_Test01 {
 		assertTrue("Insert(MAX): ", tree.insert(new Integer(Integer.MAX_VALUE)));
 		assertTrue("Insert(MIN): ", tree.insert(new Integer(Integer.MIN_VALUE)));
 		assertFalse("Insert(0): ", tree.insert(new Integer(0)));
-
+tree.printLevelorder();
 	}
 
 	@Test

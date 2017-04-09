@@ -12,23 +12,11 @@ public class MyBTree implements BTree {
 	private static int difference = 0;
 	private static boolean needToBurst;
 
-	// MyBTree() {
-	// this.setRoot(null);
-	// this.m = 1;
-	// if (debug)
-	// System.out.println("Construktor 0 Class BTree");
-	// }
-
 	MyBTree(int ordnung) {
-		// this();
 		this.setRoot(null);
 		this.m = ordnung;
 		if (debug)
 			System.out.println("Construktor 1 Class BTree [m=" + m + "]");
-	}
-
-	public void printM() {
-		System.out.println(this.m);
 	}
 
 	@Override
@@ -137,7 +125,8 @@ public class MyBTree implements BTree {
 	}
 
 	/**
-	 * 
+	 * burst/explode/split
+	 * @param nodes
 	 */
 	private void burst(Node[] nodes) {
 
@@ -486,9 +475,9 @@ public class MyBTree implements BTree {
 			System.out.println("Der Baum ist leer!");
 		else {
 			for (int i = 0; i < height(); i++) {
-				i++;
-				System.out.print("Ebene/Höhe " + i + ": ");
-				i--;
+
+				System.out.print("Ebene " + i + ": ");
+
 				printLevelorder_rec(node, i);
 				System.out.println();
 			}

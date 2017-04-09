@@ -2,6 +2,7 @@ package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
 
 public interface BTree {
 
+
 	/**
 	 * inserts number of Integer o in BTree
 	 * @param o

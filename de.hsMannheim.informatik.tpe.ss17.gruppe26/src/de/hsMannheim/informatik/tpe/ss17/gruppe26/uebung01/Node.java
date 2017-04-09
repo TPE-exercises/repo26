@@ -125,10 +125,13 @@ public class Node {
 		}
 		return false;
 	}
-
+/**
+ * wird vor dem einfügen in den Parent verwendet um die richtige position zu finden ab wo geschoben werden muss
+ * @param o
+ * @return
+ */
 	public int getIndexForO(Integer o) {
 		int index = 0;
-		// TODO NullPointer teilweise bei 0
 		for (int i = 0; i < 2 * this.m + 1; i++) {
 			if (integerArray[i] != null && o.intValue() > integerArray[i]) {
 				index = i;
@@ -147,16 +150,6 @@ public class Node {
 	 * 
 	 * @return BTree_Node clone
 	 */
-	public Node clone() {
-		Node clone = new Node(this.m);
-
-		for (int i = 0; i < this.integerArray.length; i++) {
-			clone.setValue(this.getValue(i), i);
-			clone.setNode(this.getNode(i), i);
-		}
-
-		return clone;
-	}
 	public Node deepClone() {
 		Node newNode = new Node(this.m);
 		
