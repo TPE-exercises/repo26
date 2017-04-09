@@ -349,34 +349,33 @@ public class Menue {
 
 			switch (k) {
 			case '0':
-				codeAsInt += 0;
 				break;
 			case '1':
-				codeAsInt = 1;
+				codeAsInt += 1;
 				break;
 			case '2':
-				codeAsInt = 2;
+				codeAsInt += 2;
 				break;
 			case '3':
-				codeAsInt = 3;
+				codeAsInt += 3;
 				break;
 			case '4':
-				codeAsInt = 4;
+				codeAsInt += 4;
 				break;
 			case '5':
-				codeAsInt = 5;
+				codeAsInt += 5;
 				break;
 			case '6':
-				codeAsInt = 6;
+				codeAsInt += 6;
 				break;
 			case '7':
-				codeAsInt = 7;
+				codeAsInt += 7;
 				break;
 			case '8':
-				codeAsInt = 8;
+				codeAsInt += 8;
 				break;
 			case '9':
-				codeAsInt = 9;
+				codeAsInt += 9;
 				break;
 			default:
 				return null;
