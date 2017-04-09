@@ -21,35 +21,35 @@ public class BTree_Test02 {
 		tree.insert(new Integer(11));
 	}
 
-	@Test
-	public void printInorder() {
-
-		String inorder = "[[[ 0 ] 1 [ 2 ]] 3 [[ 4 ] 6 [ 7 ]] 8 [[ 9 ] 10 [ 11 ]]]";
-		assertEquals("Inorder: ", inorder, ((MyBTree) tree).printInorderS());
-	}
-
-	@Test
-	public void printPostorder() {
-
-		String postorder = "[[[ 0 ][ 2 ] 1 ][[ 4 ][ 7 ] 6 ][[ 9 ][ 11 ] 10 ] 3  8 ]";
-		assertEquals("Postorder: ", postorder, ((MyBTree) tree).printPostorderS());
-	}
-
-	@Test
-	public void printPreorder() {
-
-		String preorder = "[ 3  8 [ 1 [ 0 ][ 2 ]][ 6 [ 4 ][ 7 ]][ 10 [ 9 ][ 11 ]]]";
-		assertEquals("Preorder: ", preorder, ((MyBTree) tree).printPreorderS());
-
-	}
-
-	@Test
-	public void printLevelorder() {
-
-		String levelorder = "[ 3  8 ][ 1 ][ 0 ][ 2 ][ 6 ][ 4 ][ 7 ][ 10 ][ 9 ][ 11 ]";
-
-		assertEquals("Levelorder: ", levelorder, ((MyBTree) tree).printLevelorderS());
-	}
+//	@Test
+//	public void printInorder() {
+//
+//		String inorder = "[[[ 0 ] 1 [ 2 ]] 3 [[ 4 ] 6 [ 7 ]] 8 [[ 9 ] 10 [ 11 ]]]";
+//		assertEquals("Inorder: ", inorder, ((MyBTree) tree).printInorderS());
+//	}
+//
+//	@Test
+//	public void printPostorder() {
+//
+//		String postorder = "[[[ 0 ][ 2 ] 1 ][[ 4 ][ 7 ] 6 ][[ 9 ][ 11 ] 10 ] 3  8 ]";
+//		assertEquals("Postorder: ", postorder, ((MyBTree) tree).printPostorderS());
+//	}
+//
+//	@Test
+//	public void printPreorder() {
+//
+//		String preorder = "[ 3  8 [ 1 [ 0 ][ 2 ]][ 6 [ 4 ][ 7 ]][ 10 [ 9 ][ 11 ]]]";
+//		assertEquals("Preorder: ", preorder, ((MyBTree) tree).printPreorderS());
+//
+//	}
+//
+//	@Test
+//	public void printLevelorder() {
+//
+//		String levelorder = "[ 3  8 ][ 1 ][ 0 ][ 2 ][ 6 ][ 4 ][ 7 ][ 10 ][ 9 ][ 11 ]";
+//
+//		assertEquals("Levelorder: ", levelorder, ((MyBTree) tree).printLevelorderS());
+//	}
 	
 	@Test
 	public void size() {

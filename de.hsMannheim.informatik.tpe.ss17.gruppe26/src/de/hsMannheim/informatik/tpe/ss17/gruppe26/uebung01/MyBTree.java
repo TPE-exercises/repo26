@@ -528,115 +528,115 @@ public class MyBTree implements BTree {
 	 * 
 	 * 
 	 */
-
-	private static String inorder = "";
-
-	public String printInorderS() {
-		Node node = getRoot();
-		if (node == null)
-			inorder = null;
-		else {
-			printInorder_recS(node);
-		}
-		return inorder;
-	}
-
-	private void printInorder_recS(Node node) {
-		inorder += "[";
-		for (int i = 0; i < 2 * m + 2; i++) {
-			if (node.getNode(i) != null) {
-				printInorder_recS(node.getNode(i));
-			}
-			if (i < 2 * m + 1 && node.getValue(i) != null) {
-				inorder += " " + node.getValue(i) + " ";
-			}
-		}
-		inorder += "]";
-	}
-
-	private static String postorder = "";
-
-	public String printPostorderS() {
-
-		Node node = getRoot();
-		if (node == null)
-			postorder = null;
-		else {
-			printPostorder_recS(node);
-		}
-		return postorder;
-	}
-
-	private void printPostorder_recS(Node node) {
-		postorder += "[";
-		for (int i = 0; i < 2 * m + 2; i++) {
-			if (node.getNode(i) != null) {
-				printPostorder_recS(node.getNode(i));
-			}
-		}
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getValue(i) != null)
-				postorder += " " + node.getValue(i) + " ";
-		}
-		postorder += "]";
-	}
-
-	private static String preorder = "";
-
-	public String printPreorderS() {
-
-		Node node = getRoot();
-		if (node == null)
-			preorder = null;
-		else {
-			printPreorder_recS(node);
-		}
-		return preorder;
-	}
-
-	private void printPreorder_recS(Node node) {
-		preorder += "[";
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getValue(i) != null)
-				preorder += " " + node.getValue(i) + " ";
-		}
-		for (int i = 0; i < 2 * m + 2; i++) {
-			if (node.getNode(i) != null) {
-				printPreorder_recS(node.getNode(i));
-			}
-		}
-		preorder += "]";
-
-	}
-
-	private static String levelorder = "";
-
-	public String printLevelorderS() {
-
-		Node node = getRoot();
-		if (node == null)
-			levelorder = null;
-		else {
-			printLevelorder_recS(node);
-		}
-		return levelorder;
-	}
-
-	private void printLevelorder_recS(Node node) {
-		levelorder += "[";
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getValue(i) != null) {
-				levelorder += " " + node.getValue(i) + " ";
-			}
-		}
-		levelorder += "]";
-
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getNode(i) != null) {
-				printLevelorder_recS(node.getNode(i));
-			}
-		}
-	}
+//
+//	private static String inorder = "";
+//
+//	public String printInorderS() {
+//		Node node = getRoot();
+//		if (node == null)
+//			inorder = null;
+//		else {
+//			printInorder_recS(node);
+//		}
+//		return inorder;
+//	}
+//
+//	private void printInorder_recS(Node node) {
+//		inorder += "[";
+//		for (int i = 0; i < 2 * m + 2; i++) {
+//			if (node.getNode(i) != null) {
+//				printInorder_recS(node.getNode(i));
+//			}
+//			if (i < 2 * m + 1 && node.getValue(i) != null) {
+//				inorder += " " + node.getValue(i) + " ";
+//			}
+//		}
+//		inorder += "]";
+//	}
+//
+//	private static String postorder = "";
+//
+//	public String printPostorderS() {
+//
+//		Node node = getRoot();
+//		if (node == null)
+//			postorder = null;
+//		else {
+//			printPostorder_recS(node);
+//		}
+//		return postorder;
+//	}
+//
+//	private void printPostorder_recS(Node node) {
+//		postorder += "[";
+//		for (int i = 0; i < 2 * m + 2; i++) {
+//			if (node.getNode(i) != null) {
+//				printPostorder_recS(node.getNode(i));
+//			}
+//		}
+//		for (int i = 0; i < 2 * m + 1; i++) {
+//			if (node.getValue(i) != null)
+//				postorder += " " + node.getValue(i) + " ";
+//		}
+//		postorder += "]";
+//	}
+//
+//	private static String preorder = "";
+//
+//	public String printPreorderS() {
+//
+//		Node node = getRoot();
+//		if (node == null)
+//			preorder = null;
+//		else {
+//			printPreorder_recS(node);
+//		}
+//		return preorder;
+//	}
+//
+//	private void printPreorder_recS(Node node) {
+//		preorder += "[";
+//		for (int i = 0; i < 2 * m + 1; i++) {
+//			if (node.getValue(i) != null)
+//				preorder += " " + node.getValue(i) + " ";
+//		}
+//		for (int i = 0; i < 2 * m + 2; i++) {
+//			if (node.getNode(i) != null) {
+//				printPreorder_recS(node.getNode(i));
+//			}
+//		}
+//		preorder += "]";
+//
+//	}
+//
+//	private static String levelorder = "";
+//
+//	public String printLevelorderS() {
+//
+//		Node node = getRoot();
+//		if (node == null)
+//			levelorder = null;
+//		else {
+//			printLevelorder_recS(node);
+//		}
+//		return levelorder;
+//	}
+//
+//	private void printLevelorder_recS(Node node) {
+//		levelorder += "[";
+//		for (int i = 0; i < 2 * m + 1; i++) {
+//			if (node.getValue(i) != null) {
+//				levelorder += " " + node.getValue(i) + " ";
+//			}
+//		}
+//		levelorder += "]";
+//
+//		for (int i = 0; i < 2 * m + 1; i++) {
+//			if (node.getNode(i) != null) {
+//				printLevelorder_recS(node.getNode(i));
+//			}
+//		}
+//	}
 	/*********************************************************************************************
 	 * 
 	 * 
