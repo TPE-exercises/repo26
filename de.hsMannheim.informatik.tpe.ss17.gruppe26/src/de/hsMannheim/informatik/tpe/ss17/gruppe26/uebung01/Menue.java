@@ -264,7 +264,6 @@ public class Menue {
 		boolean continueInsert = true;
 		readLine();
 		do {
-
 			printSeperatorDots();
 			System.out.println("INFO: Eingabe kann durch eingeben von Buchstaben abgebrochen werden. ");
 			System.out.print("Geben Sie den Wert an, den Sie einfügen möchten: ");
@@ -297,8 +296,8 @@ public class Menue {
 	
 	/**
 	 * Spielerei 
-	 * String wird zu Integer umgewandet
-	 * Null wenn buchstaben dabei sind
+	 * String wird zu Integer umgewandelt
+	 * Null wenn Buchstaben dabei sind
 	 * 
 	 * @param code
 	 * @return
