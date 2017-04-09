@@ -480,7 +480,7 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public void printLevelorder() { // TODO Muss noch korrigiert werden!
+	public void printLevelorder() {
 		Node node = root;
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
