@@ -480,24 +480,31 @@ public class MyBTree implements BTree {
 		if (node == null)
 			System.out.println("Der Baum ist leer!");
 		else {
-			printLevelorder_rec(node);
+			for (int i = 0; i < height(); i++) {
+				i++;
+				System.out.print("Ebene/Höhe " + i + ": ");
+				i--;
+				printLevelorder_rec(node, i);
+				System.out.println();
+			}
 		}
-		System.out.println();
 	}
 
-	private void printLevelorder_rec(Node node) {
-		System.out.print("[");
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getValue(i) != null) {
-				System.out.print(" " + node.getValue(i) + " ");
+	private void printLevelorder_rec(Node node, int level) {
+		if (level > 0) {
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getNode(i) != null) {
+					printLevelorder_rec(node.getNode(i), level - 1);
+				}
 			}
-		}
-		System.out.print("]");
-
-		for (int i = 0; i < 2 * m + 1; i++) {
-			if (node.getNode(i) != null) {
-				printLevelorder_rec(node.getNode(i));
+		} else {
+			System.out.print("[");
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getValue(i) != null) {
+					System.out.print(" " + node.getValue(i) + " ");
+				}
 			}
+			System.out.print("]");
 		}
 	}
 

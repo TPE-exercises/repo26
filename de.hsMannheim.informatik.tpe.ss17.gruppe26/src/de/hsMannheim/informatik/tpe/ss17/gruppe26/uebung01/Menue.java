@@ -14,6 +14,10 @@ public class Menue {
 	private static void printSeperatorDots() {
 		System.out.println("...................................................");
 	}
+	
+	private static void printSeperatorShortLines() {
+		System.out.println("---------------------------");
+	}
 
 	private static void printEmptyTree() {
 		if (numberOfChecks == 0)
@@ -47,7 +51,7 @@ public class Menue {
 				System.out.println("aktiviert.)");
 			else
 				System.out.println("deaktiviert.)");
-			System.out.println("---------------------------");
+			printSeperatorShortLines();
 			if (numberOfRuns == 0)
 				System.out.println("Was möchten Sie machen?");
 			else
@@ -225,15 +229,17 @@ public class Menue {
 					case (9):
 						System.out.println("Alle Ausgabevarianten des Baumes werden erstellt...");
 						System.out.println();
-						System.out.print("Der Baum als    Inorder: ");
+						System.out.println("Der Baum als Inorder: ");
 						tree.printInorder();
-						System.out.print("Der Baum als  Postorder: ");
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Postorder: ");
 						tree.printPostorder();
-						System.out.print("Der Baum als   Preorder: ");
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Preorder: ");
 						tree.printPreorder();
-						System.out.print("Der Baum als Levelorder: ");
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Levelorder: ");
 						tree.printLevelorder();
-						System.out.println();
 						break;
 					case (0):
 						break;
