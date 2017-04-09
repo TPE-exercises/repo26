@@ -395,9 +395,14 @@ public class MyBTree implements BTree {
 	}
 
 	@Override
-	public MyBTree clone() { // TODO Auto-generated method stub
-
-		return null;
+	public BTree clone() {
+		MyBTree tree = new MyBTree(this.m);
+		if(isEmpty()){
+			return null;
+		}
+		tree.root = this.root.deepClone();
+		
+		return tree;
 	}
 
 	@Override

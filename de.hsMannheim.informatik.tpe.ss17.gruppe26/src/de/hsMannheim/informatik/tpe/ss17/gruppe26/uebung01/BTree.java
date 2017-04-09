@@ -64,7 +64,7 @@ public interface BTree {
 	 * create deep clone
 	 * @return
 	 */
-	MyBTree clone();
+	BTree clone();
 	
 	/**
 	 * @return 
