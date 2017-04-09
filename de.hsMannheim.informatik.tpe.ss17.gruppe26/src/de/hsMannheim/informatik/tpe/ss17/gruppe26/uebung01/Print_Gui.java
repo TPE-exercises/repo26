@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
+import java.awt.event.ActionListener;
 
 public class Print_Gui extends JFrame {
 
@@ -137,7 +138,7 @@ public class Print_Gui extends JFrame {
 		contentPane.add(textField_l2);
 
 		txtrL = new JTextArea();
-		txtrL.setText("L2");
+		txtrL.setText("L1");
 		txtrL.setEnabled(false);
 		txtrL.setEditable(false);
 		txtrL.setBounds(0, 104, 36, 22);
@@ -151,7 +152,7 @@ public class Print_Gui extends JFrame {
 		contentPane.add(textField_l3);
 
 		txtrL_1 = new JTextArea();
-		txtrL_1.setText("L3");
+		txtrL_1.setText("L2");
 		txtrL_1.setEnabled(false);
 		txtrL_1.setEditable(false);
 		txtrL_1.setBounds(0, 137, 36, 22);
@@ -165,7 +166,7 @@ public class Print_Gui extends JFrame {
 		contentPane.add(textField_l4);
 
 		txtrL_2 = new JTextArea();
-		txtrL_2.setText("L4");
+		txtrL_2.setText("L3");
 		txtrL_2.setEnabled(false);
 		txtrL_2.setEditable(false);
 		txtrL_2.setBounds(0, 170, 36, 22);
@@ -179,12 +180,12 @@ public class Print_Gui extends JFrame {
 		contentPane.add(textField_l5);
 
 		txtrL_3 = new JTextArea();
-		txtrL_3.setText("L5");
+		txtrL_3.setText("L4");
 		txtrL_3.setEnabled(false);
 		txtrL_3.setEditable(false);
 		txtrL_3.setBounds(0, 202, 36, 22);
+		
 		contentPane.add(txtrL_3);
-
 		/**
 		 * 
 		 * 
