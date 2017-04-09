@@ -6,7 +6,7 @@ public class Menue {
 
 	private static int numberOfChecks = 0;
 	private static int ordnung;
-	private static  final boolean PRINT_GUI_ON = true;
+	private static final boolean PRINT_GUI_ON = true;
 
 	/**
 	 * Zeichnet eine Linie aus (_)
@@ -14,21 +14,24 @@ public class Menue {
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
-/**
- * Zeichnet eine Linie aus (.)
- */
+
+	/**
+	 * Zeichnet eine Linie aus (.)
+	 */
 	private static void printSeperatorDots() {
 		System.out.println("...................................................");
 	}
-/**
- * Zeichnet eine Linie aus (-)
- */
+
+	/**
+	 * Zeichnet eine Linie aus (-)
+	 */
 	private static void printSeperatorShortLines() {
 		System.out.println("---------------------------");
 	}
-/**
- * Ausgabe, das der Baum leer ist
- */
+
+	/**
+	 * Ausgabe, das der Baum leer ist
+	 */
 	private static void printEmptyTree() {
 		if (numberOfChecks == 0)
 			System.out.println("Der Baum ist leer. Es wurde noch nichts eingefügt.");
@@ -36,9 +39,10 @@ public class Menue {
 			System.out.println("Der Baum ist immer noch leer.");
 		numberOfChecks++;
 	}
-/**
- * Ausgabe, fehlerhafte Menueeingabe
- */
+
+	/**
+	 * Ausgabe, fehlerhafte Menueeingabe
+	 */
 	private static void printDefault() {
 		System.out.print("Fehlerhafte Eingabe! Bitte geben Sie eine gültige Zahl für den jeweiligen Menüpunkt ein! ");
 	}
@@ -194,6 +198,7 @@ public class Menue {
 						break;
 					default:
 						printDefault();
+						break;
 					}
 					System.out.println("AddAll:");
 					added = tree.addAll(otherTree);
@@ -285,7 +290,8 @@ public class Menue {
 						printSeperatorShortLines();
 						System.out.println("Der Baum als Levelorder: ");
 						tree.printLevelorder();
-						printGui(tree);
+						if (PRINT_GUI_ON)
+							printGui(tree);
 						break;
 					case (0):
 						break;
@@ -305,7 +311,7 @@ public class Menue {
 				break;
 			case (0): // Programm beenden
 				weitermachen = false;
-			break;
+				break;
 			default:
 				printDefault();
 			}
@@ -315,6 +321,7 @@ public class Menue {
 
 	/**
 	 * Verbesserte, selbstständige Eingabe von mehreren Werten
+	 * 
 	 * @param tree
 	 */
 	private static void insertManually(BTree tree) {
@@ -342,6 +349,7 @@ public class Menue {
 
 	/**
 	 * Gebe Werte per File in den Baum ein
+	 * 
 	 * @param tree
 	 */
 	private static void insertFile(BTree tree) {
@@ -406,8 +414,8 @@ public class Menue {
 		}
 		return codeAsInt;
 	}
-	
-	private static void printGui(MyBTree tree){
+
+	private static void printGui(MyBTree tree) {
 		Print_Gui.iniziallisiere(tree);
 	}
 }
