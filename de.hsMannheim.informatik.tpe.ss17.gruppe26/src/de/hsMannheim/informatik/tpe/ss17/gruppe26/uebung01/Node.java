@@ -157,6 +157,25 @@ public class Node {
 
 		return clone;
 	}
+	public Node deepClone() {
+		Node newNode = new Node(this.m);
+		
+		//Clone elements
+		for(int i = 0; i< integerArray.length; i++) {
+			if(integerArray[i] != null) {
+				newNode.integerArray[i] = integerArray[i];
+			}
+		}
+		
+		//clone children
+		for(int i = 0; i < bTreeNodeChildArray.length; i++) {
+			if(bTreeNodeChildArray[i] != null) {
+				newNode.bTreeNodeChildArray[i] = bTreeNodeChildArray[i].deepClone();
+			}
+		}
+		
+		return newNode;
+	}
 
 	/**
 	 * @return String

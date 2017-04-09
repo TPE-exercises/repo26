@@ -14,7 +14,7 @@ public class Menue {
 	private static void printSeperatorDots() {
 		System.out.println("...................................................");
 	}
-	
+
 	private static void printSeperatorShortLines() {
 		System.out.println("---------------------------");
 	}
@@ -34,7 +34,8 @@ public class Menue {
 	public static void main(String[] args) {
 		boolean weitermachen = true;
 		int numberOfRuns = 0;
-		boolean added=false;
+		boolean added = false;
+		boolean existClonedTree = false;
 
 		System.out.println("Version 1.8 (09/04/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
@@ -42,7 +43,8 @@ public class Menue {
 		printSeperatorLine();
 		System.out.println("Welche Ordnung soll der Baum haben?");
 		ordnung = readInt();
-		BTree tree = new MyBTree(ordnung);
+		MyBTree tree = new MyBTree(ordnung);
+		MyBTree clonedTree = new MyBTree(ordnung);
 		System.out.println("...Baum erstelt");
 		while (weitermachen) {
 			printSeperatorLine();
@@ -82,7 +84,7 @@ public class Menue {
 				System.out.println("(2) Werte per Datei einfügen");
 				System.out.println("(0) [Zurück]");
 				switch (readInt()) {
-				case (1): 
+				case (1):
 					insertManually(tree);
 					break;
 				case (2):
@@ -94,7 +96,7 @@ public class Menue {
 					printDefault();
 				}
 				break;
-			case (2): 
+			case (2):
 				/**
 				 * 
 				 * 
@@ -170,7 +172,7 @@ public class Menue {
 					System.out.println("(2) Datei einlesen");
 					System.out.println("(0) ABBRUCH");
 					switch (readInt()) {
-					case (1): 
+					case (1):
 						insertManually(otherTree);
 						break;
 					case (2):
@@ -190,11 +192,42 @@ public class Menue {
 				}
 				break;
 			case (5): // Aktuellen Baum klonen
-				if (tree.isEmpty()) {
-					printEmptyTree();
-				} else
-					System.out.println(
-							"BAUSTELLE! Diese Funktion muss noch implementiert werden! Bitte wählen Sie etwas anderes aus!");
+
+				printSeperatorDots();
+				System.out.println("Wählen Sie eine Option:");
+				System.out.println("(1) Baum Clonen \n(2) geklonten Baum ausgeben \n(0) Zurück");
+				switch (readInt()) {
+				case 1:
+					clonedTree = (MyBTree) tree.clone();
+					if (clonedTree == null) {
+						System.out.println("Der Baum war leer, wurde aber kopiert. Er lässt sich nicht ausgeben!");
+						break;
+					} else {
+						existClonedTree = true;
+						System.out.println("Der Baum wurde tief kopiert, er wird nun ausgegeben.");
+					}
+				case 2:
+					if (existClonedTree) {
+						System.out.println("Alle Ausgabevarianten des Baumes werden erstellt...");
+						System.out.println();
+						System.out.println("Der Baum als Inorder: ");
+						clonedTree.printInorder();
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Postorder: ");
+						clonedTree.printPostorder();
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Preorder: ");
+						clonedTree.printPreorder();
+						printSeperatorShortLines();
+						System.out.println("Der Baum als Levelorder: ");
+						clonedTree.printLevelorder();
+					} else
+						System.out.println("Der Baum wurde noch nicht erstellt oder hat keine Werte bekommen.");
+					break;
+				case 0:
+
+				}
+
 				break;
 			case (6): // Baum ausgeben lassen
 				printSeperatorDots();
@@ -265,8 +298,8 @@ public class Menue {
 		}
 		System.out.println("Programm beendet.");
 	}
-	
-	private static void insertManually(BTree tree){
+
+	private static void insertManually(BTree tree) {
 		boolean continueInsert = true;
 		readLine();
 		do {
@@ -289,7 +322,7 @@ public class Menue {
 		} while (continueInsert);
 	}
 
-	private static void insertFile(BTree tree){
+	private static void insertFile(BTree tree) {
 		readLine();
 		System.out.println("Geben Sie den Namen der Datei an:");
 		boolean insertsucces = tree.insert(readLine());
@@ -299,16 +332,16 @@ public class Menue {
 			System.out.println("ACHTUNG: Werte wurden nicht eingefügt.");
 		}
 	}
-	
+
 	/**
-	 * Spielerei 
-	 * String wird zu Integer umgewandelt
-	 * Null wenn Buchstaben dabei sind
+	 * Spielerei String wird zu Integer umgewandelt Null wenn Buchstaben dabei
+	 * sind
 	 * 
 	 * @param code
 	 * @return
 	 */
-	private static Integer checkThis(String code) { // TODO Eingabe der 0 funktioniert nicht!!!
+	private static Integer checkThis(String code) { // TODO Eingabe der 0
+													// funktioniert nicht!!!
 		int codeAsInt = 0;
 		for (int i = 0; i < code.length(); i++) {
 			codeAsInt *= 10;
