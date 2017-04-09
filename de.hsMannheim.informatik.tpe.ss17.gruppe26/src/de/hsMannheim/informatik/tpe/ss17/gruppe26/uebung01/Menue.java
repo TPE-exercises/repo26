@@ -340,8 +340,7 @@ public class Menue {
 	 * @param code
 	 * @return
 	 */
-	private static Integer checkThis(String code) { // TODO Eingabe der 0
-													// funktioniert nicht!!!
+	private static Integer checkThis(String code) {
 		int codeAsInt = 0;
 		for (int i = 0; i < code.length(); i++) {
 			codeAsInt *= 10;
