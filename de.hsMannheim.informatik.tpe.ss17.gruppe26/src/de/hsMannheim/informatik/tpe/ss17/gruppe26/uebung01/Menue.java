@@ -26,7 +26,7 @@ public class Menue {
 	 * Zeichnet eine Linie aus (-)
 	 */
 	private static void printSeperatorShortLines() {
-		System.out.println("---------------------------");
+		System.out.println("---------------------------------------------------");
 	}
 
 	/**
