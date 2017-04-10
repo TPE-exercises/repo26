@@ -1,4 +1,4 @@
-package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung01;
+package uebung01;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

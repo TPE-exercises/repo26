@@ -1,4 +1,4 @@
-package de.hsMannheim.informatik.tpe.ss17.gruppe26.uebung02;
+package uebung02;
 
 public class Menue {
 
