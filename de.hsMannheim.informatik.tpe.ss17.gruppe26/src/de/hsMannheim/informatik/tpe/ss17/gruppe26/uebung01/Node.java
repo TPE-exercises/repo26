@@ -136,7 +136,7 @@ public class Node {
 			if (integerArray[i] != null && o.intValue() > integerArray[i]) {
 				index = i;
 			} else if (integerArray[i] != null && o.intValue() < integerArray[i]) {
-				return index;
+				return i;
 			} else {
 				index++;
 				return index;
@@ -169,6 +169,7 @@ public class Node {
 		
 		return newNode;
 	}
+
 
 	/**
 	 * @return String
