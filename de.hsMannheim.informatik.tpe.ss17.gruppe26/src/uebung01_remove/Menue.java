@@ -83,6 +83,7 @@ public class Menue {
 			System.out.println("(5) Aktuellen Baum klonen");
 			System.out.println("(6) Baum ausgeben lassen");
 			System.out.println("(7) DEBUGGING aktivieren/deaktivieren");
+			System.out.println("(8) Lösche Element"); 
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): /**
@@ -309,6 +310,13 @@ public class Menue {
 					System.out.println("DEBUGGING wurde aktiviert.");
 				}
 				break;
+			case (8)://Lösche Element
+				System.out.println("Geben Sie ein, welchen Wert Sie löschen wollen:");
+				if(tree.remove(readInt())){
+					System.out.println("Wert erfolgreich gelöscht.");
+				}
+				else
+					System.out.println("Wert nicht gelöscht.");
 			case (0): // Programm beenden
 				weitermachen = false;
 				break;

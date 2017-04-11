@@ -66,21 +66,21 @@ public class MyBTree implements BTree {
 						burst(nodes);
 						System.out.println("Node: ");
 						System.out.println(node.toString());
-						
+
 						// belege für möglichen nächsten Burst node und parent
 						// neu
 						if (parent != null) {
 							System.out.println("Parent: ");
 							System.out.println(parent.toString());
-							
+
 							node = nodes[1];
-							nodes[0]=node;
-							if(node!=null)
-							if (node.getParent() != null) {
-								parent = node.getParent();
-								nodes[1] = parent;
-							} else
-								nodes[1] = null;
+							nodes[0] = node;
+							if (node != null)
+								if (node.getParent() != null) {
+									parent = node.getParent();
+									nodes[1] = parent;
+								} else
+									nodes[1] = null;
 						} else {
 							nodes[0] = null;
 							nodes[1] = null;
@@ -134,6 +134,7 @@ public class MyBTree implements BTree {
 
 	/**
 	 * burst/explode/split
+	 * 
 	 * @param nodes
 	 */
 	private void burst(Node[] nodes) {
@@ -198,7 +199,7 @@ public class MyBTree implements BTree {
 		} else {
 			// Platziere wert in Parent
 			index = parent.getIndexForO(newParent);
-			System.out.println("Index: " +index);
+			System.out.println("Index: " + index);
 			needToBurst = parent.moveForward(index, this.m);
 			parent.setValue(newParent, index);
 			if (index == 2 * this.m)
@@ -395,11 +396,11 @@ public class MyBTree implements BTree {
 	@Override
 	public BTree clone() {
 		MyBTree tree = new MyBTree(this.m);
-		if(isEmpty()){
+		if (isEmpty()) {
 			return null;
 		}
 		tree.root = this.root.deepClone();
-		
+
 		return tree;
 	}
 
@@ -521,15 +522,56 @@ public class MyBTree implements BTree {
 
 	@Override
 	public boolean remove(Integer o) {
-		// TODO Auto-generated method stub
-		return false;
+
+		if (contains(o)) {
+			Integer[] array = getAllElemets();
+			this.root=null;
+
+			for (int i = 0; i < array.length; i++) {
+				if (array[i] == o) {
+					//wert soll nicht eingefügt werden
+				} else {
+					insert(array[i]);
+				}
+			}
+			return true;
+		} else
+			return false;
 	}
-	
-	/**
-	 * Gleicht Baum nach löschen wieder aus
-	 */
-	private void defizaer(){
-		// TODO Auto-generated method stub
+
+	private Integer[] allElements;
+	private int allElementsCount;
+
+	// Speichert alle Elemente im Baum in ein Array
+	public Integer[] getAllElemets() {
+		allElements = new Integer[size()];
+		allElementsCount = 0;
+
+		Node node = root;
+		if (node == null)
+			allElements = null;
+		else {
+			for (int i = 0; i < height(); i++) {
+				rec_getAllElemets(node, i);
+			}
+		}
+		return allElements;
+	}
+	private void rec_getAllElemets(Node node, int level) {
+		if (level > 0) {
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getNode(i) != null) {
+					printLevelorder_rec(node.getNode(i), level - 1);
+				}
+			}
+		} else {
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getValue(i) != null) {
+					allElements[allElementsCount] = node.getValue(i);
+					allElementsCount++;
+				}
+			}
+		}
 	}
 
 	/*********************************************************************************************
@@ -539,115 +581,115 @@ public class MyBTree implements BTree {
 	 * 
 	 * 
 	 */
-//
-//	private static String inorder = "";
-//
-//	public String printInorderS() {
-//		Node node = getRoot();
-//		if (node == null)
-//			inorder = null;
-//		else {
-//			printInorder_recS(node);
-//		}
-//		return inorder;
-//	}
-//
-//	private void printInorder_recS(Node node) {
-//		inorder += "[";
-//		for (int i = 0; i < 2 * m + 2; i++) {
-//			if (node.getNode(i) != null) {
-//				printInorder_recS(node.getNode(i));
-//			}
-//			if (i < 2 * m + 1 && node.getValue(i) != null) {
-//				inorder += " " + node.getValue(i) + " ";
-//			}
-//		}
-//		inorder += "]";
-//	}
-//
-//	private static String postorder = "";
-//
-//	public String printPostorderS() {
-//
-//		Node node = getRoot();
-//		if (node == null)
-//			postorder = null;
-//		else {
-//			printPostorder_recS(node);
-//		}
-//		return postorder;
-//	}
-//
-//	private void printPostorder_recS(Node node) {
-//		postorder += "[";
-//		for (int i = 0; i < 2 * m + 2; i++) {
-//			if (node.getNode(i) != null) {
-//				printPostorder_recS(node.getNode(i));
-//			}
-//		}
-//		for (int i = 0; i < 2 * m + 1; i++) {
-//			if (node.getValue(i) != null)
-//				postorder += " " + node.getValue(i) + " ";
-//		}
-//		postorder += "]";
-//	}
-//
-//	private static String preorder = "";
-//
-//	public String printPreorderS() {
-//
-//		Node node = getRoot();
-//		if (node == null)
-//			preorder = null;
-//		else {
-//			printPreorder_recS(node);
-//		}
-//		return preorder;
-//	}
-//
-//	private void printPreorder_recS(Node node) {
-//		preorder += "[";
-//		for (int i = 0; i < 2 * m + 1; i++) {
-//			if (node.getValue(i) != null)
-//				preorder += " " + node.getValue(i) + " ";
-//		}
-//		for (int i = 0; i < 2 * m + 2; i++) {
-//			if (node.getNode(i) != null) {
-//				printPreorder_recS(node.getNode(i));
-//			}
-//		}
-//		preorder += "]";
-//
-//	}
-//
-//	private static String levelorder = "";
-//
-//	public String printLevelorderS() {
-//
-//		Node node = getRoot();
-//		if (node == null)
-//			levelorder = null;
-//		else {
-//			printLevelorder_recS(node);
-//		}
-//		return levelorder;
-//	}
-//
-//	private void printLevelorder_recS(Node node) {
-//		levelorder += "[";
-//		for (int i = 0; i < 2 * m + 1; i++) {
-//			if (node.getValue(i) != null) {
-//				levelorder += " " + node.getValue(i) + " ";
-//			}
-//		}
-//		levelorder += "]";
-//
-//		for (int i = 0; i < 2 * m + 1; i++) {
-//			if (node.getNode(i) != null) {
-//				printLevelorder_recS(node.getNode(i));
-//			}
-//		}
-//	}
+	//
+	// private static String inorder = "";
+	//
+	// public String printInorderS() {
+	// Node node = getRoot();
+	// if (node == null)
+	// inorder = null;
+	// else {
+	// printInorder_recS(node);
+	// }
+	// return inorder;
+	// }
+	//
+	// private void printInorder_recS(Node node) {
+	// inorder += "[";
+	// for (int i = 0; i < 2 * m + 2; i++) {
+	// if (node.getNode(i) != null) {
+	// printInorder_recS(node.getNode(i));
+	// }
+	// if (i < 2 * m + 1 && node.getValue(i) != null) {
+	// inorder += " " + node.getValue(i) + " ";
+	// }
+	// }
+	// inorder += "]";
+	// }
+	//
+	// private static String postorder = "";
+	//
+	// public String printPostorderS() {
+	//
+	// Node node = getRoot();
+	// if (node == null)
+	// postorder = null;
+	// else {
+	// printPostorder_recS(node);
+	// }
+	// return postorder;
+	// }
+	//
+	// private void printPostorder_recS(Node node) {
+	// postorder += "[";
+	// for (int i = 0; i < 2 * m + 2; i++) {
+	// if (node.getNode(i) != null) {
+	// printPostorder_recS(node.getNode(i));
+	// }
+	// }
+	// for (int i = 0; i < 2 * m + 1; i++) {
+	// if (node.getValue(i) != null)
+	// postorder += " " + node.getValue(i) + " ";
+	// }
+	// postorder += "]";
+	// }
+	//
+	// private static String preorder = "";
+	//
+	// public String printPreorderS() {
+	//
+	// Node node = getRoot();
+	// if (node == null)
+	// preorder = null;
+	// else {
+	// printPreorder_recS(node);
+	// }
+	// return preorder;
+	// }
+	//
+	// private void printPreorder_recS(Node node) {
+	// preorder += "[";
+	// for (int i = 0; i < 2 * m + 1; i++) {
+	// if (node.getValue(i) != null)
+	// preorder += " " + node.getValue(i) + " ";
+	// }
+	// for (int i = 0; i < 2 * m + 2; i++) {
+	// if (node.getNode(i) != null) {
+	// printPreorder_recS(node.getNode(i));
+	// }
+	// }
+	// preorder += "]";
+	//
+	// }
+	//
+	// private static String levelorder = "";
+	//
+	// public String printLevelorderS() {
+	//
+	// Node node = getRoot();
+	// if (node == null)
+	// levelorder = null;
+	// else {
+	// printLevelorder_recS(node);
+	// }
+	// return levelorder;
+	// }
+	//
+	// private void printLevelorder_recS(Node node) {
+	// levelorder += "[";
+	// for (int i = 0; i < 2 * m + 1; i++) {
+	// if (node.getValue(i) != null) {
+	// levelorder += " " + node.getValue(i) + " ";
+	// }
+	// }
+	// levelorder += "]";
+	//
+	// for (int i = 0; i < 2 * m + 1; i++) {
+	// if (node.getNode(i) != null) {
+	// printLevelorder_recS(node.getNode(i));
+	// }
+	// }
+	// }
 	/*********************************************************************************************
 	 * 
 	 * 
