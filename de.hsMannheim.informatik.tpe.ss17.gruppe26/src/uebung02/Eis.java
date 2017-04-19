@@ -1,7 +1,5 @@
 package uebung02;
-
 import static gdi.MakeItSimple.*;
-
 public class Eis {
 
 	private String name;
@@ -133,9 +131,15 @@ public class Eis {
 	 * 
 	 * @return String array
 	 */
-	private String[] frageSortenAb() {
-
-		return null;
+	private String[] frageSortenAb(int anzahlKugeln) {
+		String[] sorten = new String[anzahlKugeln];
+		for(int i=0;i<sorten.length;i++){
+			System.out.print("Welche Sorte: ");
+			//TODO Prüfe ob sorte verfügbar
+			sorten[i] = readLine();
+			System.out.println();
+		}
+		return sorten;
 	}
 
 	/**
