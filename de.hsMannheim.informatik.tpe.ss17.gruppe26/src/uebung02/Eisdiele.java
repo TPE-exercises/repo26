@@ -49,6 +49,7 @@ public class Eisdiele {
 	}
 
 	private void begruesen() {
+		System.out.println(this.name);
 		System.out.println("Hallo!");
 	}
 
