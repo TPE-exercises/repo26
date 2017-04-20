@@ -1,6 +1,18 @@
 package uebung02;
 
-public class MannheimerEis extends MyEis{
+public class MannheimerEis extends MyEis {
+	
+	public void vorbereiten() {
+		switch (this.name) {
+		case ("Spaghettieis"):
+		case ("Bananensplit"):
+			this.setBehaeltnis("Teller");
+			break;
+		case ("Nussbecher"):
+			this.setBehaeltnis("Becher");
+			break;
+		}
+	}
 
 	public void fuellen() {
 		switch (this.name) {
@@ -17,7 +29,6 @@ public class MannheimerEis extends MyEis{
 			break;
 		}
 	}
-
 
 	public void dekorieren() {
 		switch (this.name) {

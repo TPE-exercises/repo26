@@ -1,69 +1,62 @@
 package uebung02;
 
-import static gdi.MakeItSimple.*;
+import static gdi.MakeItSimple.readLine;
 
-public class MannheimerEisdiele extends MyEisdiele{
+public class MannheimerEisdiele extends MyEisdiele {
 
 	MannheimerEisdiele(String name, String region) {
 		super(name, region);
 	}
 
 	public void begruesen() {
-		System.out.println(this.name);
-		System.out.println("Hallo!");
+		System.out.println("Mannheimerisch: Hallo!");
+
+	}
+
+	public Eis erstellen(String typ) {
+		Eis eis = new MannheimerEis();
+	
+		System.out.println("Mannheimerisch: Welche Sorte");
+	
+		switch (readLine()) {
+		case ("Spaghettieis"):
+		case ("spaghettieis"):
+			eis.setName("Spaghettieis");
+			eis.setPreis(5.90);
+			break;
+		case ("Bananensplit"):
+		case ("bananensplit"):
+			eis.setName("Bananensplit");
+			eis.setPreis(5.90);
+			break;
+		case ("Nussbecher"):
+		case ("nussbecher"):
+			eis.setName("Nussbecher");
+			eis.setPreis(5.90);
+			break;
+		default:
+			return null;
+		}
+		return eis;
+	
 	}
 
 	public void kassieren(Eis eis) {
-		switch (eis.getName()) {
-		case ("Spaghettieis"):
-			System.out.println("Bitte bezahlen Sie jetzt " + eis.getPreis() + "0€.");
-			break;
-		case ("Bananensplit"):
+		// TODO ermittle EISPREIS oder lese von der Karte, dann -> erstellen
+		System.out.println("Mannheimerisch: Bitte bezahlen Sie jetzt " + eis.getPreis() + "0€.");
 
-			break;
-		case ("Nussbecher"):
-
-			break;
-		}
 	}
 
-	public void verabschieden(Eis eis) {
-		System.out.println("Ihr Eis:");
-		
-		System.out.print("Name:      ");
-		System.out.println(eis.getName());
-
-		String[] extras = eis.getExtras();
-		String[] sorten = eis.getSorten();
-		
-		System.out.print("Extras:    ");
-		System.out.print(extras[0]);
-		for (int i = 1; i < extras.length; i++) {
-			System.out.print(", "+extras[i] );
-		}
-		System.out.println();
-		
-		System.out.print("Sorten:    ");
-		System.out.print(sorten[0] );
-		for (int i = 1; i < sorten.length; i++) {
-			System.out.print(", "+sorten[i]);
-		}
-		System.out.println();
-		
-		System.out.print("Art:       ");
-		System.out.println(eis.getArt());
-		
-		System.out.print("Behältnis: ");
-		System.out.println(eis.getBehaeltnis());
+	public void verabschieden(String eis) {
 
 		System.out.println();
-		System.out.println("Auf Wiedersehen! Und lassen Sie sich ihr Eis schmecken!");
+		System.out.println(eis);
+		System.out.println("Mannheimerisch: Auf Wiedersehen! Und lassen Sie sich ihr Eis schmecken!");
 
 	}
 
 	public void entschuldigen() {
-		System.out.println("Tut uns leid...");
+		System.out.println("Mannheimerisch: Tut uns leid...");
 	}
-
 
 }
