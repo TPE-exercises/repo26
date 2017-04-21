@@ -2,9 +2,8 @@
 um regionale Unterschiede in der Zubereitung des Eises (Bezeichnung/ Zutaten/ Art/ etc.) 
 sowie im Dialog mit dem Kunden widerspiegeln zu können.
 
-//TODO Bezeichnung
-
 ->	Machen Sie die Klassen Eis und Eisdiele abstrakt. 
+Erledigt!
 ->	Am Bestellvorgang soll sich nichtsändern. 
 
 ->	Implementieren sie drei konkrete Klassen für jede regionale Eisdiele  
@@ -12,9 +11,13 @@ sowie im Dialog mit dem Kunden widerspiegeln zu können.
 
 Die jetzt abstrakte Klasse Eisdiele erhält hierfur eine weitere Methode: 
 ->	public abstract Eis erstellen(String typ);
-
+Erledigt!
 
 ->	Was muss hier geschehen? 
+In dieser Klasse wird das spezielle EisObjekt der speziellen Eisdiele angelegt und zurückgegeben. 
+Dies muss in der jeweiligen Unterklasse geschehen, da von der abstakten Oberklasse keines angelegt werden kann.
+Der formale paramether "String typ" wird von mir dabei nicht  verwendet. Dies hat nur einen Nutzen, 
+wenn ich die Ojekte der Unterklasse in der abstrakten Klasse in einer Switch(typ) iniziallisiere. 
 
 ->	Brauchen Sie zusätzliche Klassen und Methoden? 
 	->	Wenn Ja - welche? 
@@ -23,13 +26,13 @@ Die jetzt abstrakte Klasse Eisdiele erhält hierfur eine weitere Methode:
 	Aber nur, wenn Preis nicht von der Karte gelesen wird.
 	
 ->	Was muss in Ihrer main() passieren um die jeweiligen lokalen Eisdielen anzusprechen? 
-Für jede lokale Eisdiele muss EIN Eisdielenobjekt angelegt werden.
+Für jede lokale Eisdiele muss EIN Eisdielenobjekt angelegt werden und aufgerufen werden.
 
 ->	Müssen Sie bestehende Methoden andern oder verlagern? 
-
+Die bestehenden Methoden Eis und Eisdiele müssen komplett auseinandergezogen werden und 
+auf die abstrakte Oberklasse und die Unterklasse aufgeteilt werden. 
 
 ->	Notieren Sie die Vorteile dieser Lösung in Aufgabe 2 gegenüber der Lösung von Aufgabe 1.
 In Aufgabe 1 war es nur möglich eine Eisdiele zu bedienen/erstellen, 
 es sei den man kopiere den gesamten Code und ändere die Prints. -> UNSCHÖN (im Sinne der Vorlesung verboten!)
-
 Nun ist es möglich, mit sehr wenig aufwand belibig viele weitere Eisdielen in jeder Region zu erstellen.
