@@ -52,6 +52,7 @@ public class MannheimerEisdiele extends MyEisdiele {
 	public void verabschieden(String eis) {
 
 		System.out.println();
+		//System.out.println("Ä Balle Erdbeer, äner mit Schokolad und donn noch äner mit Persching");
 		System.out.println(eis);
 		System.out.println("Alla gell!");
 
