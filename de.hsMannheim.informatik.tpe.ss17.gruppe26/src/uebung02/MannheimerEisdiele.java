@@ -9,14 +9,16 @@ public class MannheimerEisdiele extends MyEisdiele {
 	}
 
 	public void begruesen() {
-		System.out.println("Mannheimerisch: Hallo!");
+		System.out.println("Moschäh");
+//		System.out.println("Unn wieee?");
+//		System.out.println("Ahjooo");
 
 	}
 
 	public Eis erstellen(String typ) {
 		Eis eis = new MannheimerEis();
 	
-		System.out.println("Mannheimerisch: Welche Sorte");
+		System.out.println("Was fire Eis willschdan hawwe?");
 	
 		switch (readLine()) {
 		case ("Spaghettieis"):
@@ -51,7 +53,7 @@ public class MannheimerEisdiele extends MyEisdiele {
 
 		System.out.println();
 		System.out.println(eis);
-		System.out.println("Mannheimerisch: Auf Wiedersehen! Und lassen Sie sich ihr Eis schmecken!");
+		System.out.println("Alla gell!");
 
 	}
 
