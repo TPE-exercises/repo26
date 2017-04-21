@@ -9,9 +9,10 @@ public class MannheimerEisdiele extends MyEisdiele {
 	}
 
 	public void begruesen() {
-		System.out.println("Moschäh");
+//		System.out.println("Moschäh");
 //		System.out.println("Unn wieee?");
 //		System.out.println("Ahjooo");
+		System.out.println("Jou!");
 
 	}
 
@@ -39,13 +40,14 @@ public class MannheimerEisdiele extends MyEisdiele {
 		default:
 			return null;
 		}
+		System.out.println("Ajooh!");
 		return eis;
 	
 	}
 
 	public void kassieren(Eis eis) {
 		// TODO ermittle EISPREIS oder lese von der Karte, dann -> erstellen
-		System.out.println("Mannheimerisch: Bitte bezahlen Sie jetzt " + eis.getPreis() + "0€.");
+		System.out.println("Donn krieg ich " + eis.getPreis() + "0 Euroo fun da.");
 
 	}
 
@@ -54,12 +56,12 @@ public class MannheimerEisdiele extends MyEisdiele {
 		System.out.println();
 		//System.out.println("Ä Balle Erdbeer, äner mit Schokolad und donn noch äner mit Persching");
 		System.out.println(eis);
-		System.out.println("Alla gell!");
+		System.out.println("Alla dann!");
 
 	}
 
 	public void entschuldigen() {
-		System.out.println("Mannheimerisch: Tut uns leid...");
+		System.out.println("Dut ma lääd, des hämma net.");
 	}
 
 }

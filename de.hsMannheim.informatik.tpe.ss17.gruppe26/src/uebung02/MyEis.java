@@ -74,7 +74,7 @@ abstract public class MyEis implements Eis {
 		String[] sorten = new String[anzahlKugeln];
 		for (int i = 0; i < sorten.length; i++) {
 			System.out.print("Welche Sorte: ");
-			// TODO Prüfe ob sorte verfügbar
+			// TODO Prüfe ob sorte verfügbar, ENUM? pro Region wieder anders
 			sorten[i] = readLine();
 			System.out.println();
 		}
