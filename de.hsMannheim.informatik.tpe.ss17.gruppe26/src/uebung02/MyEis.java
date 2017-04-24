@@ -68,7 +68,7 @@ abstract public class MyEis implements Eis {
 		return this.extras;
 	}
 
-	abstract public void vorbereiten() ;
+	abstract public void vorbereiten();
 
 	public String[] frageSortenAb(int anzahlKugeln) {
 		String[] sorten = new String[anzahlKugeln];

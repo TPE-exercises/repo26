@@ -9,19 +9,21 @@ public class MannheimerEisdiele extends MyEisdiele {
 	}
 
 	public void begruesen() {
+		
+		
 //		System.out.println("Moschäh");
 //		System.out.println("Unn wieee?");
 //		System.out.println("Ahjooo");
 		System.out.println("Jou!");
-
+		System.out.println("Was fire Eis willschdan hawwe?");
 	}
 
 	public Eis erstellen(String typ) {
 		Eis eis = new MannheimerEis();
 	
-		System.out.println("Was fire Eis willschdan hawwe?");
+
 	
-		switch (readLine()) {
+		switch (typ) {
 		case ("Spaghettieis"):
 		case ("spaghettieis"):
 			eis.setName("Spaghettieis");

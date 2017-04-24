@@ -1,5 +1,5 @@
 package uebung02;
-
+import static gdi.MakeItSimple.*;
 abstract public class MyEisdiele implements Eisdiele {
 
 	protected String name;
@@ -17,7 +17,9 @@ abstract public class MyEisdiele implements Eisdiele {
 	public void bestellen() {
 		begruesen();
 		
-		Eis eis = erstellen(this.getRegion());
+		String eisWahl = readLine();
+		
+		Eis eis = erstellen(eisWahl);
 
 		if(eis == null){
 			entschuldigen();
