@@ -11,12 +11,12 @@ public class Main {
 		System.out.println("___________________________________________________");
 	}
 
-	/**
-	 * create a new line of dots
-	 */
-	private static void printSeperatorDots() {
-		System.out.println("...................................................");
-	}
+	// /**
+	// * create a new line of dots
+	// */
+	// private static void printSeperatorDots() {
+	// System.out.println("...................................................");
+	// }
 
 	/**
 	 * create a new line of bindings
@@ -62,18 +62,30 @@ public class Main {
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): // caesar encrypting
+				System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
+				Crypter caesarLetters = new CrypterCaesar(readInt());
 				System.out.println("Alte Zeichenfolge: " + letters);
-				System.out.println("Neue Zeichenfolge: " + null);
+				System.out.println("Neue Zeichenfolge: " + caesarLetters.encrypt(letters));
 				break;
 			case (2): // caesar decrypting
-				System.out.println("Alte Zeichenfolge: " + letters);
-				System.out.println("Neue Zeichenfolge: " + null);
+				// System.out.println("Um wie viel Zeichen möchten Sie
+				// verschieben?");
+				// Crypter caesarLetters = new CrypterCaesar(readInt());
+				// System.out.println("Alte Zeichenfolge: " + letters);
+				// System.out.println("Neue Zeichenfolge: " +
+				// caesarLetters.decrypt(letters));
 				break;
 			case (3): // reversing
 				System.out.println("Alte Zeichenfolge: " + letters);
-				System.out.println("Neue Zeichenfolge: " + null);
+				Crypter reverseLetters = new CrypterReverse();
+				System.out.println("Neue Zeichenfolge: " + reverseLetters.decrypt(letters));
 				break;
 			case (4): // task d from lesson 2 part 2
+				String lettersOfTaskD = new String("XHMSNYYXYJQQJS");
+				System.out.println("   Verschlüsselte Botschaft: " + lettersOfTaskD);
+				System.out.println("       Umgekehrte Botschaft: " + null);
+				System.out.println("Mit Caesar(5) entschlüsselt: " + null);
+				System.out.println("Botschatf noch mal umkehren: " + null);
 				break;
 			case (9): // create a new string of letters
 				System.out.println("Bitte geben Sie eine neue Zeichenfolge ein: ");

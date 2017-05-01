@@ -4,9 +4,8 @@ public class CrypterReverse implements Crypter {
 
 	@Override
 	public String encrypt(String message) {
-		String cypherText = null;
-		int messageLength = message.length();
-		for (int i = 0; i <= messageLength;i++){
+		String cypherText = "";
+		for (int i = 0; i <= message.length()-1;i++){
 			cypherText = message.charAt(i) + cypherText;
 		}
 		return cypherText;
