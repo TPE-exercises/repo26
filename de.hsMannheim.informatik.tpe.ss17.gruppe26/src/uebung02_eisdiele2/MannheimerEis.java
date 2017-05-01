@@ -1,4 +1,4 @@
-package uebung02;
+package uebung02_eisdiele2;
 
 public class MannheimerEis extends MyEis {
 	
