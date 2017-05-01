@@ -39,7 +39,7 @@ public class Main {
 		String letters = new String();
 
 		System.out.println("Version 1.0 (01/05/2017)");
-		System.out.println("Erstellt von: Schoenke und Lange");
+		System.out.println("Erstellt von: Lange und Schoenke");
 		System.out.println("2. Programmieraufgabe Teil 2 aus TPE im SS17");
 		printSeperatorLine();
 		System.out.println();
@@ -68,12 +68,11 @@ public class Main {
 				System.out.println("Neue Zeichenfolge: " + caesarLetters.encrypt(letters));
 				break;
 			case (2): // caesar decrypting
-				// System.out.println("Um wie viel Zeichen möchten Sie
-				// verschieben?");
-				// Crypter caesarLetters = new CrypterCaesar(readInt());
-				// System.out.println("Alte Zeichenfolge: " + letters);
-				// System.out.println("Neue Zeichenfolge: " +
-				// caesarLetters.decrypt(letters));
+				 System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
+				 caesarLetters = new CrypterCaesar(readInt());
+				 System.out.println("Alte Zeichenfolge: " + letters);
+				 System.out.println("Neue Zeichenfolge: " +
+				 caesarLetters.decrypt(letters));
 				break;
 			case (3): // reversing
 				System.out.println("Alte Zeichenfolge: " + letters);

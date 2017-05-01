@@ -5,38 +5,31 @@ public class CrypterCaesar implements Crypter {
 	private int moveTo;
 
 	CrypterCaesar(int moveTo) {
-		this.moveTo = moveTo % 26;
+		moveTo = moveTo % 26;
+		if (moveTo < 0)
+			moveTo = 26 - moveTo;
+		this.moveTo = moveTo;
 	}
 
 	/**
-	 * change small characters zu big ones and move to another position
+	 * change small characters to big ones and move to another position
 	 */
 	@Override
 	public String encrypt(String message) {
 		String cypherText = "";
-		if (moveTo >= 0) {
+
 			for (int i = 0; i <= message.length() - 1; i++) {
 				int cypherChar = message.charAt(i) - 32 + moveTo;
 				if (cypherChar > 90)
 					cypherChar-=26;
 				cypherText = cypherText + (char) cypherChar;
 			}
-		}
-		
-		else {
-			for (int i = 0; i <= message.length() - 1; i++) {
-				int cypherChar = message.charAt(i) - 32 + moveTo;
-				if (cypherChar > 90)
-					cypherChar-=26;
-				cypherText = cypherText + (char) cypherChar;
-			}
-		}
 
 		return cypherText;
 	}
 
 	/**
-	 * change big characters zu small ones and move to another position
+	 * change big characters to small ones and move to another position
 	 */
 	@Override
 	public String decrypt(String cypherText) {
