@@ -11,13 +11,21 @@ public class Eisdiele {
 	 */
 	public void bestellen(String typ) {
 		begruessen();
+		System.out.println("Auf der Karte: Spaghettieis, Bananasplit");
 		String name = readLine();
-		if (name != "Spaghettieis" || name != "Bananasplit")
+		if (name != "Spaghettieis" && name != "Bananasplit")
 			entschuldigen();
 		else {
-System.out.println("Sehr gern!");
+			System.out.println("Sehr gern!");
 			Eis neuesEis = new Eis();
-			verabschieden();
+			neuesEis.name = name;
+			neuesEis.vorbereiten();
+			neuesEis.fuellen();
+			neuesEis.dekorieren();
+			kassieren(neuesEis.preis);
+			double gegeben = readInt();
+			if (gegeben == neuesEis.preis)
+				verabschieden();
 		}
 	}
 
@@ -25,7 +33,7 @@ System.out.println("Sehr gern!");
 		System.out.println("Guten Tag! Was darf ich Ihnen servieren?");
 	}
 
-	void kassieren(int preis) {
+	void kassieren(double preis) {
 		System.out.println("Das macht dann bitte: " + preis);
 	}
 
