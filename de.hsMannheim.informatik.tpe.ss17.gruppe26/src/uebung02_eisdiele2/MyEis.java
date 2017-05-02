@@ -70,6 +70,7 @@ abstract public class MyEis implements Eis {
 
 	abstract public void vorbereiten();
 
+	
 	public String[] frageSortenAb(int anzahlKugeln) {
 		String[] sorten = new String[anzahlKugeln];
 		for (int i = 0; i < sorten.length; i++) {

@@ -13,10 +13,9 @@ public class KoelnerEisdiele extends MyEisdiele {
 	}
 
 	public Eis erstellen(String typ) {
-		Eis eis = new MannheimerEis();
+		Eis eis = new KoelnerEis();
 	
-
-	
+		//Bestellung (typ) ging ein Name und Preis stehen somit fest
 		switch (typ) {
 		case ("Spaghettieis"):
 		case ("spaghettieis"):
@@ -42,7 +41,6 @@ public class KoelnerEisdiele extends MyEisdiele {
 	}
 
 	public void kassieren(Eis eis) {
-		// TODO ermittle EISPREIS oder lese von der Karte, dann -> erstellen
 		System.out.println("Koelsch: Das macht dann " + eis.getPreis() + "0 Euro.");
 
 	}

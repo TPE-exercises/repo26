@@ -26,11 +26,13 @@ public class Main {
 		 * 3 Kugeln Eis (nach wahl?), Nüsse, Sahne und Nusssauce
 		 */
 
+		
+		// Erstelle Eisdielen
 		Eisdiele mannheimerEisdiele = new MannheimerEisdiele("MonnemBestEis", "Mannheim");
 		Eisdiele koelnerEisdiele = new KoelnerEisdiele("KölschBestEis", "Köln");
 		Eisdiele berlinierEisdiele = new BerlinerEisdiele("BerlinBestEis", "Berlin");
 
-		
+		//Bestelle Eis (hier 3 verschiedene eis in 3 verschiedenen eisdielen)
 		mannheimerEisdiele.bestellen(eis1);
 		koelnerEisdiele.bestellen(eis2);
 		berlinierEisdiele.bestellen(eis3);

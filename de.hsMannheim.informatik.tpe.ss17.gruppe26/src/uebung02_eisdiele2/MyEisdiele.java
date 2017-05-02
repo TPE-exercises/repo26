@@ -1,9 +1,14 @@
 package uebung02_eisdiele2;
 abstract public class MyEisdiele implements Eisdiele {
 
-	protected String name;
-	protected String region;
+	private String name;
+	private String region;
 
+	/**
+	 * 
+	 * @param String name
+	 * @param String region
+	 */
 	MyEisdiele(String name, String region) {
 		this.name = name;
 		this.region = region;
@@ -11,6 +16,10 @@ abstract public class MyEisdiele implements Eisdiele {
 	
 	public String getRegion(){
 		return this.region;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 
 	public void bestellen(String typ) {
