@@ -1,7 +1,5 @@
 package uebung02_eisdiele1;
 
-import static gdi.MakeItSimple.*;
-
 public class Eis {
 
 	String name; // Spaghettieis, Bananasplit
