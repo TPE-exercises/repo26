@@ -2,6 +2,10 @@ package uebung02_eisdiele2;
 
 public class Main {
 
+	private static final String eis1 = "Spaghettieis";
+	private static final String eis2 = "Bananensplit";
+	private static final String eis3 = "Nussbecher";
+	
 	public static void main(String[] args) {
 
 		// Spaghettieis
@@ -26,9 +30,10 @@ public class Main {
 		Eisdiele koelnerEisdiele = new KoelnerEisdiele("KölschBestEis", "Köln");
 		Eisdiele berlinierEisdiele = new BerlinerEisdiele("BerlinBestEis", "Berlin");
 
-		mannheimerEisdiele.bestellen();
-		koelnerEisdiele.bestellen();
-		berlinierEisdiele.bestellen();
+		
+		mannheimerEisdiele.bestellen(eis1);
+		koelnerEisdiele.bestellen(eis2);
+		berlinierEisdiele.bestellen(eis3);
 
 	}
 

@@ -7,7 +7,7 @@ public interface Eisdiele {
 	/**
 	 * 
 	 */
-	public void bestellen();
+	public void bestellen(String typ);
 
 	/**
 	 * Begrüße den Kunden

@@ -1,5 +1,4 @@
 package uebung02_eisdiele2;
-import static gdi.MakeItSimple.*;
 abstract public class MyEisdiele implements Eisdiele {
 
 	protected String name;
@@ -14,12 +13,10 @@ abstract public class MyEisdiele implements Eisdiele {
 		return this.region;
 	}
 
-	public void bestellen() {
+	public void bestellen(String typ) {
 		begruesen();
-		
-		String eisWahl = readLine();
-		
-		Eis eis = erstellen(eisWahl);
+
+		Eis eis = erstellen(typ);
 
 		if(eis == null){
 			entschuldigen();
