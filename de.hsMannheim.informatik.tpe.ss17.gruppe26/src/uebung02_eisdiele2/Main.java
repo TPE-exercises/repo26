@@ -23,14 +23,12 @@ public class Main {
 		 */
 
 		Eisdiele mannheimerEisdiele = new MannheimerEisdiele("MonnemBestEis", "Mannheim");
-		// Eisdiele koellnerEisdiele = new KoellnerEisdiele("KöllschBestEis",
-		// "Kölln");
-		// Eisdiele berlinierEisdiele = new BerlinerEisdiele("BerlinBestEis",
-		// "Berlin");
+		Eisdiele koelnerEisdiele = new KoelnerEisdiele("KölschBestEis", "Köln");
+		Eisdiele berlinierEisdiele = new BerlinerEisdiele("BerlinBestEis", "Berlin");
 
 		mannheimerEisdiele.bestellen();
-		// koellnerEisdiele.bestellen();
-		// berlinerEisdiele.bestellen();
+		koelnerEisdiele.bestellen();
+		berlinierEisdiele.bestellen();
 
 	}
 

@@ -1,6 +1,6 @@
 package uebung02_eisdiele2;
 
-public class MannheimerEis extends MyEis {
+public class BerlinierEis extends MyEis {
 
 	public void vorbereiten() {
 		switch (this.name) {
@@ -48,7 +48,7 @@ public class MannheimerEis extends MyEis {
 		case ("Nussbecher"):
 			String[] extras3 = { "Nüsse", "Sahne", "Nusssauce"};
 	this.setExtras(extras3);
-			break;
+			break;fvmjkhz4
 		}
 	}
 

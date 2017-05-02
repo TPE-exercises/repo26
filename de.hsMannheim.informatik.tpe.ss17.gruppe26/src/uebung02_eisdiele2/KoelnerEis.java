@@ -1,6 +1,6 @@
 package uebung02_eisdiele2;
 
-public class MannheimerEis extends MyEis {
+public class KoelnerEis extends MyEis {
 
 	public void vorbereiten() {
 		switch (this.name) {

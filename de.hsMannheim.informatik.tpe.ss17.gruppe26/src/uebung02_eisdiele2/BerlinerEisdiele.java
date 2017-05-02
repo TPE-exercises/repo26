@@ -1,19 +1,15 @@
 package uebung02_eisdiele2;
 
-public class MannheimerEisdiele extends MyEisdiele {
+public class BerlinerEisdiele extends MyEisdiele {
 
-	MannheimerEisdiele(String name, String region) {
+	BerlinerEisdiele(String name, String region) {
 		super(name, region);
 	}
 
 	public void begruesen() {
 		
-		
-//		System.out.println("Moschäh");
-//		System.out.println("Unn wieee?");
-//		System.out.println("Ahjooo");
-		System.out.println("Jou!");
-		System.out.println("Was fire Eis willschdan hawwe?");
+		System.out.println("Berlinerisch: Hallo!");
+		System.out.println("Berlinerisch: Was für ein Eis willst du haben?");
 	}
 
 	public Eis erstellen(String typ) {
@@ -40,28 +36,27 @@ public class MannheimerEisdiele extends MyEisdiele {
 		default:
 			return null;
 		}
-		System.out.println("Ajooh!");
+		System.out.println("Koelsch: Ja!");
 		return eis;
 	
 	}
 
 	public void kassieren(Eis eis) {
 		// TODO ermittle EISPREIS oder lese von der Karte, dann -> erstellen
-		System.out.println("Donn krieg ich " + eis.getPreis() + "0 Euroo fun da.");
+		System.out.println("Berlinerisch: Das macht dann " + eis.getPreis() + "0 Euro.");
 
 	}
 
 	public void verabschieden(String eis) {
 
 		System.out.println();
-		//System.out.println("Ä Balle Erdbeer, äner mit Schokolad und donn noch äner mit Persching");
 		System.out.println(eis);
-		System.out.println("Alla dann!");
+		System.out.println("Berlinerisch: Auf Wiedersehen.");
 
 	}
 
 	public void entschuldigen() {
-		System.out.println("Dut ma lääd, des hämma net.");
+		System.out.println("Berlinerisch: Tut mir leid, das haben wir nicht.");
 	}
 
 }
