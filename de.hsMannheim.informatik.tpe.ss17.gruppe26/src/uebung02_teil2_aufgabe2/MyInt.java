@@ -14,6 +14,7 @@ public class MyInt implements Comparable<MyInt> {
 
 	@Override
 	public int compareTo(MyInt o) {
+		System.out.println("Int");
 		if (this.integer == o.getInteger())
 			return 0;
 		else if (this.integer < o.getInteger())
