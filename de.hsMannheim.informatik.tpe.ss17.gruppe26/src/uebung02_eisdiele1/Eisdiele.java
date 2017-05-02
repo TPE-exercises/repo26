@@ -11,22 +11,24 @@ public class Eisdiele {
 	 */
 	public void bestellen(String typ) {
 		begruessen();
-		System.out.println("Auf der Karte: Spaghettieis, Bananasplit");
 		String name = readLine();
-		if (name != "Spaghettieis" && name != "Bananasplit")
+		while (!name.equals("Spaghettieis") && !name.equals("Bananasplit")) {
 			entschuldigen();
-		else {
-			System.out.println("Sehr gern!");
-			Eis neuesEis = new Eis();
-			neuesEis.name = name;
-			neuesEis.vorbereiten();
-			neuesEis.fuellen();
-			neuesEis.dekorieren();
-			kassieren(neuesEis.preis);
-			double gegeben = readInt();
-			if (gegeben == neuesEis.preis)
-				verabschieden();
+			System.out.println("Auf der Karte stehen: \"Spaghettieis\" und \"Bananasplit\"");
+			name = readLine();
 		}
+		System.out.println("Sehr gern!");
+		Eis neuesEis = new Eis();
+		neuesEis.name = name;
+		neuesEis.vorbereiten();
+		neuesEis.fuellen();
+		neuesEis.dekorieren();
+		double gegeben;
+		do {
+			kassieren(neuesEis.preis);
+			gegeben = readInt();
+		} while (Double.compare(gegeben, neuesEis.preis) > 0.01);
+		verabschieden();
 	}
 
 	void begruessen() {
@@ -34,7 +36,7 @@ public class Eisdiele {
 	}
 
 	void kassieren(double preis) {
-		System.out.println("Das macht dann bitte: " + preis);
+		System.out.println("Das macht dann bitte: " + preis + " Euro");
 	}
 
 	void verabschieden() {
