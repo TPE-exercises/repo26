@@ -48,7 +48,7 @@ public class BerlinierEis extends MyEis {
 		case ("Nussbecher"):
 			String[] extras3 = { "Nüsse", "Sahne", "Nusssauce"};
 	this.setExtras(extras3);
-			break;fvmjkhz4
+			break;
 		}
 	}
 
