@@ -1,4 +1,4 @@
-package uebung02_teil2;
+package uebung02_teil2_aufgabe1;
 
 import static gdi.MakeItSimple.*;
 
@@ -80,11 +80,16 @@ public class Main {
 				System.out.println("Neue Zeichenfolge: " + reverseLetters.decrypt(letters));
 				break;
 			case (4): // task d from lesson 2 part 2
+				Crypter caesarLettersTaskD = new CrypterCaesar(5);
+			Crypter reverseLettersTaskD = new CrypterReverse();
 				String lettersOfTaskD = new String("XHMSNYYXYJQQJS");
 				System.out.println("   Verschlüsselte Botschaft: " + lettersOfTaskD);
-				System.out.println("       Umgekehrte Botschaft: " + null);
-				System.out.println("Mit Caesar(5) entschlüsselt: " + null);
-				System.out.println("Botschatf noch mal umkehren: " + null);
+				lettersOfTaskD = reverseLettersTaskD.decrypt(lettersOfTaskD);
+				System.out.println("       Umgekehrte Botschaft: " + lettersOfTaskD);
+				lettersOfTaskD = caesarLettersTaskD.decrypt(lettersOfTaskD);
+				System.out.println("Mit Caesar(5) entschlüsselt: " + lettersOfTaskD);
+				lettersOfTaskD = reverseLettersTaskD.decrypt(lettersOfTaskD);
+				System.out.println("Botschatf noch mal umkehren: " + lettersOfTaskD);
 				break;
 			case (9): // create a new string of letters
 				System.out.println("Bitte geben Sie eine neue Zeichenfolge ein: ");

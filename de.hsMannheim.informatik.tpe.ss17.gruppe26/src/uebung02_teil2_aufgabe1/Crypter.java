@@ -1,4 +1,4 @@
-package uebung02_teil2;
+package uebung02_teil2_aufgabe1;
 
 public interface Crypter {
 	
