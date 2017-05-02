@@ -5,12 +5,15 @@ package uebung02_teil2_aufgabe2;
 public class Sort_ADS {
 
 	protected static void sortArray(String sortierverfahren, Comparable[] array) {
+		System.out.println(sortierverfahren);
+		System.out.println("Unsortiert:");
 		printArray(array);
 		if (sortierverfahren.equals("insertionSort")) {
 			array = insertionSort1(array);
 		} else if (sortierverfahren.equals("shakerSort")) {
 			array = shakerSort(array);
 		}
+		System.out.println("Sortiert:");
 		printArray(array);
 	}
 
@@ -19,8 +22,9 @@ public class Sort_ADS {
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i]);
 			if (i != array.length)
-				System.out.println(" | ");
+				System.out.print(" | ");
 		}
+		System.out.println();
 
 	}
 
