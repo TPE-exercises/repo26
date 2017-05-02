@@ -2,8 +2,13 @@ package uebung02_teil2_aufgabe2;
 
 //import static gdi.MakeItSimple.*;
 
-public class Sort_ADS {
+public class Sort {
 
+	/**
+	 * 
+	 * @param String sortierverfahren (insertionSort || shakerSort)
+	 * @param Comparable[] array
+	 */
 	protected static void sortArray(String sortierverfahren, Comparable[] array) {
 		System.out.println(sortierverfahren);
 		System.out.println("Unsortiert:");
@@ -17,24 +22,33 @@ public class Sort_ADS {
 		printArray(array);
 	}
 
+	/**
+	 * print the Comparable[] array
+	 * @param array
+	 */
 	private static void printArray(Comparable[] array) {
 
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i]);
-			if (i != array.length)
+			if (i != array.length-1)
 				System.out.print(" | ");
 		}
 		System.out.println();
 
 	}
 
+	/**
+	 * 
+	 * @param Comparable[] numberSequence
+	 * @return Comparable[]
+	 */
 	private static Comparable[] insertionSort1(Comparable[] numberSequence) {
 
 		for (int i = 1; i < numberSequence.length; i++) {
 			Comparable m = numberSequence[i]; // Marker-Field
 
 			int j;
-			for (j = i; j > 0 && numberSequence[j - 1].compareTo(m) == 1; j--)
+			for (j = i; j > 0 && numberSequence[j - 1].compareTo(m) > 0; j--)
 				// for (j =i; j > 0 && numberSequence[j - 1] > m; j--)
 				numberSequence[j] = numberSequence[j - 1];
 
@@ -47,6 +61,11 @@ public class Sort_ADS {
 		return numberSequence;
 	}
 
+	/**
+	 * 
+	 * @param Comparable[] numberSequence
+	 * @return Comparable[]
+	 */
 	private static Comparable[] shakerSort(Comparable[] numberSequence) {
 		boolean swapped;
 		boolean moved;
@@ -117,6 +136,12 @@ public class Sort_ADS {
 		return numberSequence;
 	}
 
+	/**
+	 * nessasary for shakerSort
+	 * @param numberSequence
+	 * @param int idx1
+	 * @param int idx2
+	 */
 	private static void swap(Comparable[] numberSequence, int idx1, int idx2) {
 		Comparable tmp = numberSequence[idx1];
 		numberSequence[idx1] = numberSequence[idx2];
