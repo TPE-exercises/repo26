@@ -5,18 +5,11 @@ import static gdi.MakeItSimple.*;
 public class Main {
 
 	/**
-	 * create a new line of underlines
+	 * create a new line of underscores
 	 */
 	private static void printSeperatorLine() {
 		System.out.println("___________________________________________________");
 	}
-
-	// /**
-	// * create a new line of dots
-	// */
-	// private static void printSeperatorDots() {
-	// System.out.println("...................................................");
-	// }
 
 	/**
 	 * create a new line of bindings
@@ -65,23 +58,25 @@ public class Main {
 				System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
 				Crypter caesarLetters = new CrypterCaesar(readInt());
 				System.out.println("Alte Zeichenfolge: " + letters);
-				System.out.println("Neue Zeichenfolge: " + caesarLetters.encrypt(letters));
+				letters = caesarLetters.encrypt(letters);
+				System.out.println("Neue Zeichenfolge: " + letters);
 				break;
 			case (2): // caesar decrypting
-				 System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
-				 caesarLetters = new CrypterCaesar(readInt());
-				 System.out.println("Alte Zeichenfolge: " + letters);
-				 System.out.println("Neue Zeichenfolge: " +
-				 caesarLetters.decrypt(letters));
+				System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
+				caesarLetters = new CrypterCaesar(readInt());
+				System.out.println("Alte Zeichenfolge: " + letters);
+				letters = caesarLetters.decrypt(letters);
+				System.out.println("Neue Zeichenfolge: " + letters);
 				break;
 			case (3): // reversing
 				System.out.println("Alte Zeichenfolge: " + letters);
 				Crypter reverseLetters = new CrypterReverse();
-				System.out.println("Neue Zeichenfolge: " + reverseLetters.decrypt(letters));
+				letters = reverseLetters.decrypt(letters);
+				System.out.println("Neue Zeichenfolge: " + letters);
 				break;
 			case (4): // task d from lesson 2 part 2
 				Crypter caesarLettersTaskD = new CrypterCaesar(5);
-			Crypter reverseLettersTaskD = new CrypterReverse();
+				Crypter reverseLettersTaskD = new CrypterReverse();
 				String lettersOfTaskD = new String("XHMSNYYXYJQQJS");
 				System.out.println("   Verschlüsselte Botschaft: " + lettersOfTaskD);
 				lettersOfTaskD = reverseLettersTaskD.decrypt(lettersOfTaskD);
@@ -92,6 +87,7 @@ public class Main {
 				System.out.println("Botschatf noch mal umkehren: " + lettersOfTaskD);
 				break;
 			case (9): // create a new string of letters
+				readLine();
 				System.out.println("Bitte geben Sie eine neue Zeichenfolge ein: ");
 				letters = readLine();
 				break;
