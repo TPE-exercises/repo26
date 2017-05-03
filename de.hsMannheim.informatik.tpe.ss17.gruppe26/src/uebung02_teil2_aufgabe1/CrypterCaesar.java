@@ -7,7 +7,7 @@ public class CrypterCaesar implements Crypter {
 	CrypterCaesar(int moveTo) {
 		moveTo = moveTo % 26;
 		if (moveTo < 0)
-			moveTo = 26 - moveTo;
+			moveTo = 26 + moveTo;
 		this.moveTo = moveTo;
 	}
 

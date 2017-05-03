@@ -1,6 +1,6 @@
 package uebung02_teil2_aufgabe2;
 
-public class MyString implements Comparable<MyString> {
+public class MyString implements Comparable {
 
 	private String string;
 	
@@ -16,10 +16,10 @@ public class MyString implements Comparable<MyString> {
 	 * @return 0  this==o; -1 this<o; 1 this>o
 	 */
 	@Override
-	public int compareTo(MyString o) {		
+	public int compareTo(Object o) {		
 		//TODO Methode bestimmt nicht gültig, danicht selbst geschrieben
 		
-		int x =this.string.compareTo(o.getString());
+		int x =this.string.compareTo(((MyString) o).getString());
 //		System.out.println("****************Test: " + o + " | " + this + " | "+ x);
 		return x;
 	}
