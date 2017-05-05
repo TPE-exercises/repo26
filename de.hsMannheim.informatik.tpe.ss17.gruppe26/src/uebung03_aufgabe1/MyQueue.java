@@ -1,33 +1,44 @@
 package uebung03_aufgabe1;
 
 public class MyQueue implements Queue{
+	
+	
+	private Node head;
+
+	MyQueue() {
+		head = null;
+	}
+	
+	public Node getHead(){
+		return this.head;
+	}
 
 	@Override
-	public LinkedList enter(int element, LinkedList list) {
+	public void enter(int element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Node leave() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LinkedList leave(LinkedList list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int front(LinkedList list) {
+	public int front() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public LinkedList emptyQueue() {
+	public Queue emptyQueue() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isEmpty(LinkedList list) {
+	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -38,4 +49,5 @@ public class MyQueue implements Queue{
 		return 0;
 	}
 
+	
 }

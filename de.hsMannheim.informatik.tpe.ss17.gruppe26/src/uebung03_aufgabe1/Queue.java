@@ -3,23 +3,43 @@ package uebung03_aufgabe1;
 interface Queue{
 	
 	/**
-	 * Füge ein Element in die QUEUE ein
+	 * Enter new element in Queue
 	 * @param element
 	 * @param list
 	 */
-	void enter(int element, Queue list);
+	void enter(int element);
 	
 	/**
-	 * Leave Element 
+	 * Leave first Element (return and delete)
 	 * @param list
+	 * @return ListNode
 	 */
-	void leave(Queue list);
+	Node leave();
 	
-	int front(Queue list);
+	/**
+	 * return first elements in Queue (not delete)
+	 * @param list
+	 * @return
+	 */
+	int front();
 	
+	/**
+	 * Creates new Queue
+	 * @return
+	 */
 	Queue emptyQueue();
 	
-	boolean isEmpty(Queue list);
+	/**
+	 * 
+	 * @param list
+	 * @return true when Queue empty
+	 */
+	boolean isEmpty();
 	
-	int size(Queue list);
+	/**
+	 * retru size of Queue
+	 * @param list
+	 * @return
+	 */
+	int size();
 }
