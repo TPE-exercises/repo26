@@ -1,4 +1,4 @@
-package uebung03_aufgabe3;
+package uebung03_aufgabe2und3;
 
 import java.io.File;
 
