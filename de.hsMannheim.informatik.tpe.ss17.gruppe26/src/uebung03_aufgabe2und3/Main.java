@@ -73,7 +73,6 @@ public class Main {
 					e.printStackTrace();
 				}
 				FileReader f2;
-
 				try {
 					f2 = new FileReader("CaesarText.txt");
 					while ((c = f2.read()) != -1) {
@@ -109,7 +108,6 @@ public class Main {
 				} catch (IOException e) {
 					System.out.println("Fehler beim Lesen der Datei");
 				}
-
 				break;
 			case (9): // create a new string of letters
 				readLine();
@@ -125,5 +123,4 @@ public class Main {
 		}
 		System.out.println("Programm beendet.");
 	}
-
 }

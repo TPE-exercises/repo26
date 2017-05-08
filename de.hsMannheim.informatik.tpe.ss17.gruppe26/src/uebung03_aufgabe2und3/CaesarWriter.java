@@ -31,7 +31,7 @@ public class CaesarWriter extends FilterWriter {
 	}
 
 	/**
-	 * Ä = 142, Ö = 153, Ü = 154, ä = 132, ö = 148, ü = 129
+	 * Ä = 196, Ö = 214, Ü = 220, ä = 228, ö = 246, ü = 252 // laut JAVA (Eclipse)
 	 * 
 	 * @param c
 	 * @return
@@ -41,30 +41,32 @@ public class CaesarWriter extends FilterWriter {
 			return true;
 		if (c >= 97 && c <= 122)
 			return true;
-		if (c == 129 || c == 132 || c == 148)
+		if (c == 196 || c == 214 || c == 220)
 			return true;
-		if (c == 153 || c == 154 || c == 142)
+		if (c == 228 || c == 246 || c == 252)
 			return true;
 		return false;
 	}
 
 	public int moveToAlphabet(int c) {
-		for (int i = 0; i <= moveTo; i++) {
+		for (int i = 0; i < moveTo; i++) {
 			c++;
-			if (c == 91)
-				c = 97;
-			if (c == 123)
-				c = 142;
-			if (c == 143)
-				c = 153;
-			if (c == 155)
-				c = 132;
-			if (c == 133)
-				c = 148;
-			if (c == 149)
-				c = 129;
-			if (c == 130)
-				c = 65;
+			if (c == (int) 'Z')
+				c = (int) 'a';
+			if (c == (int) 'z' +1)
+				c = (int) 'Ä';
+			if (c == (int) 'Ä' + 1)
+				c = (int) 'Ö';
+			if (c == (int) 'Ö' + 1)
+				c = (int) 'Ü';
+			if (c == (int) 'Ü' + 1)
+				c = (int) 'ä';
+			if (c == (int) 'ä' +1)
+				c = (int) 'ö';
+			if (c == (int) 'ö' + 1)
+				c = (int) 'ü';
+			if (c == (int) 'ü' + 1)
+				c = (int) 'A';
 		}
 //		System.out.print((char) c); //*****************DEBUG
 		return c;
@@ -80,17 +82,17 @@ public class CaesarWriter extends FilterWriter {
 		write(str.toCharArray(), off, len);
 	}
 
-//	public static void main(String[] args) {
-//		PrintWriter f;
-//		try {
-//			f = new PrintWriter(new CaesarWriter(new FileWriter("CaesarText.txt"), 150));
-//			f.println("Diese Zeile wird schön groß geschrieben");
-//			// f.write('a'); // Test von write(int)
-//			// f.println();
-//			// f.println(); // Zeilenvorschub
-//			f.close();
-//		} catch (IOException e) {
-//			System.out.println("Fehler beim Erstellen der Datei");
-//		}
-//	}
+	public static void main(String[] args) {
+		PrintWriter f;
+		try {
+			f = new PrintWriter(new CaesarWriter(new FileWriter("CaesarText.txt"), 1));
+			f.println("ÄÖÜäöü");
+			// f.write('a'); // Test von write(int)
+			// f.println();
+			// f.println(); // Zeilenvorschub
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Fehler beim Erstellen der Datei");
+		}
+	}
 }

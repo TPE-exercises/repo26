@@ -1,5 +1,6 @@
 package uebung03_aufgabe2und3;
 
+import static gdi.MakeItSimple.*;
 import java.io.*;
 
 public class CaesarFileEncryptor implements IFileEncryptor {
@@ -21,7 +22,8 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 			}
 			f.close();
 		} catch (IOException e) {
-			System.out.println("Fehler beim Lesen der Datei");
+			System.out.println("Fehler beim Lesen der Datei: " + sourceDirectory);
+			e.printStackTrace();
 		}
 
 		PrintWriter f2;
@@ -33,7 +35,8 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 			// f.println(); // Zeilenvorschub
 			f2.close();
 		} catch (IOException e) {
-			System.out.println("Fehler beim Erstellen der Datei");
+			System.out.println("Fehler beim Erstellen der Datei: " + sourceDirectory);
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -46,11 +49,23 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 
 	public static void main(String[] args) {
 		// System.out.println("Bitte geben Sie einen Ordner an: ");
+		// String pfadangabe = readLine();
+		// File f = new File(pfadangabe);
 
 		File f = new File("CaesarTest"); // Ordner einlesen
-		// File[] fileArray = f.listFiles(); // Inhalte auflisten
-		// int anzahl = fileArray.length;
-		// System.out.print(anzahl);
+		File[] fileArray = f.listFiles(); // Inhalte auflisten
+		int anzahl = fileArray.length;
+		int zahlOrdner = 0;
+		int zahlDateien = 0;
+		System.out.println("Anzahl Dateien/Ordner: " + anzahl);
+		for (int i = 0; i<anzahl;i++){
+			if (fileArray[i].isDirectory())
+				zahlOrdner++;
+			else
+				zahlDateien++;			
+		}
+		System.out.println("Anzahl Ordner: " + zahlOrdner);
+		System.out.println("Anzahl Dateien: " + zahlDateien);
 
 		File f2 = new File(f + "_encrypted"); // Neuen Ordner erstellen
 
