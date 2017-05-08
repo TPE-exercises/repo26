@@ -28,7 +28,7 @@ public class StackList implements Stack,ADT {
 			}
 
 		} else
-			// TODO OwnException overflow
+
 			throw new OverflowException(element);
 
 	}
@@ -40,7 +40,7 @@ public class StackList implements Stack,ADT {
 			this.head = this.head.getNext();
 			return oldHead;
 		} else
-			// TODO OwnException underflow
+
 			throw new UnderflowException();
 	}
 

@@ -24,7 +24,6 @@ public class QueueList implements Queue, ADT {
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
 		if (hQueue.size() < this.maxSize) {
-			// TODO maxSize beachten!
 			Node node = this.head;
 			if (node == null) {
 				this.head = new Node(element, null);
