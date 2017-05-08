@@ -9,27 +9,6 @@ public class Menue {
 	private static final boolean PRINT_GUI_ON = true;
 
 	/**
-	 * Zeichnet eine Linie aus (_)
-	 */
-	private static void printSeperatorLine() {
-		System.out.println("___________________________________________________");
-	}
-
-	/**
-	 * Zeichnet eine Linie aus (.)
-	 */
-	private static void printSeperatorDots() {
-		System.out.println("...................................................");
-	}
-
-	/**
-	 * Zeichnet eine Linie aus (-)
-	 */
-	private static void printSeperatorShortLines() {
-		System.out.println("---------------------------------------------------");
-	}
-
-	/**
 	 * Ausgabe, das der Baum leer ist
 	 */
 	private static void printEmptyTree() {
@@ -56,20 +35,20 @@ public class Menue {
 		System.out.println("Version 1.8 (09/04/2017)");
 		System.out.println("Erstellt von: Schoenke und Lange");
 		System.out.println("1. Programmieraufgabe \"BTree\" aus TPE im SS17");
-		printSeperatorLine();
+		OwnUtils.printLines.printSeperatorLine();
 		System.out.println("Welche Ordnung soll der Baum haben?");
 		ordnung = readInt();
 		MyBTree tree = new MyBTree(ordnung);
 		MyBTree clonedTree = new MyBTree(ordnung);
 		System.out.println("...Baum erstelt");
 		while (weitermachen) {
-			printSeperatorLine();
+			OwnUtils.printLines.printSeperatorLine();
 			System.out.print("(Debugging ist ");
 			if (MyBTree.debug)
 				System.out.println("aktiviert.)");
 			else
 				System.out.println("deaktiviert.)");
-			printSeperatorShortLines();
+			OwnUtils.printLines.printSeperatorShortLines();
 			if (numberOfRuns == 0)
 				System.out.println("Was möchten Sie machen?");
 			else
@@ -94,7 +73,7 @@ public class Menue {
 						 * 
 						 * 
 						 **/
-				printSeperatorDots();
+				OwnUtils.printLines.printSeperatorDots();
 				System.out.println("Wie wollen Sie Werte in den Baum einfügen?");
 				System.out.println("(1) Werte per Hand eingeben");
 				System.out.println("(2) Werte per Datei einfügen");
@@ -126,7 +105,7 @@ public class Menue {
 					printEmptyTree();
 					break;
 				} else {
-					printSeperatorDots();
+					OwnUtils.printLines.printSeperatorDots();
 					System.out.println("Welche Werte möchten Sie finden/ausgeben lassen?");
 					System.out.println("(1) Einen bestimmten Wert finden");
 					System.out.println("(2) Die Größe des Baumes herausfinden");
@@ -210,7 +189,7 @@ public class Menue {
 				break;
 			case (5): // Aktuellen Baum klonen
 
-				printSeperatorDots();
+				OwnUtils.printLines.printSeperatorDots();
 				System.out.println("Wählen Sie eine Option:");
 				System.out.println("(1) Baum Clonen \n(2) geklonten Baum ausgeben \n(0) Zurück");
 				switch (readInt()) {
@@ -229,13 +208,13 @@ public class Menue {
 						System.out.println();
 						System.out.println("Der Baum als Inorder: ");
 						clonedTree.printInorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Postorder: ");
 						clonedTree.printPostorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Preorder: ");
 						clonedTree.printPreorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Levelorder: ");
 						clonedTree.printLevelorder();
 					} else
@@ -247,7 +226,7 @@ public class Menue {
 
 				break;
 			case (6): // Baum ausgeben lassen
-				printSeperatorDots();
+				OwnUtils.printLines.printSeperatorDots();
 				if (tree.isEmpty()) {
 					printEmptyTree();
 					break;
@@ -281,13 +260,13 @@ public class Menue {
 						System.out.println();
 						System.out.println("Der Baum als Inorder: ");
 						tree.printInorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Postorder: ");
 						tree.printPostorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Preorder: ");
 						tree.printPreorder();
-						printSeperatorShortLines();
+						OwnUtils.printLines.printSeperatorShortLines();
 						System.out.println("Der Baum als Levelorder: ");
 						tree.printLevelorder();
 						if (PRINT_GUI_ON)
@@ -328,7 +307,7 @@ public class Menue {
 		boolean continueInsert = true;
 		readLine();
 		do {
-			printSeperatorDots();
+			OwnUtils.printLines.printSeperatorDots();
 			System.out.println("INFO: Eingabe kann durch eingeben von Buchstaben abgebrochen werden. ");
 			System.out.print("Geben Sie den Wert an, den Sie einfügen möchten: ");
 			String rawCode = readLine();
