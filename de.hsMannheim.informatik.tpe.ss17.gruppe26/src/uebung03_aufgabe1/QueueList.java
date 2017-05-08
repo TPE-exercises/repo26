@@ -1,6 +1,6 @@
 package uebung03_aufgabe1;
 
-public class QueueList implements Queue {
+public class QueueList implements Queue, ADT {
 
 	private Node head;
 	private int maxSize;
@@ -19,7 +19,7 @@ public class QueueList implements Queue {
 	}
 
 	@Override
-	public boolean enter(int element) {
+	public void enter(Object element) throws Exception {
 
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
@@ -28,20 +28,21 @@ public class QueueList implements Queue {
 			Node node = this.head;
 			if (node == null) {
 				this.head = new Node(element, null);
-				return true;
+			return;
 			}
 
 			while (node.getNext() != null) {
 				node = node.getNext();
 			}
 			node.setNext(new Node(element, null));
-			return true;
-		}
-		return false;
+		
+		}else
+			throw new OverflowException(element);
+	
 	}
 
 	@Override
-	public Node leave() {
+	public Node leave() throws Exception {
 		Node first = null;
 		if (head != null) {
 			first = this.head;
@@ -51,14 +52,15 @@ public class QueueList implements Queue {
 				this.head = null;
 			return first;
 		}
-		return null;
+		else
+			throw new UnderflowException();
 
 	}
 
 	@Override
-	public int front() {
+	public Object front() {
 		try {
-			return (int) this.head.getValue();
+			return this.head.getValue();
 		} catch (NullPointerException ex) {
 			System.out.print("Es existiert kein Element im Stack! -> ");
 			return 0;

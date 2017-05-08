@@ -6,21 +6,21 @@ public interface Stack {
 	 * @param element
 	 * @param list
 	 */
-	boolean enter(int element);
+	void enter(Object element) throws Exception;
 	
 	/**
 	 * Leave first Element (return and delete)
 	 * @param list
 	 * @return Stack
 	 */
-	Node leave();
+	Node leave()throws Exception;
 	
 	/**
 	 * return first elements in Stack (not delete)
 	 * @param list
 	 * @return
 	 */
-	int front();
+	Object front();
 	
 	/**
 	 * Creates new Stack
@@ -41,4 +41,5 @@ public interface Stack {
 	 * @return
 	 */
 	int size();
+
 }

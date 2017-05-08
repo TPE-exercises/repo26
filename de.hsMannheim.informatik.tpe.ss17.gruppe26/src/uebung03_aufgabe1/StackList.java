@@ -1,6 +1,6 @@
 package uebung03_aufgabe1;
 
-public class StackList implements Stack {
+public class StackList implements Stack,ADT {
 
 	private Node head;
 	private int maxSize;
@@ -10,8 +10,12 @@ public class StackList implements Stack {
 		this.maxSize = maxSize;
 	}
 
+	public StackList() {
+		this(5);
+	}
+
 	@Override
-	public boolean enter(int element) {
+	public void enter(Object element) throws Exception {
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
 		if (hQueue.size() < this.maxSize) {
@@ -22,22 +26,28 @@ public class StackList implements Stack {
 				node.setNext(this.head);
 				this.head = node;
 			}
-			return true;
-		}
-		return false;
+
+		} else
+			// TODO OwnException overflow
+			throw new OverflowException(element);
+
 	}
 
 	@Override
-	public Node leave() {
-		Node oldHead = this.head;
-		this.head = this.head.getNext();
-		return oldHead;
+	public Node leave() throws Exception {
+		if (this.head != null) {
+			Node oldHead = this.head;
+			this.head = this.head.getNext();
+			return oldHead;
+		} else
+			// TODO OwnException underflow
+			throw new UnderflowException();
 	}
 
 	@Override
-	public int front() {
+	public Object front() {
 		try {
-			return (int) this.head.getValue();
+			return this.head.getValue();
 		} catch (NullPointerException ex) {
 			System.out.print("Es existiert kein Element im Stack! -> ");
 			return 0;

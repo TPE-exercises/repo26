@@ -8,21 +8,21 @@ interface Queue{
 	 * @param list
 	 * @return 
 	 */
-	boolean enter(int element);
+	void enter(Object element) throws Exception;
 	
 	/**
 	 * Leave first Element (return and delete)
 	 * @param list
 	 * @return ListNode
 	 */
-	Node leave();
+	Node leave()throws Exception;
 	
 	/**
 	 * return first elements in Queue (not delete)
 	 * @param list
 	 * @return
 	 */
-	int front();
+	Object front();
 	
 	/**
 	 * Creates new Queue
