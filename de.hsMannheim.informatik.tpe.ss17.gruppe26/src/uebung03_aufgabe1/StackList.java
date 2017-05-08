@@ -1,10 +1,10 @@
 package uebung03_aufgabe1;
 
-public class MyStack implements Stack {
+public class StackList implements Stack {
 
 	private Node head;
 
-	MyStack() {
+	StackList() {
 		head = null;
 	}
 
@@ -28,12 +28,17 @@ public class MyStack implements Stack {
 
 	@Override
 	public int front() {
+		try{
 		return (int) this.head.getValue();
+		}catch(NullPointerException ex){
+			System.out.print("Es existiert kein Element im Stack! -> ");
+			return 0;
+		}
 	}
 
 	@Override
 	public Stack emptyStack() {
-		return new MyStack();
+		return new StackList();
 	}
 
 	@Override
@@ -45,8 +50,16 @@ public class MyStack implements Stack {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		int size=0;
+		Node node = this.head;
+		while(node !=null){
+			size++;
+			if(node.getNext()!=null)
+				node=node.getNext();
+			else
+				node=null;
+		}
+		return size;
 	}
 
 }
