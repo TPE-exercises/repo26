@@ -3,28 +3,41 @@ package uebung03_aufgabe1;
 public class QueueList implements Queue {
 
 	private Node head;
+	private int maxSize;
 
 	QueueList() {
-		head = null;
+		this(5);
 	}
 
-	public Node getHead() {
-		return this.head;
+	QueueList(int maxSize) {
+		head = null;
+		this.maxSize = maxSize;
+	}
+
+	public void setHead(Node head) {
+		this.head = head;
 	}
 
 	@Override
-	public void enter(int element) {
-		Node node = this.head;
-		if (node == null) {
-			this.head = new Node(element, null);
-			return;
-		}
+	public boolean enter(int element) {
 
-		while (node.getNext() != null) {
-			node=node.getNext();
-		}
-		node.setNext(new Node(element,null));
+		QueueList hQueue = new QueueList();
+		hQueue.setHead(this.head);
+		if (hQueue.size() < this.maxSize) {
+			// TODO maxSize beachten!
+			Node node = this.head;
+			if (node == null) {
+				this.head = new Node(element, null);
+				return true;
+			}
 
+			while (node.getNext() != null) {
+				node = node.getNext();
+			}
+			node.setNext(new Node(element, null));
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -53,8 +66,8 @@ public class QueueList implements Queue {
 	}
 
 	@Override
-	public Queue emptyQueue() {
-		return new QueueList();
+	public Queue emptyQueue(int maxSize) {
+		return new QueueList(maxSize);
 	}
 
 	@Override

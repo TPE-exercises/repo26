@@ -6,8 +6,9 @@ interface Queue{
 	 * Enter new element in Queue
 	 * @param element
 	 * @param list
+	 * @return 
 	 */
-	void enter(int element);
+	boolean enter(int element);
 	
 	/**
 	 * Leave first Element (return and delete)
@@ -27,7 +28,7 @@ interface Queue{
 	 * Creates new Queue
 	 * @return
 	 */
-	Queue emptyQueue();
+	Queue emptyQueue(int maxSize);
 	
 	/**
 	 * 

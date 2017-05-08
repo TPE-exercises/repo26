@@ -6,7 +6,7 @@ public interface Stack {
 	 * @param element
 	 * @param list
 	 */
-	void enter(int element);
+	boolean enter(int element);
 	
 	/**
 	 * Leave first Element (return and delete)
@@ -26,7 +26,7 @@ public interface Stack {
 	 * Creates new Stack
 	 * @return
 	 */
-	Stack emptyStack();
+	Stack emptyStack(int maxSize);
 	
 	/**
 	 * 
@@ -36,7 +36,7 @@ public interface Stack {
 	boolean isEmpty();
 	
 	/**
-	 * retru size of Stack
+	 * return size of Stack
 	 * @param list
 	 * @return
 	 */
