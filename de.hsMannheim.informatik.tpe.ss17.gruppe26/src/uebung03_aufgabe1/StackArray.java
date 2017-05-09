@@ -59,7 +59,7 @@ public class StackArray implements Stack, ADT {
 	 * double the size of the array and clone it into the longer
 	 */
 	private void doubleSizeArray() {
-		System.out.println("doubleSize");
+//		System.out.println("doubleSize");
 		Object[] doubleSizeArray = new Object[this.array.length * 2];
 
 		for (int i = 0; i < this.array.length; i++) {

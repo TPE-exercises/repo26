@@ -1,6 +1,6 @@
 package uebung03_aufgabe1;
 
-public class QueueList implements Queue,ADT {
+public class QueueList implements Queue, ADT {
 
 	private Node head;
 	private int maxSize;
@@ -17,31 +17,34 @@ public class QueueList implements Queue,ADT {
 	public void setHead(Node head) {
 		this.head = head;
 	}
-	public Node getHead(){
+
+	public Node getHead() {
 		return this.head;
 	}
 
-
 	@Override
 	public void enter(Object element) throws Exception {
-
+		// TODO Ringpuffer
+		// hilftQueue
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
+
 		if (hQueue.size() < this.maxSize) {
+
 			Node node = this.head;
 			if (node == null) {
 				this.head = new Node(element, null);
-			return;
+				return;
 			}
 
 			while (node.getNext() != null) {
 				node = node.getNext();
 			}
 			node.setNext(new Node(element, null));
-		
-		}else
+
+		} else
 			throw new OverflowException(element);
-	
+
 	}
 
 	@Override
@@ -54,8 +57,7 @@ public class QueueList implements Queue,ADT {
 			else
 				this.head = null;
 			return first;
-		}
-		else
+		} else
 			throw new UnderflowException();
 
 	}
@@ -70,7 +72,7 @@ public class QueueList implements Queue,ADT {
 		}
 	}
 
-//	@Override
+	// @Override
 	public Queue emptyQueue(int maxSize) {
 		return new QueueList(maxSize);
 	}
@@ -95,7 +97,7 @@ public class QueueList implements Queue,ADT {
 		}
 		return size;
 	}
-	
+
 	@Override
 	public String toString(Node node) {
 		String string = "";
