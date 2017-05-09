@@ -1,7 +1,7 @@
 package uebung03_aufgabe1;
 
 interface Queue{
-	
+	Node getHead();
 	/**
 	 * Enter new element in Queue
 	 * @param element

@@ -1,6 +1,7 @@
 package uebung03_aufgabe1;
 
 public interface Stack {
+	Node getHead();
 	/**
 	 * Stack new element in Stack
 	 * @param element

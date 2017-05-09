@@ -1,6 +1,6 @@
 package uebung03_aufgabe1;
 
-public class StackList implements Stack,ADT {
+public class StackList implements Stack, ADT {
 
 	private Node head;
 	private int maxSize;
@@ -12,6 +12,10 @@ public class StackList implements Stack,ADT {
 
 	public StackList() {
 		this(5);
+	}
+	
+	public Node getHead(){
+		return this.head;
 	}
 
 	@Override
@@ -78,6 +82,20 @@ public class StackList implements Stack,ADT {
 				node = null;
 		}
 		return size;
+	}
+
+	@Override
+	public String toString(Node node) {
+		String string = "";
+		if (node != null) {
+			string += "El: " + node.getValue();
+			if (node.getNext() != null) {
+				string += "--->";
+				string += this.toString(node.getNext());
+				string += "<---";
+			}
+		}
+		return string;
 	}
 
 }

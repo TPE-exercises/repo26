@@ -50,9 +50,7 @@ public class Main {
 //		printSeperator();
 	}
 
-	private static void printSeperator() {
-		System.out.println("-----------------------------------------");
-	}
+	
 	
 	public static void sortiere(Sort1 s, Comparable[] array){
 		System.out.println("Unsortiert:");
@@ -71,5 +69,7 @@ public class Main {
 		System.out.println();
 
 	}
-
+private static void printSeperator() {
+		System.out.println("-----------------------------------------");
+	}
 }
