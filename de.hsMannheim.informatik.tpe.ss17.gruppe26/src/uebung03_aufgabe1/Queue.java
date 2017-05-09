@@ -24,11 +24,11 @@ interface Queue{
 	 */
 	Object front();
 	
-	/**
-	 * Creates new Queue
-	 * @return
-	 */
-	Queue emptyQueue(int maxSize);
+//	/**
+//	 * Creates new Queue
+//	 * @return
+//	 */
+//	Queue emptyQueue(int maxSize);
 	
 	/**
 	 * 

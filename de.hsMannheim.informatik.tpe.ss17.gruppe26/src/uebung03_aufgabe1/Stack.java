@@ -14,7 +14,7 @@ public interface Stack {
 	 * @param list
 	 * @return Stack
 	 */
-	Node leave()throws Exception;
+	Object leave()throws Exception;
 	
 	/**
 	 * return first elements in Stack (not delete)
@@ -23,11 +23,11 @@ public interface Stack {
 	 */
 	Object front();
 	
-	/**
-	 * Creates new Stack
-	 * @return
-	 */
-	Stack emptyStack(int maxSize);
+//	/**
+//	 * Creates new Stack
+//	 * @return
+//	 */
+//	Stack emptyStack(int maxSize);
 	
 	/**
 	 * 

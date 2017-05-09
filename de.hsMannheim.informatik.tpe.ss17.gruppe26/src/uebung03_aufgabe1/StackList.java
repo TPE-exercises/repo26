@@ -58,7 +58,7 @@ public class StackList implements Stack, ADT {
 		}
 	}
 
-	@Override
+//	@Override
 	public Stack emptyStack(int maxSize) {
 		return new StackList(maxSize);
 	}

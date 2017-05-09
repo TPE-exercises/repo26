@@ -9,45 +9,36 @@ public class Menue {
 
 	public static void main(String[] args) throws Exception {
 
-		enter(s2,0);
-		enter(s2,1);
-		enter(s2,2);
-		enter(s2,4);
-		enter(s2,4);
-		enter(s2,5);
-		
-		System.out.println(s2.toString(null));
-		
-//		System.out.println(size(s1));
-//		System.out.println(toString(s1, s1.getHead()));
+		enter(s2, new Integer(0));
+		enter(s2, new Integer(1));
+		leave(s2);
+		leave(s2);
 
-		
-
+		// System.out.println(s2.toString(null));
 
 	}
 
-
-	private static void enter(ADT adt,Object element) throws Exception{
+	private static void enter(ADT adt, Object element) throws Exception {
 		adt.enter(element);
 	}
 
-	private static Node leave(ADT adt) throws Exception{
+	private static Object leave(ADT adt) throws Exception {
 		return adt.leave();
 	}
 
-	private static Object front(ADT adt){
+	private static Object front(ADT adt) {
 		return adt.front();
 	}
 
-	private static boolean isEmpty(ADT adt){
+	private static boolean isEmpty(ADT adt) {
 		return adt.isEmpty();
 	}
 
-	private static int size(ADT adt){
+	private static int size(ADT adt) {
 		return adt.size();
 	}
-	
-	public static String toString(ADT adt, Node node){
+
+	public static String toString(ADT adt, Node node) {
 		return adt.toString(node);
 	}
 

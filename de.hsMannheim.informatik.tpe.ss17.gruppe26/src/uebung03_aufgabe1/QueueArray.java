@@ -33,12 +33,6 @@ public class QueueArray implements Queue,ADT{
 	}
 
 	@Override
-	public Queue emptyQueue(int maxSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;

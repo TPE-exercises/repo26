@@ -16,7 +16,7 @@ public interface ADT {
 		 * @param list
 		 * @return ListNode
 		 */
-		Node leave()throws Exception;
+		Object leave()throws Exception;
 		
 		/**
 		 * return first elements in Queue (not delete)

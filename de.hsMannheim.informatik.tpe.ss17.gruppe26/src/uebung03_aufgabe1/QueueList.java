@@ -70,7 +70,7 @@ public class QueueList implements Queue,ADT {
 		}
 	}
 
-	@Override
+//	@Override
 	public Queue emptyQueue(int maxSize) {
 		return new QueueList(maxSize);
 	}
