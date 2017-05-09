@@ -9,4 +9,7 @@ public class OverflowException extends Exception {
 		super("Too many Objects: " + element);
 
 	}
+	OverflowException(){
+		super("Too many Objects, array size doubles!");
+	}
 }

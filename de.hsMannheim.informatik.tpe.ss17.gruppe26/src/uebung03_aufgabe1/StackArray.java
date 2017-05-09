@@ -51,6 +51,7 @@ public class StackArray implements Stack, ADT {
 		} else {
 			doubleSizeArray();
 			this.array[i] = element;
+			throw new OverflowException();
 		}
 	}
 
