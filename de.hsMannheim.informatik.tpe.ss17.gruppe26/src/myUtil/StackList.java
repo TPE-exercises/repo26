@@ -1,11 +1,11 @@
-package uebung03_aufgabe1;
+package myUtil;
 
 public class StackList implements Stack, ADT {
 
 	private Node head;
 	private int maxSize;
 
-	StackList(int maxSize) {
+	public StackList(int maxSize) {
 		head = null;
 		this.maxSize = maxSize;
 	}
@@ -19,7 +19,7 @@ public class StackList implements Stack, ADT {
 	}
 
 	@Override
-	public void enter(Object element) throws Exception {
+	public void enter(Object element) throws OverflowException {
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
 		if (hQueue.size() < this.maxSize) {
@@ -33,7 +33,7 @@ public class StackList implements Stack, ADT {
 
 		} else
 
-			throw new OverflowException(element);
+			throw new OverflowException("Too many Object: ",element);
 
 	}
 

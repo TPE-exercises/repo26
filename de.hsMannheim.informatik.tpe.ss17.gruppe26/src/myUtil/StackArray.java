@@ -1,4 +1,4 @@
-package uebung03_aufgabe1;
+package myUtil;
 
 public class StackArray implements Stack, ADT {
 	private Object[] array;
@@ -9,7 +9,7 @@ public class StackArray implements Stack, ADT {
 		this.array = new Object[maxSize];
 	}
 
-	StackArray() {
+	public StackArray() {
 		this(5);
 	}
 
@@ -32,7 +32,7 @@ public class StackArray implements Stack, ADT {
 	}
 
 	@Override
-	public void enter(Object element) throws Exception {
+	public void enter(Object element) throws OverflowException {
 		// System.out.println("___________");
 		// System.out.println("length: " + this.array.length + " toEnter: " +
 		// element);
@@ -47,11 +47,15 @@ public class StackArray implements Stack, ADT {
 		}
 		// Array to short double or Exception
 		if (this.array.length > this.maxSize) {
-			throw new OverflowException(element);
+			throw new OverflowException("Too many Object, Array allready doublesize: ",element);
 		} else {
 			doubleSizeArray();
 			this.array[i] = element;
-			throw new OverflowException();
+//			try {
+				throw new OverflowException("Too many Object, doublesize array: ", element);
+//			} catch (OverflowException ex) {
+//				ex.printStackTrace();
+//			}
 		}
 	}
 

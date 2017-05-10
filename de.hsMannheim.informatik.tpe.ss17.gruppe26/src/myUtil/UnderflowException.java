@@ -1,4 +1,4 @@
-package uebung03_aufgabe1;
+package myUtil;
 
 public class UnderflowException extends Exception {
 

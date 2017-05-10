@@ -1,5 +1,12 @@
 package uebung03_aufgabe1;
 
+import myUtil.ADT;
+import myUtil.Node;
+import myUtil.QueueArray;
+import myUtil.QueueList;
+import myUtil.StackArray;
+import myUtil.StackList;
+
 public class Menue {
 
 	private static final ADT s1 = new StackList();
@@ -8,16 +15,35 @@ public class Menue {
 	private static final ADT q2 = new QueueArray();
 
 	public static void main(String[] args) throws Exception {
-		try {
+
 			enter(q2, new Integer(0));
 			enter(q2, new Integer(1));
 			enter(q2, new Integer(2));
 			enter(q2, new Integer(3));
 			enter(q2, new Integer(4));
 			enter(q2, new Integer(5));
-		} catch (OverflowException ex) {
-			throw ex;
-		}
+			
+			enter(q1, new Integer(0));
+			enter(q1, new Integer(1));
+			enter(q1, new Integer(2));
+			enter(q1, new Integer(3));
+			enter(q1, new Integer(4));
+			enter(q1, new Integer(5));
+			
+			enter(s1, new Integer(0));
+			enter(s1, new Integer(1));
+			enter(s1, new Integer(2));
+			enter(s1, new Integer(3));
+			enter(s1, new Integer(4));
+			enter(s1, new Integer(5));
+			
+			enter(q2, new Integer(0));
+			enter(q2, new Integer(1));
+			enter(q2, new Integer(2));
+			enter(q2, new Integer(3));
+			enter(q2, new Integer(4));
+			enter(q2, new Integer(5));
+
 
 		System.out.println(q2.toString(null));
 		System.out.println("-.-´");

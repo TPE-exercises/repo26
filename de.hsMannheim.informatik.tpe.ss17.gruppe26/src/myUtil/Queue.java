@@ -1,46 +1,46 @@
-package uebung03_aufgabe1;
+package myUtil;
 
-public interface Stack {
+public interface Queue{
 	Node getHead();
 	/**
-	 * Stack new element in Stack
+	 * Enter new element in Queue
 	 * @param element
 	 * @param list
+	 * @return 
 	 */
 	void enter(Object element) throws Exception;
 	
 	/**
 	 * Leave first Element (return and delete)
 	 * @param list
-	 * @return Stack
+	 * @return ListNode
 	 */
 	Object leave()throws Exception;
 	
 	/**
-	 * return first elements in Stack (not delete)
+	 * return first elements in Queue (not delete)
 	 * @param list
 	 * @return
 	 */
 	Object front();
 	
 //	/**
-//	 * Creates new Stack
+//	 * Creates new Queue
 //	 * @return
 //	 */
-//	Stack emptyStack(int maxSize);
+//	Queue emptyQueue(int maxSize);
 	
 	/**
 	 * 
 	 * @param list
-	 * @return true when Stack empty
+	 * @return true when Queue empty
 	 */
 	boolean isEmpty();
 	
 	/**
-	 * return size of Stack
+	 * retru size of Queue
 	 * @param list
 	 * @return
 	 */
 	int size();
-
 }

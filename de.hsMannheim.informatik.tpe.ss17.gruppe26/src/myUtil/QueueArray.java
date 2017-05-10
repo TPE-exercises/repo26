@@ -1,4 +1,4 @@
-package uebung03_aufgabe1;
+package myUtil;
 
 public class QueueArray implements Queue, ADT {
 	private Object[] array;
@@ -13,7 +13,7 @@ public class QueueArray implements Queue, ADT {
 		this.count = 0;
 	}
 
-	QueueArray() {
+	public QueueArray() {
 		this(5);
 	}
 
@@ -37,7 +37,7 @@ public class QueueArray implements Queue, ADT {
 	}
 
 	@Override
-	public void enter(Object element) throws Exception {
+	public void enter(Object element) throws OverflowException {
 		if (this.count < this.array.length) {
 			this.array[(this.first + this.count) % this.array.length] = element;
 			this.count++;
@@ -45,11 +45,18 @@ public class QueueArray implements Queue, ADT {
 			if (this.maxSize == this.array.length) {
 				doubleSizeArray();
 				this.enter(element);
-//				System.out.println("*******double array size");
-				throw new OverflowException();
+				
+				
+//				try {
+					throw new OverflowException("Too many Object, doublesize array: ", element);
+//				} catch (OverflowException ex) {
+//					ex.printStackTrace();
+//				}
+				
 			} else {
-				throw new OverflowException(element);
+				throw new OverflowException("Too many Object, Array allready doublesize: ",element);
 			}
+
 		}
 
 	}
@@ -65,7 +72,10 @@ public class QueueArray implements Queue, ADT {
 	}
 
 	@Override
-	public Object leave() throws Exception {
+	public Object leave() throws UnderflowException {
+		if (this.count==0) {
+			throw new UnderflowException();
+		}
 		this.first++;
 		this.count--;
 		return this.array[first - 1];
@@ -78,7 +88,7 @@ public class QueueArray implements Queue, ADT {
 
 	@Override
 	public boolean isEmpty() {
-		if (this.count==0)
+		if (this.count == 0)
 			return true;
 		return false;
 	}

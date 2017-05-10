@@ -1,11 +1,11 @@
-package uebung03_aufgabe1;
+package myUtil;
 
 public class QueueList implements Queue, ADT {
 
 	private Node head;
 	private int maxSize;
 
-	QueueList() {
+	public QueueList() {
 		this(5);
 	}
 
@@ -23,7 +23,7 @@ public class QueueList implements Queue, ADT {
 	}
 
 	@Override
-	public void enter(Object element) throws Exception {
+	public void enter(Object element) throws OverflowException {
 		// TODO Ringpuffer
 		// hilftQueue
 		QueueList hQueue = new QueueList();
@@ -43,12 +43,12 @@ public class QueueList implements Queue, ADT {
 			node.setNext(new Node(element, null));
 
 		} else
-			throw new OverflowException(element);
+			throw new OverflowException("Too many Object: ", element);
 
 	}
 
 	@Override
-	public Node leave() throws Exception {
+	public Node leave() throws UnderflowException {
 		Node first = null;
 		if (head != null) {
 			first = this.head;
