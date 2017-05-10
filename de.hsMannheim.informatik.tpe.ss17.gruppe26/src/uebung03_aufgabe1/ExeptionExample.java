@@ -39,7 +39,8 @@ public class ExeptionExample {
 			sum = numbers[0] / numbers[1];
 			System.out.println(sum);
 		} catch (ArithmeticException ex) {
-			System.err.println("Sie dürfen um gottes Willen nicht durch NULL dividieren!");
+			System.out.println("Sie dürfen um gottes Willen nicht durch NULL dividieren!");
+			ex.printStackTrace();
 		}
 		
 	}
