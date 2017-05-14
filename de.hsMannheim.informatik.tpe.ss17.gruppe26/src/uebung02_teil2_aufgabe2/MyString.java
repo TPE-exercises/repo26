@@ -4,7 +4,7 @@ public class MyString implements Comparable {
 
 	private String string;
 	
-	MyString(String string){
+	public MyString(String string){
 		this.string=string;
 	}
 	

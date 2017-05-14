@@ -6,7 +6,7 @@ public class QueueArray implements Queue, ADT {
 	private int first;
 	private int count;
 
-	QueueArray(int maxSize) {
+	public QueueArray(int maxSize) {
 		this.maxSize = maxSize;
 		this.array = new Object[maxSize];
 		this.first = 0;
@@ -22,11 +22,12 @@ public class QueueArray implements Queue, ADT {
 		String string = "";
 		for (int i = 0; i < this.count; i++) {
 			string += " " + this.array[(this.first + i) % this.array.length];
-			// if (this.array[i] != null)
-			// string += " " + this.array[i];
-			// else
-			// string += " _";
+		
 		}
+		for (int i = count; i < this.array.length; i++) {
+			string += " _";
+		}
+		System.out.println("length: "+this.array.length);
 		return string;
 	}
 
@@ -47,11 +48,11 @@ public class QueueArray implements Queue, ADT {
 				this.enter(element);
 				
 				
-//				try {
+				try {
 					throw new OverflowException("Too many Object, doublesize array: ", element);
-//				} catch (OverflowException ex) {
-//					ex.printStackTrace();
-//				}
+				} catch (OverflowException ex) {
+					ex.printStackTrace();
+				}
 				
 			} else {
 				throw new OverflowException("Too many Object, Array allready doublesize: ",element);

@@ -9,7 +9,7 @@ public class QueueList implements Queue, ADT {
 		this(5);
 	}
 
-	QueueList(int maxSize) {
+	public QueueList(int maxSize) {
 		head = null;
 		this.maxSize = maxSize;
 	}
