@@ -85,14 +85,12 @@ public class sorts {
 
 	/**
 	 * 
-	 * @param numberSequence
+	 * @param array
 	 * @param bottom
 	 * @param top
 	 * @return
 	 */
-	static int[] quicksort_rec(int[] numberSequence, int bottom, int top) {
-
-		int[] array = numberSequence;
+	static int[] quicksort_rec(int[] array, int bottom, int top) {
 
 		if (top > bottom) {
 			int index = zerlege(array, bottom, top);
