@@ -13,7 +13,7 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 	}
 
 	@Override
-	public File encrypt(File sourceDirectory) {
+	public File encrypt(File sourceDirectory) throws IsNoFolderException {
 
 		if (sourceDirectory.isDirectory()) {
 			File destinationDirectory = new File(sourceDirectory + "_encrypted");
@@ -27,13 +27,12 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 			return destinationDirectory;
 
 		} else {
-			// TODO: FEHLERMELDUNG
-			return null;
+			throw new IsNoFolderException("Der angegebene Pfad ist kein Ordner!");
 		}
 	}
 
 	@Override
-	public File decrypt(File sourceDirectory) {
+	public File decrypt(File sourceDirectory) throws IsNoFolderException {
 		if (sourceDirectory.isDirectory()) {
 			File destinationDirectory = new File(sourceDirectory + "_decrypted");
 			if (destinationDirectory.exists()) {
@@ -46,8 +45,7 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 			return destinationDirectory;
 
 		} else {
-			// TODO: FEHLERMELDUNG
-			return null;
+			throw new IsNoFolderException("Der angegebene Pfad ist kein Ordner!");
 		}
 	}
 
