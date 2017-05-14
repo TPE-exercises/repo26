@@ -29,19 +29,19 @@ public class Menue {
 			switch (chooseOption(1, 7)) {
 			case 1:// enter
 				System.out.println("Geben Sie ihr " + getCurrentObject() + " ein.");
-				currentADT.enter(getObject());
+				enter(currentADT,getObject());
 				break;
 			case 2:// leave
-				System.out.println(currentADT.leave());
+				System.out.println(leave(currentADT));
 				break;
 			case 3:// front
-				System.out.println(currentADT.front());
+				System.out.println(front(currentADT));
 				break;
 			case 4:// isEmpty
-				System.out.println(currentADT.isEmpty());
+				System.out.println(isEmpty(currentADT));
 				break;
 			case 5:// size
-				System.out.println(currentADT.size());
+				System.out.println(size(currentADT));
 				break;
 			case 6:// change ADT
 				currentADT = chooseADT(currentADT);
