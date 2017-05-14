@@ -10,8 +10,9 @@ public interface IFileEncryptor {
 	 * 
 	 * @param sourceDirectory
 	 * @return null, if the sourceDirectory is not a folder
+	 * @throws IsNoFolderException 
 	 */
-	public File encrypt(File sourceDirectory);
+	public File encrypt(File sourceDirectory) throws IsNoFolderException;
 
 	/**
 	 * checks sourceDirectory, if it is a directory, that method creates new
@@ -20,6 +21,6 @@ public interface IFileEncryptor {
 	 * @param sourceDirectory
 	 * @return null, if the sourceDirectory is not a folder
 	 */
-	public File decrypt(File sourceDirectory);
+	public File decrypt(File sourceDirectory) throws IsNoFolderException;
 
 }

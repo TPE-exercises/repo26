@@ -6,21 +6,14 @@ import java.io.*;
 
 public class Menue_Uebung03_Aufgabe2_3 {
 
-	/**
-	 * create a new line of underscores
-	 */
-	private static void printSeperatorLine() {
-		OwnUtils.printLines.printSeperatorLine();
-//		System.out.println("___________________________________________________");
-	}
 
-	/**
-	 * create a new line of bindings
-	 */
-	private static void printSeperatorShortLines() {
-		OwnUtils.printLines.printSeperatorShortLines();
-//		System.out.println("---------------------------------------------------");
-	}
+		
+
+	
+
+
+		
+
 
 	/**
 	 * print failure, if the input was a wrong value
@@ -36,13 +29,13 @@ public class Menue_Uebung03_Aufgabe2_3 {
 		int c;
 		String letters = new String();
 
-		System.out.println("Version 1.0 (07/05/2017)");
+		System.out.println("Version 2.0 (14/05/2017)");
 		System.out.println("Erstellt von: Lange und Schoenke");
 		System.out.println("3. Programmieraufgabe Aufgabe 2 aus TPE im SS17");
-		printSeperatorLine();
+		OwnUtils.printLines.printSeperatorLine();
 		System.out.println();
 		while (continueMenu) {
-			printSeperatorShortLines();
+			OwnUtils.printLines.printSeperatorShortLines();
 			if (numberOfRuns == 0)
 				System.out.println("Was möchten Sie tun?");
 			else
@@ -74,7 +67,6 @@ public class Menue_Uebung03_Aufgabe2_3 {
 					// f.println(); // Zeilenvorschub
 					f.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Fehler beim Erstellen der Datei");
 					e.printStackTrace();
 				}
@@ -113,6 +105,7 @@ public class Menue_Uebung03_Aufgabe2_3 {
 					f4.close();
 				} catch (IOException e) {
 					System.out.println("Fehler beim Lesen der Datei");
+					e.printStackTrace();
 				}
 				break;
 			case (8): // encrypt a folder by caesar
@@ -122,7 +115,12 @@ public class Menue_Uebung03_Aufgabe2_3 {
 				System.out.println("Um wie viel Zeichen möchten Sie verschieben?");
 				IFileEncryptor neu = new CaesarFileEncryptor(readInt());
 				File sourceFile = new File(pfadangabe);
-				File encryptedFile = neu.encrypt(sourceFile);
+				File encryptedFile = null;
+				try {
+					encryptedFile = neu.encrypt(sourceFile);
+				} catch (IsNoFolderException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Der neue Ordner heißt nun: " + encryptedFile);
 				break;
 			case (9): // decrypt a folder by caesar
@@ -132,7 +130,12 @@ public class Menue_Uebung03_Aufgabe2_3 {
 				System.out.print("Um wie viel Zeichen möchten Sie verschieben?");
 				IFileEncryptor neu2 = new CaesarFileEncryptor(readInt());
 				File sourceFile2 = new File(pfadangabe2);
-				File decryptedFile = neu2.decrypt(sourceFile2);
+				File decryptedFile = null;
+				try {
+					decryptedFile = neu2.decrypt(sourceFile2);
+				} catch (IsNoFolderException e) {
+					e.printStackTrace();
+				}
 				System.out.println("Der neue Ordner heißt nun: " + decryptedFile);
 				break;
 			case (0): // exit the program
