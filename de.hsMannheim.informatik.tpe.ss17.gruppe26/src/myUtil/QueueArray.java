@@ -33,7 +33,6 @@ public class QueueArray implements Queue, ADT {
 
 	@Override
 	public Node getHead() {
-		// TODO not needet
 		return null;
 	}
 

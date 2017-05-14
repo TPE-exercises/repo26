@@ -95,14 +95,21 @@ public class Menue {
 	private static Object getObject() {
 		switch (ObjectOption) {
 		case 1:
+			Object myInt = null;
+			int x = Integer.MIN_VALUE;
 			try {
-				Object myInt = new uebung02_teil2_aufgabe2.MyInt(new Integer(readInt()));
+				x = readInt();
 				readLine();
-				return myInt;
 			} catch (Exception ex) {
-				ex.printStackTrace();
-//				System.out.println();
+				 ex.printStackTrace();
+				 return null;
+				 //TODO hier wird die MIN_VALUE eingetragen wenn eingabe falsch
+				// System.out.println("Bitte erneut eingeben!");
+				// getObject();
 			}
+			myInt = new uebung02_teil2_aufgabe2.MyInt(new Integer(x));
+			readLine();
+			return myInt;
 
 		case 2:
 			return new uebung02_teil2_aufgabe2.MyString(readLine());

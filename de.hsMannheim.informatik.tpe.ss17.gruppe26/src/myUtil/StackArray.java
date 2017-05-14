@@ -27,7 +27,6 @@ public class StackArray implements Stack, ADT {
 
 	@Override
 	public Node getHead() {
-		// TODO not needet
 		return null;
 	}
 

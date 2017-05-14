@@ -24,7 +24,6 @@ public class QueueList implements Queue, ADT {
 
 	@Override
 	public void enter(Object element) throws OverflowException {
-		// TODO Ringpuffer
 		// hilftQueue
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
