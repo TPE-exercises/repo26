@@ -4,7 +4,7 @@ import static gdi.MakeItSimple.*;
 
 import java.io.*;
 
-public class Main {
+public class Menue_Uebung03_Aufgabe2_3 {
 
 	/**
 	 * create a new line of underscores
