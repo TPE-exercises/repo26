@@ -9,6 +9,9 @@ public class StackArray implements Stack, ADT {
 		this.array = new Object[maxSize];
 	}
 
+	/**
+	 * default, maxSize 5
+	 */
 	public StackArray() {
 		this(5);
 	}

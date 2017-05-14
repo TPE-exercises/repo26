@@ -57,11 +57,10 @@ public class Menue {
 	}
 
 	/**
-	 * 
+	 * returns the Churrent ObjectTyp as String
 	 * @return
 	 */
 	private static String getCurrentObject() {
-		// System.out.println("***"+ ObjectOption);
 		switch (ObjectOption) {
 		case 1:
 			return "MyInt";
@@ -72,7 +71,7 @@ public class Menue {
 	}
 
 	/**
-	 * 
+	 * Choose ObjectType
 	 * @return
 	 */
 	private static int chooseObjectOption() {
@@ -89,7 +88,7 @@ public class Menue {
 	}
 
 	/**
-	 * 
+	 * creates an Object MyInt or MyString
 	 * @return
 	 */
 	private static Object getObject() {
@@ -117,6 +116,9 @@ public class Menue {
 		return null;
 	}
 
+	/**
+	 * print the options/menue
+	 */
 	private static void printADTs() {
 		OwnUtils.printLines.printSeperatorLine();
 		System.out.println("Wählen Sie ihren ADT / Standartgröße \"5\"");
@@ -126,6 +128,11 @@ public class Menue {
 		System.out.println("(4) Queue as Array");
 	}
 
+	/**
+	 * returns the new ADT to work with it, saves old ADT first
+	 * @param oldADT
+	 * @return
+	 */
 	private static ADT chooseADT(ADT oldADT) {
 		// System.out.println("Wie viele Elemente sollen in den ADT passen?");
 		// int number = readInt();
@@ -172,6 +179,9 @@ public class Menue {
 
 	}
 
+	/**
+	 * prints options/menue
+	 */
 	private static void printMenue() {
 		OwnUtils.printLines.printSeperatorDots();
 		System.out.println("Ihre Möglichkeiten:");
@@ -184,6 +194,12 @@ public class Menue {
 		System.out.println("(7) change ObjectType");
 	}
 
+	/**
+	 * choose an Option, nessasary for all menues
+	 * @param min
+	 * @param max
+	 * @return
+	 */
 	private static int chooseOption(int min, int max) {
 		int value = 0;
 		do {
@@ -199,6 +215,11 @@ public class Menue {
 		return value;
 	}
 
+	
+	/*
+	 * following methodes link to the special methodes
+	 */
+	
 	private static void enter(ADT adt, Object element) throws Exception {
 		adt.enter(element);
 	}

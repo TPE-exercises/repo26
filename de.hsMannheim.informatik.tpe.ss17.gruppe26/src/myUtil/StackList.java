@@ -10,6 +10,9 @@ public class StackList implements Stack, ADT {
 		this.maxSize = maxSize;
 	}
 
+	/**
+	 * default, maxSize 5
+	 */
 	public StackList() {
 		this(5);
 	}
@@ -57,8 +60,11 @@ public class StackList implements Stack, ADT {
 			return 0;
 		}
 	}
-
-//	@Override
+/**
+ * returns an new empty StackObject
+ * @param maxSize
+ * @return
+ */
 	public Stack emptyStack(int maxSize) {
 		return new StackList(maxSize);
 	}

@@ -13,6 +13,9 @@ public class QueueArray implements Queue, ADT {
 		this.count = 0;
 	}
 
+	/**
+	 * default maxSize of 5
+	 */
 	public QueueArray() {
 		this(5);
 	}
@@ -59,6 +62,9 @@ public class QueueArray implements Queue, ADT {
 
 	}
 
+	/**
+	 * double the size of the array (once)
+	 */
 	private void doubleSizeArray() {
 		Object[] doubleSizeArray = new Object[this.array.length * 2];
 

@@ -1,5 +1,8 @@
 package myUtil;
 
+/*
+ * Class copied from GIT (Schramm)
+ */
 
 public class Node {
 	Object val; // contains nodes of any kind

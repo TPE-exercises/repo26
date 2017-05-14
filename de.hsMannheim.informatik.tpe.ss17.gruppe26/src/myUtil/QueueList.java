@@ -5,6 +5,9 @@ public class QueueList implements Queue, ADT {
 	private Node head;
 	private int maxSize;
 
+	/**
+	 * default, maxSize 5
+	 */
 	public QueueList() {
 		this(5);
 	}

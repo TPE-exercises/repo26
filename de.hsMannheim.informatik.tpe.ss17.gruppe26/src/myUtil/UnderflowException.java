@@ -1,5 +1,10 @@
 package myUtil;
 
+/**
+ * Own Exception Class for Underflows in Stack or Queue
+ * @author lange
+ *
+ */
 public class UnderflowException extends Exception {
 
 	// Konstruktor unserer eigenen Exception
