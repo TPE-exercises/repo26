@@ -41,7 +41,7 @@ public class MenueHelper {
 	 * @param String
 	 *            "restparam"
 	 */
-	public static void menuePrinter(String... menueOptions) {
+	public static void menueGenerator_Printer(String... menueOptions) {
 		OwnUtils.printLines.printSeperatorLine();
 		System.out.println("Wählen Sie eine der folgenden Optionen: ");
 		for (int i = 0; i < menueOptions.length; i++) {
