@@ -5,6 +5,7 @@ import java.io.*;
 public class CaesarWriter extends FilterWriter {
 
 	int moveTo;
+	static char[] alphabet = new char[58];
 
 	public CaesarWriter(Writer arg0, int moveTo) {
 		super(arg0);
@@ -12,64 +13,63 @@ public class CaesarWriter extends FilterWriter {
 		if (moveTo < 0)
 			moveTo = 58 + moveTo;
 		this.moveTo = moveTo;
+		createAlphabet();
 	}
 
 	public void write(int c) throws IOException {
-		if (moveTo % 58 == 0) {
+		if (this.moveTo % 58 == 0) {
 			super.write((char) c);
-		} else
-			super.write((char) encrypt(c));
-	}
-
-	public int encrypt(int c) {
-		if (isInAlphabet(c)) {
-			return moveToAlphabet(c);
-		} else { // Ist Buchstabe nicht im gültigen Alphabet, bleibt es unverändert
-//			System.out.print((char) c); // *********DEBUG
-			return c;
+		} else {
+			super.write(encrypt((char) c));
 		}
 	}
 
 	/**
-	 * Ä = 196, Ö = 214, Ü = 220, ä = 228, ö = 246, ü = 252 // laut JAVA (Eclipse)
-	 * 
-	 * @param c
-	 * @return
+	 * if character is in alphabet, run the moving method
+	 * if character is not in alphabet, return itself
+	 * @param cc
+	 * @return the moved character or the same character
 	 */
-	public boolean isInAlphabet(int c) {
-		if (c >= 65 && c <= 90)
-			return true;
-		if (c >= 97 && c <= 122)
-			return true;
-		if (c == 196 || c == 214 || c == 220)
-			return true;
-		if (c == 228 || c == 246 || c == 252)
-			return true;
-		return false;
+	public char encrypt(char cc) {
+		int position = isInAlphabet(cc);
+		if (position != -1) {
+			return moveToAlphabet(position);
+		} else {
+			// System.out.print((char) cc); // *********DEBUG
+			return cc;
+		}
 	}
 
-	public int moveToAlphabet(int c) {
-		for (int i = 0; i < moveTo; i++) {
-			c++;
-			if (c == (int) 'Z')
-				c = (int) 'a';
-			if (c == (int) 'z' +1)
-				c = (int) 'Ä';
-			if (c == (int) 'Ä' + 1)
-				c = (int) 'Ö';
-			if (c == (int) 'Ö' + 1)
-				c = (int) 'Ü';
-			if (c == (int) 'Ü' + 1)
-				c = (int) 'ä';
-			if (c == (int) 'ä' +1)
-				c = (int) 'ö';
-			if (c == (int) 'ö' + 1)
-				c = (int) 'ü';
-			if (c == (int) 'ü' + 1)
-				c = (int) 'A';
+	/**
+	 * check, if the char is in alphabet 
+	 * @param c
+	 * @return the position of the char in alphabet
+	 * @return -1 if the char is not in the alphabet
+	 */
+	public int isInAlphabet(char c) {
+		for (int i = 0; i < alphabet.length; i++) {
+			if (c == alphabet[i]) {
+				return i;
+			}
 		}
-//		System.out.print((char) c); //*****************DEBUG
-		return c;
+		return -1;
+	}
+
+	/**
+	 * move the character inner the alphabet
+	 * 
+	 * @param pos of the char in the alphabet
+	 * @return the new char
+	 */
+	public char moveToAlphabet(int pos) {
+		for (int i = 0; i < this.moveTo; i++) {
+			pos++;
+			if (pos > 57) {
+				pos = 0;
+			}
+		}
+		// System.out.print((char) c); //*****************DEBUG
+		return alphabet[pos];
 	}
 
 	public void write(char[] cbuf, int off, int len) throws IOException {
@@ -83,16 +83,41 @@ public class CaesarWriter extends FilterWriter {
 	}
 
 	public static void main(String[] args) {
-		PrintWriter f;
-		try {
-			f = new PrintWriter(new CaesarWriter(new FileWriter("CaesarText.txt"), 1));
-			f.println("ÄÖÜäöü");
-			// f.write('a'); // Test von write(int)
-			// f.println();
-			// f.println(); // Zeilenvorschub
-			f.close();
-		} catch (IOException e) {
-			System.out.println("Fehler beim Erstellen der Datei");
+		// PrintWriter f;
+		// try {
+		// f = new PrintWriter(new CaesarWriter(new
+		// FileWriter("CaesarText.txt"), 1));
+		// f.println("ÄÖÜäöü");
+		// // f.write('a'); // Test von write(int)
+		// // f.println();
+		// // f.println(); // Zeilenvorschub
+		// f.close();
+		// } catch (IOException e) {
+		// System.out.println("Fehler beim Erstellen der Datei");
+		// }
+	}
+
+	/**
+	 * extra method to create the long alphabet as an array of chars
+	 */
+	public static void createAlphabet() {
+		for (int i = 0; i < 26; i++) {
+			alphabet[i] = (char) ((int) 'A' + i);
+		}
+		for (int i = 0; i < 26; i++) {
+			alphabet[i + 26] = (char) ((int) 'a' + i);
+		}
+		alphabet[52] = 'Ä';
+		alphabet[53] = 'Ö';
+		alphabet[54] = 'Ü';
+		alphabet[55] = 'ä';
+		alphabet[56] = 'ö';
+		alphabet[57] = 'ü';
+	}
+
+	public static void printAlphabet() {
+		for (int i = 0; i < alphabet.length; i++) {
+			System.out.println("alphabet[" + i + "]: " + alphabet[i]);
 		}
 	}
 }
