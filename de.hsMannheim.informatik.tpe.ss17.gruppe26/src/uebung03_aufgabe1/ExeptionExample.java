@@ -12,6 +12,8 @@ public class ExeptionExample {
 		OwnUtils.printLines.printSeperatorLine();
 
 		div(enterNumbers());
+		
+		System.out.println("Programmende");
 
 	}
 

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ABCD
+=======
+ASazÄÜäü
+>>>>>>> branch 'master' of https://github.com/TPE-exercises/repo26

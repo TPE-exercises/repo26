@@ -4,7 +4,7 @@ public class StackArray implements Stack, ADT {
 	private Object[] array;
 	private int maxSize;
 
-	StackArray(int maxSize) {
+	public StackArray(int maxSize) {
 		this.maxSize = maxSize;
 		this.array = new Object[maxSize];
 	}
@@ -27,7 +27,6 @@ public class StackArray implements Stack, ADT {
 
 	@Override
 	public Node getHead() {
-		// TODO not needet
 		return null;
 	}
 
@@ -51,11 +50,11 @@ public class StackArray implements Stack, ADT {
 		} else {
 			doubleSizeArray();
 			this.array[i] = element;
-//			try {
+			try {
 				throw new OverflowException("Too many Object, doublesize array: ", element);
-//			} catch (OverflowException ex) {
-//				ex.printStackTrace();
-//			}
+			} catch (OverflowException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 

@@ -9,7 +9,7 @@ public class QueueList implements Queue, ADT {
 		this(5);
 	}
 
-	QueueList(int maxSize) {
+	public QueueList(int maxSize) {
 		head = null;
 		this.maxSize = maxSize;
 	}
@@ -24,7 +24,6 @@ public class QueueList implements Queue, ADT {
 
 	@Override
 	public void enter(Object element) throws OverflowException {
-		// TODO Ringpuffer
 		// hilftQueue
 		QueueList hQueue = new QueueList();
 		hQueue.setHead(this.head);
