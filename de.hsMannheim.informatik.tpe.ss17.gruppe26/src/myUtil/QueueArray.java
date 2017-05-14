@@ -45,8 +45,6 @@ public class QueueArray implements Queue, ADT {
 			if (this.maxSize == this.array.length) {
 				doubleSizeArray();
 				this.enter(element);
-				
-				
 				try {
 					throw new OverflowException("Too many Object, doublesize array: ", element);
 				} catch (OverflowException ex) {
