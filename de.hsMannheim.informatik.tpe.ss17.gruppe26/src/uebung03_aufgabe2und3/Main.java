@@ -10,14 +10,16 @@ public class Main {
 	 * create a new line of underscores
 	 */
 	private static void printSeperatorLine() {
-		System.out.println("___________________________________________________");
+		OwnUtils.printLines.printSeperatorLine();
+//		System.out.println("___________________________________________________");
 	}
 
 	/**
 	 * create a new line of bindings
 	 */
 	private static void printSeperatorShortLines() {
-		System.out.println("---------------------------------------------------");
+		OwnUtils.printLines.printSeperatorShortLines();
+//		System.out.println("---------------------------------------------------");
 	}
 
 	/**
