@@ -1,6 +1,7 @@
 package myUtil;
 
 public class StackArray implements Stack, ADT {
+	//TODO protected
 	private Object[] array;
 	private int maxSize;
 
@@ -38,6 +39,7 @@ public class StackArray implements Stack, ADT {
 		// System.out.println("___________");
 		// System.out.println("length: " + this.array.length + " toEnter: " +
 		// element);
+		//TODO counter hoch bzw runter setzten
 		int i = 0;
 		for (i = 0; i < this.array.length; i++) {
 			// System.out.println("El: " + this.array[i] + " at: " + i);
