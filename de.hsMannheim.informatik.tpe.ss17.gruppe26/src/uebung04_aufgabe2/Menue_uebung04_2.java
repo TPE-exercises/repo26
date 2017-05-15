@@ -3,7 +3,7 @@ package uebung04_aufgabe2;
 public class Menue_uebung04_2 {
 
 	public static void main(String[] args) {
-		 Comparable[] array = random(100,0,1000);
+		 Comparable[] array = random(1000,0,1000);
 //		 Comparable[] array = {new Integer(7),new Integer(6),new Integer(4),new Integer(8),new Integer(9),new Integer(3),new Integer(1),new Integer(2),new Integer(10),new Integer(12),new Integer(5),new Integer(4)};
 		 
 		 OwnUtils.ArrayThings.printOneDimensionalArray(array);
@@ -12,11 +12,16 @@ public class Menue_uebung04_2 {
 		 QuickSort_Parallel sort = new QuickSort_Parallel();
 		 sort.sort(array);
 		 
-		 
-		
 		 sort.printStatus( array);
 	}
 
+	/**
+	 * erstellt zufälliges array
+	 * @param length
+	 * @param minimum
+	 * @param maximum
+	 * @return
+	 */
 	private static Comparable[] random(int length, int minimum, int maximum) {
 		Comparable[] array = new Comparable[length];
 
