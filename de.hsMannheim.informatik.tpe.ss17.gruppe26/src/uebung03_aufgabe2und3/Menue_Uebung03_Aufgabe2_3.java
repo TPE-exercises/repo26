@@ -6,15 +6,6 @@ import java.io.*;
 
 public class Menue_Uebung03_Aufgabe2_3 {
 
-
-		
-
-	
-
-
-		
-
-
 	/**
 	 * print failure, if the input was a wrong value
 	 */
@@ -48,7 +39,7 @@ public class Menue_Uebung03_Aufgabe2_3 {
 			System.out.println("(8) Einen Ordner verschlüsseln");
 			System.out.println("(9) Einen Ordner entschlüsseln");
 			System.out.println("(0) Programm beenden");
-			switch (readInt()) {
+			switch (OwnUtils) {
 			case (1): // create a new string of letters
 				readLine();
 				System.out.println("Bitte geben Sie eine neue Zeichenfolge ein: ");
