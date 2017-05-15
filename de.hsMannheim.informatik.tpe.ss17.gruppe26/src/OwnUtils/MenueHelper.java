@@ -24,10 +24,10 @@ public class MenueHelper {
 		do {
 			try {
 				value = readInt();
+				readLine();
 			} catch (Exception ex) {
 				System.out.println("Geben Sie eine Zahl ein!");
 			}
-			readLine();
 			if (value > max || value < min)
 				System.out.println("Geben Sie einen Wert zwischen " + min + " und " + max + " ein.");
 		} while (value > max || value < min);

@@ -3,6 +3,7 @@ package myUtil;
 public interface Stack {
 	Node getHead();
 	/**
+	 * eigentlich push
 	 * Stack new element in Stack
 	 * @param element
 	 * @param list
@@ -10,6 +11,7 @@ public interface Stack {
 	void enter(Object element) throws Exception;
 	
 	/**
+	 * eigentlich pop
 	 * Leave first Element (return and delete)
 	 * @param list
 	 * @return Stack
