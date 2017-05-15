@@ -76,30 +76,30 @@ public class CaesarReader extends FilterReader {
 		return alphabet[pos];
 	}
 
-//	public int read(char[] cbuf, int off, int len) throws IOException {
-//	 for (int i = 0; i < len; ++i) {
-//	 read(cbuf[off + i]);
-//	 }
-//	 return
-//	 }
-//
-//	public void read(String str, int off, int len) throws IOException {
-//		read(str.toCharArray(), off, len);
-//	}
-//
-//	public static void main(String[] args) {
-//		Reader f;
-//		int c;
-//		try {
-//			f = new CaesarReader(new FileReader("CaesarText.txt"), 1);
-//			while ((c = f.read()) != -1) {
-//				System.out.print((char) c);
-//			}
-//			f.close();
-//		} catch (IOException e) {
-//			System.out.println("Fehler beim Lesen der Datei");
-//		}
-//	}
+	public int read(char[] cbuf, int off, int len) throws IOException {
+		for (int i = off; i < len; ++i) {
+			cbuf[i] = (char) decrypt(cbuf[i]);
+		}
+		return super.read(cbuf, off, len);
+	}
+
+	public void read(String str, int off, int len) throws IOException {
+		read(str.toCharArray(), off, len);
+	}
+
+	public static void main(String[] args) {
+		Reader f;
+		int c;
+		try {
+			f = new CaesarReader(new FileReader("CaesarText.txt"), 1);
+			while ((c = f.read()) != -1) {
+				System.out.print((char) c);
+			}
+			f.close();
+		} catch (IOException e) {
+			System.out.println("Fehler beim Lesen der Datei");
+		}
+	}
 
 	/**
 	 * extra method to create the long alphabet as an array of chars

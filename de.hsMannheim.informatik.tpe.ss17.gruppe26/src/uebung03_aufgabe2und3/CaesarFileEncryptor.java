@@ -130,15 +130,4 @@ public class CaesarFileEncryptor implements IFileEncryptor {
 			}
 		}
 	}
-
-	// public static void main(String[] args) {
-	// System.out.print("Bitte geben Sie einen Ordner an: ");
-	// String pfadangabe = readLine();
-	// System.out.print("Um wie viel Zeichen möchten Sie verschieben?");
-	// IFileEncryptor neu = new CaesarFileEncryptor(readInt());
-	// File sourceFile = new File(pfadangabe);
-	// File encryptedFile = neu.encrypt(sourceFile);
-	// System.out.println("Der neue Ordner heißt nun: " + encryptedFile);
-	// System.out.println("[ENDE]");
-	// }
 }

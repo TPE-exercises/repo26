@@ -6,21 +6,12 @@ import java.io.*;
 
 public class Menue_Uebung03_Aufgabe2_3 {
 
-
-		
-
-	
-
-
-		
-
-
 	/**
 	 * print failure, if the input was a wrong value
 	 */
 	private static void printDefault() {
-		System.out.print("Fehlerhafte Eingabe!");
-		System.out.print("Bitte geben Sie eine gültige Zahl für den jeweiligen Menüpunkt ein! ");
+		System.out.println("Fehlerhafte Eingabe!");
+		System.out.println("Bitte geben Sie eine gültige Zahl für den jeweiligen Menüpunkt ein! ");
 	}
 
 	public static void main(String[] args) {
@@ -48,9 +39,9 @@ public class Menue_Uebung03_Aufgabe2_3 {
 			System.out.println("(8) Einen Ordner verschlüsseln");
 			System.out.println("(9) Einen Ordner entschlüsseln");
 			System.out.println("(0) Programm beenden");
-			switch (readInt()) {
+			switch (OwnUtils.MenueHelper.chooseOption(0, 9)) {
 			case (1): // create a new string of letters
-				readLine();
+//				readLine();
 				System.out.println("Bitte geben Sie eine neue Zeichenfolge ein: ");
 				letters = readLine();
 				break;

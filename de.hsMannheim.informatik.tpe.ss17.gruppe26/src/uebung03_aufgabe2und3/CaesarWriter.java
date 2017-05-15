@@ -82,21 +82,6 @@ public class CaesarWriter extends FilterWriter {
 		write(str.toCharArray(), off, len);
 	}
 
-	public static void main(String[] args) {
-		// PrintWriter f;
-		// try {
-		// f = new PrintWriter(new CaesarWriter(new
-		// FileWriter("CaesarText.txt"), 1));
-		// f.println("ÄÖÜäöü");
-		// // f.write('a'); // Test von write(int)
-		// // f.println();
-		// // f.println(); // Zeilenvorschub
-		// f.close();
-		// } catch (IOException e) {
-		// System.out.println("Fehler beim Erstellen der Datei");
-		// }
-	}
-
 	/**
 	 * extra method to create the long alphabet as an array of chars
 	 */
