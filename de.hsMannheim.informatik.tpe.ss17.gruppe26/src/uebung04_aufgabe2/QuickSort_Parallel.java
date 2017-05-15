@@ -1,12 +1,13 @@
 package uebung04_aufgabe2;
 
-public class QuickSort_Parallel implements SortAlgorithm {
+public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 
 	private int numberOfSwaps;
 	private int numberOfComparisons;
 	private int numberOfCreatedThreads;
-	private int numberOfRecursions;
+	protected int numberOfRecursions;
 	private long timeNeedet;
+	protected static Comparable[] array ;
 
 	QuickSort_Parallel() {
 		numberOfSwaps = 0;
@@ -23,7 +24,7 @@ public class QuickSort_Parallel implements SortAlgorithm {
 		this.numberOfSwaps++;
 	}
 
-	private void addRecursion() {
+	protected void addRecursion() {
 		this.numberOfRecursions++;
 	}
 
@@ -31,7 +32,7 @@ public class QuickSort_Parallel implements SortAlgorithm {
 		this.timeNeedet = time;
 	}
 
-	private void addThread() {
+	protected void addThread() {
 		this.numberOfCreatedThreads++;
 	}
 
@@ -61,16 +62,19 @@ public class QuickSort_Parallel implements SortAlgorithm {
 	/*
 	 * ################### end getter/setter/adder
 	 */
+	
 
 	@Override
 	public void sort(Comparable[] array) {
+		this.array=array;
 		final long timeStart = System.currentTimeMillis();
 
-		array = quicksort(array, 0, array.length - 1);
-
-		// to test, add some time
+		QuickSort_Thread thread1 = new QuickSort_Thread(this,array, 0, array.length-1);
+		thread1.start();
+		
+		//wait until Thread is ready
 		try {
-			Thread.sleep(120);
+			thread1.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -80,25 +84,6 @@ public class QuickSort_Parallel implements SortAlgorithm {
 
 	}
 
-	/**
-	 * 
-	 * @param array
-	 * @param bottom
-	 * @param top
-	 * @return
-	 */
-	private Comparable[] quicksort(Comparable[] array, int bottom, int top) {
-		addRecursion();
-		if (top > bottom) {
-			int index = zerlege(array, bottom, top);
-			// TODO give to diffrent threds
-			addThread();
-			quicksort(array, bottom, index - 1);
-			addThread();
-			quicksort(array, index + 1, top);
-		}
-		return array;
-	}
 
 	/**
 	 * 
@@ -122,7 +107,7 @@ public class QuickSort_Parallel implements SortAlgorithm {
 	 * @param top
 	 * @return
 	 */
-	private int zerlege(Comparable[] numberSequence, int bottom, int top) {
+	protected int zerlege(Comparable[] numberSequence, int bottom, int top) {
 		Comparable[] array = numberSequence;
 		int pivot = top;
 		int index = bottom;
@@ -130,8 +115,9 @@ public class QuickSort_Parallel implements SortAlgorithm {
 		for (int marker = bottom; marker <= top - 1; marker++) {
 			addCompare();
 			if (array[marker].compareTo(array[pivot]) == -1 || array[marker].compareTo(array[pivot]) == 0) {
-				if (index != marker)
+				if (index != marker) {
 					swapTwoNumbers(array, index, marker);
+				}
 				index++;
 			}
 		}
@@ -140,7 +126,7 @@ public class QuickSort_Parallel implements SortAlgorithm {
 	}
 
 	/**
-	 * <b></h3> Test</b>
+	 * 
 	 * @param array
 	 */
 	public void printStatus(Comparable[] array) {
