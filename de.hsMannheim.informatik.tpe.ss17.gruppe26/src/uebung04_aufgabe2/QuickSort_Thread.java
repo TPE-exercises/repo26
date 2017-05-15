@@ -44,7 +44,8 @@ public class QuickSort_Thread extends Thread {
 			thread2.start();
 			
 			try {
-				Thread.sleep(100);
+				thread1.join();
+				thread2.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
