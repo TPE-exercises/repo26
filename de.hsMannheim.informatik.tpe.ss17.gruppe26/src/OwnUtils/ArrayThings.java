@@ -30,9 +30,14 @@ public class ArrayThings {
 	public static void printOneDimensionalArray(Object[] array) {
 		if (array[0] != null) {
 			System.out.print(array[0].toString());
+		}else{
+			System.out.print("_");
 		}
 		for (int i = 1; i < array.length; i++) {
+			if(array[i]!=null)
 			System.out.print(" | " + array[i].toString());
+			else
+				System.out.print(" | _");
 		}
 		System.out.println();
 	}
