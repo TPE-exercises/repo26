@@ -8,6 +8,6 @@ public class Thread_Put extends Thread {
 
 	@Override
 	public void run() {
-		// TODO fill witch content
+		ringpufferAsArray.put(element);
 	}
 }

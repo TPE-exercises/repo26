@@ -8,7 +8,7 @@ public class Thread_Get extends Thread {
 
 	@Override
 	public void run() {
-		// TODO fill witch content
+		ringpufferAsArray.get();
 	}
 
 }

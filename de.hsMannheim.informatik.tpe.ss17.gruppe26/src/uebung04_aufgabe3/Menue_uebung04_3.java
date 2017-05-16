@@ -8,8 +8,8 @@ public class Menue_uebung04_3 {
 		 * Pre add things u need
 		 */
 		int length = 5;
-		OwnUtils.RingpufferAsArray array = new OwnUtils.RingpufferAsArray(length);
-		OwnUtils.ArrayThings.printOneDimensionalArray(array.getArray());
+		OwnUtils.RingpufferAsArray ringpufferAsArray = new OwnUtils.RingpufferAsArray(length);
+		OwnUtils.ArrayThings.printOneDimensionalArray(ringpufferAsArray.getArray());
 		OwnUtils.printLines.printSeperatorLine();
 		
 		Thread_Put t1 = new Thread_Put();
