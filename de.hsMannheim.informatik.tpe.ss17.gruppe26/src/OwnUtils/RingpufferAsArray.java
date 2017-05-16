@@ -6,17 +6,17 @@ public class RingpufferAsArray {
 	private int count;
 	private Comparable[] array;
 
-	RingpufferAsArray(int length, int first, int count) {
+	private RingpufferAsArray(int length, int first, int count) {
 		this.array = new Comparable[length];
 		this.first = first;
 		this.count = count;
 	}
 
-	RingpufferAsArray(int length) {
+	public RingpufferAsArray(int length) {
 		this(length, 0, 0);
 	}
 
-	RingpufferAsArray() {
+	public RingpufferAsArray() {
 		this(5, 0, 0);
 	}
 
