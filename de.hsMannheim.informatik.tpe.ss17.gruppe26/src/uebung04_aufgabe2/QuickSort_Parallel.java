@@ -7,7 +7,9 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	private int numberOfCreatedThreads;
 	protected int numberOfRecursions;
 	private long timeNeedet;
-	protected static Comparable[] array ;
+	
+	protected static int nowRunningThreads=0;
+	protected static Comparable[] array;
 
 	QuickSort_Parallel() {
 		numberOfSwaps = 0;
@@ -62,17 +64,16 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	/*
 	 * ################### end getter/setter/adder
 	 */
-	
 
 	@Override
 	public void sort(Comparable[] array) {
-		this.array=array;
+		this.array = array;
 		final long timeStart = System.currentTimeMillis();
 
-		QuickSort_Thread thread1 = new QuickSort_Thread(this,array, 0, array.length-1);
+		QuickSort_Thread thread1 = new QuickSort_Thread(this, array, 0, array.length - 1);
 		thread1.start();
-		
-		//wait until Thread is ready
+
+		// wait until Thread is ready
 		try {
 			thread1.join();
 		} catch (InterruptedException e) {
@@ -83,7 +84,6 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 		setTime(timeEnd - timeStart);
 
 	}
-
 
 	/**
 	 * 
@@ -113,7 +113,9 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 		int index = bottom;
 
 		for (int marker = bottom; marker <= top - 1; marker++) {
+
 			addCompare();
+
 			if (array[marker].compareTo(array[pivot]) == -1 || array[marker].compareTo(array[pivot]) == 0) {
 				if (index != marker) {
 					swapTwoNumbers(array, index, marker);
