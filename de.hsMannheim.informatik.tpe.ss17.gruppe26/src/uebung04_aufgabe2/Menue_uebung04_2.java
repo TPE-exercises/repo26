@@ -5,7 +5,7 @@ public class Menue_uebung04_2 {
 	protected static int cores=2;
 
 	public static void main(String[] args) {
-		Comparable[] array = random(100, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		Comparable[] array = random(100, 0, 100);
 		// Comparable[] array = {new Integer(7),new Integer(6),new
 		// Integer(4),new Integer(8),new Integer(9),new Integer(3),new
 		// Integer(1),new Integer(2),new Integer(10),new Integer(12),new

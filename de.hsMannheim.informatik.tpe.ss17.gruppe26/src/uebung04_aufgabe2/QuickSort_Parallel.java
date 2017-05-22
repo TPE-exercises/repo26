@@ -7,8 +7,8 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	private int numberOfCreatedThreads;
 	protected int numberOfRecursions;
 	private long timeNeedet;
-	
-	protected static int nowRunningThreads=0;
+
+	protected static int nowRunningThreads = 0;
 	protected static Comparable[] array;
 
 	QuickSort_Parallel() {
@@ -70,7 +70,7 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 		this.array = array;
 		final long timeStart = System.currentTimeMillis();
 
-		QuickSort_Thread thread1 = new QuickSort_Thread(this, array, 0, array.length - 1);
+		QuickSort_Thread thread1 = new QuickSort_Thread(this, 0, array.length - 1);
 		thread1.start();
 
 		// wait until Thread is ready
@@ -87,17 +87,18 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 
 	/**
 	 * 
-	 * @param numberSequence
+	 * @param array
 	 * @param idx1
 	 * @param idx2
 	 * @return
 	 */
-	private Comparable[] swapTwoNumbers(Comparable[] numberSequence, int idx1, int idx2) {
+	private void swapTwoNumbers(int idx1, int idx2) {
 		addSwap();
-		Comparable tmp = numberSequence[idx1];
-		numberSequence[idx1] = numberSequence[idx2];
-		numberSequence[idx2] = tmp;
-		return numberSequence;
+
+		Comparable tmp = array[idx1];
+		array[idx1] = array[idx2];
+		array[idx2] = tmp;
+
 	}
 
 	/**
@@ -107,8 +108,7 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	 * @param top
 	 * @return
 	 */
-	protected int zerlege(Comparable[] numberSequence, int bottom, int top) {
-		Comparable[] array = numberSequence;
+	protected int zerlege(int bottom, int top) {
 		int pivot = top;
 		int index = bottom;
 
@@ -118,12 +118,13 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 
 			if (array[marker].compareTo(array[pivot]) == -1 || array[marker].compareTo(array[pivot]) == 0) {
 				if (index != marker) {
-					swapTwoNumbers(array, index, marker);
+					swapTwoNumbers(index, marker);
 				}
 				index++;
 			}
+			swapTwoNumbers(index, pivot);
+
 		}
-		swapTwoNumbers(array, index, pivot);
 		return index;
 	}
 

@@ -8,7 +8,7 @@ public class Thread_Get extends Thread {
 
 	@Override
 	public void run() {
-		ringpufferAsArray.get();
+//		ringpufferAsArray.get();
 	}
 
 }

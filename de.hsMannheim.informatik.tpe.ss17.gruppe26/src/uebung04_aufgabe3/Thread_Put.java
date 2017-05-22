@@ -8,6 +8,6 @@ public class Thread_Put extends Thread {
 
 	@Override
 	public void run() {
-		ringpufferAsArray.put(element);
+//		ringpufferAsArray.put(element);
 	}
 }
