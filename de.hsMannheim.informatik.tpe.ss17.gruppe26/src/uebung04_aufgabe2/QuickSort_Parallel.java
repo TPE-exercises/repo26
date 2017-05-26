@@ -1,23 +1,42 @@
+/**
+ * @author lange
+ * Studienleistungsaufgabe 4/2 aus dem Sommersemester 2017 TPE mit Herr Schramm
+ */
+
 package uebung04_aufgabe2;
 
 public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 
+	/**
+	 * Count number of swaps needet to sort
+	 */
 	private int numberOfSwaps;
+
+	/**
+	 * Count number of comparisons needet to sort
+	 */
 	private int numberOfComparisons;
+
+	/**
+	 * Count number of created Threads during the whole sort
+	 */
 	private int numberOfCreatedThreads;
-	protected int numberOfRecursions;
+
+	/**
+	 * logs the time needet so sort the array
+	 */
 	private long timeNeedet;
 
-	protected static int nowRunningThreads = 0;
-
+	/**
+	 * array to sort
+	 */
 	protected static Comparable[] array;
 
 	QuickSort_Parallel() {
-		numberOfSwaps = 0;
-		numberOfComparisons = 0;
-		numberOfCreatedThreads = 0;
-		numberOfRecursions = 0;
-		timeNeedet = 0;
+		this.numberOfSwaps = 0;
+		this.numberOfComparisons = 0;
+		this.numberOfCreatedThreads = 0;
+		this.timeNeedet = 0;
 	}
 
 	/*
@@ -25,10 +44,6 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	 */
 	private void addSwap() {
 		this.numberOfSwaps++;
-	}
-
-	protected void addRecursion() {
-		this.numberOfRecursions++;
 	}
 
 	private void setTime(long time) {
@@ -43,23 +58,19 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 		this.numberOfComparisons++;
 	}
 
-	public int getSwaps() {
+	private int getSwaps() {
 		return this.numberOfSwaps;
 	}
 
-	public int getCompares() {
+	private int getCompares() {
 		return this.numberOfComparisons;
 	}
 
-	public int getThreads() {
+	private int getThreads() {
 		return this.numberOfCreatedThreads;
 	}
 
-	public int getRecusions() {
-		return this.numberOfRecursions;
-	}
-
-	public long getTime() {
+	private long getTime() {
 		return this.timeNeedet;
 	}
 	/*
@@ -87,29 +98,29 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	}
 
 	/**
+	 * swap two objects in an array
 	 * 
 	 * @param array
 	 * @param idx1
 	 * @param idx2
 	 * @return
 	 */
-	synchronized private void swapTwoNumbers(int idx1, int idx2) {
+	private void swapTwoNumbers(int idx1, int idx2) {
 		addSwap();
-
 		Comparable tmp = array[idx1];
 		array[idx1] = array[idx2];
 		array[idx2] = tmp;
-
 	}
 
 	/**
+	 * copied from Semester 1
 	 * 
 	 * @param numberSequence
 	 * @param bottom
 	 * @param top
 	 * @return
 	 */
-	synchronized protected int zerlege(int bottom, int top) {
+	protected int zerlege(int bottom, int top) {
 		int pivot = top;
 		int index = bottom;
 
@@ -127,15 +138,21 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	}
 
 	/**
+	 * Print all informatins
+	 * <li>Number of Swaps
+	 * <li>Number of Comparisons
+	 * <li>Number of Threads
+	 * <li>Time
+	 * <li>array
 	 * 
 	 * @param array
 	 */
-	public void printStatus(Comparable[] array) {
+	protected void printStatus(Comparable[] array) {
 		OwnUtils.printLines.printSeperatorDots();
-		 System.out.println("numberOfSwaps: " + this.getSwaps());
-		 System.out.println("numberOfComparisons: " + this.getCompares());
-		 System.out.println("numberOfCreatedThreads: " + this.getThreads());
-		 System.out.println("timeNeedet: " + this.getTime() + " millisec");
+		System.out.println("numberOfSwaps: " + this.getSwaps());
+		System.out.println("numberOfComparisons: " + this.getCompares());
+		System.out.println("numberOfCreatedThreads: " + this.getThreads());
+		System.out.println("timeNeedet: " + this.getTime() + " millisec");
 		OwnUtils.ArrayThings.printOneDimensionalArray(array);
 		OwnUtils.printLines.printSeperatorDots();
 	}
