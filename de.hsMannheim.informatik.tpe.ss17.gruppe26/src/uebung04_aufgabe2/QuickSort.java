@@ -132,7 +132,6 @@ public class QuickSort implements SortAlgorithm {
 		OwnUtils.printLines.printSeperatorDots();
 		System.out.println("numberOfSwaps: " + this.getSwaps());
 		System.out.println("numberOfComparisons: " + this.getCompares());
-		System.out.println("numberOfCreatedThreads: " + this.getThreads());
 		System.out.println("numberOfRecursions: " + this.getRecusions());
 		System.out.println("timeNeedet: " + this.getTime() + " millisec");
 		OwnUtils.ArrayThings.printOneDimensionalArray(array);

@@ -15,18 +15,25 @@ public class QuickSort_Thread extends Thread {
 
 	@Override
 	public void run() {
+		
 		QuickSort_Parallel.nowRunningThreads++;
 
 		if (top > bottom) {
-
 			int index;
 			index = sort.zerlege(bottom, top);
 
 			QuickSort_Thread thread = new QuickSort_Thread(sort, bottom, index - 1);
 			thread.start();
-
+.
 			this.bottom = index + 1;
 			this.run();
+			
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
 
 		}
 		QuickSort_Parallel.nowRunningThreads--;

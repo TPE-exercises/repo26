@@ -9,6 +9,7 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	private long timeNeedet;
 
 	protected static int nowRunningThreads = 0;
+
 	protected static Comparable[] array;
 
 	QuickSort_Parallel() {
@@ -92,7 +93,7 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	 * @param idx2
 	 * @return
 	 */
-	private void swapTwoNumbers(int idx1, int idx2) {
+	synchronized private void swapTwoNumbers(int idx1, int idx2) {
 		addSwap();
 
 		Comparable tmp = array[idx1];
@@ -108,23 +109,20 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	 * @param top
 	 * @return
 	 */
-	protected int zerlege(int bottom, int top) {
+	synchronized protected int zerlege(int bottom, int top) {
 		int pivot = top;
 		int index = bottom;
 
 		for (int marker = bottom; marker <= top - 1; marker++) {
-
-			addCompare();
-
+			this.addCompare();
 			if (array[marker].compareTo(array[pivot]) == -1 || array[marker].compareTo(array[pivot]) == 0) {
 				if (index != marker) {
 					swapTwoNumbers(index, marker);
 				}
 				index++;
 			}
-			swapTwoNumbers(index, pivot);
-
 		}
+		swapTwoNumbers(index, pivot);
 		return index;
 	}
 
@@ -134,11 +132,10 @@ public class QuickSort_Parallel extends Thread implements SortAlgorithm {
 	 */
 	public void printStatus(Comparable[] array) {
 		OwnUtils.printLines.printSeperatorDots();
-		System.out.println("numberOfSwaps: " + this.getSwaps());
-		System.out.println("numberOfComparisons: " + this.getCompares());
-		System.out.println("numberOfCreatedThreads: " + this.getThreads());
-		System.out.println("numberOfRecursions: " + this.getRecusions());
-		System.out.println("timeNeedet: " + this.getTime() + " millisec");
+		 System.out.println("numberOfSwaps: " + this.getSwaps());
+		 System.out.println("numberOfComparisons: " + this.getCompares());
+		 System.out.println("numberOfCreatedThreads: " + this.getThreads());
+		 System.out.println("timeNeedet: " + this.getTime() + " millisec");
 		OwnUtils.ArrayThings.printOneDimensionalArray(array);
 		OwnUtils.printLines.printSeperatorDots();
 	}
