@@ -69,7 +69,7 @@ public class ArrayThings {
 	}
 	
 	/**
-	 * compares two OneDimensionalArrays 
+	 * compares two OneDimensionalArrays and print index of first not matching Objects
 	 * @param array1
 	 * @param array2
 	 * @return <li>true if equals <li>false if not
