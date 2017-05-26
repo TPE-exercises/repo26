@@ -24,7 +24,6 @@ public class QuickSort_Thread extends Thread {
 
 			QuickSort_Thread thread = new QuickSort_Thread(sort, bottom, index - 1);
 			thread.start();
-.
 			this.bottom = index + 1;
 			this.run();
 			
