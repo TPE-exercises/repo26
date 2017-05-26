@@ -1,8 +1,6 @@
 package uebung04_aufgabe2;
 
 public class Menue_uebung04_2 {
-	
-	protected static int cores=2;
 
 	public static void main(String[] args) {
 		Comparable[] array = random(500, 0, 100);
