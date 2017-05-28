@@ -2,28 +2,34 @@ package uebung04_aufgabe3;
 
 
 public class Menue_uebung04_3 {
-	public static void main(String[ ]args){
-		
-		/*
-		 * Pre add things u need
-		 */
-		int length = 5;
-		OwnUtils.RingpufferAsArray ringpufferAsArray = new OwnUtils.RingpufferAsArray(length);
-		OwnUtils.ArrayThings.printOneDimensionalArray(ringpufferAsArray.getArray());
-		OwnUtils.printLines.printSeperatorLine();
-		
-		Thread_Put t1 = new Thread_Put();
-		Thread_Get t2 = new Thread_Get();
-		
-		t1.start();
-		t2.start();
-		/*
-		 * Pre add end
-		 */
-		
-		//TODO fill witch content
-		
-		
+	
+	OwnUtils.RingpufferAsArray ringpufferAsArray;
+	
+	Menue_uebung04_3 (int length){
+	this.ringpufferAsArray = new OwnUtils.RingpufferAsArray(length);
 	}
 	
+	public static void main(String[ ]args){
+		
+		OwnUtils.printLines.printSeperatorLine();
+		
+		Menue_uebung04_3 neuesObjekt = new Menue_uebung04_3(5);
+		
+		Thread_Timer time = new Thread_Timer(OwnUtils.Reader.readInt());
+		time.start();
+		
+		
+		Thread_Put p1 = new Thread_Put(1000, neuesObjekt);
+		Thread_Put p2 = new Thread_Put(1000, neuesObjekt);
+		Thread_Put p3 = new Thread_Put(1000, neuesObjekt);
+		Thread_Get g1 = new Thread_Get(500, neuesObjekt);
+		Thread_Get g2 = new Thread_Get(500, neuesObjekt);
+		
+		try {
+			time.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 }

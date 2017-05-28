@@ -20,11 +20,16 @@ public class RingpufferAsArray {
 		this(5, 0, 0);
 	}
 
+	public int getLength(){
+		return array.length;
+	}
+	
 	public int getFirst() {
 		return this.first;
 	}
 
 	public int getCount() {
+
 		return this.count;
 	}
 

@@ -1,0 +1,54 @@
+Übungsblatt 4 Aufgabe 1: Threads - Theorie
+Beschreiben und benennen Sie die Probleme,
+die durch die Anwesenheit von mehreren Threads entstehen können.
+
+Problem, ineffizient (Perfomance Hazards):
+Ein Vorgang, der durch die Ausführung mehrerer Threads eigentlich schneller laufen soll,
+kann durch den Einsatz von Threads viel länger dauern, als durch die sequenzielle Abarbeitung der Aufgabe.
+Das Problem liegt darin, dass die Verwaltung der Threads mehr Zeit kostet,
+als die eigentliche Ausführung, der Aufgaben durch die Threads.
+Beispiel: Siehe Darstellung in Aufgabe 2 dieses Arbeitsblattes
+
+Problem, gemeinsamer Zugriff auf kritische Bereiche (rare condition):
+Mehrere Threads könnten versuchen gleichzeitgig die selbe Variable oder das selbe Objekt ändern zu wollen.
+Durch die Aufteilung der Mikrobefehle der einzelnen Threads,
+kann es dazu kommen, dass Variablen fehlerhaft geändert werden.
+Beispiel: Konto Zubuchung/Abbuchung aus Folie 24 (Kapitel 6 Multithreading).
+
+Problem, Sperrung eines kritischen Bereiches (Deadlock):
+Sperrt ein Thread einen kritischen Bereich (durch Monitor), damit nur dieser ihn bearbeiten kann,
+kann es dazu kommen, dass dieser aushungert.
+Das passiert dadurch, dass der Thread auf die Bearbeitung des kritischen Bereiches wartet,
+solange der Thread diesen aber sperrt, kann er nicht bearbeitet werden.
+
+Problem, endloser Wechsel zwischen Threads (Livelock):
+Threads können voneinander abhängig sein, bzw. aufeinander warten.
+In schlechten Konstellationen, warten Threads gegenseitig darauf, dass etwas beim anderen passiert (permanenter Wechsel zwischen Zuständen).
+Dadurch verfängt sich das Programm in einer Endlosschleife, ohne, dass etwas passiert.
+
+Problem, Aushungern eines Threads (Starvation):
+Durch die Systemeigene Verwaltung der Threads (Scheduling) kann es dazu kommen,
+dass ein Thread permanent auf warten gesetzt wird, weil andere Threads immer bevorzugt rangenommen werden.
+Bei einem permanent laufendem System, wie zum Beispiel einem Server,
+kann es sein, dass Aufgaben des Threads nie bearbeitet werden.
+
+Problem, Terminierung (Liveness Hazards):
+Durch das Aushungern oder Sperrung von kritischen Bereichen,
+kann es dazu kommen, dass Programme nicht terminieren (einfrieren),
+was nicht gewollt ist.
+Beispiele: Deadlock, Livelock, Starvation (Aushungern)
+
+Problem, Reproduizieren von Problemen:
+Da die Organisation der Parallelität nicht immer die selbe ist,
+weil auf dem System nie immer die exakt gleichen Daten und Programme zur gleichen Zeit ausgeführt werden,
+können Fehlverhalten durch Threads nie zu 100% getestet bzw. reproduziert werden.
+
+Problem, Denken des Menschen:
+Der Mensch kann nur schwer in parallele Abläufe denken. Daher kann er ein Threadprogramm nie perfekt planen geschweige denn programmieren.
+
+Sonstiges:
+
+Eine Klasse, die keine der genannten Probleme aufweist, ist "thread safe".
+Viele Klassen (Klassenbibliothek) sind nicht thread safe und müssen explizit geschützt werden.
+Unveränderliche Objekte sind immer thread safe (z.B. String).
+...
