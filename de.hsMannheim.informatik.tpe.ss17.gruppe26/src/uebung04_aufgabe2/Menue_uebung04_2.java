@@ -3,7 +3,7 @@ package uebung04_aufgabe2;
 public class Menue_uebung04_2 {
 
 	public static void main(String[] args) {
-		Comparable[] array = random(500, 0, 100);
+		Comparable[] array = OwnUtils.ArrayThings.random(500, 0, 100);
 		Comparable[] array2 = OwnUtils.ArrayThings.cloneOneDimensionalArray(array);
 
 		OwnUtils.ArrayThings.printOneDimensionalArray(array);
@@ -20,25 +20,6 @@ public class Menue_uebung04_2 {
 
 		//check if arrays are equlas 
 		System.out.println("Arrays gleich: " + OwnUtils.ArrayThings.isOneDimensionalArrayEquals(array, array2));
-	}
-
-	/**
-	 * erstellt zufälliges array
-	 * 
-	 * @param length
-	 * @param minimum
-	 * @param maximum
-	 * @return
-	 */
-	private static Comparable[] random(int length, int minimum, int maximum) {
-		Comparable[] array = new Comparable[length];
-
-		for (int i = 0; i < array.length; i++) {
-			int randomNum = minimum + (int) (Math.random() * maximum);
-			array[i] = new Integer(randomNum);
-		}
-
-		return array;
 	}
 
 }
