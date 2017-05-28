@@ -6,6 +6,9 @@ public class Thread_Timer extends Thread{
 		this.runTime=runTime*60000;
 	}
 	
+	/**
+	 * this thread is the timegiver to let other threads work
+	 */
 	public void run(){
 		final long timeStart = System.currentTimeMillis();
 		

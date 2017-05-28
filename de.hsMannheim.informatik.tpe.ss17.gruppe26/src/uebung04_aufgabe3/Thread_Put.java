@@ -2,10 +2,14 @@ package uebung04_aufgabe3;
 
 public class Thread_Put extends Thread {
 
-	
 	int sleeptime;
 	Menue_Uebung04_Aufgabe3 neuesObjekt;
 	
+	/**
+	 * constructer sets this thread as daemon and starts it
+	 * @param sleeptime
+	 * @param neuesObjekt
+	 */
 	Thread_Put(int sleeptime, Menue_Uebung04_Aufgabe3 neuesObjekt) {
 		this.sleeptime = sleeptime;
 		this.neuesObjekt = neuesObjekt;
@@ -13,14 +17,18 @@ public class Thread_Put extends Thread {
 		start();
 	}
 
+	/**
+	 * thread puts a random number into the ringbuffer.
+	 * if ringbuffer is full, thread will sleep (sleeptime).
+	 */
 	@Override
 	public void run() {
 		System.out.println("Erzeuger " + this + " gestartet!");
 		
-		//Soll immer laufen (bis Main beendet)
+		//run permanently till the timer thread stops that deamon
 		while (true) {
 			
-			//Wartezeit (Zeit die zum verbrauchen benötigt wird)
+			//waitingtime (time that needed to create an item of the ringbuffer)
 			try {
 				Thread.sleep(sleeptime);
 			} catch (InterruptedException e) {

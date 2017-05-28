@@ -5,6 +5,11 @@ public class Thread_Get extends Thread {
 	int sleeptime;
 	Menue_Uebung04_Aufgabe3 neuesObjekt;
 
+	/**
+	 * constructer sets this thread as daemon and starts it
+	 * @param sleeptime
+	 * @param neuesObjekt
+	 */
 	Thread_Get(int sleeptime, Menue_Uebung04_Aufgabe3 neuesObjekt) {
 		this.sleeptime = sleeptime;
 		this.neuesObjekt = neuesObjekt;
@@ -12,11 +17,15 @@ public class Thread_Get extends Thread {
 		start();
 	}
 
+	/**
+	 * thread gets a number of the ringbuffer.
+	 * if ringbuffer is empty, thread sleep (sleeptime)
+	 */
 	@Override
 	public void run() {
 		System.out.println("Verbraucher " + this + " gestartet! ");
 		
-		//Soll immer laufen (bis Main beendet)
+		//run permanently till the timer thread stops that deamon
 		while (true) {
 			
 			if (neuesObjekt.ringpuffer.getCount() <= 0) {
@@ -30,7 +39,7 @@ public class Thread_Get extends Thread {
 				}
 			}
 			
-			//Wartezeit (Zeit die zum verbrauchen benötigt wird)
+			//waitingtime (time that needed to consume an item of the ringbuffer)
 			try {
 				Thread.sleep(sleeptime);
 			} catch (InterruptedException e) {

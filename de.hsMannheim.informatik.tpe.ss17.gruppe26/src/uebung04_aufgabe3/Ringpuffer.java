@@ -6,37 +6,70 @@ public class Ringpuffer {
 	private int count;
 	private Comparable[] array;
 
+	/**
+	 * constructer of the ringbuffer
+	 * @param length
+	 * @param first
+	 * @param count
+	 */
 	private Ringpuffer(int length, int first, int count) {
 		this.array = new Comparable[length];
 		this.first = first;
 		this.count = count;
 	}
 
+	/**
+	 * constructer of ringbuffer with length parameter
+	 * @param length
+	 */
 	public Ringpuffer(int length) {
 		this(length, 0, 0);
 	}
 
+	/**
+	 * contructer of ringbuffer without parameters
+	 */
 	public Ringpuffer() {
 		this(5, 0, 0);
 	}
 
+	/**
+	 * 
+	 * @return the length of the ringbuffer
+	 */
 	public int getLength() {
 		return array.length;
 	}
 
+	/**
+	 * 
+	 * @return 
+	 */
 	public int getFirst() {
 		return this.first;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getCount() {
-
 		return this.count;
 	}
 
+	/**
+	 * 
+	 * @return the ringbuffer array
+	 */
 	public Comparable[] getArray() {
 		return this.array;
 	}
 
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public Comparable getIndex(int index) {
 		if (index > this.count)
 			return null;
