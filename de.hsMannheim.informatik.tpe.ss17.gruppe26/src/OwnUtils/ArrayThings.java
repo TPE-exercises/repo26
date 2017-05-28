@@ -87,4 +87,23 @@ public class ArrayThings {
 
 	}
 	
+	/**
+	 * erstellt zufälliges array
+	 * 
+	 * @param length
+	 * @param minimum
+	 * @param maximum
+	 * @return
+	 */
+	public static Comparable[] random(int length, int minimum, int maximum) {
+		Comparable[] array = new Comparable[length];
+
+		for (int i = 0; i < array.length; i++) {
+			int randomNum = minimum + (int) (Math.random() * maximum);
+			array[i] = new Integer(randomNum);
+		}
+
+		return array;
+	}
+	
 }
