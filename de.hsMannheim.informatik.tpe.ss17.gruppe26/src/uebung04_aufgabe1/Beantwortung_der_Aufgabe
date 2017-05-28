@@ -13,11 +13,11 @@ Problem, gemeinsamer Zugriff auf kritische Bereiche (rare condition):
 Mehrere Threads könnten versuchen gleichzeitgig die selbe Variable oder das selbe Objekt ändern zu wollen.
 Durch die Aufteilung der Mikrobefehle der einzelnen Threads,
 kann es dazu kommen, dass Variablen fehlerhaft geändert werden.
-Beispiel: Konto Zubuchung/Abbuchung aus Folie 24 (Kapitel 6 Multithreading).
+Beispiel: Siehe Beispiel rare_condition
 
 Problem, Sperrung eines kritischen Bereiches (Deadlock):
 Sperrt ein Thread einen kritischen Bereich (durch Monitor), damit nur dieser ihn bearbeiten kann,
-kann es dazu kommen, dass dieser aushungert.
+kann es dazu kommen, dass das Programm nicht mehr weiter arbeitet.
 Das passiert dadurch, dass der Thread auf die Bearbeitung des kritischen Bereiches wartet,
 solange der Thread diesen aber sperrt, kann er nicht bearbeitet werden.
 
@@ -25,6 +25,7 @@ Problem, endloser Wechsel zwischen Threads (Livelock):
 Threads können voneinander abhängig sein, bzw. aufeinander warten.
 In schlechten Konstellationen, warten Threads gegenseitig darauf, dass etwas beim anderen passiert (permanenter Wechsel zwischen Zuständen).
 Dadurch verfängt sich das Programm in einer Endlosschleife, ohne, dass etwas passiert.
+Beispiel: Zwei Personen bitten sich gegenseitig darum, dass der andere zuerst durch die Tür geht.
 
 Problem, Aushungern eines Threads (Starvation):
 Durch die Systemeigene Verwaltung der Threads (Scheduling) kann es dazu kommen,

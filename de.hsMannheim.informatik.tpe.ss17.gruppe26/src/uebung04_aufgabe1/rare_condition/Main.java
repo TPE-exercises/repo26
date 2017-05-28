@@ -1,4 +1,4 @@
-package uebung04_aufgabe1.kritischer_Bereich;
+package uebung04_aufgabe1.rare_condition;
 
 public class Main {
 	
