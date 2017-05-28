@@ -1,6 +1,6 @@
 package uebung04_aufgabe1.Livelock;
 
-public class Main {
+public class Main_Uebung04_Aufgabe1_Livelock {
 
 	public static void main(String[] args) {
 		System.out.println("Erstelle Threads...");

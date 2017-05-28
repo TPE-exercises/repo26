@@ -1,6 +1,6 @@
 package uebung04_aufgabe1.Reproduzierung;
 
-public class Main {
+public class Menue_Uebung04_Aufgabe1_Reproduzierung {
 
 	public static void main(String[] args) {
 		System.out.println("Führen Sie das Programm mehrfach aus und beobachten Sie die verschiedenen Ergebnisse!");

@@ -1,6 +1,6 @@
 package uebung04_aufgabe1.rare_condition;
 
-public class Main {
+public class Menue_Uebung04_Aufgabe1_rare_condition {
 	
 	public static int balance=1000;
 

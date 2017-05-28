@@ -4,9 +4,9 @@ public class Thread_Put extends Thread {
 
 	
 	int sleeptime;
-	Menue_uebung04_3 neuesObjekt;
+	Menue_Uebung04_Aufgabe3 neuesObjekt;
 	
-	Thread_Put(int sleeptime, Menue_uebung04_3 neuesObjekt) {
+	Thread_Put(int sleeptime, Menue_Uebung04_Aufgabe3 neuesObjekt) {
 		this.sleeptime = sleeptime;
 		this.neuesObjekt = neuesObjekt;
 		setDaemon(true);
@@ -15,7 +15,7 @@ public class Thread_Put extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("Starte Erzeuger...:" + this);
+		System.out.println("Erzeuger " + this + " gestartet!");
 		
 		//Soll immer laufen (bis Main beendet)
 		while (true) {
@@ -28,9 +28,9 @@ public class Thread_Put extends Thread {
 				e.printStackTrace();
 			}
 					Integer element = new Integer((int) (Math.random()*100));
-					System.out.println("Versuche Element " + element + " zu putten.");
+//					System.out.println("Versuche Element " + element + " zu putten.");
 					if (neuesObjekt.ringpuffer.getCount() >= neuesObjekt.ringpuffer.getLength()) {
-						System.out.println("Array leider voll, warte...");
+						System.out.println("[ERZEUGER " + this.getName() + "]: Array leider voll, warte...");
 					} else {
 						try {
 							neuesObjekt.ringpuffer.put(element);
@@ -38,7 +38,7 @@ public class Thread_Put extends Thread {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						System.out.println("Element "+ element+" eingefügt.");
+						System.out.println("[ERZEUGER " + this.getName() + "]: Element "+ element+" eingefügt.");
 					}
 		}
 	}

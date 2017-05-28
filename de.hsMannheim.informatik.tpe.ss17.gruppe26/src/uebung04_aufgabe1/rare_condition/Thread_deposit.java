@@ -9,9 +9,9 @@ public class Thread_deposit extends Thread {
 	}
 
 	public void run() {
-		int oldBalance = Main.balance;
+		int oldBalance = Menue_Uebung04_Aufgabe1_rare_condition.balance;
 		oldBalance = oldBalance + this.value;
-		Main.balance = oldBalance;
+		Menue_Uebung04_Aufgabe1_rare_condition.balance = oldBalance;
 	}
 
 

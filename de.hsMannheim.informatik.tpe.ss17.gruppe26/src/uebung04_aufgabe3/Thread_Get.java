@@ -3,9 +3,9 @@ package uebung04_aufgabe3;
 public class Thread_Get extends Thread {
 
 	int sleeptime;
-	Menue_uebung04_3 neuesObjekt;
+	Menue_Uebung04_Aufgabe3 neuesObjekt;
 
-	Thread_Get(int sleeptime, Menue_uebung04_3 neuesObjekt) {
+	Thread_Get(int sleeptime, Menue_Uebung04_Aufgabe3 neuesObjekt) {
 		this.sleeptime = sleeptime;
 		this.neuesObjekt = neuesObjekt;
 		setDaemon(true);
@@ -14,16 +14,16 @@ public class Thread_Get extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println("Starte Verbraucher...:" + this);
+		System.out.println("Verbraucher " + this + " gestartet! ");
 		
 		//Soll immer laufen (bis Main beendet)
 		while (true) {
-			System.out.println("Versuche Element zu entfernen.");
+			
 			if (neuesObjekt.ringpuffer.getCount() <= 0) {
-				System.out.println("Array leider leer, warte...");
+				System.out.println("[VERBRAUCHER " + this.getName() + "]: Array leider leer, warte...");
 			} else {
 				try {
-					System.out.println("Element: "+neuesObjekt.ringpuffer.get() + " entfernt.");
+					System.out.println("[VERBRAUCHER " + this.getName() + "]: Element "+neuesObjekt.ringpuffer.get() + " wurde entfernt.");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

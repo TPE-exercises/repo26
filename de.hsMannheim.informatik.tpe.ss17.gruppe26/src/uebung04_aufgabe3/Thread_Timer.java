@@ -10,7 +10,7 @@ public class Thread_Timer extends Thread{
 		final long timeStart = System.currentTimeMillis();
 		
 		while(System.currentTimeMillis()-timeStart < this.runTime){
-			System.out.println((System.currentTimeMillis()-timeStart)/1000 + "sec");
+			System.out.println("[TIMER]: " + (System.currentTimeMillis()-timeStart)/1000 + " Sek.");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -18,5 +18,8 @@ public class Thread_Timer extends Thread{
 				e.printStackTrace();
 			}
 		}
+		System.out.println("");
+		System.out.println("[TIMER]: Zeit abgelaufen!");
+		System.out.println("[TIMER]: Programm terminiert!");
 	}
 }
