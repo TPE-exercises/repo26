@@ -19,8 +19,6 @@ public class Thread_Put extends Thread {
 		
 		//Soll immer laufen (bis Main beendet)
 		while (true) {
-			System.out.println("Starte neue Runde:" + this);
-//			boolean putted = false;
 			
 			//Wartezeit (Zeit die zum verbrauchen benötigt wird)
 			try {
@@ -29,7 +27,6 @@ public class Thread_Put extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//				do {
 					Integer element = new Integer((int) (Math.random()*100));
 					System.out.println("Versuche Element " + element + " zu putten.");
 					if (neuesObjekt.ringpuffer.getCount() >= neuesObjekt.ringpuffer.getLength()) {
@@ -43,8 +40,6 @@ public class Thread_Put extends Thread {
 						}
 						System.out.println("Element "+ element+" eingefügt.");
 					}
-//				} while (!putted);
 		}
-		
 	}
 }

@@ -18,9 +18,6 @@ public class Thread_Get extends Thread {
 		
 		//Soll immer laufen (bis Main beendet)
 		while (true) {
-			System.out.println("Starte neue Runde:" + this);
-//			boolean geted = false;
-			
 			System.out.println("Versuche Element zu entfernen.");
 			if (neuesObjekt.ringpuffer.getCount() <= 0) {
 				System.out.println("Array leider leer, warte...");
@@ -40,8 +37,6 @@ public class Thread_Get extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//				do {
-//				} while (!geted);
 		}
 	}
 }

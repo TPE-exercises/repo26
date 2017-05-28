@@ -17,8 +17,6 @@ public class Thread_Timer extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		notifyAll();
 	}
 }
