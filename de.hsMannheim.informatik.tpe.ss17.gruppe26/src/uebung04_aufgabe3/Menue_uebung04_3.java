@@ -1,12 +1,11 @@
 package uebung04_aufgabe3;
 
-
 public class Menue_uebung04_3 {
 	
-	OwnUtils.RingpufferAsArray ringpufferAsArray;
+	Ringpuffer ringpuffer;
 	
 	Menue_uebung04_3 (int length){
-	this.ringpufferAsArray = new OwnUtils.RingpufferAsArray(length);
+	this.ringpuffer = new Ringpuffer(length);
 	}
 	
 	public static void main(String[ ]args){

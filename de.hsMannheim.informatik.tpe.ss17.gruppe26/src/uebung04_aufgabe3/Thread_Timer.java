@@ -19,8 +19,6 @@ public class Thread_Timer extends Thread{
 			}
 			
 		}
-		
-		
+		notifyAll();
 	}
-	
 }

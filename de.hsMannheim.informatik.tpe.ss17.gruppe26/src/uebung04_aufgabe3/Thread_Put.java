@@ -2,6 +2,7 @@ package uebung04_aufgabe3;
 
 public class Thread_Put extends Thread {
 
+	
 	int sleeptime;
 	Menue_uebung04_3 neuesObjekt;
 	
@@ -15,40 +16,35 @@ public class Thread_Put extends Thread {
 	@Override
 	public void run() {
 		System.out.println("Starte Erzeuger...:" + this);
+		
+		//Soll immer laufen (bis Main beendet)
 		while (true) {
 			System.out.println("Starte neue Runde:" + this);
-			boolean putted = false;
+//			boolean putted = false;
+			
+			//Wartezeit (Zeit die zum verbrauchen benötigt wird)
 			try {
 				Thread.sleep(sleeptime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			synchronized (neuesObjekt) {
-				do {
+//				do {
 					Integer element = new Integer((int) (Math.random()*100));
 					System.out.println("Versuche Element " + element + " zu putten.");
-					if (neuesObjekt.ringpufferAsArray.getCount() >= neuesObjekt.ringpufferAsArray.getLength()) {
+					if (neuesObjekt.ringpuffer.getCount() >= neuesObjekt.ringpuffer.getLength()) {
 						System.out.println("Array leider voll, warte...");
-						try {
-							wait();
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 					} else {
 						try {
-							
-							neuesObjekt.ringpufferAsArray.put(element);
+							neuesObjekt.ringpuffer.put(element);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						System.out.println("Element "+ element+" eingefügt.");
 					}
-				} while (!putted);
-			}
-
+//				} while (!putted);
 		}
+		
 	}
 }

@@ -19,7 +19,19 @@ public class Thread_Get extends Thread {
 		//Soll immer laufen (bis Main beendet)
 		while (true) {
 			System.out.println("Starte neue Runde:" + this);
-			boolean geted = false;
+//			boolean geted = false;
+			
+			System.out.println("Versuche Element zu entfernen.");
+			if (neuesObjekt.ringpuffer.getCount() <= 0) {
+				System.out.println("Array leider leer, warte...");
+			} else {
+				try {
+					System.out.println("Element: "+neuesObjekt.ringpuffer.get() + " entfernt.");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
 			//Wartezeit (Zeit die zum verbrauchen benötigt wird)
 			try {
@@ -28,28 +40,8 @@ public class Thread_Get extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			synchronized (neuesObjekt) {
-				do {
-					System.out.println("Versuche Element zu entfernen.");
-					if (neuesObjekt.ringpufferAsArray.getCount() <= 0) {
-						System.out.println("Array leider leer, warte...");
-						try {
-							wait();
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} else {
-						try {
-							System.out.println("Element: "+neuesObjekt.ringpufferAsArray.get() + " entfernt.");
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				} while (!geted);
-			}
-
+//				do {
+//				} while (!geted);
 		}
 	}
 }
