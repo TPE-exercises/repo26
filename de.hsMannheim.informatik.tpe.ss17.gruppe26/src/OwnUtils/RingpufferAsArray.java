@@ -20,10 +20,10 @@ public class RingpufferAsArray {
 		this(5, 0, 0);
 	}
 
-	public int getLength(){
+	public int getLength() {
 		return array.length;
 	}
-	
+
 	public int getFirst() {
 		return this.first;
 	}
@@ -51,13 +51,25 @@ public class RingpufferAsArray {
 	 * @throws Exception
 	 *             when array is full
 	 */
-	public void put(Comparable el) throws Exception {
-		if (this.count < this.array.length) {
-			this.count++;
-			this.array[(this.first + this.count-1) % this.array.length] = el;
-		} else {
-			throw new Exception("Ringpuffer already full: "+el);
-		}
+	synchronized public void put(Comparable el) throws Exception {
+		boolean put = false;
+		do {
+			if (this.count < this.array.length) {
+				this.count++;
+				put = true;
+				this.array[(this.first + this.count - 1) % this.array.length] = el;
+			} else {
+				System.out.println("Array leider voll, warte...");
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// throw new Exception("Ringpuffer already full: "+el);
+
+			}
+		} while (!put);
 	}
 
 	/**
@@ -65,12 +77,25 @@ public class RingpufferAsArray {
 	 * @return
 	 * @throws Exception
 	 */
-	public Comparable get() throws Exception {
-		if (this.count > 0) {
-			this.count--;
-			this.first++;
-			return this.array[(this.first - 1) % this.array.length];
-		} else
-			throw new Exception("Ringpuffer is Empty!");
+	synchronized public Comparable get() throws Exception {
+		boolean get = false;
+		do {
+			if (this.count > 0) {
+				this.count--;
+				this.first++;
+				get = true;
+				return this.array[(this.first - 1) % this.array.length];
+			} else {
+				System.out.println("Array leider leer, warte...");
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			// throw new Exception("Ringpuffer is Empty!");
+		} while (!get);
+		return null;
 	}
 }
