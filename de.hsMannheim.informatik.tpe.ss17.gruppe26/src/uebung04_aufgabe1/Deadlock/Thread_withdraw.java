@@ -5,11 +5,19 @@ public class Thread_withdraw extends Thread {
 	int value;
 	Konto konto;
 
+	/**
+	 * Konstruktor für den Abbuch-Thread
+	 * @param value stellt den Betrag der Abbuchung dar
+	 * @param konto ist das Konto, welches belastet wird
+	 */
 	public Thread_withdraw(int value, Konto konto) {
 		this.value = value;
 		this.konto = konto;
 	}
 
+	/**
+	 * Thread zur Belastung des Kontos
+	 */
 	public void run() {
 		boolean withdrawed = false;
 		System.out.println("Starte Abhebevorgang...");
@@ -34,6 +42,5 @@ public class Thread_withdraw extends Thread {
 			} while (!withdrawed);
 			System.out.println("w: Konto wird wieder freigegeben.");
 		}
-
 	}
 }
