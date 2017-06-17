@@ -6,7 +6,6 @@ public class Menue {
 
 	private static int numberOfChecks = 0;
 	private static int ordnung;
-	private static final boolean PRINT_GUI_ON = true;
 
 	/**
 	 * Zeichnet eine Linie aus (_)
@@ -291,8 +290,6 @@ public class Menue {
 						printSeperatorShortLines();
 						System.out.println("Der Baum als Levelorder: ");
 						tree.printLevelorder();
-						if (PRINT_GUI_ON)
-							printGui(tree);
 						break;
 					case (0):
 						break;
@@ -422,9 +419,5 @@ public class Menue {
 
 		}
 		return codeAsInt;
-	}
-
-	private static void printGui(MyBTree tree) {
-		Print_Gui.iniziallisiere(tree);
 	}
 }
