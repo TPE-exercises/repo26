@@ -3,7 +3,7 @@ package uebung04_aufgabe2;
 public class Menue_uebung04_2 {
 
 	public static void main(String[] args) {
-		Comparable[] array = OwnUtils.ArrayThings.random(500, 0, 100);
+		Comparable[] array = OwnUtils.ArrayThings.random(20000, 0, 100);
 		Comparable[] array2 = OwnUtils.ArrayThings.cloneOneDimensionalArray(array);
 
 		OwnUtils.ArrayThings.printOneDimensionalArray(array);
