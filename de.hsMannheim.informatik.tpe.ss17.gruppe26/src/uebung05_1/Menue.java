@@ -2,6 +2,8 @@ package uebung05_1;
 
 import static gdi.MakeItSimple.*;
 
+import java.util.Iterator;
+
 public class Menue {
 
 	private static int numberOfChecks = 0;
@@ -82,7 +84,8 @@ public class Menue {
 			System.out.println("(5) Aktuellen Baum klonen");
 			System.out.println("(6) Baum ausgeben lassen");
 			System.out.println("(7) DEBUGGING aktivieren/deaktivieren");
-			System.out.println("(8) Lösche Element"); 
+			System.out.println("(8) Lösche Element");
+			System.out.println("(9) Iterieren");
 			System.out.println("(0) Programm beenden");
 			switch (readInt()) {
 			case (1): /**
@@ -307,13 +310,32 @@ public class Menue {
 					System.out.println("DEBUGGING wurde aktiviert.");
 				}
 				break;
-			case (8)://Lösche Element
+			case (8):// Lösche Element
 				System.out.println("Geben Sie ein, welchen Wert Sie löschen wollen:");
-				if(tree.remove(readInt())){
+				if (tree.remove(readInt())) {
 					System.out.println("Wert erfolgreich gelöscht.");
-				}
-				else
+				} else
 					System.out.println("Wert nicht gelöscht.");
+				break;
+			case 9:// Iterieren
+				boolean iteratorGoOn = true;
+				Iterator it = new MyIterator(tree);
+				do {
+					OwnUtils.MenueHelper.menueGenerator_Printer("[Zurück]", "hasNext", "next", "remove");
+					switch (OwnUtils.MenueHelper.chooseOption(0, 3)) {
+					case 1:
+						System.out.println(it.hasNext());
+						break;
+					case 2:
+						System.out.println(it.next());
+						break;
+					case 3:
+						it.remove();
+						break;
+					case 0:
+						iteratorGoOn=false;
+					}
+				} while (iteratorGoOn);
 				break;
 			case (0): // Programm beenden
 				weitermachen = false;
