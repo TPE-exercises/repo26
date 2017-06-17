@@ -524,12 +524,18 @@ public class MyBTree implements BTree {
 	public boolean remove(Integer o) {
 
 		if (contains(o)) {
-			Integer[] array = getAllElemets();
-			this.root=null;
+			// MyBTree newTree = new MyBTree(this.m);
+			levelorder();
+			Integer[] array = removeArray;
+
+			for (int i = 0; i < array.length; i++)
+				System.out.print(array[i] + " ");
+
+			this.root = null;
 
 			for (int i = 0; i < array.length; i++) {
-				if (array[i] == o) {
-					//wert soll nicht eingefügt werden
+				if (array[i].equals(o)) {
+					// wert soll nicht eingefügt werden
 				} else {
 					insert(array[i]);
 				}
@@ -537,6 +543,46 @@ public class MyBTree implements BTree {
 			return true;
 		} else
 			return false;
+	}
+
+	private static Integer[] removeArray = null;
+	private static int removePos = 0;
+
+	public void levelorder() {
+		removeArray = new Integer[this.size()];
+		removePos = 0;
+		Node node = root;
+		if (node == null)
+			System.out.println("Der Baum ist leer!");
+		else {
+			for (int i = 0; i < height(); i++) {
+
+				// System.out.print("Ebene " + i + ": ");
+
+				levelorder_rec(node, i);
+//				System.out.println();
+			}
+		}
+	}
+
+	private void levelorder_rec(Node node, int level) {
+		if (level > 0) {
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getNode(i) != null) {
+					levelorder_rec(node.getNode(i), level - 1);
+				}
+			}
+		} else {
+			// System.out.print("[");
+			for (int i = 0; i < 2 * m + 1; i++) {
+				if (node.getValue(i) != null) {
+					// System.out.print(" " + node.getValue(i) + " ");
+					removeArray[removePos] = node.getValue(i);
+					removePos++;
+				}
+			}
+			// System.out.print("]");
+		}
 	}
 
 	private Integer[] allElements;
@@ -557,6 +603,7 @@ public class MyBTree implements BTree {
 		}
 		return allElements;
 	}
+
 	private void rec_getAllElemets(Node node, int level) {
 		if (level > 0) {
 			for (int i = 0; i < 2 * m + 1; i++) {

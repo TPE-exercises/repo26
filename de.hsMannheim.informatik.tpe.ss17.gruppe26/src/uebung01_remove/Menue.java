@@ -317,6 +317,7 @@ public class Menue {
 				}
 				else
 					System.out.println("Wert nicht gelöscht.");
+				break;
 			case (0): // Programm beenden
 				weitermachen = false;
 				break;
