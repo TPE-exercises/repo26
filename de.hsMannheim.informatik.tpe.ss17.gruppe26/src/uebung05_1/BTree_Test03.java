@@ -1,4 +1,4 @@
-package uebung01_remove;
+package uebung05_1;
 
 import static org.junit.Assert.*;
 import org.junit.*;

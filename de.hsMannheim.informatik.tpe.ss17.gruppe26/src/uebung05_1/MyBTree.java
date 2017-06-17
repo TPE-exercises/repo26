@@ -1,4 +1,4 @@
-package uebung01_remove;
+package uebung05_1;
 
 import static gdi.MakeItSimple.*;
 
