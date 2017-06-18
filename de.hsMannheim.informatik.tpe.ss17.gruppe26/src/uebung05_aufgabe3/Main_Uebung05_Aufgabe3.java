@@ -34,13 +34,14 @@ public class Main_Uebung05_Aufgabe3 {
 		try {
 			Reader f;
 			int c;
-			timeStart = System.currentTimeMillis();
+			
 			f = new WordReader(new FileReader(fileName));
+			timeStart = System.currentTimeMillis();
 			while ((c = f.read()) != -1) {
 				// TODO System.out.print((char) c);
 			}
-			f.close();
 			timeEnd = System.currentTimeMillis();
+			f.close();
 			System.out.println("Benötigte Zeit: " + (timeEnd - timeStart) + " ms");
 		} catch (IOException e) {
 			System.out.println("Fehler beim Lesen der Datei");
