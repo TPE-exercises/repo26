@@ -10,88 +10,120 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class TreeMapTest {
+//TODO kommentare auf englisch
 	
-	
+	/**
+	 * Beispiel der Verwendung
+	 * @param args
+	 */
+	public static void main(String[] args) {
 
-    public static void main(String[] args) {
+		//HashMap erstellen
+		Map<String, Integer> hashMap = new HashMap<String, Integer>();
 
-        Map<String, Integer> startMap = new HashMap<String, Integer>();
+		//Manuelles Einfügen
+		hashMap.put("Er", 1);
+		hashMap.put("Sie", 2);
+		hashMap.put("Es", 1);
 
-        startMap.put("Er", 1);
-        startMap.put("Sie", 2);
-        startMap.put("Es", 1);
+		//automatisches einfügen
+		String neu = "Es";
+		insertInMap(hashMap, neu);
 
-        
-        String neu = "Es";
-        insertInMap(startMap, neu);
+		//TreeMap erstellen
+		TreeMap<Integer, Set<String>> treeMap = convertHashToTree(hashMap);
+		
+		//alles ausgeben lassen
+		printHashMap(hashMap);
+		printTreeInorder(treeMap);
+		printTreeReversed(treeMap);
+	}
 
-        
-        printMap(startMap);
+	/**
+	 * erstellt aus der HashMap eine TreeMap
+	 * @param map
+	 * @return
+	 */
+	protected static TreeMap<Integer, Set<String>> convertHashToTree(Map<String, Integer> map) {
+		Set<String> keys = map.keySet();
+		TreeMap<Integer, Set<String>> treeMap = new TreeMap<Integer, Set<String>>();
+		for (String key : keys) {
+			int value = map.get(key);
+			Set<String> values;
+			if (treeMap.containsKey(value)) {
+				values = treeMap.get(value);
+				values.add(key);
+			} else {
+				values = new HashSet<String>();
+				values.add(key);
+			}
 
-        /*
-         * Da hier "Es" & "Sie" den gleichen Wert haben kann man nicht einfach
-         * die TreeMap erstellen wie Nille schon sagt
-         */
-        Set<String> keys = startMap.keySet();
-        TreeMap<Integer, Set<String>> treeMap = new TreeMap<Integer, Set<String>>();
-        for (String key : keys) {
-            int value = startMap.get(key);
-            Set<String> values;
-            if(treeMap.containsKey(value)){
-                values = treeMap.get(value);
-                values.add(key);
-            } else {
-                values = new HashSet<String>();
-                values.add(key);
-            }
-            
-            treeMap.put(value, values);
-        }
-        
-        
-        
-        System.out.println("\nTreeMap \n");
-        Set<Integer> treeValues = treeMap.keySet();
-        for (Integer integer : treeValues) {
-            Set<String> values = treeMap.get(integer);
-            System.out.print(integer + " |");
-            for (String string : values) {
-                System.out.print(" " + string);
-            }
-            System.out.println();
-        }
-        
-        /* Und groesster Wert zuerst*/
-        System.out.println("\nAndersrum");
-        List<Integer> reverseKeys = new LinkedList<Integer>(treeValues);
-        Collections.reverse(reverseKeys);
-        for (Integer integer : reverseKeys) {
-            Set<String> values = treeMap.get(integer);
-            System.out.print(integer + " |");
-            for (String string : values) {
-                System.out.print(" " + string);
-            }
-            System.out.println();
-        }
+			treeMap.put(value, values);
+		}
+		return treeMap;
+	}
 
-    }
-    protected static void printMap(Map<String, Integer> map){
-    	System.out.println("HashMap \n");
-        Set<String> keys = map.keySet();
-        for (String key : keys) {
-            System.out.println(key + " | " + map.get(key));
-        }
-    }
-    protected static void printTree(Map<String, Integer> map){
-    	
-    }
+	/**
+	 * Gibt die gesamte HashMap aus
+	 * @param map
+	 */
+	protected static void printHashMap(Map<String, Integer> map) {
+		System.out.println("HashMap \n");
+		Set<String> keys = map.keySet();
+		for (String key : keys) {
+			System.out.println(key + " | " + map.get(key));
+		}
+	}
 
-    private static void insertInMap(Map<String, Integer> startMap, String neu) {
-        if (startMap.containsKey(neu)) {
-            int value = startMap.get(neu);
-            startMap.put(neu, ++value);
-        }else{
-        	startMap.put(neu, 1);
-        }
-    }
+	/**
+	 * Gibt den gesamten Baum aus, kleinster Wert zuerst
+	 * @param treeMap
+	 */
+	protected static void printTreeInorder(TreeMap<Integer, Set<String>> treeMap) {
+		System.out.println("\nTreeMap \n");
+		Set<Integer> treeValues = treeMap.keySet();
+		for (Integer integer : treeValues) {
+			Set<String> values = treeMap.get(integer);
+			System.out.print(integer + " |");
+			for (String string : values) {
+				System.out.print(" " + string);
+			}
+			System.out.println();
+		}
+	}
+
+	/**
+	 * Gibt den gesamten Baum aus, heufigster Wert zuerst
+	 * @param treeMap
+	 */
+	protected static void printTreeReversed(TreeMap<Integer, Set<String>> treeMap) {
+		System.out.println("\nAndersrum");
+		Set<Integer> treeValues = treeMap.keySet();
+		List<Integer> reverseKeys = new LinkedList<Integer>(treeValues);
+		Collections.reverse(reverseKeys);
+		for (Integer integer : reverseKeys) {
+			Set<String> values = treeMap.get(integer);
+			System.out.print(integer + " |");
+			for (String string : values) {
+				System.out.print(" " + string);
+			}
+			System.out.println();
+		}
+	}
+
+	/**
+	 * Fügt einen String die die Map ein. Ist der String bereits enthalten wird
+	 * sein Wert vergrößert. Andernfalls wird der Eintrag erstellt.
+	 * 
+	 * @param startMap
+	 * @param neu
+	 */
+	private static void insertInMap(Map<String, Integer> startMap, String neu) {
+		if (startMap.containsKey(neu)) {
+			int value = startMap.get(neu);
+			startMap.put(neu, ++value);
+		} else {
+			startMap.put(neu, 1);
+		}
+	}
 }
