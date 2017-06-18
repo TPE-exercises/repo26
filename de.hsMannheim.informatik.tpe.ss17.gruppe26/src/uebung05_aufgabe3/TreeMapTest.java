@@ -10,30 +10,31 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class TreeMapTest {
-//TODO kommentare auf englisch
-	
+	// TODO kommentare auf englisch
+
 	/**
 	 * Beispiel der Verwendung
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		//HashMap erstellen
+		// HashMap erstellen
 		Map<String, Integer> hashMap = new HashMap<String, Integer>();
 
-		//Manuelles Einfügen
+		// Manuelles Einfügen
 		hashMap.put("Er", 1);
 		hashMap.put("Sie", 2);
 		hashMap.put("Es", 1);
 
-		//automatisches einfügen
+		// automatisches einfügen
 		String neu = "Es";
 		insertInMap(hashMap, neu);
 
-		//TreeMap erstellen
+		// TreeMap erstellen
 		TreeMap<Integer, Set<String>> treeMap = convertHashToTree(hashMap);
-		
-		//alles ausgeben lassen
+
+		// alles ausgeben lassen
 		printHashMap(hashMap);
 		printTreeInorder(treeMap);
 		printTreeReversed(treeMap);
@@ -41,15 +42,18 @@ public class TreeMapTest {
 
 	/**
 	 * erstellt aus der HashMap eine TreeMap
+	 * 
 	 * @param map
 	 * @return
 	 */
 	protected static TreeMap<Integer, Set<String>> convertHashToTree(Map<String, Integer> map) {
 		Set<String> keys = map.keySet();
 		TreeMap<Integer, Set<String>> treeMap = new TreeMap<Integer, Set<String>>();
+
 		for (String key : keys) {
 			int value = map.get(key);
 			Set<String> values;
+
 			if (treeMap.containsKey(value)) {
 				values = treeMap.get(value);
 				values.add(key);
@@ -65,10 +69,11 @@ public class TreeMapTest {
 
 	/**
 	 * Gibt die gesamte HashMap aus
+	 * 
 	 * @param map
 	 */
 	protected static void printHashMap(Map<String, Integer> map) {
-		System.out.println("HashMap \n");
+		// System.out.println("HashMap \n");
 		Set<String> keys = map.keySet();
 		for (String key : keys) {
 			System.out.println(key + " | " + map.get(key));
@@ -77,23 +82,31 @@ public class TreeMapTest {
 
 	/**
 	 * Gibt den gesamten Baum aus, kleinster Wert zuerst
+	 * 
 	 * @param treeMap
 	 */
 	protected static void printTreeInorder(TreeMap<Integer, Set<String>> treeMap) {
-		System.out.println("\nTreeMap \n");
+		// System.out.println("\nTreeMap \n");
 		Set<Integer> treeValues = treeMap.keySet();
 		for (Integer integer : treeValues) {
 			Set<String> values = treeMap.get(integer);
 			System.out.print(integer + " |");
 			for (String string : values) {
-				System.out.print(" " + string);
+				System.out.print(" (" + string + ")");
+				// TODO möglicher counter um zu zählen, wie viele Wörter bereits
+				// genannt wurden.
+
 			}
+			// würde, wenn 100 ereicht, hier einen
+			// break;
+			// setzen
 			System.out.println();
 		}
 	}
 
 	/**
 	 * Gibt den gesamten Baum aus, heufigster Wert zuerst
+	 * 
 	 * @param treeMap
 	 */
 	protected static void printTreeReversed(TreeMap<Integer, Set<String>> treeMap) {
@@ -105,8 +118,13 @@ public class TreeMapTest {
 			Set<String> values = treeMap.get(integer);
 			System.out.print(integer + " |");
 			for (String string : values) {
-				System.out.print(" " + string);
+				System.out.print(" (" + string + ")");
+				// TODO möglicher counter um zu zählen, wie viele Wörter bereits
+				// genannt wurden.
 			}
+			// würde, wenn 100 ereicht, hier einen
+			// break;
+			// setzen
 			System.out.println();
 		}
 	}
@@ -119,10 +137,13 @@ public class TreeMapTest {
 	 * @param neu
 	 */
 	private static void insertInMap(Map<String, Integer> startMap, String neu) {
+		//erhöhe wert
 		if (startMap.containsKey(neu)) {
 			int value = startMap.get(neu);
 			startMap.put(neu, ++value);
-		} else {
+		} 
+		//füge wert neu ein
+		else {
 			startMap.put(neu, 1);
 		}
 	}
