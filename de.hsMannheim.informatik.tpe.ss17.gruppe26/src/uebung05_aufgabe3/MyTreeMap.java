@@ -9,6 +9,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import uebung02_teil2_aufgabe2.Main;
+import uebung02_teil2_aufgabe2.MyString;
+import uebung02_teil2_aufgabe2.insertionSort;
+
 public class MyTreeMap {
 
 	/**
@@ -73,30 +77,44 @@ public class MyTreeMap {
 	}
 
 	/**
-	 * <li>prints the whole TreeMap, most common word at first
+	 * <li>prints the whole TreeMap, most common word at first. and creates an array of this
 	 * <li>Gibt den gesamten Baum aus, heufigster Wert zuerst
 	 * 
 	 * @param treeMap
 	 */
-	protected static void printTreeReversed(TreeMap<Integer, Set<String>> treeMap) {
+	protected static MyString[] printTreeReversed(TreeMap<Integer, Set<String>> treeMap) {
 		System.out.println("\nAndersrum");
 		Set<Integer> treeValues = treeMap.keySet();
 		List<Integer> reverseKeys = new LinkedList<Integer>(treeValues);
 		Collections.reverse(reverseKeys);
-		int zaehler = 1;
-		
+		int zaehler = 0;
+		MyString[] array = new MyString[100];
 		for (Integer integer : reverseKeys) {
 			Set<String> values = treeMap.get(integer);
 			System.out.print(integer + " | ");
 			for (String string : values) {
-				System.out.print(zaehler+". (" + string + ") ");
-				
+				 System.out.print(zaehler+". (" + string + ") ");
+				MyString newString = new MyString(string);
+				array[zaehler] = newString;
 				zaehler++;
+				if (zaehler >= 100)
+					break;
 			}
-			if (zaehler >= 101)
+			if (zaehler >= 100)
 				break;
+
 			System.out.println();
 		}
+		return array;
+	}
+	
+	protected static MyString[] sortArray(MyString[] array){
+		
+		Main.sortiere(new insertionSort(), array);
+		for(int i=0;i<array.length;i++){
+			System.out.println(array[i]+" ");
+		}
+		return array;
 	}
 
 	/**

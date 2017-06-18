@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import uebung02_teil2_aufgabe2.MyString;
+
 public class WordReader extends FilterReader {
 
 	private static char[] alphabet = new char[58];
@@ -77,7 +79,11 @@ public class WordReader extends FilterReader {
 
 		TreeMap<Integer, Set<String>> treeMap = MyTreeMap.convertHashToTree(hashMap);
 
-		MyTreeMap.printTreeReversed(treeMap);
+		MyString[] array = MyTreeMap.printTreeReversed(treeMap);
+		System.out.println("\n");
+		MyTreeMap.sortArray(array);
+		
+		
 	}
 
 	/**

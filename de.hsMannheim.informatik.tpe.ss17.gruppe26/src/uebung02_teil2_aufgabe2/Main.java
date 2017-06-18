@@ -53,10 +53,10 @@ public class Main {
 	
 	
 	public static void sortiere(Sort1 s, Comparable[] array){
-		System.out.println("Unsortiert:");
-		printArray(array);
+//		System.out.println("Unsortiert:");
+//		printArray(array);
 		s.sort(array);
-		printArray(array);
+//		printArray(array);
 	}
 	
 	private static void printArray(Comparable[] array) {
