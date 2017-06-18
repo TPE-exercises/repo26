@@ -41,7 +41,8 @@ public class TreeMapTest {
 	}
 
 	/**
-	 * erstellt aus der HashMap eine TreeMap
+	 * <li>creates a TreeMap out of a HashMap
+	 * <li>erstellt aus der HashMap eine TreeMap
 	 * 
 	 * @param map
 	 * @return
@@ -68,7 +69,8 @@ public class TreeMapTest {
 	}
 
 	/**
-	 * Gibt die gesamte HashMap aus
+	 * <li>prints the whole HashMap
+	 * <li>Gibt die gesamte HashMap aus
 	 * 
 	 * @param map
 	 */
@@ -81,7 +83,8 @@ public class TreeMapTest {
 	}
 
 	/**
-	 * Gibt den gesamten Baum aus, kleinster Wert zuerst
+	 * <li>prints the whole TreeMap, rarest word at first
+	 * <li>Gibt den gesamten Baum aus, kleinster Wert zuerst
 	 * 
 	 * @param treeMap
 	 */
@@ -105,7 +108,8 @@ public class TreeMapTest {
 	}
 
 	/**
-	 * Gibt den gesamten Baum aus, heufigster Wert zuerst
+	 * <li>prints the whole TreeMap, most common word at first
+	 * <li>Gibt den gesamten Baum aus, heufigster Wert zuerst
 	 * 
 	 * @param treeMap
 	 */
@@ -130,19 +134,21 @@ public class TreeMapTest {
 	}
 
 	/**
-	 * Fügt einen String die die Map ein. Ist der String bereits enthalten wird
-	 * sein Wert vergrößert. Andernfalls wird der Eintrag erstellt.
+	 * <li>Adds a string to the map. If the string is already included, its
+	 * value is increased. Otherwise, the entry is created.
+	 * <li>Fügt einen String die die Map ein. Ist der String bereits enthalten
+	 * wird sein Wert vergrößert. Andernfalls wird der Eintrag erstellt.
 	 * 
 	 * @param startMap
 	 * @param neu
 	 */
 	private static void insertInMap(Map<String, Integer> startMap, String neu) {
-		//erhöhe wert
+		// erhöhe wert
 		if (startMap.containsKey(neu)) {
 			int value = startMap.get(neu);
 			startMap.put(neu, ++value);
-		} 
-		//füge wert neu ein
+		}
+		// füge wert neu ein
 		else {
 			startMap.put(neu, 1);
 		}
