@@ -1,4 +1,4 @@
-package uebung05_1;
+package uebung05_aufgabe1und2;
 
 import static gdi.MakeItSimple.*;
 
@@ -554,9 +554,15 @@ public class MyBTree implements BTree, Iterable {
 			return false;
 	}
 
+	/**
+	 * array created from levelorder()
+	 */
 	protected static Integer[] removeArray = null;
 	private static int removePos = 0;
 
+	/**
+	 * creates an array in levelorder
+	 */
 	public void levelorder() {
 		removeArray = new Integer[this.size()];
 		removePos = 0;
@@ -574,6 +580,11 @@ public class MyBTree implements BTree, Iterable {
 		}
 	}
 
+	/**
+	 * nessasary for levelorder()
+	 * @param node
+	 * @param level
+	 */
 	private void levelorder_rec(Node node, int level) {
 		if (level > 0) {
 			for (int i = 0; i < 2 * m + 1; i++) {

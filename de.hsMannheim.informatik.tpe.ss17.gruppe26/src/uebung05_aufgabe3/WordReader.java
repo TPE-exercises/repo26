@@ -4,11 +4,13 @@ import java.io.FilterReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.IOException;
-import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class WordReader extends FilterReader {
-	
+
 	private static char[] alphabet = new char[58];
 
 	protected WordReader(Reader arg0) {
@@ -21,6 +23,9 @@ public class WordReader extends FilterReader {
 		long timeStart = 0;
 		long timeEnd = 0;
 		String fileName = null;
+
+		// create HashMap
+		Map<String, Integer> hashMap = new HashMap<String, Integer>();
 
 		// info and user dialog to ask for parameters
 		System.out.println("2IB im SS17");
@@ -40,22 +45,27 @@ public class WordReader extends FilterReader {
 			fileName = "shakespeare.txt";
 			break;
 		}
-		
+
 		try {
 			Reader f;
 			int c;
-			String newWord = null;
+			String newWord = "";
 			f = new WordReader(new FileReader(fileName));
 			timeStart = System.currentTimeMillis();
 			while ((c = f.read()) != -1) {
-				// TODO System.out.print((char) c);
+				
+				// check if letters are an word or not
 				int position = isInAlphabet((char) c);
 				if (position != -1) {
-					newWord +=  (char)position;
+					newWord += (char) position;
 				} else {
-					newWord = newWord.toLowerCase();
-					
-					newWord = null;
+					if (newWord != null) {
+						newWord = newWord.toLowerCase(); // ignore lower and upper case in words
+
+						if ( newWord.length()>0)
+							MyTreeMap.insertInMap(hashMap, newWord);
+						newWord = "";
+					}
 				}
 			}
 			timeEnd = System.currentTimeMillis();
@@ -65,42 +75,11 @@ public class WordReader extends FilterReader {
 			System.out.println("Fehler beim Lesen der Datei");
 		}
 
-	}
-	
-	public int read() throws IOException {
-		int c = super.read();
-		
-		return c;
-	}
-	
-//	public int read(char[] cbuf, int off, int len) throws IOException {
-//		for (int i = off; i < len; ++i) {
-//			cbuf[i] = (char) decrypt(cbuf[i]);
-//		}
-//		return super.read(cbuf, off, len);
-//	}
+		TreeMap<Integer, Set<String>> treeMap = MyTreeMap.convertHashToTree(hashMap);
 
-	public void read(String str, int off, int len) throws IOException {
-		read(str.toCharArray(), off, len);
+		MyTreeMap.printTreeReversed(treeMap);
 	}
-	
-//	/**
-//	 * if character is in alphabet, run the moving method if character is not in
-//	 * alphabet, return itself
-//	 * 
-//	 * @param c
-//	 *            is the value of the char
-//	 * @return the moved character or the same character
-//	 */
-//	private int readWord(int c) {
-//		int position = isInAlphabet((char) c);
-//		if (position != -1) {
-//			return (int) moveToAlphabet(position);
-//		} else {
-//			return c;
-//		}
-//	}
-	
+
 	/**
 	 * check, if the char is in alphabet
 	 * 
@@ -111,12 +90,12 @@ public class WordReader extends FilterReader {
 	private static int isInAlphabet(char c) {
 		for (int i = 0; i < alphabet.length; i++) {
 			if (c == alphabet[i]) {
-				return i;
+				return c;
 			}
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * extra method to create the long alphabet as an array of chars
 	 */

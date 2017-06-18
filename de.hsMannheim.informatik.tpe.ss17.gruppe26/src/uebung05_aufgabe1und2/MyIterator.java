@@ -1,4 +1,4 @@
-package uebung05_1;
+package uebung05_aufgabe1und2;
 
 import java.util.Iterator;
 

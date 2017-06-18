@@ -9,36 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class TreeMapTest {
-	// TODO kommentare auf englisch
-
-	/**
-	 * Beispiel der Verwendung
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-		// HashMap erstellen
-		Map<String, Integer> hashMap = new HashMap<String, Integer>();
-
-		// Manuelles Einfügen
-		hashMap.put("Er", 1);
-		hashMap.put("Sie", 2);
-		hashMap.put("Es", 1);
-
-		// automatisches einfügen
-		String neu = "Es";
-		insertInMap(hashMap, neu);
-
-		// TreeMap erstellen
-		TreeMap<Integer, Set<String>> treeMap = convertHashToTree(hashMap);
-
-		// alles ausgeben lassen
-		printHashMap(hashMap);
-		printTreeInorder(treeMap);
-		printTreeReversed(treeMap);
-	}
+public class MyTreeMap {
 
 	/**
 	 * <li>creates a TreeMap out of a HashMap
@@ -96,13 +67,7 @@ public class TreeMapTest {
 			System.out.print(integer + " |");
 			for (String string : values) {
 				System.out.print(" (" + string + ")");
-				// TODO möglicher counter um zu zählen, wie viele Wörter bereits
-				// genannt wurden.
-
 			}
-			// würde, wenn 100 ereicht, hier einen
-			// break;
-			// setzen
 			System.out.println();
 		}
 	}
@@ -118,17 +83,18 @@ public class TreeMapTest {
 		Set<Integer> treeValues = treeMap.keySet();
 		List<Integer> reverseKeys = new LinkedList<Integer>(treeValues);
 		Collections.reverse(reverseKeys);
+		int zaehler = 1;
+		
 		for (Integer integer : reverseKeys) {
 			Set<String> values = treeMap.get(integer);
-			System.out.print(integer + " |");
+			System.out.print(integer + " | ");
 			for (String string : values) {
-				System.out.print(" (" + string + ")");
-				// TODO möglicher counter um zu zählen, wie viele Wörter bereits
-				// genannt wurden.
+				System.out.print(zaehler+". (" + string + ") ");
+				
+				zaehler++;
 			}
-			// würde, wenn 100 ereicht, hier einen
-			// break;
-			// setzen
+			if (zaehler >= 101)
+				break;
 			System.out.println();
 		}
 	}
@@ -142,7 +108,7 @@ public class TreeMapTest {
 	 * @param startMap
 	 * @param neu
 	 */
-	private static void insertInMap(Map<String, Integer> startMap, String neu) {
+	protected static void insertInMap(Map<String, Integer> startMap, String neu) {
 		// erhöhe wert
 		if (startMap.containsKey(neu)) {
 			int value = startMap.get(neu);
