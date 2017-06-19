@@ -38,13 +38,21 @@ public class WordReader extends FilterReader {
 		System.out.println("Bitte wählen Sie eine Datei aus:");
 		System.out.println("[1] Bibel.txt");
 		System.out.println("[2] shakespeare.txt");
+		System.out.println("[3] Bibel2.txt (in UTF-8)");
+		System.out.println("[4] shakespeare2.txt (in UTF-8)");
 
-		switch (OwnUtils.MenueHelper.chooseOption(1, 2)) {
+		switch (OwnUtils.MenueHelper.chooseOption(1, 4)) {
 		case 1:
 			fileName = "Bibel.txt";
 			break;
 		case 2:
 			fileName = "shakespeare.txt";
+			break;
+		case 3:
+			fileName = "Bibel2.txt";
+			break;
+		case 4:
+			fileName = "shakespeare2.txt";
 			break;
 		}
 
